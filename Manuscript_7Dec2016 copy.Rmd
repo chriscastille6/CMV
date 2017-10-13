@@ -1,5 +1,5 @@
 ---
-title: You Gotta Keep em' Separated? Examining the Efficacy of Proximal Remedies for Causes of Method Variance 
+title: "You've Gotta Keep em' Separated? Examining the Efficacy of Proximal Remedies for Causes of Method Variance"
 author:
 - address: 253 Rumford Ct., Newtown, PA 18940
   affiliation: '1'
