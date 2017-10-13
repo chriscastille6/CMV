@@ -31,7 +31,9 @@ abstract: "Organizational scholars have long argued that method factors introduc
 wordcount: X
 ---
 
-Hi Wayne! Again. 
+#Introduction
+
+The literature on method variance...
 
 ```{r message = FALSE, warning = FALSE}
 #library("papaja")
