@@ -34,6 +34,11 @@ wordcount: X
 #Introduction
 
 The literature on method variance...
+...is convoluted at best.
+
+
+Chris, do you see this?
+
 
 ```{r message = FALSE, warning = FALSE}
 #library("papaja")
