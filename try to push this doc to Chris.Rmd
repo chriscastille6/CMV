@@ -39,6 +39,8 @@ The literature on method variance...
 
 Chris, do you see this?
 
+What about this new file?
+
 
 ```{r message = FALSE, warning = FALSE}
 #library("papaja")
