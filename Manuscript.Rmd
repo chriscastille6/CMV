@@ -425,6 +425,9 @@ anovaBF(IRB ~ Condition, data = final, progress=FALSE)
 #plot(bfit1, plot.type="trace")
 #plot(bfit1, plot.type="autocorr")
 #plot(bfit1, "histogram")
+
+#write CSV file
+write.csv(final, file = "data.csv")
 ```
 
 
