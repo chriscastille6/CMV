@@ -1,5 +1,4 @@
 ---
-
 title: "You've Gotta Keep em' Separated? Examining the Efficacy of Proximal Remedies for Causes of Method Variance"
 
 author:
@@ -33,11 +32,14 @@ wordcount: X
 
 #Introduction
 
-The literature on method variance...
-...is convoluted at best.
 
+=======
+Notes for us to discuss:
+The cognitive psychology literature, specifically on heuristics and biases in decision making and judgments, informs method variance research. For instance, consider anchoring, wherein one's judgment is informed by an arbitrary prior thought in one's conciousness, within and their ability to explain item-order (or item priming) effects. In an experiment, college students were asked the questions (a) how happy are you and (b) how often are you dating. When asked in this order, the correlation between the two questions was low (r = .11). However, when asked in reverse, the correlation was 5 times larger (r = .62). Similar findings emerged with married couples about their sex life (see Strack, Martin, & Schwarz, 1988). The design of the questionnaire (in this case, the item order) explains the size of the correlation estimated between measures of life satisfaction and dating or frequency of sex, respectively, with anchoring providing the psychological explanation. 
+(A few questions regarding the above: has this been replicated? the effect seems exaggerated, so I'm wondering if the effect size is reliable...What would a Fisher r-to-z test reveal? which effect is closer to the truth, and why?)
 
-Chris, do you see this?
+References:
+Strack, F. L., Martin, L., & Scharz, N. (1988). Priming and communication: The social determinants of information use in judgments of life-satisfaction. European Journal of Social Psychology, pp. 429-442.
 
 
 ```{r message = FALSE, warning = FALSE}
@@ -436,7 +438,6 @@ Notes below are the Bayesian test of the invariance of scale intercorrelations.
 library(bayesboot)
 library(BayesFactor)
 library(BayesMed)
-library(cocor)
 library(plyr)
 library(psych)
 library(cocor)
@@ -445,11 +446,23 @@ library(ggplot2)
 library(QRM)
 
 #Frequentist estimate of correlation between PP and OCBI for across conditions.
-f.Controlr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
-f.ItemRandr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
-f.CSManpipr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
-f.FScalesr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
-f.ScaleRandr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+f.Controlr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
+f.ItemRandr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+
+f.Controlr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "Control", ])
+f.ItemRandr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "ScaleRand", ])
+
+f.Controlr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "Control", ])
+f.ItemRandr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "ScaleRand", ])
 
 #Examining correlations between variables across conditions.
 #Extract sample sizes
@@ -461,13 +474,29 @@ FScalesn <- c$FillerScales$n[c(1)]
 ScaleRandn <- c$ScaleRand$n[c(1)]
 
 #Extract correlations and compare
-func <- function(xx)
+func1 <- function(xx1)
 {
-return(data.frame(COR = cor(xx$a, xx$b)))
+return(data.frame(COR = cor(xx1$a, xx1$b)))
 }
 ##PP and OCBI
-xx <- data.frame(group = final$Condition, a = final$PP, b = final$OCBI)
-a <- ddply(xx, .(group), func)
+xx1 <- data.frame(group = final$Condition, a = final$PP, b = final$OCBI)
+a <- ddply(xx1, .(group), func)
+
+func <- function(xx2)
+{
+return(data.frame(COR = cor(xx2$a, xx2$b)))
+}
+##PP and OCBO
+xx2 <- data.frame(group = final$Condition, a = final$PP, b = final$OCBO)
+b <- ddply(xx2, .(group), func) 
+
+func <- function(xx3)
+{
+return(data.frame(COR = cor(xx3$a, xx3$b)))
+}
+##PP and OCBI
+xx3 <- data.frame(group = final$Condition, a = final$PP, b = final$IRB)
+c<- ddply(xx3, .(group), func)
 
 #Evaluate the difference in correlations using frequentist method: Fisher r to z transformation and test of significant differences. Note: these tests are conducted singly as in the test compares only two conditions at a time. It is possible to run an omnibus test that examines whether a correlation varies across all groups. However, the code for this test would need to be written. No big deal, but an easy alternative would be to correct for the number of tests that we run, which may be too conservative. See http://davidakenny.net/doc/statbook/chapter_16.pdf for more information. 
 
@@ -497,7 +526,61 @@ ScaleRand.PP.OCBI.r <- ScaleRand.PP.OCBI.r[2]
 cocor.indep.groups(as.numeric(Control.PP.OCBI.r), as.numeric(ScaleRand.PP.OCBI.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
 ###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results.
 
-####Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB, etc.).
+##1. PP and OCBO: Control vs. CSManipulation
+Control.PP.OCBO.r <- a[1,]
+Control.PP.OCBO.r <- Control.PP.OCBO.r[2]
+CSManip.PP.OCBO.r <- a[2,]
+CSManip.PP.OCBO.r <- CSManip.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(CSManip.PP.OCBO.r), Controln, CSManipn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##2. PP and OCBO: Control vs. ItemRand
+ItemRand.PP.OCBO.r <- a[3,]
+ItemRand.PP.OCBO.r <- ItemRand.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(ItemRand.PP.OCBO.r), Controln, ItemRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##3. PP and OCBO: Control vs. FScales
+FScales.PP.OCBO.r <- a[4,]
+FScales.PP.OCBO.r <- FScales.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(FScales.PP.OCBO.r), Controln, FScalesn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis rejected using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##4. PP and OCBO: Control vs. ScaleRand
+ScaleRand.PP.OCBO.r <- a[5,]
+ScaleRand.PP.OCBO.r <- ScaleRand.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(ScaleRand.PP.OCBO.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##1. PP and IRB: Control vs. CSManipulation
+Control.PP.IRB.r <- a[1,]
+Control.PP.IRB.r <- Control.PP.IRB.r[2]
+CSManip.PP.IRB.r <- a[2,]
+CSManip.PP.IRB.r <- CSManip.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(CSManip.PP.IRB.r), Controln, CSManipn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##2. PP and IRB: Control vs. ItemRand
+ItemRand.PP.IRB.r <- a[3,]
+ItemRand.PP.IRB.r <- ItemRand.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(ItemRand.PP.IRB.r), Controln, ItemRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##3. PP and IRB: Control vs. FScales
+FScales.PP.IRB.r <- a[4,]
+FScales.PP.IRB.r <- FScales.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(FScales.PP.IRB.r), Controln, FScalesn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis rejected using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##4. PP and IRB: Control vs. ScaleRand
+ScaleRand.PP.IRB.r <- a[5,]
+ScaleRand.PP.IRB.r <- ScaleRand.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(ScaleRand.PP.IRB.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+
+####Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB).
+
 ##Praoctive Personality and OCBO
 xx <- data.frame(group = final$Condition, a = final$PP, b = final$OCBO)
 a <- ddply(xx, .(group), func)
@@ -519,52 +602,127 @@ xx <- data.frame(group = final$Condition, a = final$OCBO, b = final$IRB)
 a <- ddply(xx, .(group), func)
 
 #Bayesian estimate of correlation between PP and OCBI for across conditions.
-b.Controlr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
-b.ItemRandr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
-b.CSManpipr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
-b.FScalesr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
-b.ScaleRandr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+b.Controlr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
+b.ItemRandr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+
+b.Controlr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "Control", ])
+b.ItemRandr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "ScaleRand", ])
+
+b.Controlr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "Control", ])
+b.ItemRandr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "ScaleRand", ])
 
 #Examine fit of the models
-plot(b.Controlr)
-plot(b.ItemRandr)
-plot(b.CSManpipr)
-plot(b.FScalesr)
-plot(b.ScaleRandr)
+plot(b.Controlr1)
+plot(b.ItemRandr1)
+plot(b.CSManpipr1)
+plot(b.FScalesr1)
+plot(b.ScaleRandr1)
+
+plot(b.Controlr2)
+plot(b.ItemRandr2)
+plot(b.CSManpipr2)
+plot(b.FScalesr2)
+plot(b.ScaleRandr2)
+
+plot(b.Controlr3)
+plot(b.ItemRandr3)
+plot(b.CSManpipr3)
+plot(b.FScalesr3)
+plot(b.ScaleRandr3)
 
 #Plot differences for PP-OCBI relationship and estimate proportion of effects that are consistent with a null effect, which here is defined as r = [-.10, .10].
 #Item Randomization
-control_mcmc <- as.data.frame(b.Controlr)
-ItemRandr_mcmc <- as.data.frame(b.ItemRandr)
-hist(ItemRandr_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Item-Randomized Scales", yaxt = "n")
-1-(mean(ItemRandr_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr_mcmc$rho - control_mcmc$rho < -.1 ))
+control_mcmc <- as.data.frame(b.Controlr1)
+ItemRandr1_mcmc <- as.data.frame(b.ItemRandr1)
+hist(ItemRandr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr1_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr1_mcmc$rho - control_mcmc$rho < -.1 ))
 #48% chance that filler scales have no effect defined by r = [-.10, .10]. 
 
+control_mcmc <- as.data.frame(b.Controlr2)
+ItemRandr2_mcmc <- as.data.frame(b.ItemRandr2)
+hist(ItemRandr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr2_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#48% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+ItemRandr3_mcmc <- as.data.frame(b.ItemRandr3)
+hist(ItemRandr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr3_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#48% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
 #Cover Story Manipulation
-control_mcmc <- as.data.frame(b.Controlr)
-CSManpipr_mcmc <- as.data.frame(b.CSManpipr)
-hist(CSManpipr_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Coverstory", yaxt = "n")
-1-(mean(CSManpipr_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr_mcmc$rho - control_mcmc$rho < -.1 ))
+control_mcmc <- as.data.frame(b.Controlr1)
+CSManpipr1_mcmc <- as.data.frame(b.CSManpipr1)
+hist(CSManpipr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr1_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr1_mcmc$rho - control_mcmc$rho < -.1 ))
 #51% chance that filler scales have no effect defined by r = [-.10, .10]. 
 
+control_mcmc <- as.data.frame(b.Controlr2)
+CSManpipr2_mcmc <- as.data.frame(b.CSManpipr2)
+hist(CSManpipr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr2_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#51% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+CSManpipr3_mcmc <- as.data.frame(b.CSManpipr3)
+hist(CSManpipr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr3_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#51% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
 #Large difference between control and filler scales. Examine the probability that filler scales weaken correlation.
-control_mcmc <- as.data.frame(b.Controlr)
-Fscales_mcmc <- as.data.frame(b.FScalesr)
+control_mcmc <- as.data.frame(b.Controlr1)
+Fscales1_mcmc <- as.data.frame(b.FScalesr1)
 head(control_mcmc)
-hist(Fscales_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Filler Scales", yaxt = "n")
-1-(mean(Fscales_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales_mcmc$rho - control_mcmc$rho < -.1 ))
+hist(Fscales1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales1_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales1_mcmc$rho - control_mcmc$rho < -.1 ))
 #12% chance that filler scales have no effect defined by r = [-.10, .10]. 
 
+control_mcmc <- as.data.frame(b.Controlr2)
+Fscales2_mcmc <- as.data.frame(b.FScalesr2)
+head(control_mcmc)
+hist(Fscales2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales2_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales2_mcmc$rho - control_mcmc$rho < -.1 ))
+#12% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+Fscales3_mcmc <- as.data.frame(b.FScalesr3)
+head(control_mcmc)
+hist(Fscales3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales3_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales3_mcmc$rho - control_mcmc$rho < -.1 ))
+#12% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
 #Scale Randomization
-control_mcmc <- as.data.frame(b.Controlr)
-ScaleRandr_mcmc <- as.data.frame(b.ScaleRandr)
-hist(ScaleRandr_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Scale-Randomized Scales", yaxt = "n")
-1-(mean(ScaleRandr_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr_mcmc$rho - control_mcmc$rho < -.1 ))
+control_mcmc <- as.data.frame(b.Controlr1)
+ScaleRandr1_mcmc <- as.data.frame(b.ScaleRandr1)
+hist(ScaleRandr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr1_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr1_mcmc$rho - control_mcmc$rho < -.1 ))
 #40% chance that filler scales have no effect defined by r = [-.10, .10]. 
+
+control_mcmc <- as.data.frame(b.Controlr2)
+ScaleRandr2_mcmc <- as.data.frame(b.ScaleRandr2)
+hist(ScaleRandr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr2_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#40% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+ScaleRandr3_mcmc <- as.data.frame(b.ScaleRandr3)
+hist(ScaleRandr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr3_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#40% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
 
 ##Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB, etc.).
 #Plot differences for PP-OCBO relationship
 ```
+
 
 The results for the default two-sided test can be obtained as follows: 
 ```{r}
