@@ -1,5 +1,4 @@
 ---
-
 title: "You've Gotta Keep em' Separated? Examining the Efficacy of Proximal Remedies for Causes of Method Variance"
 
 author:
@@ -30,14 +29,42 @@ tablelist: no
 abstract: "Organizational scholars have long argued that method factors introduce nuisance variance into observations and bias our results. In response to this threat, researchers have proposed procedural remedies. For studies where measures are gathered from the same source (e.g., employee) and same time-point (one survey administration), recommended remedies include (1) presenting participants with a cover story to disguise the purpose of the survey (which addresses respondents' ability to produce data consistent with researchers' hypotheses), (2) randomizing or counterbalancing the order of item presentation (which addresses item context effects), and (3) introducing a brief temporal separation (which addresses respondents' momentary mood). Though researchers have relied upon these proximal method variance remedies, there are no studies examining their efficacy. Here, we present the findings from two experiments utilizing the same measurement model and demonstrate that these remedies do reduce method variance. However, and surprisingly, our findings yielded no instance in which the remedies reduced common method variance across the predictor and criteria measures of our model. Rather, other sources of variance (i.e., trait affectivity) that were not addressed by these remedies (and not addressed by available procedural remedies) led to significantly biased estimates because they were shared across predictors and criteria. We conclude with recommendations for researchers wishing to reduce the presence of method variance in their studies."    
 wordcount: X
 ---
-
 #Introduction
-
-The literature on method variance...
-...is convoluted at best.
-
-
-Chris, do you see this?
+  Few methodological problems have been discussed more frequently than the presence and impact of method rvariance (Spector, Rosen, Richardson, Williams, & Johnson 2016), or variation in observations attributable to methodolgoical sources than to substantive/theoretical constructs of interest (Campbell & Fiske, 1959). Though long debated over the past several decades (e.g., Campbell & Fiske, 1959; Lance & Simonovsky, 2015; Richardson, Simmering, & Sturman, 2009; Spector, 2006), the problem of method variance is often viewed as a serious one in the organizational sciences, where researchers often rely upon observations made using sources believed to share common method variance (i.e., variation in observations that is attributable to a common cause, such mood held by respondents; see Podsakoff et al., 2003). Those who believe strongly that CMV is persistent problem believe that method variance threatens the substantive knowledgebase upon which practitioners rely, and so many procedural solutions have been proposed to address this eminent problem (Podsakoff, MacKenzie, Lee, & Podsakoff, 2003; Podsakoff, MacKenzie, & Podsakoff, 2012). The proposed solutions are often simple (e.g., use a cover story to disguise the purpose of a study, counterbalance item presentation, and separate measurement by an interval of time) and routinely encouraged by journal editors (e.g., Ashkanasy, 2009).   
+  Unfortunately, these procedural method variance remedies have not received close examination, particularly using experimental designs that compare observations obtained using these remedies to those obtained without. These experiments are needed because they can demonstrate the extent to which a remedy addresses a proposed cause of method variance (e.g., participant beliefs about item covariation, respondent mood), resulting in reduced method variance and less biased results. Therefore, we set out to conduct these experiments and to this end we make the following contributions to the literature. First, we test the causal role of hypothesized proximal 8causes of method variance, specifically resondent consistency motifs, item context effects, and mood. Second, drawing on recent literature distinguishing between common and uncommon method variance (see Spector et al., 2016), we demonstrate the extent to which these different sources of method variance differentially affect observations, affecting reserachers' ability to produce accurate effect size estimates. Thirdly, we explore causes of method variance that are specific to the substantive theory under investigation in our study, allowing a comparison of general and specific causes of method variance. 
+##Theoretical Overview of Method Variance
+	Before we dive too deeply into the literature on method bias, we should clarify the terms 'method,' 'method variance,' and 'method bias,' as there are differing perspectives. Summarizing the available literature, Podsakoff et al. (2012) distinguished between a broad and narrow definition. Drawing on Fisk (1982) and citing several researchers who support this position (e.g., Johnson et al., 2011; Edwards, 2008; Siemsen et al., 2010; Weijters et al., 2010), Podsakoff et al. noted that method encompasses several abstract elements (e.g., taking a paper-and-pencil instrument, responding using Likert scales, characteristics of the examiner) and when these elements are shared across methods or measures in the same investigation, there will be a convergence resulting in bias. By contrast, Lance et al. (2009, 2010) restricted method to aspects that refer to alternative means of enumerating observations to indicate standings on latent traits (e.g., self- vs. other-report), which has been critized as omitting common rater sources of method variance (e.g., consistency motifs and illusory rater correlations; see Podsakoff et al., 2012). Method variance refers to the impact of a methodological aspect of study on a particular observation(s) (e.g.,  mood affecting observations obtained with a single-source single time-point design), which differs from the extent to which method variance is shared across methods, causing biased/inflated parameter estimates (e.g., negative mood both contaminating observations of two variables, inflating their covariances; see Williams & Anderson, 1994). This distinction is important because method variance can be unique to a specific set of observations within a dataset (e.g., halo effects contaminate supervisor appraisals of employee performance, but not subordinate variables). When such uncommon method variance is present in one's observations, observed covariances with other observations are attentuated (see Spector et al., 2016).
+	Conventionally, method variance is a concern when researchers's conclusions dervie from self-report surveys administered at a single time-point because it is believed that methods affect the same item response process. Therefore, it is important to understand how methods affect the underlying item response process resulting in contaminated observations. Research from cognitive psychology suggests that four cognitive processes are associated with responding to survey items (see Tourangeau et al., 2000): (1) comprehension (i.e., understanding items), (2) retrieval (i.e., recalling item-relevant memories), (3) judgment (i.e., assessing the completeness of a relevant memory), and (4) response (i.e., mapping one's judgement onto the available item responses). Podsakoff et al. (2003) later divided the last process into response selection and (5) response reporting to highlight how individuals might modify their responses to adhere to certain criteria (e.g., adjusting previous item responses to appear more consistent). Podsakoff et al. (2003) summarized the method variance literature into four broad potential sources of common method bias (i.e., common rater effects, item characteristic effects, item context effeccts, and measurement context effects) to explain how response processes are corrupted, resulting in contaminated observations. 
+	In our manuscript, we examine the role of a few sources identified by Podsakoff et al. (2003) that are believed to play a role in all same-source surveys. These sources of method variance are referred to as proximal causes of method variance. In two studies, we examine the role of a specific common rater effects (i.e., implicit theories, consistency motifs, mood states, trait affectivity factors), item context effects (i.e., item/scale priming and item/scale embeddedness effects), and measurement context effects (i.e., gathering observations on predictor and criterion variables at the same point in time vs a differnt point in time), which are believed to corrupt the item response process, contaminate observations, and ultimately bias estimates of covariation. We have decided to focus on proximal causes of method variance for single-source designs because these designs are likely to be the most prevalent in the organizational and social science (applied and academic settings) due to their relatively lower cost and reduced administrative burden. As such, ensuring that our remedies work is paramount to helping researchers make the most of their research designs. Furthermore, single-source designs should be ripe for method variance because the cognitive processes of retrieval (i.e., remembering responses to previously answered items rather than the whole of one's experience), judgment (i.e., falsely judging that one has effectively retrieved relevant memories), and in some instances reporting (i.e., modifying one's responses to be consistent) may not be addressed unless a remedy is applied (see Tourangeau et al., 2000; Podsakoff et al., 2003, 2012). 
+[Question: Why not examine response style indicators as well (e.g., acquiescence, disacquiescence, intra-individual response consistency)? More recently, researchers have examined the stability of response styles, or the preference for particular response categories, which reflects a clear consistency motif. In an 8-year ongoing panel study, Wetzel et al. (2015) found that between 49 and 59% of the variance in state response style factors could be explained by trait response style factors, indicating a remarkable amount of response consistency across time and also raising questions about their state-like properties. Answer: Don't bring this up unless reviewers ask you to look into this. 
+[Concern: Be sure to maintain a distinction between "causes" and "effects" when writing. Others don't do this, but we should be more responsible.]
+###Relevant Common Rater Effects  
+	Common rater effects are any artifactual covariation introduced by gathering observations on (or from) the same rater (Podsakoff et al., 2003). Though there are many common rater effects (see Podsakoff et al., 2003), there are four that are particularly relevant for our study: consistency motifs, implicit theories, mood states, and trait affectivity factors. Consistency motifs refer to the propensity for respondents to maintain consistency in their responses to questions, which social psychologists suggest are produced by a basic human drive to appear consistent (Cialdini, 2009). Clearly, the drive to appear consistent should affect response reporting, as individuals will desire to appear rational (Podsakoff et al., 2003). Early research suggested that some individuals edit their responses to appear more consistent (Smith, 1983) or avoid inconsistencies (McGuire, 1960). Later research revealed consistency motifs might bias estimates of covariation (Harrison, McLaughlin, & Coalter, 1996). Similarly, implicit theories or illusory correlations refer to respondents beliefs about the covariation among particular traits, behaviors, and or outcomes that may not accurately reflect reality (Sternberg, Conway, Ketron, & Bernstein, 1981). These biases are believed to affect judgments of response appriopriateness (Podsakoff et al., 2003).
+	To address consistency motifs and implicit theories, researchers have used cover stories (e.g., Harrison et al., 1996), which are narratives designed to both disguise the hypotheses under investigation and dispel implicit theories held by the participants (Podsakoff et al., 2003). Importantly, there is no experimental research evaluating this procedural remedy for these sources of method variance. 
+	Somewhat differntly from consistency motifs and implicit theories are mood states and trait affectivity factors, which are clearly interrelated. Mood states refer to respondents momentary or brief mood state. A great deal of research indicates that one's emotional state influences the contents of what is recalled from memory by priming similarly valenced material stored in memory (cf. Blaney, 1986; Blower, 1981; Isen & Baron, 1991; Parrott & Sabini, 1990). Sometimes this has a desirable effect, such as when mood-congruency facilitates recall (Bower, 1981; Isen & Baron, 1991). However, when individuals are highly aroused, errors in recall seem more likley (Carson & Verrier, 2007). One's mood state should also be related to general affectivity (positive and negative), which refers to a respondent's propensity to view themselves or their environments in positive or negative ways (Podsakoff et al., 2003). Trait affectivity should exert similar effects on the item response process as mood, and may explain the effect of momentary mood state on the item response process. Brief, Burke, George, Robinson, and Webster (1988) observed that negative affectivity contaminates observations of stress, job and life satisfaction, depression, and the amount of affect experienced at work, resulting in biased estimates of covariation. Similarly, Williams and Anderson (1994) found that positive emotionality (analogous to positive affectivity) contaminates self-report measurements of several commonly studied organizational variables (sp. job satisfaction, organizational commitment, leader-contingent reward behavior, and job characteristics). Additionally, they found that negative emotionality (alaogous to negative affectivity) played a weaker role, only affecting  observations of job satisfaction. Similarly, Chen and Spector (1991) and Jex and Spector (1996) observed weak influences of negative affectivity on the relationships between self-reported job stress and strain variables. In short, both trait affectivity and momentary mood states may be a common source of method variance.
+	To address the role of mood states, researchers have proposed using a temporal separation of measurement that increases the amount of time between when observations of  predictor and criterion variables are made (Podsakoff et al., 2003; 2012). Though it involves separation by time, this remedy addresses a proximal cause of method variance (i.e., mood state). It is assumed that introducing a temporal separation (e.g., separating measures by one week) will reduce the systematic influence of momentary mood states, resulting in estimates that are less baised. Again, there is no research examining the efficacy of this remedy.
+=======
+Note: Reviewers might point out that social desirability would be a better control variable than positive or negative affectivity for our substnative measurement model because the factors that we have measured are all socially desirable. However, we would like to point out that social desirabilty reflects a personality disposition high in need for approval that would become activated in contexts where there are clear cues/signals that changes in item response behavior to appear socially desirable would be desired/rewarded. We took efforts to ensure that no such cues were present in both of our conditions. Rather, trait affectivity would relate to cognitive biases (e.g., self-However, this trait could be relevant in settings where the need for approval could be motivated, resulting in changes to item response behavior (e.g., high-stakes employee selection contexts).
+###Relevant Context Effects	
+	Context effects refer to any artifactual covariation among observations caused by an item or scale’s location or relationship to other items or scales in a survey (e.g., item/scale priming and item/scale embeddedness effects). Podakoff et al. (2003) proposed that item context can affect retrieval and judgments of response appropriateness. Though these effects are elusive (i.e., they can be difficult to predict and control a prioi; see Tourangeau & Rasinski, 1988), Tourangeau, Rasinski, and D’Andrade (1991) demonstrated that participants respond more quickly to similar items placed closer together rather than further apart, suggesting that prior responses were more easily accessible in short-term memory. Tourangeau et al.’s (1991) findings also suggest that item intercorrelations may be a function of the consistent ordering of items within a particular instrument. If so, then participants observed data may artificially discriminate on a latent trait. Examining this possibility, Steinberg (1994) found that one item in a 20-item scale became slightly more discriminating when it was presented later in the scale rather than as the first item, which Steinberg attributed to the increase in self-awareness that occurs when individuals are asked to repeatedly reflect on their own tendencies. Additionally, Harrison et al. (1996) found that context effects produced by scale location and scale valence (negative scales presented before positive scales) affected psychometric properties such that scales presented later were less reliable. Further, when negative scales were presented first, estimated inter-scale correlations were much higher, suggesting the presence of scale embeddedness effects. 
+	To address item priming and item embeddedness effects, researchers have proposed counterbalancing or randomizing the order of item and/or scales within a survey, particular around a filler scale or series of filler scales (Podakoff et al., 2003; Salancik & Pfeffer, 1977). It is assumed that this remedy will reduce the systematic influence of context effects that might introduce common method variance across predictors and criteria, resulting in estimates of scale covariation that are less biased by context. Again, there is no research examining the efficacy of this remedy.
+=======
+Note: Make sure to consistently use the disctinction between scale and item covariation. 
+###Measurement-Specific Causes of Both Common and Uncommon Method Variance
+  Advocating a more nuanced view of common method variance, Spector et al. (2016) suggest that certain causes of method variance are specific to the measurement strategy employed by researchers. For instance, when gathering observations on both affective/attitudinal and behavioral factors, Spector et al. encouraged researchers to consider ways to capture the mood state exhibited by their participates, as this would be a likely common cause of method variance that would contaminate the response process underlying both sets of observations, resulting in biased estimates of covariation. Addtionally, there may be sources of method variance that are uncommon (i.e., unique) to particular methods of observation. For instance, affective/attitudinal measures might be more strongly affected by response sets (e.g., consistency motifs) than behavioral measures, which would be affected by impression management strategies. Such effects would attenuate scale covariances unless controlled (see Spector et al., 2016). Addressing these sources of variance requires statistical strategies (e.g., measured cause models; see Williams et al., 2010).
+  In line with Spector et al.'s call for controlling both common and uncommon method variance, we built in measures of method variance causes that were shared across our measures and unique to specific mesures. In both of our studies, we used the same measurement model and tested the same underlying theory; namely, that proactive personality relates positively to proactive behaviors (i.e., voice and taking charge) as well as behaviors reflecting task performance (i.e., in-role behavior) and contextual performance (i.e., OCB) (see Figure 1). We decided to study these predictor-criterion relationships for three reasons that are important for both organizational scholars and method variance testing in general. First, these relationships are often described in the literature (e.g., Fuller & Marler, 2009; Grant, Gino, & Hoffman, 2011), suggesting that assuming a relationship is important to a broad audience of organizational scholars. Second, prior research suggests that these relationships may be a function of method variance (e.g., Fuller & Marler, 2009). For instance, a meta-analysis by Fuller and Marler (2009) demonstrated that these relationships are often inflated by common method variance, particularly when observations are gathered using the same source rather than multiple sources (see Table 1). They observed that the relationships between proactive personality and workplace behaviors was substantially inflated by between 129% and 308% when observations were made using a common (rather than independent) source. Though researchers have suggested that such percentages mistate the impact of method variance (e.g., Lance & Simonovsky, 2015; Spector et al., 2016), it seems clear that methodological differences are resulting and diverging estimates. Third, and most importantly, it is not clear what sources of method variance would explain such these differences. To respolve these disparities, we tested the same measurement model in our two studies, examining the effects of various hypothesized common method factors (e.g., mood, affectivity, and consistency motifs) and uncommon method factors (e.g., negative item wording). Figure b illustrates how the method factors were modeled.
+=======
+[Note: Readers may have noted an apparent disparity between Podsakoff et al. (2003) and Spector et al. (2016) on the role of consistency motifs. Spector et al. (2016) suggest this factor may be more relevant for affective/attitudinal factors than behavioral, whereas Podsakoff et al. (2003) suggests that consistency motifs could be equally relevant for items/scales within a measure).] 
+###General Purpose
+  In two experiments, we examine the efficacy of procedural remedies for different proximal causes of common method variance while also examining the role played by other proximal causes of method variance that are specific to our measures. In both studies, we randomly assigned individuals to one of two conditions where remedies for different proximal causes of CMV have been applied or have not been applied. This allows us to test the causal role of hypothesized mechanisms that give rise method variance and also to test the extent to which these causes produce biased estimates.
+##Study 1 - The Role of Consistency Motifs, Implicit Theories, and Context Effects 
+  In study 1, we examined the role of consistency motifs, implicit theories, and context effects. More specifically, we tested whether using a cover story and randomzing items and scales around a filler scale worked (i.e., reduced the presence of method variance). Participants were randomly assigned to a condition where observations were obtained with or without these remedies. For our non-remedied (i.e., control) condition, an online self-reported survey was designed such that all items and scales appeared in the same order, but were separated by different webpages. This is a conventional kind of survey design likely in use by many organizations. For our remedied condition, we used a cover story that was designed to both blind participants to the purpose of our study and dispel implicit theories regarding the substantive intention guiding a study such as ours: test for positive relationships linking proactive personality to workplace behaviors. Also, the presentation of items within scales and also the whole scales were randomized around a series of filler scale consisting of measured method effect factors. We provide more detail for these remedies below.
+=======
+Notes for us to discuss:
+The cognitive psychology literature, specifically on heuristics and biases in decision making and judgments, informs method variance research. For instance, consider anchoring, wherein one's judgment is informed by an arbitrary prior thought in one's conciousness, within and their ability to explain item-order (or item priming) effects. In an experiment, college students were asked the questions (a) how happy are you and (b) how often are you dating. When asked in this order, the correlation between the two questions was low (r = .11). However, when asked in reverse, the correlation was 5 times larger (r = .62). Similar findings emerged with married couples about their sex life (see Strack, Martin, & Schwarz, 1988). The design of the questionnaire (in this case, the item order) explains the size of the correlation estimated between measures of life satisfaction and dating or frequency of sex, respectively, with anchoring providing the psychological explanation. 
+(A few questions regarding the above: has this been replicated? the effect seems exaggerated, so I'm wondering if the effect size is reliable...What would a Fisher r-to-z test reveal? which effect is closer to the truth, and why?)
+References:
+Strack, F. L., Martin, L., & Scharz, N. (1988). Priming and communication: The social determinants of information use in judgments of life-satisfaction. European Journal of Social Psychology, pp. 429-442.
 
 
 ```{r message = FALSE, warning = FALSE}
@@ -281,72 +308,74 @@ data <- data[c(-2)]
 
 ###### ENGAGE MACHINE LEARNING TO AUTOMATE MANIPULATION CHECK ######
 #Engage supervised machine learning to analyze purpose check data, which will tell us if participants actually watched the video and got the purpose of the study. 
-#library(caret)
-#library(tm)
-#library(SnowballC)
-#library(stringr)
-#Training data.NOTE: You'll need to filter in the 30 cases that force participants to distinguish purpose 1 from purpose 2. This will improve the accuracy of the algorithms.
-#data.t <- data[1:60]
-#data.t <- data.t[c(23,24,25,26)]
-#data.t[] <- lapply(data.t, str_trim)
-#is.na(data.t) <- data.t==''
-#data.t <- na.omit(data.t)
-#cond.code <- data.t[c(1)]
-#data.t <- data.t[c(2)]
-#corpus <- VCorpus(VectorSource(data.t$PurpCk1))
+library(caret)
+library(tm)
+library(SnowballC)
+library(stringr)
+#Training data. NOTE: You'll need to filter in the 30 cases that force participants to distinguish purpose 1 from purpose 2. This will improve the accuracy of the algorithms.
+data.t <- data[1:60]
+data.t <- data.t[c(23,24,25,26)]
+data.t[] <- lapply(data.t, str_trim)
+is.na(data.t) <- data.t==''
+data.t <- na.omit(data.t)
+cond.code <- data.t[c(1)]
+data.t <- data.t[c(2)]
+corpus <- VCorpus(VectorSource(data.t$PurpCk1))
 ##Create a text document matrix.
-#tdm <- DocumentTermMatrix(corpus, list(removePunctuation = TRUE, stripWhitespace = TRUE, content_transformer(tolower), stopwords = TRUE, stemming = FALSE, removeNumbers = FALSE))
+tdm <- DocumentTermMatrix(corpus, list(removePunctuation = TRUE, stripWhitespace = TRUE, content_transformer(tolower), stopwords = TRUE, stemming = FALSE, removeNumbers = FALSE))
 ##Convert to a data.frame for training and assign a classification (factor) to each document.
-#train <- as.matrix(tdm)
+train <- as.matrix(tdm)
 #Create condition code that differentiates individuals from conditions.
-#cond.code <- as.data.frame(ifelse(cond.code$Condition== "CSManipulation", 1,0))
-#train <- cbind(train, cond.code)
-#colnames(train)[ncol(train)] <- 'y'
-#train <- as.data.frame(train)
-#train$y <- as.factor(train$y)
+cond.code <- as.data.frame(ifelse(cond.code$Condition== "CSManipulation", 1,0))
+train <- cbind(train, cond.code)
+colnames(train)[ncol(train)] <- 'y'
+train <- as.data.frame(train)
+train$y <- as.factor(train$y)
 ##Train.
-#require(foreach)
-#registerDoSEQ()
+require(foreach)
+registerDoSEQ()
 #Training control prevents model over-fitting. 
-#tc <- trainControl(method = "cv", number = 7, verboseIter=FALSE , #preProcOptions="pca", allowParallel=TRUE)
-#bayesglm <- train(y ~ ., data = train, method = 'bayesglm', trControl=tc)
-#rf <- train(y ~ ., data = train, method = 'rf', trControl=tc)
-#NN <- train(y ~ ., data = train, method = 'nnet', trControl=tc, verbose=FALSE)
-#svml <- train(y ~ ., data = train, method = 'svmLinear', trControl=tc)
-#logitboost <- train(y ~ ., data = train, method = 'LogitBoost', trControl=tc)
+tc <- trainControl(method = "cv", number = 7, verboseIter=FALSE , preProcOptions="pca", allowParallel=TRUE)
+bayesglm <- train(y ~ ., data = train, method = 'bayesglm', trControl=tc)
+rf <- train(y ~ ., data = train, method = 'rf', trControl=tc)
+NN <- train(y ~ ., data = train, method = 'nnet', trControl=tc, verbose=FALSE)
+svml <- train(y ~ ., data = train, method = 'svmLinear', trControl=tc)
+logitboost <- train(y ~ ., data = train, method = 'LogitBoost', trControl=tc)
 
 #This is used to complare the models against one anoher.
-#model <- c("Bayes GLM", "Neural Net", "SVM (linear)", "LogitBoost")
-#Accuracy <- c(max(bayesglm$results$Accuracy),
-#              max(NN$results$Accuracy),
-#              max(svml$results$Accuracy),
-#              max(logitboost$results$Accuracy))
-#Kappa <- c(max(bayesglm$results$Kappa),
-#           max(NN$results$Kappa),
-#           max(svml$results$Kappa),
-#           max(logitboost$results$Kappa))
-#performance <- cbind(model,Accuracy,Kappa)
-#knitr::kable(performance)
+model <- c("Bayes GLM", "Neural Net", "SVM (linear)", "LogitBoost")
+Accuracy <- c(max(bayesglm$results$Accuracy),
+              max(NN$results$Accuracy),
+              max(svml$results$Accuracy),
+              max(logitboost$results$Accuracy))
+Kappa <- c(max(bayesglm$results$Kappa),
+           max(NN$results$Kappa),
+           max(svml$results$Kappa),
+           max(logitboost$results$Kappa))
+performance <- cbind(model,Accuracy,Kappa)
+knitr::kable(performance)
 #Create new dataset and fit models to new data.
-#data.n <- data[1:60]
-#data.n <- data.n[c(24,25,26)]
+data.n <- data[1:60]
+data.n <- data.n[c(24,25,26)]
+
+#ERROR HERE <- number of columns of arguments do not match
 #data.n <- rbind(data.t,data.n)
-#data.n[] <- lapply(data.n, str_trim)
-#is.na(data.n) <- data.n==''
-#data.n <- na.omit(data.n)
-#data.n <- unique(data.n)
-#data.n <- data.n$PurpCk1
-#data.n <- as.data.frame(data.n)
+data.n[] <- lapply(data.n, str_trim)
+is.na(data.n) <- data.n==''
+data.n <- na.omit(data.n)
+data.n <- unique(data.n)
+data.n <- data.n$PurpCk1
+data.n <- as.data.frame(data.n)
 #Fit model to new data
-#corpus <- VCorpus(VectorSource(data.n$data.n))
+corpus <- VCorpus(VectorSource(data.n$data.n))
 ##Create a text document matrix.
-#tdm <- DocumentTermMatrix(corpus, list(removePunctuation = TRUE, stripWhitespace = TRUE, content_transformer(tolower), stopwords = TRUE, stemming = FALSE, removeNumbers = FALSE))
-#test <- as.matrix(tdm)
+tdm <- DocumentTermMatrix(corpus, list(removePunctuation = TRUE, stripWhitespace = TRUE, content_transformer(tolower), stopwords = TRUE, stemming = FALSE, removeNumbers = FALSE))
+test <- as.matrix(tdm)
 ##Convert to a data.frame for training and assign a classification (factor) to each document.
-#predict(svml,test)
+z <- as.data.frame(predict(bayesglm,test))
 ###IT WORKS!!!! Send to team. 
-#share <- subset(data, Condition=="CSManipulation")
-#share <- share[c(24,25)]
+share <- subset(data, Condition=="CSManipulation")
+share <- share[c(24,25)]
 
 #Assuming that some people correctly guessed the hypothesis, then engage supervised machine learning to analyze hypothesis guessing data. 
 #data <- data[1:30,]
@@ -431,12 +460,11 @@ write.csv(final, file = "data.csv")
 ```
 
 
-Notes below are the Bayesian test of the invariance of scale intercorrelations. 
+Notes below are the Bayesian tests of scale intercorrelations. 
 ```{r}
 library(bayesboot)
 library(BayesFactor)
 library(BayesMed)
-library(cocor)
 library(plyr)
 library(psych)
 library(cocor)
@@ -445,11 +473,23 @@ library(ggplot2)
 library(QRM)
 
 #Frequentist estimate of correlation between PP and OCBI for across conditions.
-f.Controlr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
-f.ItemRandr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
-f.CSManpipr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
-f.FScalesr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
-f.ScaleRandr <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+f.Controlr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
+f.ItemRandr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+
+f.Controlr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "Control", ])
+f.ItemRandr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "ScaleRand", ])
+
+f.Controlr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "Control", ])
+f.ItemRandr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "ScaleRand", ])
 
 #Examining correlations between variables across conditions.
 #Extract sample sizes
@@ -461,13 +501,29 @@ FScalesn <- c$FillerScales$n[c(1)]
 ScaleRandn <- c$ScaleRand$n[c(1)]
 
 #Extract correlations and compare
-func <- function(xx)
+func <- function(xx1)
 {
-return(data.frame(COR = cor(xx$a, xx$b)))
+return(data.frame(COR = cor(xx1$a, xx1$b)))
 }
 ##PP and OCBI
-xx <- data.frame(group = final$Condition, a = final$PP, b = final$OCBI)
-a <- ddply(xx, .(group), func)
+xx1 <- data.frame(group = final$Condition, a = final$PP, b = final$OCBI)
+a <- ddply(xx1, .(group), func)
+
+func <- function(xx2)
+{
+return(data.frame(COR = cor(xx2$a, xx2$b)))
+}
+##PP and OCBO
+xx2 <- data.frame(group = final$Condition, a = final$PP, b = final$OCBO)
+b <- ddply(xx2, .(group), func) 
+
+func <- function(xx3)
+{
+return(data.frame(COR = cor(xx3$a, xx3$b)))
+}
+##PP and OCBI
+xx3 <- data.frame(group = final$Condition, a = final$PP, b = final$IRB)
+c<- ddply(xx3, .(group), func)
 
 #Evaluate the difference in correlations using frequentist method: Fisher r to z transformation and test of significant differences. Note: these tests are conducted singly as in the test compares only two conditions at a time. It is possible to run an omnibus test that examines whether a correlation varies across all groups. However, the code for this test would need to be written. No big deal, but an easy alternative would be to correct for the number of tests that we run, which may be too conservative. See http://davidakenny.net/doc/statbook/chapter_16.pdf for more information. 
 
@@ -497,7 +553,61 @@ ScaleRand.PP.OCBI.r <- ScaleRand.PP.OCBI.r[2]
 cocor.indep.groups(as.numeric(Control.PP.OCBI.r), as.numeric(ScaleRand.PP.OCBI.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
 ###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results.
 
-####Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB, etc.).
+##1. PP and OCBO: Control vs. CSManipulation
+Control.PP.OCBO.r <- a[1,]
+Control.PP.OCBO.r <- Control.PP.OCBO.r[2]
+CSManip.PP.OCBO.r <- a[2,]
+CSManip.PP.OCBO.r <- CSManip.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(CSManip.PP.OCBO.r), Controln, CSManipn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##2. PP and OCBO: Control vs. ItemRand
+ItemRand.PP.OCBO.r <- a[3,]
+ItemRand.PP.OCBO.r <- ItemRand.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(ItemRand.PP.OCBO.r), Controln, ItemRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##3. PP and OCBO: Control vs. FScales
+FScales.PP.OCBO.r <- a[4,]
+FScales.PP.OCBO.r <- FScales.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(FScales.PP.OCBO.r), Controln, FScalesn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis rejected using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##4. PP and OCBO: Control vs. ScaleRand
+ScaleRand.PP.OCBO.r <- a[5,]
+ScaleRand.PP.OCBO.r <- ScaleRand.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(ScaleRand.PP.OCBO.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##1. PP and IRB: Control vs. CSManipulation
+Control.PP.IRB.r <- a[1,]
+Control.PP.IRB.r <- Control.PP.IRB.r[2]
+CSManip.PP.IRB.r <- a[2,]
+CSManip.PP.IRB.r <- CSManip.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(CSManip.PP.IRB.r), Controln, CSManipn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##2. PP and IRB: Control vs. ItemRand
+ItemRand.PP.IRB.r <- a[3,]
+ItemRand.PP.IRB.r <- ItemRand.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(ItemRand.PP.IRB.r), Controln, ItemRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##3. PP and IRB: Control vs. FScales
+FScales.PP.IRB.r <- a[4,]
+FScales.PP.IRB.r <- FScales.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(FScales.PP.IRB.r), Controln, FScalesn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis rejected using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##4. PP and IRB: Control vs. ScaleRand
+ScaleRand.PP.IRB.r <- a[5,]
+ScaleRand.PP.IRB.r <- ScaleRand.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(ScaleRand.PP.IRB.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+
+####Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB).
+
 ##Praoctive Personality and OCBO
 xx <- data.frame(group = final$Condition, a = final$PP, b = final$OCBO)
 a <- ddply(xx, .(group), func)
@@ -519,52 +629,131 @@ xx <- data.frame(group = final$Condition, a = final$OCBO, b = final$IRB)
 a <- ddply(xx, .(group), func)
 
 #Bayesian estimate of correlation between PP and OCBI for across conditions.
-b.Controlr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
-b.ItemRandr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
-b.CSManpipr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
-b.FScalesr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
-b.ScaleRandr <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+b.Controlr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
+b.ItemRandr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
 
-#Examine fit of the models
-plot(b.Controlr)
-plot(b.ItemRandr)
-plot(b.CSManpipr)
-plot(b.FScalesr)
-plot(b.ScaleRandr)
+#Bayesian estimate of correlation between PP and OCBO for across conditions.
+b.Controlr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "Control", ])
+b.ItemRandr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "ScaleRand", ])
+
+#Bayesian estimate of correlation between PP and IRB for across conditions.
+b.Controlr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "Control", ])
+b.ItemRandr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "ScaleRand", ])
+
+#Examine fit of the models for PP and OCBI
+plot(b.Controlr1)
+plot(b.ItemRandr1)
+plot(b.CSManpipr1)
+plot(b.FScalesr1)
+plot(b.ScaleRandr1)
+
+#Examine fit of the models for PP and OCBO
+plot(b.Controlr2)
+plot(b.ItemRandr2)
+plot(b.CSManpipr2)
+plot(b.FScalesr2)
+plot(b.ScaleRandr2)
+
+#Examine fit of the models for PP and IRB
+plot(b.Controlr3)
+plot(b.ItemRandr3)
+plot(b.CSManpipr3)
+plot(b.FScalesr3)
+plot(b.ScaleRandr3)
 
 #Plot differences for PP-OCBI relationship and estimate proportion of effects that are consistent with a null effect, which here is defined as r = [-.10, .10].
 #Item Randomization
-control_mcmc <- as.data.frame(b.Controlr)
-ItemRandr_mcmc <- as.data.frame(b.ItemRandr)
-hist(ItemRandr_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Item-Randomized Scales", yaxt = "n")
-1-(mean(ItemRandr_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr_mcmc$rho - control_mcmc$rho < -.1 ))
+control_mcmc <- as.data.frame(b.Controlr1)
+ItemRandr1_mcmc <- as.data.frame(b.ItemRandr1)
+hist(ItemRandr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr1_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr1_mcmc$rho - control_mcmc$rho < -.1 ))
 #48% chance that filler scales have no effect defined by r = [-.10, .10]. 
 
+control_mcmc <- as.data.frame(b.Controlr2)
+ItemRandr2_mcmc <- as.data.frame(b.ItemRandr2)
+hist(ItemRandr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr2_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#48% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+ItemRandr3_mcmc <- as.data.frame(b.ItemRandr3)
+hist(ItemRandr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr3_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#48% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
 #Cover Story Manipulation
-control_mcmc <- as.data.frame(b.Controlr)
-CSManpipr_mcmc <- as.data.frame(b.CSManpipr)
-hist(CSManpipr_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Coverstory", yaxt = "n")
-1-(mean(CSManpipr_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr_mcmc$rho - control_mcmc$rho < -.1 ))
+control_mcmc <- as.data.frame(b.Controlr1)
+CSManpipr1_mcmc <- as.data.frame(b.CSManpipr1)
+hist(CSManpipr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr1_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr1_mcmc$rho - control_mcmc$rho < -.1 ))
 #51% chance that filler scales have no effect defined by r = [-.10, .10]. 
 
+control_mcmc <- as.data.frame(b.Controlr2)
+CSManpipr2_mcmc <- as.data.frame(b.CSManpipr2)
+hist(CSManpipr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr2_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#51% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+CSManpipr3_mcmc <- as.data.frame(b.CSManpipr3)
+hist(CSManpipr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr3_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#51% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
 #Large difference between control and filler scales. Examine the probability that filler scales weaken correlation.
-control_mcmc <- as.data.frame(b.Controlr)
-Fscales_mcmc <- as.data.frame(b.FScalesr)
+control_mcmc <- as.data.frame(b.Controlr1)
+Fscales1_mcmc <- as.data.frame(b.FScalesr1)
 head(control_mcmc)
-hist(Fscales_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Filler Scales", yaxt = "n")
-1-(mean(Fscales_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales_mcmc$rho - control_mcmc$rho < -.1 ))
+hist(Fscales1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales1_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales1_mcmc$rho - control_mcmc$rho < -.1 ))
 #12% chance that filler scales have no effect defined by r = [-.10, .10]. 
 
+control_mcmc <- as.data.frame(b.Controlr2)
+Fscales2_mcmc <- as.data.frame(b.FScalesr2)
+head(control_mcmc)
+hist(Fscales2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales2_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales2_mcmc$rho - control_mcmc$rho < -.1 ))
+#12% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+Fscales3_mcmc <- as.data.frame(b.FScalesr3)
+head(control_mcmc)
+hist(Fscales3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales3_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales3_mcmc$rho - control_mcmc$rho < -.1 ))
+#12% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
 #Scale Randomization
-control_mcmc <- as.data.frame(b.Controlr)
-ScaleRandr_mcmc <- as.data.frame(b.ScaleRandr)
-hist(ScaleRandr_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Scale-Randomized Scales", yaxt = "n")
-1-(mean(ScaleRandr_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr_mcmc$rho - control_mcmc$rho < -.1 ))
+control_mcmc <- as.data.frame(b.Controlr1)
+ScaleRandr1_mcmc <- as.data.frame(b.ScaleRandr1)
+hist(ScaleRandr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr1_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr1_mcmc$rho - control_mcmc$rho < -.1 ))
 #40% chance that filler scales have no effect defined by r = [-.10, .10]. 
+
+control_mcmc <- as.data.frame(b.Controlr2)
+ScaleRandr2_mcmc <- as.data.frame(b.ScaleRandr2)
+hist(ScaleRandr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr2_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#40% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+ScaleRandr3_mcmc <- as.data.frame(b.ScaleRandr3)
+hist(ScaleRandr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr3_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#40% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
 
 ##Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB, etc.).
 #Plot differences for PP-OCBO relationship
 ```
+
 
 The results for the default two-sided test can be obtained as follows: 
 ```{r}
@@ -641,7 +830,7 @@ plotRhoPriorPosterior(n=nStudy1, r=rStudy1, alpha=1/gamma, yLim=7)
 
 
 
-
+MTurk messaging stuff.
 ```{r}
 #Note: Possibly change the HITID
 #b <- "Our systems flagged your HIT and may be rejected unless you take action. Individuals are flagged when, after completing our survey, they provide a confirmation code to us that was not assigned to a survey taker which can occur when (1) individuals incorrectly provide a confirmation code that was never issued or (2) individuals fabricate a confirmation code. To determine if you incorrectly provided a confirmation code that was never issued, which will not result in a rejection, we will need to examine our dataset to find the confirmation code that was most probably assigned to your survey. Therefore, we will need the following information from you: (1) your gender, (2) your age, (3) your job title, and (4) the number of years worked at your current job. We will not share this information. It is being asked for only to identify your data and confirmation code. If we can identify your data, then your HIT will not be rejected. However, if you did provide a confirmation code to us that was fabricated, then we will reject your HIT unless you notify us that you wish to take our survey in earnest. Then we will provide you with access to our survey. Related to this point, if you did take part in our survey but were screened out, then we can provide you with access to the portion of your survey that was flagged for inattentive responding and give you an opportunity to complete your survey in earnest. We will need you to provide us with your gender, age, job title, and the number of years worked so we can identify your survey and allow you to complete it. Please send all information to the lead researcher's email address (christopher.castille@nicholls.edu) along with any questions that you may have. We want to resolve this matter in ways that benefit all workers and allow fair treatment. Thank you for your time and effort with regard to our project."
@@ -687,42 +876,7 @@ good <- submitted[complete.cases(submitted),]
 ApproveAssignments(assignments = good$AssignmentID)
 ```
 
-#Introduction
-  Few methodological problems have been discussed more frequently than the presence and impact of method rvariance (Spector, Rosen, Richardson, Williams, & Johnson 2016), or variation in observations attributable to methodolgoical sources than to substantive/theoretical constructs of interest (Campbell & Fiske, 1959). Though long debated over the past several decades (e.g., Campbell & Fiske, 1959; Lance & Simonovsky, 2015; Richardson, Simmering, & Sturman, 2009; Spector, 2006), the problem of method variance is often viewed as a serious one in the organizational sciences, where researchers often rely upon observations made using sources believed to share common method variance (i.e., variation in observations that is attributable to a common cause, such mood held by respondents; see Podsakoff et al., 2003). Those who believe strongly that CMV is persistent problem believe that method variance threatens the substantive knowledgebase upon which practitioners rely, and so many procedural solutions have been proposed to address this eminent problem (Podsakoff, MacKenzie, Lee, & Podsakoff, 2003; Podsakoff, MacKenzie, & Podsakoff, 2012). The proposed solutions are often simple (e.g., use a cover story to disguise the purpose of a study, counterbalance item presentation, and separate measurement by an interval of time) and routinely encouraged by journal editors (e.g., Ashkanasy, 2009).   
-  Unfortunately, these procedural method variance remedies have not received close examination, particularly using experimental designs that compare observations obtained using these remedies to those obtained without. These experiments are needed because they can demonstrate the extent to which a remedy addresses a proposed cause of method variance (e.g., participant beliefs about item covariation, respondent mood), resulting in reduced method variance and less biased results. Therefore, we set out to conduct these experiments and to this end we make the following contributions to the literature. First, we test the causal role of hypothesized proximal 8causes of method variance, specifically resondent consistency motifs, item context effects, and mood. Second, drawing on recent literature distinguishing between common and uncommon method variance (see Spector et al., 2016), we demonstrate the extent to which these different sources of method variance differentially affect observations, affecting reserachers' ability to produce accurate effect size estimates. Thirdly, we explore causes of method variance that are specific to the substantive theory under investigation in our study, allowing a comparison of general and specific causes of method variance. 
-##Theoretical Overview of Method Variance
-	Before we dive too deeply into the literature on method bias, we should clarify the terms 'method,' 'method variance,' and 'method bias,' as there are differing perspectives. Summarizing the available literature, Podsakoff et al. (2012) distinguished between a broad and narrow definition. Drawing on Fisk (1982) and citing several researchers who support this position (e.g., Johnson et al., 2011; Edwards, 2008; Siemsen et al., 2010; Weijters et al., 2010), Podsakoff et al. noted that method encompasses several abstract elements (e.g., taking a paper-and-pencil instrument, responding using Likert scales, characteristics of the examiner) and when these elements are shared across methods or measures in the same investigation, there will be a convergence resulting in bias. By contrast, Lance et al. (2009, 2010) restricted method to aspects that refer to alternative means of enumerating observations to indicate standings on latent traits (e.g., self- vs. other-report), which has been critized as omitting common rater sources of method variance (e.g., consistency motifs and illusory rater correlations; see Podsakoff et al., 2012). Method variance refers to the impact of a methodological aspect of study on a particular observation(s) (e.g.,  mood affecting observations obtained with a single-source single time-point design), which differs from the extent to which method variance is shared across methods, causing biased/inflated parameter estimates (e.g., negative mood both contaminating observations of two variables, inflating their covariances; see Williams & Anderson, 1994). This distinction is important because method variance can be unique to a specific set of observations within a dataset (e.g., halo effects contaminate supervisor appraisals of employee performance, but not subordinate variables). When such uncommon method variance is present in one's observations, observed covariances with other observations are attentuated (see Spector et al., 2016).
-	Conventionally, method variance is a concern when researchers's conclusions dervie from self-report surveys administered at a single time-point because it is believed that methods affect the same item response process. Therefore, it is important to understand how methods affect the underlying item response process resulting in contaminated observations. Research from cognitive psychology suggests that four cognitive processes are associated with responding to survey items (see Tourangeau et al., 2000): (1) comprehension (i.e., understanding items), (2) retrieval (i.e., recalling item-relevant memories), (3) judgment (i.e., assessing the completeness of a relevant memory), and (4) response (i.e., mapping one's judgement onto the available item responses). Podsakoff et al. (2003) later divided the last process into response selection and (5) response reporting to highlight how individuals might modify their responses to adhere to certain criteria (e.g., adjusting previous item responses to appear more consistent). Podsakoff et al. (2003) summarized the method variance literature into four broad potential sources of common method bias (i.e., common rater effects, item characteristic effects, item context effeccts, and measurement context effects) to explain how response processes are corrupted, resulting in contaminated observations. 
-	In our manuscript, we examine the role of a few sources identified by Podsakoff et al. (2003) that are believed to play a role in all same-source surveys. These sources of method variance are referred to as proximal causes of method variance. In two studies, we examine the role of a specific common rater effects (i.e., implicit theories, consistency motifs, mood states, trait affectivity factors), item context effects (i.e., item/scale priming and item/scale embeddedness effects), and measurement context effects (i.e., gathering observations on predictor and criterion variables at the same point in time vs a differnt point in time), which are believed to corrupt the item response process, contaminate observations, and ultimately bias estimates of covariation. We have decided to focus on proximal causes of method variance for single-source designs because these designs are likely to be the most prevalent in the organizational and social science (applied and academic settings) due to their relatively lower cost and reduced administrative burden. As such, ensuring that our remedies work is paramount to helping researchers make the most of their research designs. Furthermore, single-source designs should be ripe for method variance because the cognitive processes of retrieval (i.e., remembering responses to previously answered items rather than the whole of one's experience), judgment (i.e., falsely judging that one has effectively retrieved relevant memories), and in some instances reporting (i.e., modifying one's responses to be consistent) may not be addressed unless a remedy is applied (see Tourangeau et al., 2000; Podsakoff et al., 2003, 2012). 
-	
-	Question: Why not examine response style indicators as well (e.g., acquiescence, disacquiescence, intra-individual response consistency)? More recently, researchers have examined the stability of response styles, or the preference for particular response categories, which reflects a clear consistency motif. In an 8-year ongoing panel study, Wetzel et al. (2015) found that between 49 and 59% of the variance in state response style factors could be explained by trait response style factors, indicating a remarkable amount of response consistency across time and also raising questions about their state-like properties. Answer: Don't bring this up unless reviewers ask you to look into this. 
-	Concern: Be sure to maintain a distinction between "causes" and "effects" when writing. Others don't do this, but we should be more responsible.
-		
-###Relevant Common Rater Effects  
-	Common rater effects are any artifactual covariation introduced by gathering observations on (or from) the same rater (Podsakoff et al., 2003). Though there are many common rater effects (see Podsakoff et al., 2003), there are four that are particularly relevant for our study: consistency motifs, implicit theories, mood states, and trait affectivity factors. Consistency motifs refer to the propensity for respondents to maintain consistency in their responses to questions, which social psychologists suggest are produced by a basic human drive to appear consistent (Cialdini, 2009). Clearly, the drive to appear consistent should affect response reporting, as individuals will desire to appear rational (Podsakoff et al., 2003). Early research suggested that some individuals edit their responses to appear more consistent (Smith, 1983) or avoid inconsistencies (McGuire, 1960). Later research revealed consistency motifs might bias estimates of covariation (Harrison, McLaughlin, & Coalter, 1996). Similarly, implicit theories or illusory correlations refer to respondents beliefs about the covariation among particular traits, behaviors, and or outcomes that may not accurately reflect reality (Sternberg, Conway, Ketron, & Bernstein, 1981). These biases are believed to affect judgments of response appriopriateness (Podsakoff et al., 2003).
-	To address consistency motifs and implicit theories, researchers have used cover stories (e.g., Harrison et al., 1996), which are narratives designed to both disguise the hypotheses under investigation and dispel implicit theories held by the participants (Podsakoff et al., 2003). Importantly, there is no experimental research evaluating this procedural remedy for these sources of method variance. 
-	Somewhat differntly from consistency motifs and implicit theories are mood states and trait affectivity factors, which are clearly interrelated. Mood states refer to respondents momentary or brief mood state. A great deal of research indicates that one's emotional state influences the contents of what is recalled from memory by priming similarly valenced material stored in memory (cf. Blaney, 1986; Blower, 1981; Isen & Baron, 1991; Parrott & Sabini, 1990). Sometimes this has a desirable effect, such as when mood-congruency facilitates recall (Bower, 1981; Isen & Baron, 1991). However, when individuals are highly aroused, errors in recall seem more likley (Carson & Verrier, 2007). One's mood state should also be related to general affectivity (positive and negative), which refers to a respondent's propensity to view themselves or their environments in positive or negative ways (Podsakoff et al., 2003). Trait affectivity should exert similar effects on the item response process as mood, and may explain the effect of momentary mood state on the item response process. Brief, Burke, George, Robinson, and Webster (1988) observed that negative affectivity contaminates observations of stress, job and life satisfaction, depression, and the amount of affect experienced at work, resulting in biased estimates of covariation. Similarly, Williams and Anderson (1994) found that positive emotionality (analogous to positive affectivity) contaminates self-report measurements of several commonly studied organizational variables (sp. job satisfaction, organizational commitment, leader-contingent reward behavior, and job characteristics). Additionally, they found that negative emotionality (alaogous to negative affectivity) played a weaker role, only affecting  observations of job satisfaction. Similarly, Chen and Spector (1991) and Jex and Spector (1996) observed weak influences of negative affectivity on the relationships between self-reported job stress and strain variables. In short, both trait affectivity and momentary mood states may be a common source of method variance.
-	To address the role of mood states, researchers have proposed using a temporal separation of measurement that increases the amount of time between when observations of  predictor and criterion variables are made (Podsakoff et al., 2003; 2012). Though it involves separation by time, this remedy addresses a proximal cause of method variance (i.e., mood state). It is assumed that introducing a temporal separation (e.g., separating measures by one week) will reduce the systematic influence of momentary mood states, resulting in estimates that are less baised. Again, there is no research examining the efficacy of this remedy.
-	
-	Note: Reviewers might point out that social desirability would be a better control variable than positive or negative affectivity for our substnative measurement model because the factors that we have measured are all socially desirable. However, we would like to point out that social desirabilty reflects a personality disposition high in need for approval that would become activated in contexts where there are clear cues/signals that changes in item response behavior to appear socially desirable would be desired/rewarded. We took efforts to ensure that no such cues were present in both of our conditions. Rather, trait affectivity would relate to cognitive biases (e.g., self-However, this trait could be relevant in settings where the need for approval could be motivated, resulting in changes to item response behavior (e.g., high-stakes employee selection contexts).
-	  
-###Relevant Context Effects	
-	Context effects refer to any artifactual covariation among observations caused by an item or scale’s location or relationship to other items or scales in a survey (e.g., item/scale priming and item/scale embeddedness effects). Podakoff et al. (2003) proposed that item context can affect retrieval and judgments of response appropriateness. Though these effects are elusive (i.e., they can be difficult to predict and control a prioi; see Tourangeau & Rasinski, 1988), Tourangeau, Rasinski, and D’Andrade (1991) demonstrated that participants respond more quickly to similar items placed closer together rather than further apart, suggesting that prior responses were more easily accessible in short-term memory. Tourangeau et al.’s (1991) findings also suggest that item intercorrelations may be a function of the consistent ordering of items within a particular instrument. If so, then participants observed data may artificially discriminate on a latent trait. Examining this possibility, Steinberg (1994) found that one item in a 20-item scale became slightly more discriminating when it was presented later in the scale rather than as the first item, which Steinberg attributed to the increase in self-awareness that occurs when individuals are asked to repeatedly reflect on their own tendencies. Additionally, Harrison et al. (1996) found that context effects produced by scale location and scale valence (negative scales presented before positive scales) affected psychometric properties such that scales presented later were less reliable. Further, when negative scales were presented first, estimated inter-scale correlations were much higher, suggesting the presence of scale embeddedness effects. 
-	To address item priming and item embeddedness effects, researchers have proposed counterbalancing or randomizing the order of item and/or scales within a survey, particular around a filler scale or series of filler scales (Podakoff et al., 2003; Salancik & Pfeffer, 1977). It is assumed that this remedy will reduce the systematic influence of context effects that might introduce common method variance across predictors and criteria, resulting in estimates of scale covariation that are less biased by context. Again, there is no research examining the efficacy of this remedy.
 
-  Note: Make sure to consistently use the disctinction between scale and item covariation. 
-  
-###Measurement-Specific Causes of Both Common and Uncommon Method Variance
-  Advocating a more nuanced view of common method variance, Spector et al. (2016) suggest that certain causes of method variance are specific to the measurement strategy employed by researchers. For instance, when gathering observations on both affective/attitudinal and behavioral factors, Spector et al. encouraged researchers to consider ways to capture the mood state exhibited by their participates, as this would be a likely common cause of method variance that would contaminate the response process underlying both sets of observations, resulting in biased estimates of covariation. Addtionally, there may be sources of method variance that are uncommon (i.e., unique) to particular methods of observation. For instance, affective/attitudinal measures might be more strongly affected by response sets (e.g., consistency motifs) than behavioral measures, which would be affected by impression management strategies. Such effects would attenuate scale covariances unless controlled (see Spector et al., 2016). Addressing these sources of variance requires statistical strategies (e.g., measured cause models; see Williams et al., 2010).
-  In line with Spector et al.'s call for controlling both common and uncommon method variance, we built in measures of method variance causes that were shared across our measures and unique to specific mesures. In both of our studies, we used the same measurement model and tested the same underlying theory; namely, that proactive personality relates positively to proactive behaviors (i.e., voice and taking charge) as well as behaviors reflecting task performance (i.e., in-role behavior) and contextual performance (i.e., OCB) (see Figure 1). We decided to study these predictor-criterion relationships for three reasons that are important for both organizational scholars and method variance testing in general. First, these relationships are often described in the literature (e.g., Fuller & Marler, 2009; Grant, Gino, & Hoffman, 2011), suggesting that assuming a relationship is important to a broad audience of organizational scholars. Second, prior research suggests that these relationships may be a function of method variance (e.g., Fuller & Marler, 2009). For instance, a meta-analysis by Fuller and Marler (2009) demonstrated that these relationships are often inflated by common method variance, particularly when observations are gathered using the same source rather than multiple sources (see Table 1). They observed that the relationships between proactive personality and workplace behaviors was substantially inflated by between 129% and 308% when observations were made using a common (rather than independent) source. Though researchers have suggested that such percentages mistate the impact of method variance (e.g., Lance & Simonovsky, 2015; Spector et al., 2016), it seems clear that methodological differences are resulting and diverging estimates. Third, and most importantly, it is not clear what sources of method variance would explain such these differences. To respolve these disparities, we tested the same measurement model in our two studies, examining the effects of various hypothesized common method factors (e.g., mood, affectivity, and consistency motifs) and uncommon method factors (e.g., negative item wording). Figure b illustrates how the method factors were modeled.
-  
-  (note: Readers may have noted an apparent disparity between Podsakoff et al. (2003) and Spector et al. (2016) on the role of consistency motifs. Spector et al. (2016) suggest this factor may be more relevant for affective/attitudinal factors than behavioral, whereas Podsakoff et al. (2003) suggests that consistency motifs could be equally relevant for items/scales within a measure). 
-  
-###General Purpose
-  In two experiments, we examine the efficacy of procedural remedies for different proximal causes of common method variance while also examining the role played by other proximal causes of method variance that are specific to our measures. In both studies, we randomly assigned individuals to one of two conditions where remedies for different proximal causes of CMV have been applied or have not been applied. This allows us to test the causal role of hypothesized mechanisms that give rise method variance and also to test the extent to which these causes produce biased estimates.
-
-##Study 1 - The Role of Consistency Motifs, Implicit Theories, and Context Effects 
-  In study 1, we examined the role of consistency motifs, implicit theories, and context effects. More specifically, we tested whether using a cover story and randomzing items and scales around a filler scale worked (i.e., reduced the presence of method variance). Participants were randomly assigned to a condition where observations were obtained with or without these remedies. For our non-remedied (i.e., control) condition, an online self-reported survey was designed such that all items and scales appeared in the same order, but were separated by different webpages. This is a conventional kind of survey design likely in use by many organizations. For our remedied condition, we used a cover story that was designed to both blind participants to the purpose of our study and dispel implicit theories regarding the substantive intention guiding a study such as ours: test for positive relationships linking proactive personality to workplace behaviors. Also, the presentation of items within scales and also the whole scales were randomized around a series of filler scale consisting of measured method effect factors. We provide more detail for these remedies below.
 #Methods
 ##Sample and Procedure
 ```{r include=FALSE}
@@ -734,10 +888,7 @@ require("memisc")
 require("dplyr")
 set.seed(19)
 
-#PCProximal.spss <- read.spss("C:\\Users\\ccastille\\iCloudDrive\\Documents\\Research\\Common Method Variance\\R Analyses\\Proactivity at Work Survey - Item Counterbalancing - Copy_October 18, 2016_09.25.sav", to.data.frame=TRUE, use.value.labels=FALSE)
-
-#MAC
-Proximal.spss <- read.spss("/Users/ccasti02/Documents/Research/Common Method Variance/R Analyses/Proactivity at Work Survey - Item Counterbalancing - Copy_October 18, 2016_09.25.sav", to.data.frame=TRUE, use.value.labels=FALSE)
+Proximal.spss <- read.spss("Proactivity at Work Survey - Item Counterbalancing - Copy_October 18, 2016_09.25.sav", to.data.frame=TRUE, use.value.labels=FALSE)
 data <- as.data.frame(Proximal.spss)
 ```
 Six hundred and twenty-one workers from Amazon's Mechanical Turk were paid $1.30 for completing a survey, of which 556 agreed to participate in our study after reading our informed consent form. 
@@ -760,15 +911,14 @@ Following this manipulation, we asked our participants to respond to the followi
 #Data Scrubbing Block.
 #Select those who agreed to participate. Q42=1 OR Q44=1. 
 Agree <- filter(data, Q42 %in% c("1") & Q47 %in% c("1") | Q44 %in% c("1") & Q79 %in% c("2"))
-#View(Agree)
 
 #Filter in attentive responders.
 Inattent <- filter(Agree, Q26_11 == "1" | Q105_11 ==  "1")
-#View(Inattent)
 
 #Setup demographics.
 #Rename variables.
-Inattent$COND <- Inattent$Q42 #"1" means they have been sent to the "control/non-remedied"" condition, whereas "0" means they have been sent to the "treatment/remedied condition'.
+Inattent$COND <- Inattent$Q42 
+#"1" means they have been sent to the "control/non-remedied"" condition, whereas "0" means they have been sent to the "treatment/remedied condition'.
 Inattent$AGE <- Inattent$Q33
 Inattent$RACE <- Inattent$Q34
 Inattent$GENDER <- Inattent$Q35
@@ -795,7 +945,6 @@ Inattent$Q39_TEXT <- NULL
 ##Convert NAs to 0 to allow merging. Later, you'll need to reasign NAs to conduct a missing data analysis. 
 Inattent[is.na(Inattent)] <- 0
 
-#View(Inattent)
 #Proactive personality
 Inattent$PP1	<-	Inattent$Q26_1	+Inattent$Q105_1
 Inattent$PP2	<-	Inattent$Q26_2	+Inattent$Q105_2
@@ -868,8 +1017,8 @@ Inattent$CM1b <- NULL
 "I am a talkative person"
 Inattent$CM2a <- Inattent$Q29_8 + Inattent$Q106_26
 #"I am a silent person"
-Inattent$Q30_8r <- recode(Inattent$Q30_8, '1=5; 2=4; 4=2; 5=1')
-Inattent$Q106_34r <- recode(Inattent$Q106_34, '1=5; 2=4; 4=2; 5=1')
+Inattent$Q30_8r <- car::recode(Inattent$Q30_8, "1=5; 2=4; 4=2; 5=1")
+Inattent$Q106_34r <- car::recode(Inattent$Q106_34, '1=5; 2=4; 4=2; 5=1')
 Inattent$CM2b <- Inattent$Q30_8r + Inattent$Q106_34r
 Inattent$CM2 <- Inattent$CM2a - Inattent$CM2b
 Inattent$CM2 <- abs(Inattent$CM2)
@@ -880,8 +1029,8 @@ Inattent$Q106_34r <- NULL
 #"I am an optimistic person"
 Inattent$CM3a <- Inattent$Q33_6 + Inattent$Q112_6
 #"I am a pessimistic person"
-Inattent$Q41_7r <- recode(Inattent$Q41_7, '1=5; 2=4; 4=2; 5=1')
-Inattent$Q116_7r <- recode(Inattent$Q116_7, '1=5; 2=4; 4=2; 5=1')
+Inattent$Q41_7r <- car::recode(Inattent$Q41_7, '1=5; 2=4; 4=2; 5=1')
+Inattent$Q116_7r <- car::recode(Inattent$Q116_7, '1=5; 2=4; 4=2; 5=1')
 Inattent$CM3b <- Inattent$Q41_7r + Inattent$Q116_7r
 Inattent$CM3 <- Inattent$CM3a - Inattent$CM3b
 Inattent$CM3 <- abs(Inattent$CM3)
@@ -892,8 +1041,8 @@ Inattent$Q116_7r <- NULL
 #"I seldom feel blue."
 Inattent$CM4a <- Inattent$Q31_8 + Inattent$Q106_42
  #"I often feel blue."
-Inattent$Q32_5r <- recode(Inattent$Q32_5, '1=5; 2=4; 4=2; 5=1')
-Inattent$Q111_5r <- recode(Inattent$Q111_5, '1=5; 2=4; 4=2; 5=1')
+Inattent$Q32_5r <- car::recode(Inattent$Q32_5, '1=5; 2=4; 4=2; 5=1')
+Inattent$Q111_5r <- car::recode(Inattent$Q111_5, '1=5; 2=4; 4=2; 5=1')
 Inattent$CM4b <- Inattent$Q32_5r + Inattent$Q111_5r
 Inattent$CM4 <- Inattent$CM4a - Inattent$CM4b
 Inattent$CM4 <- abs(Inattent$CM4)
@@ -1698,6 +1847,7 @@ boxplot(data$CM ~ data$COND)
 Having demonstrated a succesful manipulation, we subsetted our data into separate groups, specified a causal model as outlined by figure 1b, examined the method effects present in each group. The process was applied for both control and remedied conditions separately as these conditions would vary in their respective method effects, rendering the results of a multi-group analysis suspect. Specifically for the remedied condition, an unmeasured latent method construct factor was included in the model as representing a common blocking factor that exerted equal contaminating effects on all criterion measurement variables. This unmeasured latent method factor was modeled as causing an equal amount of method variance that would be common to the criterion variables because these measures were in the same block of items. Because there were nested model comparisons, we have chosen to only report the best-fitting models for each respective dataset along with predictor-criterion standardized regression estimates (see Table x). Note: for the best-fitting method effects model applied to the remedied condition, we observed a noncongeneric (equal) method effect factor loading of .21 (p = .003) for all criterion variables, which we believed captured a common item blocking factor.
 
 ```{r}
+require(lavaan)
 affect.m <- '
   PA =~ PAp1 + PAp2 + PAp3 + PAp4 + PAp5 + MOOD
   NA =~ Nap1 + Nap2 + Nap3 + Nap4 + Nap5 + MOOD
@@ -1993,7 +2143,7 @@ methodu.sem.c  <-  '
 methodu.sem.c <- cfa(methodu.sem.c, estimator = "MLM", data=control, std.lv = TRUE)
 summary(methodu.sem.c, standardized = TRUE, fit.measures = TRUE)
 anova(methodu.sem.c,methodc.sem.c)
-anova(baseline.method.model.c, method.sem.model.u)
+anova(baseline.c, methodu.sem.c)
 #Method U is superior to baseline model. Congeneric CMV is present. 
 
 #METHOD R
@@ -2547,7 +2697,7 @@ Our results suggest that method variance is far more nuanced than suggested by t
 ##Sample, Measures, and Procedure
 ```{r}
 library(foreign)
-Temporal.spss <- read.spss("/Users/ccasti02/Documents/Research/Common Method Variance/Older Approaches/Older Data/CMV.TempSep.sav", to.data.frame=FALSE, use.value.labels=FALSE)
+Temporal.spss <- read.spss("CMV.TempSep.sav", to.data.frame=FALSE, use.value.labels=FALSE)
 #View(Temporal.spss)
 data2 <- data.frame(Temporal.spss)
 #Note: 533 variables...lots of bullshit variables to trim. Thanks Surveymonkey. 
@@ -3694,7 +3844,7 @@ methodu.sem.c  <-  '
 methodu.sem.c <- cfa(methodu.sem.c, estimator = "MLM", data=control, std.lv = TRUE)
 summary(methodu.sem.c, standardized = TRUE, fit.measures = TRUE)
 anova(methodu.sem.c,methodc.sem.c)
-anova(baseline.method.model.c, method.sem.model.u)
+anova(baseline.c, methodu.sem.c)
 #Method U is superior to baseline model. Congeneric CMV is present. 
 
 #METHOD R
@@ -4076,192 +4226,14 @@ methodr.sem.t <- cfa(methodr.t, estimator = "MLM", data=control, std.lv = TRUE)
 summary(methodr.sem.t, standardized = TRUE, fit.measures = TRUE)
 anova(methodu.sem.t,methodr.sem.t)
 ```
-```{r}
-parameterEstimates(methodC.c)
-#        lhs op     rhs label   est    se      z pvalue ci.lower ci.upper
-#144      PR ~~     IRB       0.279 0.068  4.128  0.000    0.147    0.412
-#145      PR ~~    OCBI       0.335 0.099  3.383  0.001    0.141    0.529
-#146      PR ~~    OCBO       0.306 0.100  3.069  0.002    0.111    0.502
-#148      VC ~~     IRB       0.306 0.097  3.160  0.002    0.116    0.495
-#149      VC ~~    OCBI       0.401 0.103  3.870  0.000    0.198    0.603
-#150      VC ~~    OCBO       0.340 0.102  3.351  0.001    0.141    0.539
-#151      TC ~~     IRB       0.189 0.066  2.853  0.004    0.059    0.319
-#152      TC ~~    OCBI       0.376 0.076  4.922  0.000    0.227    0.526
-#153      TC ~~    OCBO       0.285 0.083  3.430  0.001    0.122    0.447
 
-parameterEstimates(methodC.t)
-#        lhs op     rhs label   est    se      z pvalue ci.lower ci.upper
-#144      PR ~~     IRB       0.339 0.134  2.527  0.012    0.076    0.601
-#145      PR ~~    OCBI       0.541 0.126  4.299  0.000    0.294    0.788
-#146      PR ~~    OCBO       0.437 0.135  3.241  0.001    0.173    0.702
-#148      VC ~~     IRB       0.446 0.112  3.970  0.000    0.226    0.666
-#149      VC ~~    OCBI       0.621 0.112  5.564  0.000    0.402    0.839
-#150      VC ~~    OCBO       0.515 0.122  4.212  0.000    0.276    0.755
-#151      TC ~~     IRB       0.476 0.102  4.646  0.000    0.275    0.676
-#152      TC ~~    OCBI       0.716 0.063 11.339  0.000    0.592    0.840
-#153      TC ~~    OCBO       0.588 0.093  6.345  0.000    0.406    0.769
-```
-# Discussion
+#Discussion
   Our results speak to a more nuanced view of method variance that has been offered by Spector, Rosen, Richardson, Williams, and Johnson (2016), who urge researchers to focus less on broad solutions to CMV  (e.g., broad set of remedies for proximal method effects and statistical controls that assume unidimensional method effects) and more more on the extraneuous effects that are introduced by the measurement strategy employed in an investigation, which they refer to as either common or unique method variance. To explain by way of example, studies seeking to estimate the effect of attitudinal factors on behaviors should consider sources of variance that are common to all measures in the study (e.g., mood and social desirability) as well as factors unique to specific measures in the study (e.g., response sets might affect self-reports of attitudes while impression management might affect reports of sensitive behaviors, like deviance). Either common or unique sources of variance could dominate a particular study, or they could also cancel each other out. Either way, they introduce variation into the measures utilized in an investigation, which can result in either inflated or attentuated effect size estimates. They also encourage research into the developmentof a knowledge base upon which to rely in deciding how method variance could be addressed in investigations, which will require accumulating knowledge about soruces of methods to consider and control in a study. To this point, while our investigation focused on certain common method variance sources (e.g., consistency motifs, affectivity, mood), we did not exhaustively study the role played by all possible sources (e.g., social desirability). We also neglected to address the role played by uncommon method variance sources (e.g., impression management, which seems relevant for self-reports of IRB, limited information, which seems relevant for self-reports of behavior; and response sets, which seems relevant for proactive personalitiy). Therefore, we encourage future reserach to investigate the role played by these sources of nuissance variance. 
   Additionally, some of our method effects were assumed to be measured without error (e.g., consistency motifs and daily mood). Clearly, this false. [Could we conduct a sensitivity analysis to address this concern? I might need help here.]
-  Our item blocking strategy may have also played a role [Discuss that article that Alice shared].
-  
-```{r}
-#To diagnoose the source of model mis-fit, we consulted the modificaiton indices. It is worth noting that of the 48 MI values that were greater than 10 (a commonly used cutoff for determinig which residuals to correlate), 32 were observed in the non-remedied condition and 16 were observed in the non-remedied condition. This suggests that proximal remedies appear to reduce the number of correlated residuals in one's data, perhaps by as much as 50%. 
+  Our item blocking strategy may have also played a role.
 
-#Given our desire to present credible parameter estimates, both substantive and methodological, we decided to adopt a correlated residuals strategy. Specifically, we allowed residuals to corrrelate if (1) they occurred for items within the same scale, (2) correlated across both conditions and (3) if freeing these residual covariances would improve model-data fit. Though conducted post-hoc, we followed this strategy because these residual correlations would appear to be a persistent problem with either the measure or a self-report administration of this measure (or possibly both). In other words, our study allows us to examine which residual covariances are cross-validated. However, residuals that do not correlate acorss conditions could be correlated for condition specific reasons (e.g., item order effects). Though freeing these residual covariances might also be principled (see Cole et al., 2007), doing so in our study would act contrary to our goal of testing the invariance of substantive parameters under different proximal CMV conditions. This decision making process resulted in specifying/allowing for four residual covariances in our model, which did provide a significant improvement in model data fit (p < .001) and generally improved upon model-data fit statistics (X^2^ = 2724.47, df = 2020, p < .001; rCFI = .87, rTLI = .86, rRMSEA = .055, SRMR = .081).
-
-```{r}
-cfa.model.m<- '
-  PR =~ PP1 + PP2 + PP3 + PP4 + PP5 + PP6 + PP7 + PP8 + PP9 + PP10 
-  VC =~ VC1 + VC2 + VC3 + VC4 + VC5 + VC6
-  TC =~ TC1 + TC2 + TC3 + TC4 + TC5 + TC6 + TC7 + TC8 + TC9 + TC10
-  IRB =~ IRB1 + IRB2 + IRB3 + IRB4 + IRB5 
-  OCBI =~ OCBI1 + OCBI2 + OCBI3 + OCBI4 + OCBI5 + OCBI6 + OCBI7
-  OCBO =~ OCBO1 + OCBO2 + OCBO6 + OCBO7
-OCBI1~~OCBI2
-OCBO6~~OCBO7
-PP2~~PP4
-PP5~~PP9
-'
-
-model1.m <- cfa(cfa.model.m, estimator = "MLM", data=data, group="COND")
-summary(model1.m, standardized = TRUE, fit.measures = TRUE)
-anova(model1,model1.m)
-```
-
-We proceded to test measurement invariance by imposing equality constraints on (1) item factor loadings (weak invariance), (2) item intercepts (strong invariance), and lastly (3) latent covariances.
-
-```{r}
-#Measurement invariance.
-model2 <- cfa(cfa.model.m, estimator = "MLM", data=data, group="COND", group.equal=c("loadings"))
-summary(model2,fit.measures=TRUE, standardized=TRUE)
-anova(model1.m, model2)
-```
-The results of testing for weak invariance suggested invariant factor loadings (SBX^2^dif = 48.42, df = 45, p = .34). In other words, proximal causes of method variance did not appear to cause items to become systematically more discriminating for their respective latent constructs, contrary to what was observed by Steinberg (1994). Having satisfied weak invariance, we proceeded to test for strong invariance by examing invariant item intercepts.
-
-```{r}
-#Measurement invariance.
-model3 <- cfa(cfa.model.m, estimator = "MLM", data=data, group="COND", group.equal=c("loadings","intercepts"))
-summary(model3, fit.measures=TRUE, standardized=TRUE)
-anova(model2, model3)
-```
-The results of testing for strong invariance suggested non-invariant item intercepts (SBX^2^dif = 255.65, df = 40, p < .001), indicating non-invariance of item factor loadings, invariances, or both. Examining the modification indices allows us to inspect the pattern of proximally caused method variance. 
-
-```{r}
-lavTestScore(model3)
-#Free the intercepts (p<.05).
-#             			G1		G2
-#p133 #.040 - PP2	5.455		6.013
-#p142 #.032 - VC1	4.660		4.164
-#p146 #.032 - VC5	3.788		4.382
-#p149 #.013 - TC2	4.553		4.369
-#p155 #.018 - TC8	4.213		4.438
-#p156 #.004 - TC9	3.846		3.732
-#p165 #.030 - OCBI1	4.763		4.468
-#p166 #.016 - OCBI2	4.293		4.754
-
-#Free the factor loadings (p< .05). 
-#p2 #.013 - PP2
-#p6 #.048 - PP6
-#p19 #.043 - TC3
-#p25 #.011 - TC9
-#p37 #.004 - OCBI4
-#p45 #.017 - OCBO5
-#p50 #.004 - OCBO3
-
-```
-
-Examining the modification indices revealed the presence of eight non-invariant intercepts (p < .05), the pattern of which was not consistent with the contaminating influences of proximally caused method variance. For two scales (voice and OCBI), for which there were two non-invariant intercepts, these intercepts were such that the overall impact on the scale mean would be negligable (i.e., the direction of the intercept were in opposition for a scale, canceling each other out). By contrast, for proactive personality, a single item contained a higher intercept (PP2). For taking charge, there were three invariant intercepts in inconsistent directions (two driving the scale mean higher in the remedied condition, one diriving the scale mean higher in the control condition). It should be noted that the observed scale means do not vary across conditions [note: I ran t-tests for this, and can provide the code if needed], so though some item intercepts were non-invariant, the magnitude of this non-invariance was not large enough to produce differences in the scale means. 
-
-Given such negligable influence of these non-invariant parameters, we freed the non-invariant intercepts and tested partial scalar invariance. Initial testing suggested that certain factor loadings would also need to be freed for partial scalar invariance to be achieved. 
-
-```{r}
-#Initial testing. Still a significant difference, though small (p < .01)
-model3a <- cfa(cfa.model.m, estimator = "MLM", data=data, group="COND", group.equal=c("loadings","intercepts"), group.partial=c("PP2~1","VC1~1","VC5~1","TC2~1","TC8~1","TC9~1", "OCBI1~1", "OCBI2~1"))
-summary(model3a, fit.measures=TRUE, standardized=TRUE)
-anova(model2,model3a)
-```
-
-Freeing seven non-invariant factor loadings provided evidence of partial scalar invariance. 
-```{r}
-#Freeing factor loadings.
-model3b <- cfa(cfa.model.m, estimator = "MLM", data=data, group="COND", group.equal=c("loadings","intercepts"), group.partial=c("PP2~1","VC1~1","VC5~1","TC2~1","TC8~1","TC9~1", "OCBI1~1", "OCBI2~1", "PR=~PP2", "PR=~PP6", "TC=~TC3", "TC=~TC9","OCBI=~OCBI4", "OCBO=~OCBO5","NMETHOD=~OCBO3"))
-summary(model3b, fit.measures=TRUE, standardized=TRUE)
-anova(model3b,model2)
-```
-
-Once these non-invariant elements of the model were freed, the results achieved non-significance (S-B X^2^ diff = -26.62, df = 25, p = 1.00). Thus our findings support partial strong invariance. Thus, we proceded on to testing invariance of latent variable covariances.
-```{r}
-model4 <- cfa(cfa.model.m,estimator = "MLM", data, group="COND", group.equal=c("loadings","intercepts","lv.covariances"), group.partial=c("PP2~1","VC1~1","VC5~1","TC2~1","TC8~1","TC9~1", "OCBI1~1", "OCBI2~1", "PR=~PP2", "PR=~PP6", "TC=~TC3", "TC=~TC9","OCBI=~OCBI4", "OCBO=~OCBO5","NMETHOD=~OCBO3"))
-summary(model4, fit.measures=TRUE, standardized=TRUE)
-anova(model3b, model4)
-```
-
-The results supported invariant latent variable covariances (S-B X^2^ diff = 7.55, df = 15, p = .94). The fit of the overall model was still mixed, with some fit indices suggesting unacceptable fit (X^2^ = 2786.30, df = 2105, p < .001; rCFI = 0.88, rTLI = 0.87, SRMR = .084) and another suggesting acceptable fit (rRMSEA = 0.053). 
-```{r}
-#Lavaan
-require(lavaan)
-require(semTools)
-
-#Substantive model
-substantive.model  <-  '
-#Substantive factors
-  PR =~ PPp1 + PPp2 + PPp3 + PPp4
-  VC =~ VCp1 + VCp2 + VCp3
-  TC =~ TCp1 + TCp2 + TCp3
-  IRB =~ IRBp1 + IRBp2 + IRBp3
-  OCBI =~ OCBIp1 + OCBIp2 + OCBIp3
-  OCBO =~ OCBOp1 + OCBOp2 + OCBOp3
-'
-#Overall
-s.model <- cfa(substantive.model, estimator = "MLM", data=data, group="COND", std.lv = TRUE)
-summary(s.model, standardized = TRUE, fit.measures = TRUE)
-
-#Control
-s.model.c <- cfa(substantive.model, estimator = "MLM", data=control, std.lv = TRUE)
-summary(s.model.c, standardized = TRUE, fit.measures = TRUE)
-##Notes: All parcels reflected their respective factor and in the expected direction. 
-
-#Treatment
-s.model.t <- cfa(substantive.model, estimator = "MLM", data=treatment, std.lv = TRUE)
-summary(s.model.t, standardized = TRUE, fit.measures = TRUE)
-##Notes: One of the in-role behavior parcels did not reflect their respective factor (IRBp3, p = .068). This could be due to reduced internal consistency that would be expected as a function of randomizing items within a scale. 
-
-#Regression effects
-regression.model  <-  '
-#Substantive factors
-  PR =~ PPp1 + PPp2 + PPp3 + PPp4
-  VC =~ VCp1 + VCp2 + VCp3
-  TC =~ TCp1 + TCp2 + TCp3
-  IRB =~ IRBp1 + IRBp2 + IRBp3
-  OCBI =~ OCBIp1 + OCBIp2 + OCBIp3
-  OCBO =~ OCBOp1 + OCBOp2 + OCBOp3
-#Regressions
-  VC ~ PR
-  TC ~ PR
-  IRB ~ PR
-  OCBI ~ PR
-  OCBO ~ PR
-'
-#Overall
-r.model.o <- cfa(regression.model, estimator = "MLM", data=data, group="COND", std.lv = TRUE)
-summary(r.model.o, standardized = TRUE, fit.measures = TRUE)
-
-#Control
-r.model.c <- cfa(regression.model, estimator = "MLM", data=control, std.lv = TRUE)
-summary(r.model.c, standardized = TRUE, fit.measures = TRUE)
-##Notes: All parcels reflected their respective factor and in the expected direction. 
-
-#Treatment
-r.model.t <- cfa(regression.model, estimator = "MLM", data=treatment, std.lv = TRUE)
-summary(r.model.t, standardized = TRUE, fit.measures = TRUE)
-##Notes: One of the in-role behavior parcels did not reflect their respective factor (IRBp3, p = .068). This could be due to reduced internal consistency that would be expected as a function of randomizing items within a scale. 
-
-```
-```
 \newpage
-# References
+#References
 ```{r create_r-references}
 r_refs(file = "r-references.bib")
 ```
