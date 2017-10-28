@@ -67,6 +67,7 @@ Temporal.spss <- read.spss("CMV.TempSep.sav", to.data.frame=FALSE, use.value.lab
 data2 <- data.frame(Temporal.spss)
 #Note: 533 variables...lots of bullshit variables to trim. Thanks Surveymonkey. 
 
+<<<<<<< HEAD
 #Delete old dems.
 data2$MVOutlier <- NULL
 data2$Source <- NULL
@@ -82,6 +83,16 @@ data2$BLUE2_T2 <- NULL
 data2$BLUE3_T2 <- NULL
 data2$BLUE4_T2 <- NULL
 data2$BLUE <- NULL
+=======
+
+=======
+Notes for us to discuss:
+The cognitive psychology literature, specifically on heuristics and biases in decision making and judgments, informs method variance research. For instance, consider anchoring, wherein one's judgment is informed by an arbitrary prior thought in one's conciousness, within and their ability to explain item-order (or item priming) effects. In an experiment, college students were asked the questions (a) how happy are you and (b) how often are you dating. When asked in this order, the correlation between the two questions was low (r = .11). However, when asked in reverse, the correlation was 5 times larger (r = .62). Similar findings emerged with married couples about their sex life (see Strack, Martin, & Schwarz, 1988). The design of the questionnaire (in this case, the item order) explains the size of the correlation estimated between measures of life satisfaction and dating or frequency of sex, respectively, with anchoring providing the psychological explanation. 
+(A few questions regarding the above: has this been replicated? the effect seems exaggerated, so I'm wondering if the effect size is reliable...What would a Fisher r-to-z test reveal? which effect is closer to the truth, and why?)
+
+References:
+Strack, F. L., Martin, L., & Scharz, N. (1988). Priming and communication: The social determinants of information use in judgments of life-satisfaction. European Journal of Social Psychology, pp. 429-442.
+>>>>>>> f11ee7771209a4d7d2ffa7f99e2ed3a8dab21f0b
 
 
 #Delete positive brand label attitudes.
@@ -246,6 +257,7 @@ data2$AGE3J <- NULL
 data2$AGE3K <- NULL
 data2$AGE3L <- NULL
 
+<<<<<<< HEAD
 #Delete random sex factors
 data2$SEX0 <- NULL
 data2$SEX1 <- NULL
@@ -380,6 +392,783 @@ data2$SEX3I <- NULL
 data2$SEX3J <- NULL
 data2$SEX3K <- NULL
 data2$SEX3L <- NULL
+=======
+#Link to Qualtrics
+registerOptions(api_token="U8ut239nN4WeqDo0V1cDniUGMBG1jRtICUgZw0hp", root_url="rutgers.qualtrics.com")
+surveys <- getSurveys()
+#Get survey data
+mysurvey <- getSurvey(surveys$id[3], force_request = TRUE)
+##Prune the stuff we don't need.#Note: Make sure to keep the "Finished" variable as some folks do not turn in the survey even though they complete it. 
+mysurvey <- mysurvey[c(-1,-2,-3,-4,-5,-6,-7,-8,-9,-11,-13)]
+data <- mysurvey
+##Collapse like data across columns.
+###Conditions; build independent data sets and then rename the condition variable.
+###1 Control
+data$Demand.ConsitMotif1[is.na(data$Demand.ConsitMotif1)] <- 0
+data$Demand.ConsitMotif1 <- as.numeric(data$Demand.ConsitMotif1)
+###2 Cover Story Manipulation
+data$CoverStoryManip <- ifelse(data$CoverStoryManip == 1, c("2"))
+data$CoverStoryManip[is.na(data$CoverStoryManip)] <- 0
+data$CoverStoryManip <- as.numeric(data$CoverStoryManip)
+###3 Randomized Items
+data$Demand.ConsitMotif3 <- ifelse(data$Demand.ConsitMotif3 == 1, c("3"))
+data$Demand.ConsitMotif3[is.na(data$Demand.ConsitMotif3)] <- 0
+data$Demand.ConsitMotif3 <- as.numeric(data$Demand.ConsitMotif3)
+###4 Filler Scales
+data$Demand.ConsitMotif4 <- ifelse(data$Demand.ConsitMotif4 == 1, c("4"))
+data$Demand.ConsitMotif4[is.na(data$Demand.ConsitMotif4)] <- 0
+data$Demand.ConsitMotif4 <- as.numeric(data$Demand.ConsitMotif4)
+###5 Randomized Scales
+data$Demand.ConsitMotif2 <- ifelse(data$Demand.ConsitMotif2 == 1, c("5"))
+data$Demand.ConsitMotif2[is.na(data$Demand.ConsitMotif2)] <- 0
+data$Demand.ConsitMotif2 <- as.numeric(data$Demand.ConsitMotif2)
+#Combine condition data into single variable column
+data$Condition <- data$Demand.ConsitMotif1 + data$CoverStoryManip + data$Demand.ConsitMotif3 + data$Demand.ConsitMotif4 + data$Demand.ConsitMotif2
+####Delete old condition data.
+data <- subset(data, select=-c(Demand.ConsitMotif1, CoverStoryManip, Demand.ConsitMotif3, Demand.ConsitMotif4, Demand.ConsitMotif2))
+#Apply value lables
+data$Condition <- factor(data$Condition, levels = c(1,2,3,4,5), labels = c("Control", "CSManipulation","ItemRand","FillerScales","ScaleRand"))
+###Combine all open-ended responses to the manipulation check for study purpose
+data$PurpCk1 <- paste(data$PurpChk1a, data$PurpChk2a,data$PurpChk3a, data$PurpChk4a, data$PurpChk5a)
+data$PurpCk2 <- paste(data$PurpChk1b, data$PurpChk2b,data$PurpChk3b, data$PurpChk4b, data$PurpChk5b) 
+####Delete old purpose chk data. 
+data <- subset(data, select=-c(PurpChk1a, PurpChk1b, PurpChk2a, PurpChk2b, PurpChk3a, PurpChk3b, PurpChk4a, PurpChk4b, PurpChk5a, PurpChk5b))
+####Delte meaningless condition data. IC = Informed Consent. FOR = Frame of Reference.
+data <- subset(data, select=-c(IC1, IC2, IC3, Q136, FOR1, FOR2, FOR4, FOR5, FORx))
+#Move Finished to the end of the file.
+moveMe <- function(data, tomove, where = "last", ba = NULL) {
+  temp <- setdiff(names(data), tomove)
+  x <- switch(
+    where,
+    first = data[c(tomove, temp)],
+    last = data[c(temp, tomove)],
+    before = {
+      if (is.null(ba)) stop("must specify ba column")
+      if (length(ba) > 1) stop("ba must be a single character string")
+      data[append(temp, values = tomove, after = (match(ba, temp)-1))]
+    },
+    after = {
+      if (is.null(ba)) stop("must specify ba column")
+      if (length(ba) > 1) stop("ba must be a single character string")
+      data[append(temp, values = tomove, after = (match(ba, temp)))]
+    })
+  x
+}
+data <- moveMe(data, c("Finished"),"after", "PurpCk2")
+#Delete Prep and Text variables.
+data <- data[c(-2,-3,-69,-135,-201,-268)]
+#Consolidate item response measures
+##Form Likert datasets, re-lable values, convert to numeric data, consolidate measures, and delete data.
+agree <- data[c(2:41,67:106,132:171,198:209,235:302,329:335)]
+agree <- ifelse(agree == "Strongly Disagree", 1, ifelse(agree == "Disagree", 2, ifelse(agree == "Neither Agree nor Disagree", 3, ifelse(agree == "Agree", 4, ifelse(agree == "Strongly Agree", 5,0)))))
+write.csv(agree, file = "agree.csv")
+agree <- read_csv("agree.csv")
+#####Proactive Personality 
+agree$PP1	<-	agree$PP1_1	+	agree$PP2_1	+	agree$PP5_1	+	agree$PP6_1	+	agree$PPx_1
+agree$PP2	<-	agree$PP1_2	+	agree$PP2_2	+	agree$PP5_2	+	agree$PP6_2	+	agree$PPx_2
+agree$PP3	<-	agree$PP1_3	+	agree$PP2_3	+	agree$PP5_3	+	agree$PP6_3	+	agree$PPx_3
+agree$PP4	<-	agree$PP1_4	+	agree$PP2_4	+	agree$PP5_4	+	agree$PP6_4	+	agree$PPx_4
+agree$PP5	<-	agree$PP1_5	+	agree$PP2_5	+	agree$PP5_5	+	agree$PP6_5	+	agree$PPx_5
+agree$PP6	<-	agree$PP1_6	+	agree$PP2_6	+	agree$PP5_6	+	agree$PP6_6	+	agree$PPx_6
+agree$PP7	<-	agree$PP1_7	+	agree$PP2_7	+	agree$PP5_7	+	agree$PP6_7	+	agree$PPx_7
+agree$PP8	<-	agree$PP1_8	+	agree$PP2_8	+	agree$PP5_8	+	agree$PP6_8	+	agree$PPx_8
+agree$PP9	<-	agree$PP1_9	+	agree$PP2_9	+	agree$PP5_9	+	agree$PP6_9	+	agree$PPx_9
+agree$PP10	<-	agree$PP1_10	+	agree$PP2_10	+	agree$PP5_10	+	agree$PP6_10	+	agree$PPx_10
+#####OCBI
+agree$OCBI1	<-	agree$OCBI1_1	+	agree$OCBI2_1	+	agree$OCBI5_1	+	agree$OCBI6_1	+	agree$OCBIx_1
+agree$OCBI2	<-	agree$OCBI1_3	+	agree$OCBI2_3	+	agree$OCBI5_3	+	agree$OCBI6_3	+	agree$OCBIx_3
+agree$OCBI3	<-	agree$OCBI1_4	+	agree$OCBI2_4	+	agree$OCBI5_4	+	agree$OCBI6_4	+	agree$OCBIx_4
+agree$OCBI4	<-	agree$OCBI1_5	+	agree$OCBI2_5	+	agree$OCBI5_5	+	agree$OCBI6_5	+	agree$OCBIx_5
+agree$OCBI5	<-	agree$OCBI1_6	+	agree$OCBI2_6	+	agree$OCBI5_6	+	agree$OCBI6_6	+	agree$OCBIx_6
+agree$OCBI6	<-	agree$OCBI1_7	+	agree$OCBI2_7	+	agree$OCBI5_7	+	agree$OCBI6_7	+	agree$OCBIx_7
+agree$OCBI7	<-	agree$OCBI1_8	+	agree$OCBI2_8	+	agree$OCBI5_8	+	agree$OCBI6_8	+	agree$OCBIx_8
+#####OCBO
+agree$OCBO1	<-	agree$OCBO1_1	+	agree$OCBO2_1	+	agree$OCBO5_1	+	agree$OCBO6_1	+	agree$OCBOx_1
+agree$OCBO2	<-	agree$OCBO1_2	+	agree$OCBO2_2	+	agree$OCBO5_2	+	agree$OCBO6_2	+	agree$OCBOx_2
+agree$OCBO3	<-	agree$OCBO1_3	+	agree$OCBO2_3	+	agree$OCBO5_3	+	agree$OCBO6_3	+	agree$OCBOx_3
+agree$OCBO4	<-	agree$OCBO1_5	+	agree$OCBO2_5	+	agree$OCBO5_5	+	agree$OCBO6_5	+	agree$OCBOx_5
+agree$OCBO5	<-	agree$OCBO1_6	+	agree$OCBO2_6	+	agree$OCBO5_6	+	agree$OCBO6_6	+	agree$OCBOx_6
+agree$OCBO6	<-	agree$OCBO1_7	+	agree$OCBO2_7	+	agree$OCBO5_7	+	agree$OCBO6_7	+	agree$OCBOx_7
+agree$OCBO7	<-	agree$OCBO1_8	+	agree$OCBO2_8	+	agree$OCBO5_8	+	agree$OCBO6_8	+	agree$OCBOx_8
+#####IRB
+agree$IRB1	<-	agree$IRB1_1	+	agree$IRB2_1	+	agree$IRB5_1	+	agree$IRB6_1	+	agree$IRBx_1
+agree$IRB2	<-	agree$IRB1_3	+	agree$IRB2_3	+	agree$IRB5_3	+	agree$IRB6_3	+	agree$IRBx_3
+agree$IRB3	<-	agree$IRB1_4	+	agree$IRB2_4	+	agree$IRB5_4	+	agree$IRB6_4	+	agree$IRBx_4
+agree$IRB4	<-	agree$IRB1_5	+	agree$IRB2_5	+	agree$IRB5_5	+	agree$IRB6_5	+	agree$IRBx_5
+agree$IRB5	<-	agree$IRB1_6	+	agree$IRB2_6	+	agree$IRB5_6	+	agree$IRB6_6	+	agree$IRBx_6
+agree$IRB6	<-	agree$IRB1_8	+	agree$IRB2_8	+	agree$IRB5_8	+	agree$IRB6_8	+	agree$IRBx_8
+agree$IRB7	<-	agree$IRB1_9	+	agree$IRB2_9	+	agree$IRB5_9	+	agree$IRB6_9	+	agree$IRBx_9
+#####Inattentive Responding
+agree$IR	<-	agree$PP1_11	+	agree$PP2_11	+	agree$PP5_11	+	agree$PP6_11	+	agree$PPx_11
+#####Consistency Motif
+#Brave
+agree$CM1	<-	agree$PP1_12	+	agree$PP2_12	+	agree$PP5_12	+	agree$PP6_12	+	agree$PPx_12
+#Often feel blue.
+agree$CM2	<-	agree$OCBI1_2	+	agree$OCBI2_2	+	agree$OCBI5_2	+	agree$OCBI6_2	+	agree$OCBIx_2
+#Talkative
+agree$CM3	<-	agree$OCBI1_9	+	agree$OCBI2_9	+	agree$OCBI5_9	+	agree$OCBI6_9	+	agree$OCBIx_9
+#Pessimistic Person
+agree$CM4	<-	agree$OCBO1_4	+	agree$OCBO2_4	+	agree$OCBO5_4	+	agree$OCBO6_4	+	agree$OCBOx_4
+#Silent Person
+agree$CM5	<-	agree$OCBO1_9	+	agree$OCBO2_9	+	agree$OCBO5_9	+	agree$OCBO6_9	+	agree$OCBOx_9
+#Courageous
+agree$CM6	<-	agree$IRB1_2	+	agree$IRB2_2	+	agree$IRB5_2	+	agree$IRB6_2	+	agree$IRBx_2
+#Optimistic 
+agree$CM7	<-	agree$IRB1_7	+	agree$IRB2_7	+	agree$IRB5_7	+	agree$IRB6_7	+	agree$IRBx_7
+#Seldom feel blue.
+agree$CM8	<-	agree$IRB1_10	+	agree$IRB2_10	+	agree$IRB5_10	+	agree$IRB6_10	+	agree$IRBx_10
+#Consolidate "agree" dataset.
+agree <- agree[c(202:248)]
+#HALO
+halo <- data[c(42:45,107:110,172:175,210:213,303:306)]
+halo <- ifelse(halo == "Very bad", 1, ifelse(halo == "Bad", 2, ifelse(halo == "Somewhat bad", 3, ifelse(halo == "Neither good nor bad", 4, ifelse(halo == "Somewhat good", 5, ifelse(halo == "Good", 6, ifelse(halo == "Very good", 7, 0)))))))
+write.csv(halo, file = "halo.csv")
+halo <- read_csv("halo.csv")
+halo$HALO1	<-	halo$HALO1_1	+	halo$HALO2_1	+	halo$HALO5_1	+	halo$HALO6_1 +	halo$HALOx_1
+halo$HALO2	<-	halo$HALO1_2	+	halo$HALO2_2	+	halo$HALO5_2	+	halo$HALO6_2 +	halo$HALOx_2
+halo$HALO3	<-	halo$HALO1_3	+	halo$HALO2_3	+	halo$HALO5_3	+	halo$HALO6_3 +	halo$HALOx_3
+halo$HALO4	<-	halo$HALO1_4	+	halo$HALO2_4	+	halo$HALO5_4	+	halo$HALO6_4 +	halo$HALOx_4
+#Consolidate "halo" dataset.
+halo <- halo[c(22:25)]
+#PANAS
+PANAS <- data[c(46:65,111:130,176:195,214:233,307:326)]
+PANAS <- ifelse(PANAS == "Very slightly or not at all", 1, ifelse(PANAS == "A little", 2, ifelse(PANAS == "Moderately", 3, ifelse(PANAS == "Quite a bit", 4, ifelse(PANAS == "Extremely", 5, 0)))))
+write.csv(PANAS, file = "PANAS.csv")
+PANAS <- read_csv("PANAS.csv")
+PANAS$PAff1	<-	PANAS$PAff1_1	+	PANAS$PAff2_1	+	PANAS$PAff5_1	+	PANAS$PAff6_1	+	PANAS$PAffx_1
+PANAS$PAff2	<-	PANAS$PAff1_2	+	PANAS$PAff2_2	+	PANAS$PAff5_2	+	PANAS$PAff6_2	+	PANAS$PAffx_2
+PANAS$PAff3	<-	PANAS$PAff1_3	+	PANAS$PAff2_3	+	PANAS$PAff5_3	+	PANAS$PAff6_3	+	PANAS$PAffx_3
+PANAS$PAff4	<-	PANAS$PAff1_4	+	PANAS$PAff2_4	+	PANAS$PAff5_4	+	PANAS$PAff6_4	+	PANAS$PAffx_4
+PANAS$PAff5	<-	PANAS$PAff1_5	+	PANAS$PAff2_5	+	PANAS$PAff5_5	+	PANAS$PAff6_5	+	PANAS$PAffx_5
+PANAS$PAff6	<-	PANAS$PAff1_6	+	PANAS$PAff2_6	+	PANAS$PAff5_6	+	PANAS$PAff6_6	+	PANAS$PAffx_6
+PANAS$PAff7	<-	PANAS$PAff1_7	+	PANAS$PAff2_7	+	PANAS$PAff5_7	+	PANAS$PAff6_7	+	PANAS$PAffx_7
+PANAS$PAff8	<-	PANAS$PAff1_8	+	PANAS$PAff2_8	+	PANAS$PAff5_8	+	PANAS$PAff6_8	+	PANAS$PAffx_8
+PANAS$PAff9	<-	PANAS$PAff1_9	+	PANAS$PAff2_9	+	PANAS$PAff5_9	+	PANAS$PAff6_9	+	PANAS$PAffx_9
+PANAS$PAff10	<-	PANAS$PAff1_10	+	PANAS$PAff2_10	+	PANAS$PAff5_10	+	PANAS$PAff6_10	+	PANAS$PAffx_10
+PANAS$NAff1	<-	PANAS$NAff1_1	+	PANAS$NAff2_1	+	PANAS$NAff5_1	+	PANAS$NAff6_1	+	PANAS$NAffx_1
+PANAS$NAff2	<-	PANAS$NAff1_2	+	PANAS$NAff2_2	+	PANAS$NAff5_2	+	PANAS$NAff6_2	+	PANAS$NAffx_2
+PANAS$NAff3	<-	PANAS$NAff1_3	+	PANAS$NAff2_3	+	PANAS$NAff5_3	+	PANAS$NAff6_3	+	PANAS$NAffx_3
+PANAS$NAff4	<-	PANAS$NAff1_4	+	PANAS$NAff2_4	+	PANAS$NAff5_4	+	PANAS$NAff6_4	+	PANAS$NAffx_4
+PANAS$NAff5	<-	PANAS$NAff1_5	+	PANAS$NAff2_5	+	PANAS$NAff5_5	+	PANAS$NAff6_5	+	PANAS$NAffx_5
+PANAS$NAff6	<-	PANAS$NAff1_6	+	PANAS$NAff2_6	+	PANAS$NAff5_6	+	PANAS$NAff6_6	+	PANAS$NAffx_6
+PANAS$NAff7	<-	PANAS$NAff1_7	+	PANAS$NAff2_7	+	PANAS$NAff5_7	+	PANAS$NAff6_7	+	PANAS$NAffx_7
+PANAS$NAff8	<-	PANAS$NAff1_8	+	PANAS$NAff2_8	+	PANAS$NAff5_8	+	PANAS$NAff6_8	+	PANAS$NAffx_8
+PANAS$NAff9	<-	PANAS$NAff1_9	+	PANAS$NAff2_9	+	PANAS$NAff5_9	+	PANAS$NAff6_9	+	PANAS$NAffx_9
+PANAS$NAff10	<-	PANAS$NAff1_10	+	PANAS$NAff2_10	+	PANAS$NAff5_10	+	PANAS$NAff6_10	+	PANAS$NAffx_10
+#Consolidate "PANAS" dataset.
+PANAS <- PANAS[c(102:121)]
+#Consolidate manipulation checks. 
+##Deleting likert/psychological data.
+data <- subset(data,select=-c(2:327,329:335))
+##Deleting other nuissance variables.
+data <- subset(data,select=-c(2,13,23:36))
+##Reorganize data.
+#data <- data[,c(1,6:14, 15,16, 2, 3, 4, 5)]
+#write.csv(data, file = "proximalCMV2.csv")
+#Bind all datasets.
+data <- cbind(data,agree,halo,PANAS)
+
+#MTurk IGNORE THIS SEGMENT as MTurkR is now compromised.
+#require("MTurkR")
+#Link to MTurk (Work on MTurkR)
+#Sys.setenv("AWS_ACCESS_KEY_ID" = "")
+#Sys.setenv("AWS_SECRET_ACCESS_KEY" = "")
+#Test connection to live server
+#AccountBalance()
+#SearchHITS
+#hits <- SearchHITs()
+#Buy more HITS. CAREFUL. 
+#ExtendHIT(hit.type = "3SVZJ4A2P5CW4G2BZY7UE78GFL1IEV",add.assignments = 60, add.seconds = seconds(days=7))
+#GetHITs and merge into MTurk dataframe. Use "SearchHITS()" to find the correct HIT. Make sure you have the right HITId. The followering are seprated out by batches.
+#Go to MTurk account and manually download batch results. Place the batch in the working directory. 
+a <- read_csv("Batch_2846969_batch_results.csv")
+#Manually edit confirmation codes.
+#a$Answer.surveycode[a$Answer.surveycode=="A11FRLH5KWRLBV"] <- "96090306"
+#How long did the average participant take to complete the survey?
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+getmode(a$WorkTimeInSeconds)/60
+
+#Create seperate datasets to identify possible those who did not complete the survey. Convert confirmation_code from character to numeric.
+data.mt <- a[c(15,16,17,24,28)]
+#Relabel variables to allow merging.
+names(data.mt) <- c("AssignmentID","WorkerID","AssignmentStatus","Seconds","confirmation_code")
+data.mt <- transform(data.mt, confirmation_code = as.numeric(confirmation_code))
+#Ensure that paid participants' data are analyzed
+data1 <- merge(data.mt, data, ID="confirmation_code",  all.x = TRUE)
+#Acquire data from individuals who completed the survey in earnest. 
+data1.1 <- merge(data.mt, data, ID="confirmation_code",  all.y = TRUE)
+data1.1 <- data1.1[is.na(data1.1$WorkerID),]
+rownames(data1.1) <- seq(length=nrow(data1.1)) 
+#Subset in individuals providing a confirmation code that is not in our database. 
+false.code <- data1[is.na(data1$Finished),]
+false.code <- subset(false.code, AssignmentStatus=='Submitted')
+#Subset in individuals with complete data and get rid of the workerIDs.
+data2 <- merge(data.mt, data, ID="confirmation_code")
+data2 <- rbind(data2,data1.1)
+data <- data2[c(-2)]
+#Subset into submitted, accepted, and rejected.
+submitted <- data.mt[ which(data.mt$AssignmentStatus=='Submitted'), ]
+approved <- data.mt[ which(data.mt$AssignmentStatus=='Approved'), ]
+rejected <- data.mt[ which(data.mt$AssignmentStatus=='Rejected'), ]
+#Build dataset
+a <- a[c(28,24)]
+names(a) <- c("confirmation_code", "WorkTimeInSeconds")
+df <- merge(a,data,by="confirmation_code")
+#Get RID of the worker IDS.
+data <- data[c(-2)]
+
+###### ENGAGE MACHINE LEARNING TO AUTOMATE MANIPULATION CHECK ######
+#Engage supervised machine learning to analyze purpose check data, which will tell us if participants actually watched the video and got the purpose of the study. 
+#library(caret)
+#library(tm)
+#library(SnowballC)
+#library(stringr)
+#Training data.NOTE: You'll need to filter in the 30 cases that force participants to distinguish purpose 1 from purpose 2. This will improve the accuracy of the algorithms.
+#data.t <- data[1:60]
+#data.t <- data.t[c(23,24,25,26)]
+#data.t[] <- lapply(data.t, str_trim)
+#is.na(data.t) <- data.t==''
+#data.t <- na.omit(data.t)
+#cond.code <- data.t[c(1)]
+#data.t <- data.t[c(2)]
+#corpus <- VCorpus(VectorSource(data.t$PurpCk1))
+##Create a text document matrix.
+#tdm <- DocumentTermMatrix(corpus, list(removePunctuation = TRUE, stripWhitespace = TRUE, content_transformer(tolower), stopwords = TRUE, stemming = FALSE, removeNumbers = FALSE))
+##Convert to a data.frame for training and assign a classification (factor) to each document.
+#train <- as.matrix(tdm)
+#Create condition code that differentiates individuals from conditions.
+#cond.code <- as.data.frame(ifelse(cond.code$Condition== "CSManipulation", 1,0))
+#train <- cbind(train, cond.code)
+#colnames(train)[ncol(train)] <- 'y'
+#train <- as.data.frame(train)
+#train$y <- as.factor(train$y)
+##Train.
+#require(foreach)
+#registerDoSEQ()
+#Training control prevents model over-fitting. 
+#tc <- trainControl(method = "cv", number = 7, verboseIter=FALSE , #preProcOptions="pca", allowParallel=TRUE)
+#bayesglm <- train(y ~ ., data = train, method = 'bayesglm', trControl=tc)
+#rf <- train(y ~ ., data = train, method = 'rf', trControl=tc)
+#NN <- train(y ~ ., data = train, method = 'nnet', trControl=tc, verbose=FALSE)
+#svml <- train(y ~ ., data = train, method = 'svmLinear', trControl=tc)
+#logitboost <- train(y ~ ., data = train, method = 'LogitBoost', trControl=tc)
+
+#This is used to complare the models against one anoher.
+#model <- c("Bayes GLM", "Neural Net", "SVM (linear)", "LogitBoost")
+#Accuracy <- c(max(bayesglm$results$Accuracy),
+#              max(NN$results$Accuracy),
+#              max(svml$results$Accuracy),
+#              max(logitboost$results$Accuracy))
+#Kappa <- c(max(bayesglm$results$Kappa),
+#           max(NN$results$Kappa),
+#           max(svml$results$Kappa),
+#           max(logitboost$results$Kappa))
+#performance <- cbind(model,Accuracy,Kappa)
+#knitr::kable(performance)
+#Create new dataset and fit models to new data.
+#data.n <- data[1:60]
+#data.n <- data.n[c(24,25,26)]
+#data.n <- rbind(data.t,data.n)
+#data.n[] <- lapply(data.n, str_trim)
+#is.na(data.n) <- data.n==''
+#data.n <- na.omit(data.n)
+#data.n <- unique(data.n)
+#data.n <- data.n$PurpCk1
+#data.n <- as.data.frame(data.n)
+#Fit model to new data
+#corpus <- VCorpus(VectorSource(data.n$data.n))
+##Create a text document matrix.
+#tdm <- DocumentTermMatrix(corpus, list(removePunctuation = TRUE, stripWhitespace = TRUE, content_transformer(tolower), stopwords = TRUE, stemming = FALSE, removeNumbers = FALSE))
+#test <- as.matrix(tdm)
+##Convert to a data.frame for training and assign a classification (factor) to each document.
+#predict(svml,test)
+###IT WORKS!!!! Send to team. 
+#share <- subset(data, Condition=="CSManipulation")
+#share <- share[c(24,25)]
+
+#Assuming that some people correctly guessed the hypothesis, then engage supervised machine learning to analyze hypothesis guessing data. 
+#data <- data[1:30,]
+#data <- df$HypoGuessing2
+
+######  DEVELOP SCALE SCORES AND EVALUATE USING CLASSICAL TEST THEORY ###### 
+require(psych)
+#see  the example including the bfi data set
+keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"), OCBO=c("OCBO1","OCBO2","-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"), IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7")) 
+keys <- make.keys(df,keys.list)  #no longer necessary
+scores <- scoreItems(keys,df,min=1,max=5)  #using a keys matrix 
+#Create scale scores
+scores <- as.data.frame(scores$scores)
+#Bind scales with condition variables. 
+final <- as.data.frame(df$Condition)
+names(final) <- c("Condition")
+final <- cbind(final,scores)
+
+###Evaluate Scale Reliability. Code examining scale reliability is needed. Wayne, I can teach you how to do this. 
+library(CTT)
+
+######  TEST HYPOTHESES ###### 
+require(BayesFactor)
+plot(PP ~ Condition, data = final)
+plot(OCBI ~ Condition, data = final)
+plot(OCBO ~ Condition, data = final)
+plot(IRB ~ Condition, data = final)
+
+#Check the BayesFactor package to make sure that you are using the correct formula. 
+
+#Proactive Personality 
+describeBy(final$PP, final$Condition )
+summary(aov(PP ~ Condition, data = final))
+anovaBF(PP ~ Condition, data = final, progress=FALSE)
+###Seems to favor null so far...
+
+#OCBI
+describeBy(final$OCBI, final$Condition )
+summary(aov(OCBI ~ Condition, data = final))
+anovaBF(OCBI ~ Condition, data = final, progress=FALSE)
+###Seems to favor null so far...
+
+#OCBO
+describeBy(final$OCBO, final$Condition )
+summary(aov(OCBO ~ Condition, data = final))
+anovaBF(OCBO ~ Condition, data = final, progress=FALSE)
+
+#IRB
+describeBy(final$IRB, final$Condition )
+summary(aov(IRB ~ Condition, data = final))
+anovaBF(IRB ~ Condition, data = final, progress=FALSE)
+
+######  Bayesian Measurement Invariance ######  
+#The goal of the analysis is to examine the invariance (or lackthereof) of various invariant or non-invariant models. In other words, test for stricter and stricter forms of invariance. If survey design features are causing differences, then a non-invariant model will provide a better fit to the data than a model assuming invariance.
+#require(blavaan)
+#SubstantiveModel <- '
+##Substantive Factors
+##  PR =~ PP1+PP2+PP3+PP4+PP5+PP6+PP7+PP8+PP9+PP10
+##  IRB =~ IRB1+IRB2+IRB3+IRB4+IRB5+IRB6+IRB7
+##  OCBI =~ OCBI1+OCBI2+OCBI3+OCBI4+OCBI5+OCBI6+OCBI7
+#  OCBO =~ OCBO1+OCBO2+OCBO3+OCBO4+OCBO5+OCBO6+OCBO7
+#'
+#bfit1 <- bcfa(SubstantiveModel, data = df, burnin = 4000, sample = 10000, jagcontrol = list(method = "rjparallel"))
+#summary(bfit1, standardized = TRUE)
+##Model is poor fit to the data.
+#Equal loadings
+#bfit2 <- bcfa(HS.model, data = HolzingerSwineford1939, group = "school", burnin = 1000, sample = 1000, group.equal = "loadings", jagcontrol = list(method = "rjparallel"))
+#blavCompare(bfit1, bfit2)
+##Conclusion: Configural invariance is 19.836 times more probable than configural non-invariance (though this model asssuming configural invariance is also, still, a bad model). 
+#bfit3 <- bcfa(HS.model, data = HolzingerSwineford1939, group = "school", burnin = 1000, sample = 1000, group.equal = c("loadings","intercepts"), jagcontrol = list(method = "rjparallel"))
+#blavCompare(bfit2, bfit3)
+#fitmeasures(bfit3)
+#summary(bfit1, standardized = TRUE)
+#blavInspect(bfit1,"hpd")
+##Plots:
+#plot(bfit1, plot.type="trace")
+#plot(bfit1, plot.type="autocorr")
+#plot(bfit1, "histogram")
+
+#write CSV file
+write.csv(final, file = "data.csv")
+```
+
+
+Notes below are the Bayesian test of the invariance of scale intercorrelations. 
+```{r}
+library(bayesboot)
+library(BayesFactor)
+library(BayesMed)
+library(plyr)
+library(psych)
+library(cocor)
+library(BayesianFirstAid)
+library(ggplot2)
+library(QRM)
+
+#Frequentist estimate of correlation between PP and OCBI for across conditions.
+f.Controlr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
+f.ItemRandr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr1 <- cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+
+f.Controlr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "Control", ])
+f.ItemRandr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr2 <- cor.test( ~ PP + OCBO, data = final[final$Condition == "ScaleRand", ])
+
+f.Controlr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "Control", ])
+f.ItemRandr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "ItemRand", ])
+f.CSManpipr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "CSManipulation", ])
+f.FScalesr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "FillerScales", ])
+f.ScaleRandr3 <- cor.test( ~ PP + IRB, data = final[final$Condition == "ScaleRand", ])
+
+#Examining correlations between variables across conditions.
+#Extract sample sizes
+c <- describe.by(final, group="Condition")
+Controln <- c$Control$n[c(1)]
+CSManipn <- c$CSManipulation$n[c(1)]
+ItemRandn <- c$ItemRand$n[c(1)]
+FScalesn <- c$FillerScales$n[c(1)]
+ScaleRandn <- c$ScaleRand$n[c(1)]
+
+#Extract correlations and compare
+func1 <- function(xx1)
+{
+return(data.frame(COR = cor(xx1$a, xx1$b)))
+}
+##PP and OCBI
+xx1 <- data.frame(group = final$Condition, a = final$PP, b = final$OCBI)
+a <- ddply(xx1, .(group), func)
+
+func <- function(xx2)
+{
+return(data.frame(COR = cor(xx2$a, xx2$b)))
+}
+##PP and OCBO
+xx2 <- data.frame(group = final$Condition, a = final$PP, b = final$OCBO)
+b <- ddply(xx2, .(group), func) 
+
+func <- function(xx3)
+{
+return(data.frame(COR = cor(xx3$a, xx3$b)))
+}
+##PP and OCBI
+xx3 <- data.frame(group = final$Condition, a = final$PP, b = final$IRB)
+c<- ddply(xx3, .(group), func)
+
+#Evaluate the difference in correlations using frequentist method: Fisher r to z transformation and test of significant differences. Note: these tests are conducted singly as in the test compares only two conditions at a time. It is possible to run an omnibus test that examines whether a correlation varies across all groups. However, the code for this test would need to be written. No big deal, but an easy alternative would be to correct for the number of tests that we run, which may be too conservative. See http://davidakenny.net/doc/statbook/chapter_16.pdf for more information. 
+
+##1. PP and OCBI: Control vs. CSManipulation
+Control.PP.OCBI.r <- a[1,]
+Control.PP.OCBI.r <- Control.PP.OCBI.r[2]
+CSManip.PP.OCBI.r <- a[2,]
+CSManip.PP.OCBI.r <- CSManip.PP.OCBI.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBI.r), as.numeric(CSManip.PP.OCBI.r), Controln, CSManipn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results.
+
+##2. PP and OCBI: Control vs. ItemRand
+ItemRand.PP.OCBI.r <- a[3,]
+ItemRand.PP.OCBI.r <- ItemRand.PP.OCBI.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBI.r), as.numeric(ItemRand.PP.OCBI.r), Controln, ItemRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results.
+
+##3. PP and OCBI: Control vs. FScales
+FScales.PP.OCBI.r <- a[4,]
+FScales.PP.OCBI.r <- FScales.PP.OCBI.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBI.r), as.numeric(FScales.PP.OCBI.r), Controln, FScalesn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis rejected using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results.
+
+##4. PP and OCBI: Control vs. ScaleRand
+ScaleRand.PP.OCBI.r <- a[5,]
+ScaleRand.PP.OCBI.r <- ScaleRand.PP.OCBI.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBI.r), as.numeric(ScaleRand.PP.OCBI.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results.
+
+##1. PP and OCBO: Control vs. CSManipulation
+Control.PP.OCBO.r <- a[1,]
+Control.PP.OCBO.r <- Control.PP.OCBO.r[2]
+CSManip.PP.OCBO.r <- a[2,]
+CSManip.PP.OCBO.r <- CSManip.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(CSManip.PP.OCBO.r), Controln, CSManipn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##2. PP and OCBO: Control vs. ItemRand
+ItemRand.PP.OCBO.r <- a[3,]
+ItemRand.PP.OCBO.r <- ItemRand.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(ItemRand.PP.OCBO.r), Controln, ItemRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##3. PP and OCBO: Control vs. FScales
+FScales.PP.OCBO.r <- a[4,]
+FScales.PP.OCBO.r <- FScales.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(FScales.PP.OCBO.r), Controln, FScalesn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis rejected using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##4. PP and OCBO: Control vs. ScaleRand
+ScaleRand.PP.OCBO.r <- a[5,]
+ScaleRand.PP.OCBO.r <- ScaleRand.PP.OCBO.r[2]
+cocor.indep.groups(as.numeric(Control.PP.OCBO.r), as.numeric(ScaleRand.PP.OCBO.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##1. PP and IRB: Control vs. CSManipulation
+Control.PP.IRB.r <- a[1,]
+Control.PP.IRB.r <- Control.PP.IRB.r[2]
+CSManip.PP.IRB.r <- a[2,]
+CSManip.PP.IRB.r <- CSManip.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(CSManip.PP.IRB.r), Controln, CSManipn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##2. PP and IRB: Control vs. ItemRand
+ItemRand.PP.IRB.r <- a[3,]
+ItemRand.PP.IRB.r <- ItemRand.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(ItemRand.PP.IRB.r), Controln, ItemRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##3. PP and IRB: Control vs. FScales
+FScales.PP.IRB.r <- a[4,]
+FScales.PP.IRB.r <- FScales.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(FScales.PP.IRB.r), Controln, FScalesn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis rejected using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+##4. PP and IRB: Control vs. ScaleRand
+ScaleRand.PP.IRB.r <- a[5,]
+ScaleRand.PP.IRB.r <- ScaleRand.PP.IRB.r[2]
+cocor.indep.groups(as.numeric(Control.PP.IRB.r), as.numeric(ScaleRand.PP.IRB.r), Controln, ScaleRandn, alternative = "two.sided", test = "all", alpha = 0.05, conf.level = 0.95, null.value = 0, data.name = NULL, var.labels = NULL, return.htest = FALSE)
+###Null Hypothesis retained using frequentist methods. Conclusion is tentative as we may not have the power to detect effects. See Bayesian results. (update)
+
+
+####Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB).
+
+##Praoctive Personality and OCBO
+xx <- data.frame(group = final$Condition, a = final$PP, b = final$OCBO)
+a <- ddply(xx, .(group), func)
+
+##Praoctive Personality and IRB
+xx <- data.frame(group = final$Condition, a = final$PP, b = final$IRB)
+a <- ddply(xx, .(group), func)
+
+##OCBI and OCBO
+xx <- data.frame(group = final$Condition, a = final$OCBI, b = final$OCBO)
+a <- ddply(xx, .(group), func)
+
+##OCBI and IRB
+xx <- data.frame(group = final$Condition, a = final$OCBI, b = final$IRB)
+a <- ddply(xx, .(group), func)
+
+##OCBO and IRB
+xx <- data.frame(group = final$Condition, a = final$OCBO, b = final$IRB)
+a <- ddply(xx, .(group), func)
+
+#Bayesian estimate of correlation between PP and OCBI for across conditions.
+b.Controlr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "Control", ])
+b.ItemRandr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr1 <- bayes.cor.test( ~ PP + OCBI, data = final[final$Condition == "ScaleRand", ])
+
+b.Controlr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "Control", ])
+b.ItemRandr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr2 <- bayes.cor.test( ~ PP + OCBO, data = final[final$Condition == "ScaleRand", ])
+
+b.Controlr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "Control", ])
+b.ItemRandr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "ItemRand", ])
+b.CSManpipr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "CSManipulation", ])
+b.FScalesr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "FillerScales", ])
+b.ScaleRandr3 <- bayes.cor.test( ~ PP + IRB, data = final[final$Condition == "ScaleRand", ])
+
+#Examine fit of the models
+plot(b.Controlr1)
+plot(b.ItemRandr1)
+plot(b.CSManpipr1)
+plot(b.FScalesr1)
+plot(b.ScaleRandr1)
+
+plot(b.Controlr2)
+plot(b.ItemRandr2)
+plot(b.CSManpipr2)
+plot(b.FScalesr2)
+plot(b.ScaleRandr2)
+
+plot(b.Controlr3)
+plot(b.ItemRandr3)
+plot(b.CSManpipr3)
+plot(b.FScalesr3)
+plot(b.ScaleRandr3)
+
+#Plot differences for PP-OCBI relationship and estimate proportion of effects that are consistent with a null effect, which here is defined as r = [-.10, .10].
+#Item Randomization
+control_mcmc <- as.data.frame(b.Controlr1)
+ItemRandr1_mcmc <- as.data.frame(b.ItemRandr1)
+hist(ItemRandr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr1_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr1_mcmc$rho - control_mcmc$rho < -.1 ))
+#48% chance that filler scales have no effect defined by r = [-.10, .10]. 
+
+control_mcmc <- as.data.frame(b.Controlr2)
+ItemRandr2_mcmc <- as.data.frame(b.ItemRandr2)
+hist(ItemRandr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr2_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#48% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+ItemRandr3_mcmc <- as.data.frame(b.ItemRandr3)
+hist(ItemRandr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Item-Randomized Scales", yaxt = "n")
+1-(mean(ItemRandr3_mcmc$rho - control_mcmc$rho > .1 )+mean(ItemRandr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#48% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+#Cover Story Manipulation
+control_mcmc <- as.data.frame(b.Controlr1)
+CSManpipr1_mcmc <- as.data.frame(b.CSManpipr1)
+hist(CSManpipr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr1_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr1_mcmc$rho - control_mcmc$rho < -.1 ))
+#51% chance that filler scales have no effect defined by r = [-.10, .10]. 
+
+control_mcmc <- as.data.frame(b.Controlr2)
+CSManpipr2_mcmc <- as.data.frame(b.CSManpipr2)
+hist(CSManpipr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr2_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#51% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+CSManpipr3_mcmc <- as.data.frame(b.CSManpipr3)
+hist(CSManpipr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Coverstory", yaxt = "n")
+1-(mean(CSManpipr3_mcmc$rho - control_mcmc$rho > .1 )+mean(CSManpipr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#51% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+#Large difference between control and filler scales. Examine the probability that filler scales weaken correlation.
+control_mcmc <- as.data.frame(b.Controlr1)
+Fscales1_mcmc <- as.data.frame(b.FScalesr1)
+head(control_mcmc)
+hist(Fscales1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales1_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales1_mcmc$rho - control_mcmc$rho < -.1 ))
+#12% chance that filler scales have no effect defined by r = [-.10, .10]. 
+
+control_mcmc <- as.data.frame(b.Controlr2)
+Fscales2_mcmc <- as.data.frame(b.FScalesr2)
+head(control_mcmc)
+hist(Fscales2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales2_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales2_mcmc$rho - control_mcmc$rho < -.1 ))
+#12% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+Fscales3_mcmc <- as.data.frame(b.FScalesr3)
+head(control_mcmc)
+hist(Fscales3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Filler Scales", yaxt = "n")
+1-(mean(Fscales3_mcmc$rho - control_mcmc$rho > .1 )+mean(Fscales3_mcmc$rho - control_mcmc$rho < -.1 ))
+#12% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+#Scale Randomization
+control_mcmc <- as.data.frame(b.Controlr1)
+ScaleRandr1_mcmc <- as.data.frame(b.ScaleRandr1)
+hist(ScaleRandr1_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBI r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr1_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr1_mcmc$rho - control_mcmc$rho < -.1 ))
+#40% chance that filler scales have no effect defined by r = [-.10, .10]. 
+
+control_mcmc <- as.data.frame(b.Controlr2)
+ScaleRandr2_mcmc <- as.data.frame(b.ScaleRandr2)
+hist(ScaleRandr2_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-OCBO r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr2_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr2_mcmc$rho - control_mcmc$rho < -.1 ))
+#40% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+control_mcmc <- as.data.frame(b.Controlr3)
+ScaleRandr3_mcmc <- as.data.frame(b.ScaleRandr3)
+hist(ScaleRandr3_mcmc$rho - control_mcmc$rho, 30, xlim = c(-1, 1), main = "Difference in PP-IRB r Between Control and Scale-Randomized Scales", yaxt = "n")
+1-(mean(ScaleRandr3_mcmc$rho - control_mcmc$rho > .1 )+mean(ScaleRandr3_mcmc$rho - control_mcmc$rho < -.1 ))
+#40% chance that filler scales have no effect defined by r = [-.10, .10]. (update)
+
+##Note for Wayne: Text above should be replicated for the other intercorrelations other than PP-OCBI (e.g., PP-OCBO, PP-IRB, etc.).
+#Plot differences for PP-OCBO relationship
+```
+
+
+The results for the default two-sided test can be obtained as follows: 
+```{r}
+bf01Study1 <- 1/bf10JeffreysIntegrate(n=nStudy1, r=rStudy1)
+bf01Study1
+```
+
+The results for the default one-sided test can be obtained as follows: 
+```{r}
+bf0PlusStudy1 <- 1/bfPlus0JeffreysIntegrate(n=nStudy1, r=rStudy1)
+bf0PlusStudy1
+```
+
+For the replication Bayes factor, the prior for the correlation coefficient is taken to be the posterior based on the original research. Here we use Study 1a by Bargh and Shalev (2012), which yielded $r=.57$ with $N=51$. The replication Bayes factor can then be obtained as follows:
+```{r}
+rBargh <- .57
+nBargh <- 51
+
+bf0RStudy1 <- 1/repBfR0(nOri=nBargh, rOri=rBargh, nRep=nStudy1, rRep=rStudy1)
+bf0RStudy1
+```
+
+We turn to the sensitivity analysis, which we illustrate for the case of the two-sided test. As outlined in the main text, the sensitivity involves a stretched beta with parameter $\gamma = 1/a$; the setting $\gamma=1$ corresponds to the default uniform prior, whereas $\gamma = 0$ means that $\mathcal{H}_1$ equals $\mathcal{H}_0$. The code below executes the sensitivity analysis and plots the results:
+
+```{r}
+gammaLength <- 36
+
+myGamma <- makeGammas(gammaLength)
+bf01Sense <- 1/bf10JeffreysIntegrate(n=nStudy1, r=rStudy1, alpha=1/myGamma)
+
+plotSensitivity(bf01Sense, myGamma)
+```
+
+In order to understand better what prior distributions correspond to a stretched beta with parameter $\gamma$, the code below produces a figure that shows the prior distribution. 
+
+```{r}
+someGammas <- c(1, 1/2, 1/3, 1/25)
+
+plotRhoPrior(someGammas)
+```
+
+For $\gamma=1$ we have the following priors and posteriors:
+
+```{r}
+gamma <- 1
+
+plotRhoPriorPosterior(n=nStudy1, r=rStudy1, alpha=1/gamma, yLim=6)
+```
+
+For $\gamma=1/2$ we have the following priors and posteriors:
+
+```{r}
+gamma <- 1/2
+
+plotRhoPriorPosterior(n=nStudy1, r=rStudy1, alpha=1/gamma, yLim=6)
+
+```
+
+For $\gamma=1/3$ we have the following priors and posteriors:
+
+```{r}
+gamma <- 1/3
+
+plotRhoPriorPosterior(n=nStudy1, r=rStudy1, alpha=1/gamma, yLim=6)
+```
+
+For $\gamma=1/10$ we have the following priors and posteriors:
+
+```{r}
+gamma <- 1/80
+
+plotRhoPriorPosterior(n=nStudy1, r=rStudy1, alpha=1/gamma, yLim=7)
+```
+
+
+
+
+```{r}
+#Note: Possibly change the HITID
+#b <- "Our systems flagged your HIT and may be rejected unless you take action. Individuals are flagged when, after completing our survey, they provide a confirmation code to us that was not assigned to a survey taker which can occur when (1) individuals incorrectly provide a confirmation code that was never issued or (2) individuals fabricate a confirmation code. To determine if you incorrectly provided a confirmation code that was never issued, which will not result in a rejection, we will need to examine our dataset to find the confirmation code that was most probably assigned to your survey. Therefore, we will need the following information from you: (1) your gender, (2) your age, (3) your job title, and (4) the number of years worked at your current job. We will not share this information. It is being asked for only to identify your data and confirmation code. If we can identify your data, then your HIT will not be rejected. However, if you did provide a confirmation code to us that was fabricated, then we will reject your HIT unless you notify us that you wish to take our survey in earnest. Then we will provide you with access to our survey. Related to this point, if you did take part in our survey but were screened out, then we can provide you with access to the portion of your survey that was flagged for inattentive responding and give you an opportunity to complete your survey in earnest. We will need you to provide us with your gender, age, job title, and the number of years worked so we can identify your survey and allow you to complete it. Please send all information to the lead researcher's email address (christopher.castille@nicholls.edu) along with any questions that you may have. We want to resolve this matter in ways that benefit all workers and allow fair treatment. Thank you for your time and effort with regard to our project."
+
+#Note: Message to clarify HIT.
+#m <- "Possible Solution to HIT (HITId: 3L4YG5VW9NSSWYQBDZ8P84QJT1KDD5) - Please Take Action"
+#n <- "We previously notified you regarding an issue with your HIT. We may have come across a solution to this problem that is both simple and quick to do. When you received your confirmation code, you may not have clicked on the 'Next Page' button, which would both submit your results and allow me to verify your confirmation code. I suspect that this is the problem for the majority of individuals who received a message from me previously. To see if this applies to you, simply revisit the survey via this link: https://rutgers.qualtrics.com/SE/?SID=SV_4TrJYU5QFy0nGPX. After you click on the link, you should see the last page you were on, which I suspect is the confirmation code page. To the lower right is the 'Next Page' button. Click on that and you should be told that the survey has been submitted. Once you do that, email me to let me know that you completed this task so I can verify your results. Now, a few of you did not enter a confirmation code and, if this is you, then please visit the survey link (https://rutgers.qualtrics.com/SE/?SID=SV_4TrJYU5QFy0nGPX), obtain your code, and email it to me directly. I'll manually change your data so there is no issue. Again, thank you for your time and effort with regard to our project. It is greatly appreciated."
+
+# contact multiple workers in batch. Change the worker IDs. Workers contacted are: "A47UVNSR0PBHV","A3P7AXWF57BHNX","ANPGL7XW7U766", "A3TUCOUVSP9ZGY", "AH5HMXXK35KZV".
+##Previously messaged workers.
+#c1 <- as.data.frame(c("A47UVNSR0PBHV","A3P7AXWF57BHNX","ANPGL7XW7U766", "A3TUCOUVSP9ZGY", "AH5HMXXK35KZV"))
+#names(c1) <- c("WorkerID")
+
+#Workers who must be messaged.
+#c2 <- as.character(false.code$WorkerID)
+#names(c2) <- c("WorkerID")
+#c3 <- c2[12:28,]
+#c3 <- rbind(c1, c2)
+#c4 <- c3[!duplicated(c3), ]
+#c4 <- as.character(c4)
+#Delete cases.A3P7AXWF57BHNX = 2
+#c4 <- as.character(c4[-2])
+#c5 <- as.character(c4[6:47,])
+#names(c5) <- c("WorkerID")
+##Mssage workers. BE CAREFUL.
+#e <- ContactWorker(subjects = a,
+#                   msgs = b,
+#                   workers = c2,
+#                   batch = FALSE)
+>>>>>>> f11ee7771209a4d7d2ffa7f99e2ed3a8dab21f0b
 
 #Delete random race factors
 data2$RACE0 <- NULL
