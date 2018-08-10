@@ -384,7 +384,7 @@ NIW.alpha <- my.scales[["alpha"]][9]
   We used the  10-item proactive personality scale was used to capture proactive personality [@SeibertProactivepersonalitycareer1999]. Example items include: "I am constantly on the lookout for new ways to improve," "If I see something I don't like, I fix it," and "I excel at identifying opportunities." This, and all scales included in this study, utilized a five-point agreement Likert rating scale (1 = strongly disagree, 5 = strongly agree) ($\alpha$ = `r apa(PP.alpha,2,T)`))
 
 ###In-role and organizational citizenship behavior 
-  @Williamsalternativeapproachmethod1994 In-Role Performance Behavior (IRB) and Organizational Citizenship Behavior (OCB) scales, the latter of which includes OCBI (OCB directed at the individual) and OCBO (OCB directed at the organization), were used as dependent variables. The items reflect a supervisor's perspective, but were adjusted for this study to be self-referent. Example items (and Cronbach alphas) for each respctive scale: "I perform tasks that are expected of me" ($\alpha$ = `r apa(IRB.alpha,2,T)`), "I take a personal interest in other employees" ($\alpha$ = `r apa(OCBI.alpha,2,T)`), and "I conserve and protect organizational property" ($\alpha$ = `r apa(OCBO.alpha,2,T)`).^[Two other criteria measures were included in this study and study 3. However, we have decided to focus on IRB and OCB because these variables were measured consistently across each of the three studies].
+  @Williamsalternativeapproachmethod1994 In-Role Performance Behavior (IRB) and Organizational Citizenship Behavior (OCB) scales, the latter of which includes OCBI (OCB directed at the individual) and OCBO (OCB directed at the organization), were used as dependent variables. The items were initially written to reflect a supervisor's perspective and so were adjusted here to be self-referent. Example items (and Cronbach alphas) for each respctive scale: "I perform tasks that are expected of me" ($\alpha$ = `r apa(IRB.alpha,2,T)`), "I take a personal interest in other employees" ($\alpha$ = `r apa(OCBI.alpha,2,T)`), and "I conserve and protect organizational property" ($\alpha$ = `r apa(OCBO.alpha,2,T)`).^[“Across all three studies, our data indicated that the negatively worded items from these scales loaded onto a negative item wording factor, and so we elected to omit these items from our analysis. As we learned, research suggests that negatively worded items often negatively impact survey research, such as by increasing measurement error [@dalalNegativelyWordedItems2015]. Readers who are concerned about inattentive responding or response style issues should know that the inattentive responding detection methods that we have employed are considered superior [see @dalalNegativelyWordedItems2015]. Reviewers who are interested in examining the role of negative item wording can see our data and code, which are publicly available at this link: https://osf.io/wdskv/.”]
 
 ###Positive Affectivity
   To assess trait affectivity, we used the positive scale of the PANAS [@WatsonDevelopmentValidationBrief1988]. Participants were asked to read each item and then select the responses that indicate the extent to which they generally feel, on average. Across both conditions, coefficient alpha reliability for was `r apa(PA.alpha,2,T)` for PA.
@@ -423,10 +423,7 @@ method.cfa <- '
   AP ~ 0
 '
 #To see the results of an anlysis of the discriminant validity of the measurement model, see the following object. 
-method <- cfa(model = method.cfa, ordered = c("PA1", "PA2", "PA3", "PA4", "PA5", "PA6", "PA7", "PA8", "PA9", "PA10", 
-                                      "NA1", "NA2", "NA3", "NA4", "NA5", "NA6", "NA7", "NA8", "NA9", "NA10", 
-                                      "CM1", "CM2", "CM3", "CM4", "CM5", "CM6", "CM7", "CM8"), 
-                                      data = data1, parameterization = "theta", estimator = "dwls", information = "expected")
+method <- cfa(model = method.cfa, data = data1, parameterization = "theta", estimator = "dwls", information = "expected")
 #Get method factor scores
 df <- predict(method)
 
@@ -434,27 +431,14 @@ df <- predict(method)
 data1 <- cbind(data1,df)
 
 #Note: certain response categories are too few for the estimator to work.  Specifically, the "strongly disagree" and "disagree" response options were simply combined to reflect a "disagree" option. So I combined them:
-data1$PP2[data1$PP2==1] <- 2
-data1$PP6[data1$PP6==1] <- 2
-data1$PP10[data1$PP10==1] <- 2
-data1$IRB2[data1$IRB2==1] <- 2
-data1$IRB3[data1$IRB3==1] <- 2
-data1$IRB4[data1$IRB4==1] <- 2
-data1$OCBI1[data1$OCBI1==1] <- 2
-data1$OCBI2[data1$OCBI2==1] <- 2
-data1$OCBI7[data1$OCBI7==1] <- 2
-data1$OCBO2[data1$OCBO2==1] <- 2
-data1$OCBO4[data1$OCBO4==5] <- 4
-data1$OCBO6[data1$OCBO6==1] <- 2
-data1$OCBO7[data1$OCBO7==1] <- 2
 
 ##Model 1 <- Initial Model
 initial.cfa <- '
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
 PosAff =~ c(1,1)*PA
@@ -497,21 +481,16 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-initial <- cfa(initial.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+initial <- cfa(initial.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 
 #Model 2: Baseline. Method and substantive covariances are constrained to zero. Method effects are constrained to zero.
 baseline.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
 PosAff =~ c(1,1)*PA
@@ -543,90 +522,73 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-baseline <- cfa(baseline.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+baseline <- cfa(baseline.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(initial, baseline) #As expected, baseline is much worse. 
 
-#Model 3: Method U model. Freely estimate method effects across groups. Tests for the pressence of method effects attributable to a common source of variance. Method effects are allowed to vary across conditions. Note that factor differences in factor loadings and covariances have been computed. This is because (1) subsequent testing revealed that this model was the best fitting method effect model and (2) estimating the size of the differences allowed us to determine which scales and covariances were most affected by proximal causes of method variance. 
+#Model 3: Method U model. Freely estimate method effects across groups. Tests for the pressence of method effects attributable to a common sources of variance (proximal causes and positive affectivity). Method effects are allowed to vary across conditions. Factor differences in factor loadings and covariances have been computed to facilitate interpretation of method effects. 
 methodu.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
 #Compute factor loading differences 
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
-papp1c := papp1a-papp1b
-papp2c := papp2a-papp2b
-papp3c := papp3a-papp3b
-papp4c := papp4a-papp4b
-papp5c := papp5a-papp5b
-papp6c := papp6a-papp6b
-papp7c := papp7a-papp7b
-papp8c := papp8a-papp8b
-papp9c := papp9a-papp9b
-papp10c := papp10a-papp10b
-pairb1c := pairb1a-pairb1b
-pairb2c := pairb2a-pairb2b
-pairb3c := pairb3a-pairb3b
-pairb4c := pairb4a-pairb4b
-pairb5c := pairb5a-pairb5b
-pairb6c := pairb6a-pairb6b
-pairb7c := pairb7a-pairb7b
-paocbi1c := paocbi1a-paocbi1b
-paocbi2c := paocbi2a-paocbi2b
-paocbi3c:= paocbi3a-paocbi3b
-paocbi4c := paocbi4a-paocbi4b
-paocbi5c := paocbi5a-paocbi5b
-paocbi6c := paocbi6a-paocbi6b
-paocbi7c := paocbi7a-paocbi7b
-paocbo1c := paocbo1a-paocbo1b
-paocbo2c := paocbo2a-paocbo2b
-paocbo3c := paocbo3a-paocbo3b
-paocbo4c := paocbo4a-paocbo4b
-paocbo5c := paocbo5a-paocbo5b
-paocbo6c := paocbo6a-paocbo6b
-paocbo7c := paocbo7a-paocbo7b
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+papp1c	:=	papp1b	-	papp1a
+papp2c	:=	papp2b	-	papp2a
+papp3c	:=	papp3b	-	papp3a
+papp4c	:=	papp4b	-	papp4a
+papp5c	:=	papp5b	-	papp5a
+papp6c	:=	papp6b	-	papp6a
+papp7c	:=	papp7b	-	papp7a
+papp8c	:=	papp8b	-	papp8a
+papp9c	:=	papp9b	-	papp9a
+papp10c	:=	papp10b	-	papp10a
+pairb1c	:=	pairb1b	-	pairb1a
+pairb2c	:=	pairb2b	-	pairb2a
+pairb3c	:=	pairb3b	-	pairb3a
+pairb4c	:=	pairb4b	-	pairb4a
+paocbi1c	:=	paocbi1b	-	paocbi1a
+paocbi2c	:=	paocbi2b	-	paocbi2a
+paocbi3c	:=	paocbi3a	-	paocbi3b
+paocbi4c	:=	paocbi4b	-	paocbi4a
+paocbi5c	:=	paocbi5b	-	paocbi5a
+paocbi6c	:=	paocbi6b	-	paocbi6a
+paocbi7c	:=	paocbi7b	-	paocbi7a
+paocbo1c	:=	paocbo1b	-	paocbo1a
+paocbo2c	:=	paocbo2b	-	paocbo2a
+paocbo6c	:=	paocbo6b	-	paocbo6a
+paocbo7c	:=	paocbo7b	-	paocbo7a
 
 #Factor variances are fixed to 1 to allow estimation.
 ###Substantive factors
@@ -662,12 +624,7 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodu <- cfa(methodu.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodu <- cfa(methodu.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(baseline,methodu) #Method variance attributable to positive affectivity has been identified. 
 
 #Model 4: Method I model. Constrain estimates of method effects to be equal within substantive variables but different across substantive variables. This tests whether method effects attributable to positive affectivity are present to an equal degree within a given factor but vary across different factors.
@@ -675,12 +632,12 @@ methodi.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp1a, papp1a)*PP2 + c(papp1a,papp1a)*PP3 + c(papp1a,papp1a)*PP4 + c(papp1a,papp1a)*PP5 + c(papp1a,papp1a)*PP6 + c(papp1a,papp1a)*PP7 + c(papp1a,papp1a)*PP8 + c(papp1a,papp1a)*PP9 + c(papp1a,papp1a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a)*IRB4 + c(pairb1a,pairb1a)*IRB5 + c(pairb1a,pairb1a)*IRB6 + c(pairb1a,pairb1a)*IRB7 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a)*OCBO2 + c(paocbo1a,paocbo1a)*OCBO3 + c(paocbo1a,paocbo1a)*OCBO4 + c(paocbo1a,paocbo1a)*OCBO5 + c(paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp1a, papp1a)*PP2 + c(papp1a,papp1a)*PP3 + c(papp1a,papp1a)*PP4 + c(papp1a,papp1a)*PP5 + c(papp1a,papp1a)*PP6 + c(papp1a,papp1a)*PP7 + c(papp1a,papp1a)*PP8 + c(papp1a,papp1a)*PP9 + c(papp1a,papp1a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a)*OCBO2 + c(paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -709,59 +666,48 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodi <- cfa(methodi.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodi <- cfa(methodi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(methodi,methodu) #Method variance is congeneric across substantive items. 
 
-#Model 5: Method UC model. Constrain estimates of method effects, which are freely estimated across all factors (i.e., method u), to be equal across conditions. This tests whether method variance attributable to positive affectivity is equally present across conditions. 
+#Model 5: Method UC model. Constrain estimates of method effects, which are freely estimated across all factors (i.e., method u), to be equal across conditions. This is done by making the method factor loadings equal across conditions and tests whether method variance attributable to positive affectivity is equally present across conditions. 
 methoduc.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(pairb5a,pairb5a)*IRB5 + c(pairb6a,pairb6a)*IRB6 + c(pairb7a,pairb7a)*IRB7 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo3a,paocbo3a)*OCBO3 + c(paocbo4a,paocbo4a)*OCBO4 + c(paocbo5a,paocbo5a)*OCBO5 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
-#Compute factor loading differences 
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
+#Compute factor loading differences. Done for interpretation purposes. 
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
 
 #Factor variances are fixed to 1 to allow estimation.
 ###Substantive factors
@@ -789,25 +735,21 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methoduc <- cfa(methoduc.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methoduc,methodu) #Method variance attributable to positive affectivity and negative item wording varies across the two conditions. 
+methoduc <- cfa(methoduc.cfa,group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methoduc,methodu) #Method variance attributable to positive affectivity varies across the two conditions. 
 
-#Model 6: Method UP model. Constrain substantive factor loadings to be equal across conditions but free across factors and within factors. This tests the hypothesis that proximal remedies cause a difference in the factor loadings of our measurement model. 
+#Model 6: Method UP model. Constrain substantive factor loadings to be equal across conditions but free across factors and within factors. This tests the hypothesis that proximal remedies do or do not cause a difference in the factor loadings of our measurement model. If this model is equivalent to methodu, then proximal remedies do not cause a meaningful difference in factor loadings. 
+
 methodup.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
 #Constrain substantive factor loadings to equality. 
@@ -825,9 +767,6 @@ irb1a==irb1b
 irb2a==irb2b
 irb3a==irb3b
 irb4a==irb4b
-irb5a==irb5b
-irb6a==irb6b
-irb7a==irb7b
 ocbi1a==ocbi1b
 ocbi2a==ocbi2b
 ocbi3a==ocbi3b
@@ -837,9 +776,6 @@ ocbi6a==ocbi6b
 ocbi7a==ocbi7b
 ocbo1a==ocbo1b
 ocbo2a==ocbo2b
-ocbo3a==ocbo3b
-ocbo4a==ocbo4b
-ocbo5a==ocbo5b
 ocbo6a==ocbo6b
 ocbo7a==ocbo7b
 
@@ -869,59 +805,48 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodup <- cfa(methodup.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodup <- cfa(methodup.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(methodup,methodu) #Method variance attributable to other proximal causes of method variance has been detected. Need to follow up with tests to identify the nature of the proximal causes of method variance (congeneric vs. non-congeneric).
 
-#Model 7: Method UPI model. Allow substantive factor loadings to vary across conditions. Additionally, (1) force the differences in factor loadings to be equal within factors but to (2) vary across factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are congeneric (vs. non-congeneric). If this model is not statistically different from method u, then proximal method effects are congeneric and so a simple correction for failing to use proximal remedies will not be viable. Therefore, proximal method effects are more complex than considered previously. 
+#Model 7: Method UPI model. Allow substantive factor loadings to vary across conditions but (1) force the differences in factor loadings to be equal within factors yet to (2) vary across factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are congeneric (vs. non-congeneric) and is done by (i) computing factor loading differences across conditions and then (ii) forcing the differences to be equal across conditions. If this model is statistically different from method u, then proximal method effects have complex effects and so a simple correction for failing to use proximal remedies will not be viable. However, if the model is not statistically different from method u, then this suggests that proximal method effects in the factor loadings vary across measurement models.
 methodupi.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
-#Compute factor loading differences.
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
 
 #Constrain the differences to be equal within factors but vary across factors.
 pp1c==pp2c
@@ -936,9 +861,6 @@ pp9c==pp10c
 irb1c==irb2c
 irb2c==irb3c
 irb3c==irb4c
-irb4c==irb5c
-irb5c==irb6c
-irb6c==irb7c
 ocbi1c==ocbi2c
 ocbi2c==ocbi3c
 ocbi3c==ocbi4c
@@ -946,10 +868,7 @@ ocbi4c==ocbi5c
 ocbi5c==ocbi6c
 ocbi6c==ocbi7c
 ocbo1c==ocbo2c
-ocbo2c==ocbo3c
-ocbo3c==ocbo4c
-ocbo4c==ocbo5c
-ocbo5c==ocbo6c
+ocbo2c==ocbo6c
 ocbo6c==ocbo7c
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -978,26 +897,74 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodupi <- cfa(methodupi.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodupi,methodu) #Method variance attributable to other proximal causes of method variance is congeneric. Therefore, a simple correction for failing to use a proximal remedy for CMV is overly simplistic. 
+methodupi <- cfa(methodupi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodupi,methodu) #Methodupi is not statistically different from method u, but is simpler and so retained via the rule of parsimony. Variance attributable to other proximal causes of method variance appears to vary across measures but is constant within a given measure.  Following up with a test to see if the effect is constant across all measures (and so a simple correction for failing to use a proximal remedy for CMV is viable) or if the correction would have to be within measures. 
 
-#Model 8: Method RAff model. Constrain estimates of covariances to be equal to baseline levels in respective conditions. Test method bias due to positive affectivity and proximal causes of method variance. 
-methodru.cfa <- '
+#Model 8: Tests for constant proximal method effect. Same as model 7 with one exception: force the differences in factor loadings to be equal across all factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are constant. If this model is not statistically different from method upi, then proximal method effects are a constant and can be corrected simply. In other words, proximal method effects would be as simple as has been appreciated in the literature.
+
+methodupc.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+pp10c==irb1c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+irb4c==ocbi1c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
 
 #Factor variances are fixed to 1 to allow estimation.
 ###Substantive factors
@@ -1006,87 +973,7 @@ IRB ~~ c(1,1)*IRB
 OCBI ~~ c(1,1)*OCBI
 OCBO ~~ c(1,1)*OCBO
 
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are allowed to covary.
-PP ~~ c(.358,.379)*IRB
-PP ~~ c(.536,.553)*OCBI
-PP ~~ c(.498,.382)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(.429,.540)*OCBI
-IRB ~~ c(.808,.643)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(.712,.607)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of the both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodru <- cfa(methodru.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodru,methodu) #Method bias attributable to positive affectivity and proximal causes of method variance has been detected. Unfortunately, this test is also sensitive to inflation that has occurred in the criterion variables and so we must account for this. Need to determine which relationships specifically have been strongly affected by sources of method variance.
-
-#Model 9: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model, which in this case is the Method U model) to be equal. This helps to see how complex method variance is. For this particular model, only the IRB~OCBI and IRB~OCBO relationships seemingly affected.
-methoduu.cfa<- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences 
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances.
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
 PP ~~ c(PPIRB1,PPIRB2)*IRB
 PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
 PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
@@ -1098,11 +985,97 @@ OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
 OCBI ~~ c(0,0)*PosAff
 OCBO ~~ c(0,0)*PosAff
 
-#Constrain the factor covariance differences to be equal within factors but vary across factors. Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model, which in this case is the Method U model) to be equal. This helps to see how complex method variance is. For this particular model, only the IRB~OCBI and IRB~OCBO relationships seemingly affected.
-PPIRB1==PPIRB2
-PPOCBI1==PPOCBI2
-PPOCBO1==PPOCBO2
-OCBIO1==OCBIO2
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodupc <- cfa(methodupc.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodupi,methodupc) #Methodupi is statistically different from methodupc and a better fit. Therefore, a  correction for failing to use a proximal remedy for CMV is viable) or if the correction would have to be measure specific, which is consistent with a measure-centric view of method variance (Spector et al., 2017). *More research is needed to verify this (especially if replicated in study 2). 
+
+#Model 9: Method RAff model. Constrain estimates of covariances to be equal to baseline levels in respective conditions. Test method bias due to positive affectivity and proximal causes of method variance. 
+methodrupi.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Latent covariances come from the 
+PP ~~ c(.279,.296)*IRB
+PP ~~ c(.459,.573)*OCBI
+PP ~~ c(.464,.403)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(.351,.475)*OCBI
+IRB ~~ c(.738,.591)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(.690,.635)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
 
 #Factor means of the both groups are fixed at zero to allow identification.
 ##Substantive factors
@@ -1111,13 +1084,107 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methoduu <- cfa(methoduu.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(initial, methodu, methodi, methoduc, methodup, methodupi, methoduu, methodru) #Interestingly, the focal coefficients of interest (PP~IRB, OCBI, OCBO) were invariant across groups. In other words, though proximal remedies were used to reduce common method variance in the focal predictor-criterion relationships and they appeared to cause differences in substantive factor loadings, they did not cause differences in the focal substantive parameter estimates. This may suggest that proximal causes of CMV are not be powerful enough alone to cause substantial amounts of bias. By contrast, the method bias that was observed in this study was attributable to positive affectivity. 
+methodrupi <- cfa(methodrupi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodrupi,methodupi) #No evidence of bias attributable to the accounted for method effects (i.e., positive affectivity and method effects). 
+
+#Model 10: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model, which in this case is the Method U model) to be equal. This helps to show that assuming equal covariances across conditions (i.e., method variance without bias) is tenable. 
+methodupic.cfa<- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Constrain factor covariances to equality
+PPIRB1==PPIRB2
+PPOCBI1==PPOCBI2
+PPOCBO1==PPOCBO2
+IRBOCBI1==IRBOCBI2
+OCBIO1==OCBIO2
+
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodupic <- cfa(methodupic.cfa,group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(initial, methodu, methodi, methoduc, methodup, methodupi, methodupic, methodrupi) #Interestingly, all covariances appeared invariant across conditions. In other words, proximal remediess, though appearing to reduce method variance (i.e., method variance varies across condi), do not cause differences in the substantive parameter estimates. This may suggest that proximal causes of CMV are not be powerful enough alone to cause substantial amounts of bias. By contrast, the method bias that was observed in this study was attributable to positive affectivity. 
 
 ## extract fit indices tables
 fitm.initial <- fitmeasures(initial)      #Model 1: Initial model.
@@ -1127,12 +1194,13 @@ fitm.methodi <- fitmeasures(methodi)      #Model 4: Method effects vary across s
 fitm.methoduc <- fitmeasures(methoduc)    #Model 5: Constrain method effects to equality across conditions. (Proximal method variance equal across remedied vs. non-remedied).
 fitm.methodup <- fitmeasures(methodup)    #Model 6: Constrain substantive factor loadings to be equal across conditions (proximal remedies decontaminate measurement models).
 fitm.methodupi <- fitmeasures(methodupi)  #Model 7: Force factor loadings to be equal within factors but vary across factors (congeneric vs. noncongeneric proximal method effects).
-fitm.methodru <- fitmeasures(methodru)    #Model 8: Constrain latent covariances to baseline levels in respective conditions (test for method bias).
-fitm.methodru <- fitmeasures(methoduu)    #Model 9: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05).
+fitm.methodupc <-  fitmeasures(methodupc) #Model 8: Tests for constant proximal method effect.
+fitm.methodru <- fitmeasures(methodrupi)  #Model 9: Constrain latent covariances to baseline levels in respective conditions (test for method bias).
+fitm.methodru <- fitmeasures(methodupic)  #Model 10: Constrain the between-condition factor covariances to be equal. 
 
 #Build table
 greeks=c(alpha='\u03b1', tau='\u03c4', sigma='\u03c3', beta='\u03b2', gamma='\u03b3', chi='\u03c7', delta='\u0394')
-Model <- c("Initial CFA", "Baseline", "Method U", "Method I", "Method Uc", "Method Up", "Method Upi", "Method Ru", "Method Uu")
+Model <- c("Initial CFA", "Baseline", "Method U", "Method I", "Method Uc", "Method Up", "Method Upi", "Method Ru", "Method U")
 chi.square <- c(paste0(greeks['chi'],'^2^'))
 df <- c("df")
 chi.square.p.value <- c("*p* value")
@@ -1476,7 +1544,6 @@ table[5,9] <- NA
 
 #Relable table to table 4.
 table4 <- table
-
 ```
   Descriptive statistics for study variables can be found in table 1. 
   
@@ -1865,10 +1932,7 @@ method.cfa <- '
 '
 
 #To see the results of an anlysis of the discriminant validity of the measurement model, see the following object. 
-method <- cfa(model = method.cfa, ordered = c("PA1", "PA2", "PA3", "PA4", "PA5", "PA6", "PA7", "PA8", "PA9", "PA10", 
-                                      "NA1", "NA2", "NA3", "NA4", "NA5", "NA6", "NA7", "NA8", "NA9", "NA10", 
-                                      "CM1", "CM2", "CM3", "CM4", "CM5", "CM6", "CM7", "CM8"), 
-                                      data = data2, parameterization = "theta", estimator = "dwls", information = "expected")
+method <- cfa(model = method.cfa, data = data2, parameterization = "theta", estimator = "dwls", information = "expected")
 #Get method factor scores
 df <- predict(method)
 
@@ -1879,9 +1943,9 @@ data2 <- cbind(data2,df)
 initial.cfa <- '
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo7c,ocbo7d,ocbo7e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo6a,ocbo6b,ocbo7c,ocbo7d,ocbo7e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
 PosAff =~ c(1,1,1,1,1)*PA
@@ -2014,21 +2078,16 @@ IRB ~ c(0,0,0,0,0)*1
 OCBI ~ c(0,0,0,0,0)*1
 OCBO ~ c(0,0,0,0,0)*1
 '
-initial <- cfa(initial.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+initial <- cfa(initial.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 
 #Model 2: Baseline. Method and substantive covariances are constrained to zero. Method effects are constrained to zero.
 baseline.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo7c,ocbo7d,ocbo7e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2+ c(ocbo6a,ocbo6b,ocbo7c,ocbo7d,ocbo7e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
 PosAff =~ c(1,1,1,1,1)*PA
@@ -2060,12 +2119,7 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-baseline <- cfa(baseline.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+baseline <- cfa(baseline.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(initial, baseline) #As expected, baseline is much worse. 
 
 #Model 3: Method U model. Freely estimate method effects across groups. Tests for the pressence of method effects attributable to a common source of variance. Method effects are allowed to vary across conditions. Note that factor differences in factor loadings and covariances have been computed. This is because (1) subsequent testing revealed that this model was the best fitting method effect model and (2) estimating the size of the differences allowed us to determine which scales and covariances were most affected by proximal causes of method variance. 
@@ -2073,12 +2127,12 @@ methodu.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(pairb5a,pairb5b,pairb5c,pairb5d,pairb5e)*IRB5 + c(pairb6a,pairb6b,pairb6c,pairb6d,pairb6e)*IRB6 + c(pairb7a,pairb7b,pairb7c,pairb7d,pairb7e)*IRB7 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo3a,paocbo3b,paocbo3c,paocbo3d,paocbo3e)*OCBO3 + c(paocbo4a,paocbo4b,paocbo4c,paocbo4d,paocbo4e)*OCBO4 + c(paocbo5a,paocbo5b,paocbo5c,paocbo5d,paocbo5e)*OCBO5 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
+PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
 PA ~~ ((1-.925)*0.4259783)*PA
 
 #Compute factor loading differences 
@@ -2222,36 +2276,6 @@ irb4be := irb4b-irb4e
 irb4cd := irb4c-irb4d
 irb4ce := irb4c-irb4e
 irb4de := irb4d-irb4e
-irb5ab := irb5a-irb5b
-irb5ac := irb5a-irb5c
-irb5ad := irb5a-irb5d
-irb5ae := irb5a-irb5e
-irb5bc := irb5b-irb5c
-irb5bd := irb5b-irb5d
-irb5be := irb5b-irb5e
-irb5cd := irb5c-irb5d
-irb5ce := irb5c-irb5e
-irb5de := irb5d-irb5e
-irb6ab := irb6a-irb6b
-irb6ac := irb6a-irb6c
-irb6ad := irb6a-irb6d
-irb6ae := irb6a-irb6e
-irb6bc := irb6b-irb6c
-irb6bd := irb6b-irb6d
-irb6be := irb6b-irb6e
-irb6cd := irb6c-irb6d
-irb6ce := irb6c-irb6e
-irb6de := irb6d-irb6e
-irb7ab := irb7a-irb7b
-irb7ac := irb7a-irb7c
-irb7ad := irb7a-irb7d
-irb7ae := irb7a-irb7e
-irb7bc := irb7b-irb7c
-irb7bd := irb7b-irb7d
-irb7be := irb7b-irb7e
-irb7cd := irb7c-irb7d
-irb7ce := irb7c-irb7e
-irb7de := irb7d-irb7e
 ocbi1ab := ocbi1a-ocbi1b
 ocbi1ac := ocbi1a-ocbi1c
 ocbi1ad := ocbi1a-ocbi1d
@@ -2342,36 +2366,6 @@ ocbo2be := ocbo2b-ocbo2e
 ocbo2cd := ocbo2c-ocbo2d
 ocbo2ce := ocbo2c-ocbo2e
 ocbo2de := ocbo2d-ocbo2e
-ocbo3ab := ocbo3a-ocbo3b
-ocbo3ac := ocbo3a-ocbo3c
-ocbo3ad := ocbo3a-ocbo3d
-ocbo3ae := ocbo3a-ocbo3e
-ocbo3bc := ocbo3b-ocbo3c
-ocbo3bd := ocbo3b-ocbo3d
-ocbo3be := ocbo3b-ocbo3e
-ocbo3cd := ocbo3c-ocbo3d
-ocbo3ce := ocbo3c-ocbo3e
-ocbo3de := ocbo3d-ocbo3e
-ocbo4ab := ocbo4a-ocbo4b
-ocbo4ac := ocbo4a-ocbo4c
-ocbo4ad := ocbo4a-ocbo4d
-ocbo4ae := ocbo4a-ocbo4e
-ocbo4bc := ocbo4b-ocbo4c
-ocbo4bd := ocbo4b-ocbo4d
-ocbo4be := ocbo4b-ocbo4e
-ocbo4cd := ocbo4c-ocbo4d
-ocbo4ce := ocbo4c-ocbo4e
-ocbo4de := ocbo4d-ocbo4e
-ocbo5ab := ocbo5a-ocbo5b
-ocbo5ac := ocbo5a-ocbo5c
-ocbo5ad := ocbo5a-ocbo5d
-ocbo5ae := ocbo5a-ocbo5e
-ocbo5bc := ocbo5b-ocbo5c
-ocbo5bd := ocbo5b-ocbo5d
-ocbo5be := ocbo5b-ocbo5e
-ocbo5cd := ocbo5c-ocbo5d
-ocbo5ce := ocbo5c-ocbo5e
-ocbo5de := ocbo5d-ocbo5e
 ocbo6ab := ocbo6a-ocbo6b
 ocbo6ac := ocbo6a-ocbo6c
 ocbo6ad := ocbo6a-ocbo6d
@@ -2532,36 +2526,6 @@ pairb4be := pairb4b-pairb4e
 pairb4cd := pairb4c-pairb4d
 pairb4ce := pairb4c-pairb4e
 pairb4de := pairb4d-pairb4e
-pairb5ab := pairb5a-pairb5b
-pairb5ac := pairb5a-pairb5c
-pairb5ad := pairb5a-pairb5d
-pairb5ae := pairb5a-pairb5e
-pairb5bc := pairb5b-pairb5c
-pairb5bd := pairb5b-pairb5d
-pairb5be := pairb5b-pairb5e
-pairb5cd := pairb5c-pairb5d
-pairb5ce := pairb5c-pairb5e
-pairb5de := pairb5d-pairb5e
-pairb6ab := pairb6a-pairb6b
-pairb6ac := pairb6a-pairb6c
-pairb6ad := pairb6a-pairb6d
-pairb6ae := pairb6a-pairb6e
-pairb6bc := pairb6b-pairb6c
-pairb6bd := pairb6b-pairb6d
-pairb6be := pairb6b-pairb6e
-pairb6cd := pairb6c-pairb6d
-pairb6ce := pairb6c-pairb6e
-pairb6de := pairb6d-pairb6e
-pairb7ab := pairb7a-pairb7b
-pairb7ac := pairb7a-pairb7c
-pairb7ad := pairb7a-pairb7d
-pairb7ae := pairb7a-pairb7e
-pairb7bc := pairb7b-pairb7c
-pairb7bd := pairb7b-pairb7d
-pairb7be := pairb7b-pairb7e
-pairb7cd := pairb7c-pairb7d
-pairb7ce := pairb7c-pairb7e
-pairb7de := pairb7d-pairb7e
 paocbi1ab := paocbi1a-paocbi1b
 paocbi1ac := paocbi1a-paocbi1c
 paocbi1ad := paocbi1a-paocbi1d
@@ -2652,36 +2616,6 @@ paocbo2be := paocbo2b-paocbo2e
 paocbo2cd := paocbo2c-paocbo2d
 paocbo2ce := paocbo2c-paocbo2e
 paocbo2de := paocbo2d-paocbo2e
-paocbo3ab := paocbo3a-paocbo3b
-paocbo3ac := paocbo3a-paocbo3c
-paocbo3ad := paocbo3a-paocbo3d
-paocbo3ae := paocbo3a-paocbo3e
-paocbo3bc := paocbo3b-paocbo3c
-paocbo3bd := paocbo3b-paocbo3d
-paocbo3be := paocbo3b-paocbo3e
-paocbo3cd := paocbo3c-paocbo3d
-paocbo3ce := paocbo3c-paocbo3e
-paocbo3de := paocbo3d-paocbo3e
-paocbo4ab := paocbo4a-paocbo4b
-paocbo4ac := paocbo4a-paocbo4c
-paocbo4ad := paocbo4a-paocbo4d
-paocbo4ae := paocbo4a-paocbo4e
-paocbo4bc := paocbo4b-paocbo4c
-paocbo4bd := paocbo4b-paocbo4d
-paocbo4be := paocbo4b-paocbo4e
-paocbo4cd := paocbo4c-paocbo4d
-paocbo4ce := paocbo4c-paocbo4e
-paocbo4de := paocbo4d-paocbo4e
-paocbo5ab := paocbo5a-paocbo5b
-paocbo5ac := paocbo5a-paocbo5c
-paocbo5ad := paocbo5a-paocbo5d
-paocbo5ae := paocbo5a-paocbo5e
-paocbo5bc := paocbo5b-paocbo5c
-paocbo5bd := paocbo5b-paocbo5d
-paocbo5be := paocbo5b-paocbo5e
-paocbo5cd := paocbo5c-paocbo5d
-paocbo5ce := paocbo5c-paocbo5e
-paocbo5de := paocbo5d-paocbo5e
 paocbo6ab := paocbo6a-paocbo6b
 paocbo6ac := paocbo6a-paocbo6c
 paocbo6ad := paocbo6a-paocbo6d
@@ -2710,7 +2644,7 @@ IRB ~~ c(1,1,1,1,1)*IRB
 OCBI ~~ c(1,1,1,1,1)*OCBI
 OCBO ~~ c(1,1,1,1,1)*OCBO
 
-##Factor covariances freely estimated (with the exception being the bifactors). 
+##Factor covariances freely estimated.
 PP ~~ c(ppirba,ppirbb,ppirbc,ppirbd,ppirbe)*IRB
 PP ~~ c(ppocbia,ppocbib,ppocbic,ppocbid,ppocbie)*OCBI
 PP ~~ c(ppocboa,ppocbob,ppocboc,ppocbod,ppocboe)*OCBO
@@ -2791,12 +2725,7 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-methodu <- cfa(methodu.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodu <- cfa(methodu.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(baseline,methodu) #Method variance attributable to positive affectivity has been identified. 
 
 #Model 4: Method I model. Constrain estimates of method effects to be equal within substantive variables but different across substantive variables. This tests whether method effects attributable to positive affectivity are present to an equal degree within a given factor but vary across different factors.
@@ -2804,12 +2733,12 @@ methodi.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1a,papp1a,papp1a,papp1a)*PP1 + c(papp1a, papp1a,papp1a,papp1a,papp1a)*PP2 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP3 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP4 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP5 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP6 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP7 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP8 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP9 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP10 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB4 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB5 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB6 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB7 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO2 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO3 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO4 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO5 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO7
+PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1a,papp1a,papp1a,papp1a)*PP1 + c(papp1a, papp1a,papp1a,papp1a,papp1a)*PP2 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP3 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP4 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP5 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP6 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP7 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP8 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP9 + c(papp1a,papp1a,papp1a,papp1a,papp1a)*PP10 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB4 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO2 +  c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO7
 PA ~~ ((1-.925)*0.4259783)*PA
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -2838,12 +2767,7 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-methodi <- cfa(methodi.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodi <- cfa(methodi.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(methodi,methodu) #Method variance is congeneric across substantive items. 
 
 #Model 5: Method UC model. Constrain estimates of method effects, which are freely estimated across all factors (i.e., method u), to be equal across conditions. This tests whether method variance attributable to positive affectivity is equally present across conditions. 
@@ -2851,13 +2775,13 @@ methoduc.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
 ##Substantive factors
-PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1a,papp1a,papp1a,papp1a)*PP1 + c(papp2a, papp2a,papp2a,papp2a,papp2a)*PP2 + c(papp3a,papp3a,papp3a,papp3a,papp3a)*PP3 + c(papp4a,papp4a,papp4a,papp4a,papp4a)*PP4 + c(papp5a,papp5a,papp5a,papp5a,papp5a)*PP5 + c(papp6a,papp6a,papp6a,papp6a,papp6a)*PP6 + c(papp7a,papp7a,papp7a,papp7a,papp7a)*PP7 + c(papp8a,papp8a,papp8a,papp8a,papp8a)*PP8 + c(papp9a,papp9a,papp9a,papp9a,papp9a)*PP9 + c(papp10a,papp10a,papp10a,papp10a,papp10a)*PP10 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a,pairb2a,pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a,pairb3a,pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a,pairb4a,pairb4a,pairb4a)*IRB4 + c(pairb5a,pairb5a,pairb5a,pairb5a,pairb5a)*IRB5 + c(pairb6a,pairb6a,pairb6a,pairb6a,pairb6a)*IRB6 + c(pairb7a,pairb7a,pairb7a,pairb7a,pairb7a)*IRB7 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a,paocbi2a,paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a,paocbi3a,paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a,paocbi4a,paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a,paocbi5a,paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a,paocbi6a,paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a,paocbi7a,paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a,paocbo2a,paocbo2a,paocbo2a)*OCBO2 + c(paocbo3a,paocbo3a,paocbo3a,paocbo3a,paocbo3a)*OCBO3 + c(paocbo4a,paocbo4a,paocbo4a,paocbo4a,paocbo4a)*OCBO4 + c(paocbo5a,paocbo5a,paocbo5a,paocbo5a,paocbo5a)*OCBO5 + c(paocbo6a,paocbo6a,paocbo6a,paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a,paocbo7a,paocbo7a,paocbo7a)*OCBO7
+PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1a,papp1a,papp1a,papp1a)*PP1 + c(papp2a, papp2a,papp2a,papp2a,papp2a)*PP2 + c(papp3a,papp3a,papp3a,papp3a,papp3a)*PP3 + c(papp4a,papp4a,papp4a,papp4a,papp4a)*PP4 + c(papp5a,papp5a,papp5a,papp5a,papp5a)*PP5 + c(papp6a,papp6a,papp6a,papp6a,papp6a)*PP6 + c(papp7a,papp7a,papp7a,papp7a,papp7a)*PP7 + c(papp8a,papp8a,papp8a,papp8a,papp8a)*PP8 + c(papp9a,papp9a,papp9a,papp9a,papp9a)*PP9 + c(papp10a,papp10a,papp10a,papp10a,papp10a)*PP10 + c(pairb1a,pairb1a,pairb1a,pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a,pairb2a,pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a,pairb3a,pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a,pairb4a,pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a,paocbi1a,paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a,paocbi2a,paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a,paocbi3a,paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a,paocbi4a,paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a,paocbi5a,paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a,paocbi6a,paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a,paocbi7a,paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a,paocbo1a,paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a,paocbo2a,paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a,paocbo6a,paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a,paocbo7a,paocbo7a,paocbo7a)*OCBO7
 PA ~~ ((1-.925)*0.4259783)*PA
 
 
@@ -2887,25 +2811,20 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-methoduc <- cfa(methoduc.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methoduc,methodu) #Method variance attributable to positive affectivity and negative item wording varies across the two conditions. 
+methoduc <- cfa(methoduc.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methoduc,methodu) #Method variance attributable to positive affectivity varies across the two conditions. 
 
 #Model 6: Method UP model. Constrain substantive factor loadings to be equal across conditions but free across factors and within factors. This tests the hypothesis that proximal remedies cause a difference in the factor loadings of our measurement model. 
 methodup.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1a, pp1a, pp1a, pp1a)*PP1 + c(pp2a, pp2a, pp2a, pp2a, pp2a)*PP2 + c(pp3a,pp3a, pp3a, pp3a, pp3a)*PP3 + c(pp4a,pp4a, pp4a, pp4a, pp4a)*PP4 + c(pp5a,pp5a, pp5a, pp5a, pp5a)*PP5 + c(pp6a,pp6a, pp6a, pp6a, pp6a)*PP6 + c(pp7a,pp7a, pp7a, pp7a, pp7a)*PP7 + c(pp8a,pp8a, pp8a, pp8a, pp8a)*PP8 + c(pp9a,pp9a, pp9a, pp9a, pp9a)*PP9 + c(pp10a,pp10a, pp10a, pp10a, pp10a)*PP10
-IRB =~ c(irb1a,irb1a,irb1a,irb1a,irb1a)*IRB1 + c(irb2a,irb2a,irb2a,irb2a,irb2a)*IRB2 + c(irb3a,irb3a,irb3a,irb3a,irb3a)*IRB3 + c(irb4a,irb4a,irb4a,irb4a,irb4a)*IRB4 + c(irb5a,irb5a,irb5a,irb5a,irb5a)*IRB5 + c(irb6a,irb6a,irb6a,irb6a,irb6a)*IRB6 + c(irb7a,irb7a,irb7a,irb7a,irb7a)*IRB7
+IRB =~ c(irb1a,irb1a,irb1a,irb1a,irb1a)*IRB1 + c(irb2a,irb2a,irb2a,irb2a,irb2a)*IRB2 + c(irb3a,irb3a,irb3a,irb3a,irb3a)*IRB3 + c(irb4a,irb4a,irb4a,irb4a,irb4a)*IRB4
 OCBI =~ c(ocbi1a,ocbi1a,ocbi1a,ocbi1a,ocbi1a)*OCBI1 + c(ocbi2a,ocbi2a,ocbi2a,ocbi2a,ocbi2a)*OCBI2 + c(ocbi3a,ocbi3a,ocbi3a,ocbi3a,ocbi3a)*OCBI3 + c(ocbi4a,ocbi4a,ocbi4a,ocbi4a,ocbi4a)*OCBI4 + c(ocbi5a,ocbi5a,ocbi5a,ocbi5a,ocbi5a)*OCBI5 + c(ocbi6a,ocbi6a,ocbi6a,ocbi6a,ocbi6a)*OCBI6 + c(ocbi7a,ocbi7a,ocbi7a,ocbi7a,ocbi7a)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1a,ocbo1a,ocbo1a,ocbo1a)*OCBO1 + c(ocbo2a,ocbo2a,ocbo2a,ocbo2a,ocbo2a)*OCBO2 + c(ocbo3a,ocbo3a,ocbo3a,ocbo3a,ocbo3a)*OCBO3 + c(ocbo4a,ocbo4a,ocbo4a,ocbo4a,ocbo4a)*OCBO4 + c(ocbo5a,ocbo5a,ocbo5a,ocbo5a,ocbo5a)*OCBO5 + c(ocbo6a,ocbo6a,ocbo6a,ocbo6a,ocbo6a)*OCBO6 + c(ocbo7a,ocbo7a,ocbo7a,ocbo7a,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1a,ocbo1a,ocbo1a,ocbo1a)*OCBO1 + c(ocbo2a,ocbo2a,ocbo2a,ocbo2a,ocbo2a)*OCBO2 + c(ocbo6a,ocbo6a,ocbo6a,ocbo6a,ocbo6a)*OCBO6 + c(ocbo7a,ocbo7a,ocbo7a,ocbo7a,ocbo7e)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(pairb5a,pairb5b,pairb5c,pairb5d,pairb5e)*IRB5 + c(pairb6a,pairb6b,pairb6c,pairb6d,pairb6e)*IRB6 + c(pairb7a,pairb7b,pairb7c,pairb7d,pairb7e)*IRB7 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo3a,paocbo3b,paocbo3c,paocbo3d,paocbo3e)*OCBO3 + c(paocbo4a,paocbo4b,paocbo4c,paocbo4d,paocbo4e)*OCBO4 + c(paocbo5a,paocbo5b,paocbo5c,paocbo5d,paocbo5e)*OCBO5 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
+PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
 PA ~~ ((1-.925)*0.4259783)*PA
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -2934,12 +2853,7 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-methodup <- cfa(methodup.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodup <- cfa(methodup.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(methodup,methodu) #Method variance attributable to other proximal causes of method variance has been detected. Need to follow up with tests to identify the nature of the proximal causes of method variance (congeneric vs. non-congeneric).
 
 #Model 7: Method UPI model. Force the differences in factor loadings to be equal within factors but to vary across factors. Tests the hypothesis that proximal causes of method effects addressed by diffrent proximal remedies have the same effects. If this model is not statistically different from method u, then proximal remedies vary in terms of their effects and so a simple correction for failing to use any single remedies will not be viable. In other words, the effects of proximal remedies are more complex than considered previously. 
@@ -2947,12 +2861,12 @@ methodupi.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(pairb5a,pairb5b,pairb5c,pairb5d,pairb5e)*IRB5 + c(pairb6a,pairb6b,pairb6c,pairb6d,pairb6e)*IRB6 + c(pairb7a,pairb7b,pairb7c,pairb7d,pairb7e)*IRB7 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo3a,paocbo3b,paocbo3c,paocbo3d,paocbo3e)*OCBO3 + c(paocbo4a,paocbo4b,paocbo4c,paocbo4d,paocbo4e)*OCBO4 + c(paocbo5a,paocbo5b,paocbo5c,paocbo5d,paocbo5e)*OCBO5 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
+PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
 PA ~~ ((1-.925)*0.4259783)*PA
 
 #Compute factor loading differences 
@@ -3096,36 +3010,6 @@ irb4be := irb4b-irb4e
 irb4cd := irb4c-irb4d
 irb4ce := irb4c-irb4e
 irb4de := irb4d-irb4e
-irb5ab := irb5a-irb5b
-irb5ac := irb5a-irb5c
-irb5ad := irb5a-irb5d
-irb5ae := irb5a-irb5e
-irb5bc := irb5b-irb5c
-irb5bd := irb5b-irb5d
-irb5be := irb5b-irb5e
-irb5cd := irb5c-irb5d
-irb5ce := irb5c-irb5e
-irb5de := irb5d-irb5e
-irb6ab := irb6a-irb6b
-irb6ac := irb6a-irb6c
-irb6ad := irb6a-irb6d
-irb6ae := irb6a-irb6e
-irb6bc := irb6b-irb6c
-irb6bd := irb6b-irb6d
-irb6be := irb6b-irb6e
-irb6cd := irb6c-irb6d
-irb6ce := irb6c-irb6e
-irb6de := irb6d-irb6e
-irb7ab := irb7a-irb7b
-irb7ac := irb7a-irb7c
-irb7ad := irb7a-irb7d
-irb7ae := irb7a-irb7e
-irb7bc := irb7b-irb7c
-irb7bd := irb7b-irb7d
-irb7be := irb7b-irb7e
-irb7cd := irb7c-irb7d
-irb7ce := irb7c-irb7e
-irb7de := irb7d-irb7e
 ocbi1ab := ocbi1a-ocbi1b
 ocbi1ac := ocbi1a-ocbi1c
 ocbi1ad := ocbi1a-ocbi1d
@@ -3216,36 +3100,6 @@ ocbo2be := ocbo2b-ocbo2e
 ocbo2cd := ocbo2c-ocbo2d
 ocbo2ce := ocbo2c-ocbo2e
 ocbo2de := ocbo2d-ocbo2e
-ocbo3ab := ocbo3a-ocbo3b
-ocbo3ac := ocbo3a-ocbo3c
-ocbo3ad := ocbo3a-ocbo3d
-ocbo3ae := ocbo3a-ocbo3e
-ocbo3bc := ocbo3b-ocbo3c
-ocbo3bd := ocbo3b-ocbo3d
-ocbo3be := ocbo3b-ocbo3e
-ocbo3cd := ocbo3c-ocbo3d
-ocbo3ce := ocbo3c-ocbo3e
-ocbo3de := ocbo3d-ocbo3e
-ocbo4ab := ocbo4a-ocbo4b
-ocbo4ac := ocbo4a-ocbo4c
-ocbo4ad := ocbo4a-ocbo4d
-ocbo4ae := ocbo4a-ocbo4e
-ocbo4bc := ocbo4b-ocbo4c
-ocbo4bd := ocbo4b-ocbo4d
-ocbo4be := ocbo4b-ocbo4e
-ocbo4cd := ocbo4c-ocbo4d
-ocbo4ce := ocbo4c-ocbo4e
-ocbo4de := ocbo4d-ocbo4e
-ocbo5ab := ocbo5a-ocbo5b
-ocbo5ac := ocbo5a-ocbo5c
-ocbo5ad := ocbo5a-ocbo5d
-ocbo5ae := ocbo5a-ocbo5e
-ocbo5bc := ocbo5b-ocbo5c
-ocbo5bd := ocbo5b-ocbo5d
-ocbo5be := ocbo5b-ocbo5e
-ocbo5cd := ocbo5c-ocbo5d
-ocbo5ce := ocbo5c-ocbo5e
-ocbo5de := ocbo5d-ocbo5e
 ocbo6ab := ocbo6a-ocbo6b
 ocbo6ac := ocbo6a-ocbo6c
 ocbo6ad := ocbo6a-ocbo6d
@@ -3394,33 +3248,6 @@ irb4bd==irb4be
 irb4be==irb4cd
 irb4cd==irb4ce
 irb4ce==irb4de
-irb5ab==irb5ac
-irb5ac==irb5ad
-irb5ad==irb5ae
-irb5ae==irb5bc
-irb5bc==irb5bd
-irb5bd==irb5be
-irb5be==irb5cd
-irb5cd==irb5ce
-irb5ce==irb5de
-irb6ab==irb6ac
-irb6ac==irb6ad
-irb6ad==irb6ae
-irb6ae==irb6bc
-irb6bc==irb6bd
-irb6bd==irb6be
-irb6be==irb6cd
-irb6cd==irb6ce
-irb6ce==irb6de
-irb7ab==irb7ac
-irb7ac==irb7ad
-irb7ad==irb7ae
-irb7ae==irb7bc
-irb7bc==irb7bd
-irb7bd==irb7be
-irb7be==irb7cd
-irb7cd==irb7ce
-irb7ce==irb7de
 ocbi1ab==ocbi1ac
 ocbi1ac==ocbi1ad
 ocbi1ad==ocbi1ae
@@ -3502,33 +3329,6 @@ ocbo2bd==ocbo2be
 ocbo2be==ocbo2cd
 ocbo2cd==ocbo2ce
 ocbo2ce==ocbo2de
-ocbo3ab==ocbo3ac
-ocbo3ac==ocbo3ad
-ocbo3ad==ocbo3ae
-ocbo3ae==ocbo3bc
-ocbo3bc==ocbo3bd
-ocbo3bd==ocbo3be
-ocbo3be==ocbo3cd
-ocbo3cd==ocbo3ce
-ocbo3ce==ocbo3de
-ocbo4ab==ocbo4ac
-ocbo4ac==ocbo4ad
-ocbo4ad==ocbo4ae
-ocbo4ae==ocbo4bc
-ocbo4bc==ocbo4bd
-ocbo4bd==ocbo4be
-ocbo4be==ocbo4cd
-ocbo4cd==ocbo4ce
-ocbo4ce==ocbo4de
-ocbo5ab==ocbo5ac
-ocbo5ac==ocbo5ad
-ocbo5ad==ocbo5ae
-ocbo5ae==ocbo5bc
-ocbo5bc==ocbo5bd
-ocbo5bd==ocbo5be
-ocbo5be==ocbo5cd
-ocbo5cd==ocbo5ce
-ocbo5ce==ocbo5de
 ocbo6ab==ocbo6ac
 ocbo6ac==ocbo6ad
 ocbo6ad==ocbo6ae
@@ -3574,12 +3374,7 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-methodupi <- cfa(methodupi.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodupi <- cfa(methodupi.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(methodupi,methodu) #Method variance attributable to other proximal causes of method variance is congeneric. Therefore, a simple correction for failing to use a proximal remedy for CMV is overly simplistic. 
 
 #Model 8: Method RAff model. Constrain estimates of covariances to be equal to baseline levels in respective conditions. Test method bias due to positive affectivity and proximal causes of method variance. 
@@ -3587,12 +3382,12 @@ methodru.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(pairb5a,pairb5b,pairb5c,pairb5d,pairb5e)*IRB5 + c(pairb6a,pairb6b,pairb6c,pairb6d,pairb6e)*IRB6 + c(pairb7a,pairb7b,pairb7c,pairb7d,pairb7e)*IRB7 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo3a,paocbo3b,paocbo3c,paocbo3d,paocbo3e)*OCBO3 + c(paocbo4a,paocbo4b,paocbo4c,paocbo4d,paocbo4e)*OCBO4 + c(paocbo5a,paocbo5b,paocbo5c,paocbo5d,paocbo5e)*OCBO5 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
+PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
 PA ~~ ((1-.925)*0.4259783)*PA
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -3603,14 +3398,14 @@ OCBI ~~ c(1,1,1,1,1)*OCBI
 OCBO ~~ c(1,1,1,1,1)*OCBO
 
 ##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are allowed to covary. Conditions are (1) Cover Story Manipulation, (2) Control, (3) Item Randomization, (4) Filler Scales, and (5) Scale Randomization.
-PP ~~ c(.574,.475,.556,.570,.533)*IRB
-PP ~~ c(.724,.676,.524,.343,.589)*OCBI
-PP ~~ c(.720,.598,.607,.470,.562)*OCBO
+PP ~~ c(.321,.401,.532,.534,.466)*IRB
+PP ~~ c(.712,.689,.540,.382,.538)*OCBI
+PP ~~ c(.758,.617,.572,.469,.440)*OCBO
 PP ~~ c(0,0,0,0,0)*PosAff
-IRB ~~ c(.715,.641,.657,.645,.706)*OCBI
-IRB ~~ c(.923,.929,.932,.808,.840)*OCBO
+IRB ~~ c(.620,.469,.576,.501,.636)*OCBI
+IRB ~~ c(.775,.836,.693,.737,.681)*OCBO
 IRB ~~ c(0,0,0,0,0)*PosAff
-OCBI ~~ c(.766,.679,.709,.713,.727)*OCBO
+OCBI ~~ c(.757,.618,.710,.670,.661)*OCBO
 OCBI ~~ c(0,0,0,0,0)*PosAff
 OCBO ~~ c(0,0,0,0,0)*PosAff
 
@@ -3621,12 +3416,7 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-methodru <- cfa(methodru.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodru <- cfa(methodru.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(methodru,methodu) #Method bias attributable to positive affectivity and proximal causes of method variance has not been detected.
 
 #Model 9: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model (which in this case is the Method U model) to be equal. This helps to see how complex method variance is. For this particular model, only the IRB~OCBI and IRB~OCBO relationships seemingly affected.
@@ -3634,12 +3424,12 @@ methoduu.cfa<- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b, pp1c, pp1d, pp1e)*PP1 + c(pp2a, pp2b, pp2c, pp2d, pp2e)*PP2 + c(pp3a,pp3b, pp3c, pp3d, pp3e)*PP3 + c(pp4a,pp4b, pp4c, pp4d, pp4e)*PP4 + c(pp5a,pp5b, pp5c, pp5d, pp5e)*PP5 + c(pp6a,pp6b, pp6c, pp6d, pp6e)*PP6 + c(pp7a,pp7b, pp7c, pp7d, pp7e)*PP7 + c(pp8a,pp8b, pp8c, pp8d, pp8e)*PP8 + c(pp9a,pp9b, pp9c, pp9d, pp9e)*PP9 + c(pp10a,pp10b, pp10c, pp10d, pp10e)*PP10
-IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4 + c(irb5a,irb5b,irb5c,irb5d,irb5e)*IRB5 + c(irb6a,irb6b,irb6c,irb6d,irb6e)*IRB6 + c(irb7a,irb7b,irb7c,irb7d,irb7e)*IRB7
+IRB =~ c(irb1a,irb1b,irb1c,irb1d,irb1e)*IRB1 + c(irb2a,irb2b,irb2c,irb2d,irb2e)*IRB2 + c(irb3a,irb3b,irb3c,irb3d,irb3e)*IRB3 + c(irb4a,irb4b,irb4c,irb4d,irb4e)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b,ocbi1c,ocbi1d,ocbi1e)*OCBI1 + c(ocbi2a,ocbi2b,ocbi2c,ocbi2d,ocbi2e)*OCBI2 + c(ocbi3a,ocbi3b,ocbi3c,ocbi3d,ocbi3e)*OCBI3 + c(ocbi4a,ocbi4b,ocbi4c,ocbi4d,ocbi4e)*OCBI4 + c(ocbi5a,ocbi5b,ocbi5c,ocbi5d,ocbi5e)*OCBI5 + c(ocbi6a,ocbi6b,ocbi6c,ocbi6d,ocbi6e)*OCBI6 + c(ocbi7a,ocbi7b,ocbi7c,ocbi7d,ocbi7e)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo3a,ocbo3b,ocbo3c,ocbo3d,ocbo3e)*OCBO3 + c(ocbo4a,ocbo4b,ocbo4c,ocbo4d,ocbo4e)*OCBO4 + c(ocbo5a,ocbo5b,ocbo5c,ocbo5d,ocbo5e)*OCBO5 + c(ocbo6a,ocbo6b,ocbo6c,ocbo6d,ocbo6e)*OCBO6 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b,ocbo1c,ocbo1d,ocbo1e)*OCBO1 + c(ocbo2a,ocbo2b,ocbo2c,ocbo2d,ocbo2e)*OCBO2 + c(ocbo7a,ocbo7b,ocbo7c,ocbo7d,ocbo7e)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(pairb5a,pairb5b,pairb5c,pairb5d,pairb5e)*IRB5 + c(pairb6a,pairb6b,pairb6c,pairb6d,pairb6e)*IRB6 + c(pairb7a,pairb7b,pairb7c,pairb7d,pairb7e)*IRB7 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo3a,paocbo3b,paocbo3c,paocbo3d,paocbo3e)*OCBO3 + c(paocbo4a,paocbo4b,paocbo4c,paocbo4d,paocbo4e)*OCBO4 + c(paocbo5a,paocbo5b,paocbo5c,paocbo5d,paocbo5e)*OCBO5 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
+PosAff =~ c(1,1,1,1,1)*PA + c(papp1a, papp1b,papp1c,papp1d,papp1e)*PP1 + c(papp2a, papp2b,papp2c,papp2d,papp2e)*PP2 + c(papp3a,papp3b,papp3c,papp3d,papp3e)*PP3 + c(papp4a,papp4b,papp4c,papp4d,papp4e)*PP4 + c(papp5a,papp5b,papp5c,papp5d,papp5e)*PP5 + c(papp6a,papp6b,papp6c,papp6d,papp6e)*PP6 + c(papp7a,papp7b,papp7c,papp7d,papp7e)*PP7 + c(papp8a,papp8b,papp8c,papp8d,papp8e)*PP8 + c(papp9a,papp9b,papp9c,papp9d,papp9e)*PP9 + c(papp10a,papp10b,papp10c,papp10d,papp10e)*PP10 + c(pairb1a,pairb1b,pairb1c,pairb1d,pairb1e)*IRB1 + c(pairb2a,pairb2b,pairb2c,pairb2d,pairb2e)*IRB2 + c(pairb3a,pairb3b,pairb3c,pairb3d,pairb3e)*IRB3 + c(pairb4a,pairb4b,pairb4c,pairb4d,pairb4e)*IRB4 + c(paocbi1a,paocbi1b,paocbi1c,paocbi1d,paocbi1e)*OCBI1 + c(paocbi2a,paocbi2b,paocbi2c,paocbi2d,paocbi2e)*OCBI2 + c(paocbi3a,paocbi3b,paocbi3c,paocbi3d,paocbi3e)*OCBI3 + c(paocbi4a,paocbi4b,paocbi4c,paocbi4d,paocbi4e)*OCBI4 + c(paocbi5a,paocbi5b,paocbi5c,paocbi5d,paocbi5e)*OCBI5 + c(paocbi6a,paocbi6b,paocbi6c,paocbi6d,paocbi6e)*OCBI6 + c(paocbi7a,paocbi7b,paocbi7c,paocbi7d,paocbi7e)*OCBI7 + c(paocbo1a,paocbo1b,paocbo1c,paocbo1d,paocbo1e)*OCBO1 + c(paocbo2a,paocbo2b,paocbo2c,paocbo2d,paocbo2e)*OCBO2 + c(paocbo6a,paocbo6b,paocbo6c,paocbo6d,paocbo6e)*OCBO6 + c(paocbo7a,paocbo7b,paocbo7c,paocbo7d,paocbo7e)*OCBO7
 PA ~~ ((1-.925)*0.4259783)*PA
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -3668,12 +3458,7 @@ IRB ~ c(0, 0,0,0,0)*1
 OCBI ~ c(0, 0,0,0,0)*1
 OCBO ~ c(0, 0,0,0,0)*1
 '
-methoduu <- cfa(methoduu.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methoduu <- cfa(methoduu.cfa, group = "COND", data = data2, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(initial, methodu, methodi, methoduc, methodup, methodupi, methoduu, methodru) 
 
 ## extract fit indices tables
@@ -4332,20 +4117,6 @@ data3$NA8 <- ceiling(data3$NA8)
 data3$NA9 <- ceiling(data3$NA9)
 data3$NA10 <- ceiling(data3$NA10)
 
-#Note: certain response categories are too few for the estimator to work. Specifically, the "strongly disagree" and "disagree" response options were simply combined to reflect a "disagree" option. So I combined them:
-data3$IRB1[data3$IRB1==1] <- 2
-data3$IRB2[data3$IRB2==1] <- 2
-data3$IRB4[data3$IRB4==1] <- 2
-data3$OCBI7[data3$OCBI7==1] <- 2
-data3$OCBO1[data3$OCBO1==1] <- 2
-data3$OCBO4[data3$OCBO4==0] <- 1
-data3$OCBO7[data3$OCBO7==6] <- 5
-data3$IRB3[data3$IRB3==1] <- 2
-data3$IRB3[data3$IRB7==1] <- 2
-data3$PP2[data3$PP2==1] <- 2
-data3$PP4[data3$PP4==1] <- 2
-data3$PP5[data3$PP5==1] <- 2
-
 #Setup demographics.
 #Rename variables.
 colnames(data3)[colnames(data3)=="SEX"] <- "GENDER"
@@ -4418,10 +4189,7 @@ method.cfa <- '
   AP ~ 0
 '
 #To see the results of an anlysis of the discriminant validity of the measurement model, see the following object. 
-method <- cfa(model = method.cfa, ordered = c("PA1", "PA2", "PA3", "PA4", "PA5", "PA6", "PA7", "PA8", "PA9", "PA10", 
-                                      "NA1", "NA2", "NA3", "NA4", "NA5", "NA6", "NA7", "NA8", "NA9", "NA10", 
-                                      "CM1", "CM2", "CM3", "CM4", "CM5", "CM6", "CM7", "CM8"), 
-                                      data = data3, parameterization = "theta", estimator = "dwls", information = "expected")
+method <- cfa(model = method.cfa, data = data3, parameterization = "theta", estimator = "dwls", information = "expected")
 #Get method factor scores
 df <- predict(method)
 
@@ -4429,15 +4197,14 @@ df <- predict(method)
 data3 <- cbind(data3,df)
 
 #Note: certain response categories are too few for the estimator to work.  Specifically, the "strongly disagree" and "disagree" response options were simply combined to reflect a "disagree" option. So I combined them:
-#data3$PP2[data3$PP2==1] <- 2
 
 ##Model 1 <- Initial Model
 initial.cfa <- '
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
 PosAff =~ c(1,1)*PA
@@ -4480,21 +4247,16 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-initial <- cfa(initial.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+initial <- cfa(initial.cfa, group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 
 #Model 2: Baseline. Method and substantive covariances are constrained to zero. Method effects are constrained to zero.
 baseline.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
 PosAff =~ c(1,1)*PA
@@ -4526,90 +4288,73 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-baseline <- cfa(baseline.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+baseline <- cfa(baseline.cfa, group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(initial, baseline) #As expected, baseline is much worse. 
 
-#Model 3: Method U model. Freely estimate method effects across groups. Tests for the pressence of method effects attributable to a common source of variance. Method effects are allowed to vary across conditions. Note that factor differences in factor loadings and covariances have been computed. This is because (1) subsequent testing revealed that this model was the best fitting method effect model and (2) estimating the size of the differences allowed us to determine which scales and covariances were most affected by proximal causes of method variance. 
+#Model 3: Method U model. Freely estimate method effects across groups. Tests for the pressence of method effects attributable to a common sources of variance (proximal causes and positive affectivity). Method effects are allowed to vary across conditions. Factor differences in factor loadings and covariances have been computed to facilitate interpretation of method effects. 
 methodu.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
 #Compute factor loading differences 
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
-papp1c := papp1a-papp1b
-papp2c := papp2a-papp2b
-papp3c := papp3a-papp3b
-papp4c := papp4a-papp4b
-papp5c := papp5a-papp5b
-papp6c := papp6a-papp6b
-papp7c := papp7a-papp7b
-papp8c := papp8a-papp8b
-papp9c := papp9a-papp9b
-papp10c := papp10a-papp10b
-pairb1c := pairb1a-pairb1b
-pairb2c := pairb2a-pairb2b
-pairb3c := pairb3a-pairb3b
-pairb4c := pairb4a-pairb4b
-pairb5c := pairb5a-pairb5b
-pairb6c := pairb6a-pairb6b
-pairb7c := pairb7a-pairb7b
-paocbi1c := paocbi1a-paocbi1b
-paocbi2c := paocbi2a-paocbi2b
-paocbi3c:= paocbi3a-paocbi3b
-paocbi4c := paocbi4a-paocbi4b
-paocbi5c := paocbi5a-paocbi5b
-paocbi6c := paocbi6a-paocbi6b
-paocbi7c := paocbi7a-paocbi7b
-paocbo1c := paocbo1a-paocbo1b
-paocbo2c := paocbo2a-paocbo2b
-paocbo3c := paocbo3a-paocbo3b
-paocbo4c := paocbo4a-paocbo4b
-paocbo5c := paocbo5a-paocbo5b
-paocbo6c := paocbo6a-paocbo6b
-paocbo7c := paocbo7a-paocbo7b
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+papp1c	:=	papp1b	-	papp1a
+papp2c	:=	papp2b	-	papp2a
+papp3c	:=	papp3b	-	papp3a
+papp4c	:=	papp4b	-	papp4a
+papp5c	:=	papp5b	-	papp5a
+papp6c	:=	papp6b	-	papp6a
+papp7c	:=	papp7b	-	papp7a
+papp8c	:=	papp8b	-	papp8a
+papp9c	:=	papp9b	-	papp9a
+papp10c	:=	papp10b	-	papp10a
+pairb1c	:=	pairb1b	-	pairb1a
+pairb2c	:=	pairb2b	-	pairb2a
+pairb3c	:=	pairb3b	-	pairb3a
+pairb4c	:=	pairb4b	-	pairb4a
+paocbi1c	:=	paocbi1b	-	paocbi1a
+paocbi2c	:=	paocbi2b	-	paocbi2a
+paocbi3c	:=	paocbi3a	-	paocbi3b
+paocbi4c	:=	paocbi4b	-	paocbi4a
+paocbi5c	:=	paocbi5b	-	paocbi5a
+paocbi6c	:=	paocbi6b	-	paocbi6a
+paocbi7c	:=	paocbi7b	-	paocbi7a
+paocbo1c	:=	paocbo1b	-	paocbo1a
+paocbo2c	:=	paocbo2b	-	paocbo2a
+paocbo6c	:=	paocbo6b	-	paocbo6a
+paocbo7c	:=	paocbo7b	-	paocbo7a
 
 #Factor variances are fixed to 1 to allow estimation.
 ###Substantive factors
@@ -4645,12 +4390,7 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodu <- cfa(methodu.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodu <- cfa(methodu.cfa, group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(baseline,methodu) #Method variance attributable to positive affectivity has been identified. 
 
 #Model 4: Method I model. Constrain estimates of method effects to be equal within substantive variables but different across substantive variables. This tests whether method effects attributable to positive affectivity are present to an equal degree within a given factor but vary across different factors.
@@ -4658,12 +4398,12 @@ methodi.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp1a, papp1a)*PP2 + c(papp1a,papp1a)*PP3 + c(papp1a,papp1a)*PP4 + c(papp1a,papp1a)*PP5 + c(papp1a,papp1a)*PP6 + c(papp1a,papp1a)*PP7 + c(papp1a,papp1a)*PP8 + c(papp1a,papp1a)*PP9 + c(papp1a,papp1a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a)*IRB4 + c(pairb1a,pairb1a)*IRB5 + c(pairb1a,pairb1a)*IRB6 + c(pairb1a,pairb1a)*IRB7 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a)*OCBO2 + c(paocbo1a,paocbo1a)*OCBO3 + c(paocbo1a,paocbo1a)*OCBO4 + c(paocbo1a,paocbo1a)*OCBO5 + c(paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp1a, papp1a)*PP2 + c(papp1a,papp1a)*PP3 + c(papp1a,papp1a)*PP4 + c(papp1a,papp1a)*PP5 + c(papp1a,papp1a)*PP6 + c(papp1a,papp1a)*PP7 + c(papp1a,papp1a)*PP8 + c(papp1a,papp1a)*PP9 + c(papp1a,papp1a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a)*OCBO2 + c(paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -4692,59 +4432,48 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodi <- cfa(methodi.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+methodi <- cfa(methodi.cfa, group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
 anova(methodi,methodu) #Method variance is congeneric across substantive items. 
 
-#Model 5: Method UC model. Constrain estimates of method effects, which are freely estimated across all factors (i.e., method u), to be equal across conditions. This tests whether method variance attributable to positive affectivity is equally present across conditions. 
+#Model 5: Method UC model. Constrain estimates of method effects, which are freely estimated across all factors (i.e., method u), to be equal across conditions. This is done by making the method factor loadings equal across conditions and tests whether method variance attributable to positive affectivity is equally present across conditions. 
 methoduc.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(pairb5a,pairb5a)*IRB5 + c(pairb6a,pairb6a)*IRB6 + c(pairb7a,pairb7a)*IRB7 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo3a,paocbo3a)*OCBO3 + c(paocbo4a,paocbo4a)*OCBO4 + c(paocbo5a,paocbo5a)*OCBO5 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
-#Compute factor loading differences 
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
+#Compute factor loading differences. Done for interpretation purposes. 
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
 
 #Factor variances are fixed to 1 to allow estimation.
 ###Substantive factors
@@ -4772,25 +4501,21 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methoduc <- cfa(methoduc.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methoduc,methodu) #Method variance attributable to positive affectivity and negative item wording varies across the two conditions. 
+methoduc <- cfa(methoduc.cfa,group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methoduc,methodu) #Method variance attributable to positive affectivity does not vary across the two conditions. Method uc constraints retained. 
 
-#Model 6: Method UP model. Constrain substantive factor loadings to be equal across conditions but free across factors and within factors. This tests the hypothesis that proximal remedies cause a difference in the factor loadings of our measurement model. 
+#Model 6: Method UP model. Constrain substantive factor loadings to be equal across conditions but free across factors and within factors. This tests the hypothesis that proximal remedies do or do not cause a difference in the factor loadings of our measurement model. If this model is equivalent to methodu, then proximal remedies do not cause a meaningful difference in factor loadings. 
+
 methodup.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
 #Constrain substantive factor loadings to equality. 
@@ -4808,9 +4533,6 @@ irb1a==irb1b
 irb2a==irb2b
 irb3a==irb3b
 irb4a==irb4b
-irb5a==irb5b
-irb6a==irb6b
-irb7a==irb7b
 ocbi1a==ocbi1b
 ocbi2a==ocbi2b
 ocbi3a==ocbi3b
@@ -4820,9 +4542,6 @@ ocbi6a==ocbi6b
 ocbi7a==ocbi7b
 ocbo1a==ocbo1b
 ocbo2a==ocbo2b
-ocbo3a==ocbo3b
-ocbo4a==ocbo4b
-ocbo5a==ocbo5b
 ocbo6a==ocbo6b
 ocbo7a==ocbo7b
 
@@ -4852,59 +4571,48 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodup <- cfa(methodup.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodup,methodu) #Method variance attributable to other proximal causes of method variance has been detected. Need to follow up with tests to identify the nature of the proximal causes of method variance (congeneric vs. non-congeneric).
+methodup <- cfa(methodup.cfa, group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodup,methoduc) #Method variance attributable to other proximal causes of method variance has been detected. Need to follow up with tests to identify the nature of the proximal causes of method variance (congeneric vs. non-congeneric).
 
-#Model 7: Method UPI model. Allow substantive factor loadings to vary across conditions. Additionally, (1) force the differences in factor loadings to be equal within factors but to (2) vary across factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are congeneric (vs. non-congeneric). If this model is not statistically different from method u, then proximal method effects are congeneric and so a simple correction for failing to use proximal remedies will not be viable. Therefore, proximal method effects are more complex than considered previously. 
+#Model 7: Method UPI model. Allow substantive factor loadings to vary across conditions but (1) force the differences in factor loadings to be equal within factors yet to (2) vary across factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are congeneric (vs. non-congeneric) and is done by (i) computing factor loading differences across conditions and then (ii) forcing the differences to be equal across conditions. If this model is statistically different from method uc, then proximal method effects have complex effects and so a simple correction for failing to use proximal remedies will not be viable. However, if the model is not statistically different from method u, then this suggests that proximal method effects in the factor loadings vary across measurement models.
 methodupi.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
 
-#Compute factor loading differences.
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
 
 #Constrain the differences to be equal within factors but vary across factors.
 pp1c==pp2c
@@ -4919,9 +4627,6 @@ pp9c==pp10c
 irb1c==irb2c
 irb2c==irb3c
 irb3c==irb4c
-irb4c==irb5c
-irb5c==irb6c
-irb6c==irb7c
 ocbi1c==ocbi2c
 ocbi2c==ocbi3c
 ocbi3c==ocbi4c
@@ -4929,10 +4634,7 @@ ocbi4c==ocbi5c
 ocbi5c==ocbi6c
 ocbi6c==ocbi7c
 ocbo1c==ocbo2c
-ocbo2c==ocbo3c
-ocbo3c==ocbo4c
-ocbo4c==ocbo5c
-ocbo5c==ocbo6c
+ocbo2c==ocbo6c
 ocbo6c==ocbo7c
 
 #Factor variances are fixed to 1 to allow estimation.
@@ -4961,26 +4663,71 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodupi <- cfa(methodupi.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodupi,methodu) #Method variance attributable to other proximal causes of method variance is congeneric. Therefore, a simple correction for failing to use a proximal remedy for CMV is overly simplistic. 
+methodupi <- cfa(methodupi.cfa, group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodupi,methoduc) #Methodupi is statistically different from method u, so a simple correction is not tenable.
 
 #Model 8: Method RAff model. Constrain estimates of covariances to be equal to baseline levels in respective conditions. Test method bias due to positive affectivity and proximal causes of method variance. 
-methodru.cfa <- '
+methodruc.cfa <- '
 
 ##Substantive factors
 PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
 OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
 
 ##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
 PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
 
 #Factor variances are fixed to 1 to allow estimation.
 ###Substantive factors
@@ -4989,15 +4736,15 @@ IRB ~~ c(1,1)*IRB
 OCBI ~~ c(1,1)*OCBI
 OCBO ~~ c(1,1)*OCBO
 
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are allowed to covary.
-PP ~~ c(.358,.379)*IRB
-PP ~~ c(.536,.553)*OCBI
-PP ~~ c(.498,.382)*OCBO
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Latent covariances come from the 
+PP ~~ c(.372,.342)*IRB
+PP ~~ c(.559,.338)*OCBI
+PP ~~ c(.453,.317)*OCBO
 PP ~~ c(0,0)*PosAff
-IRB ~~ c(.429,.540)*OCBI
-IRB ~~ c(.808,.643)*OCBO
+IRB ~~ c(.688,.497)*OCBI
+IRB ~~ c(.837,.645)*OCBO
 IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(.712,.607)*OCBO
+OCBI ~~ c(.794,.859)*OCBO
 OCBI ~~ c(0,0)*PosAff
 OCBO ~~ c(0,0)*PosAff
 
@@ -5008,99 +4755,8 @@ IRB ~ c(0, 0)*1
 OCBI ~ c(0, 0)*1
 OCBO ~ c(0, 0)*1
 '
-methodru <- cfa(methodru.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodru,methodu) #Method bias attributable to positive affectivity and proximal causes of method variance has been detected. Unfortunately, this test is also sensitive to inflation that has occurred in the criterion variables and so we must account for this. Need to determine which relationships specifically have been strongly affected by sources of method variance.
-
-#Model 9: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model, which in this case is the Method U model) to be equal. This helps to see how complex method variance is. For this particular model, only the IRB~OCBI and IRB~OCBO relationships seemingly affected.
-methoduu.cfa<- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(pairb5a,pairb5b)*IRB5 + c(pairb6a,pairb6b)*IRB6 + c(pairb7a,pairb7b)*IRB7 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo3a,paocbo3b)*OCBO3 + c(paocbo4a,paocbo4b)*OCBO4 + c(paocbo5a,paocbo5b)*OCBO5 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences 
-pp1c := pp1a-pp1b
-pp2c := pp2a-pp2b
-pp3c := pp3a-pp3b
-pp4c := pp4a-pp4b
-pp5c := pp5a-pp5b
-pp6c := pp6a-pp6b
-pp7c := pp7a-pp7b
-pp8c := pp8a-pp8b
-pp9c := pp9a-pp9b
-pp10c := pp10a-pp10b
-irb1c := irb1a-irb1b
-irb2c := irb2a-irb2b
-irb3c := irb3a-irb3b
-irb4c := irb4a-irb4b
-irb5c := irb5a-irb5b
-irb6c := irb6a-irb6b
-irb7c := irb7a-irb7b
-ocbi1c := ocbi1a-ocbi1b
-ocbi2c := ocbi2a-ocbi2b
-ocbi3c := ocbi3a-ocbi3b
-ocbi4c := ocbi4a-ocbi4b
-ocbi5c := ocbi5a-ocbi5b
-ocbi6c := ocbi6a-ocbi6b
-ocbi7c := ocbi7a-ocbi7b
-ocbo1c := ocbo1a-ocbo1b
-ocbo2c := ocbo2a-ocbo2b
-ocbo3c := ocbo3a-ocbo3b
-ocbo4c := ocbo4a-ocbo4b
-ocbo5c := ocbo5a-ocbo5b
-ocbo6c := ocbo6a-ocbo6b
-ocbo7c := ocbo7a-ocbo7b
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Constrain the factor covariance differences to be equal within factors but vary across factors. Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model, which in this case is the Method U model) to be equal. This helps to see how complex method variance is. For this particular model, only the IRB~OCBI and IRB~OCBO relationships seemingly affected.
-PPIRB1==PPIRB2
-PPOCBI1==PPOCBI2
-PPOCBO1==PPOCBO2
-OCBIO1==OCBIO2
-
-#Factor means of the both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methoduu <- cfa(methoduu.cfa, ordered = c("PP1", "PP2", "PP3", 
-                                              "PP4", "PP5", "PP6", "PP7", "PP8", "PP9", "PP10", 
-                                              "IRB1", "IRB2", "IRB3", "IRB4", "IRB5", "IRB6", "IRB7", "OCBI1",
-                                              "OCBI2", "OCBI3", "OCBI4", "OCBI5", "OCBI6", "OCBI7", "OCBO1", 
-                                              "OCBO2", "OCBO3", "OCBO4", "OCBO5", "OCBO6", "OCBO7"),
-                  group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(initial, methodu, methodi, methoduc, methodup, methodupi, methoduu, methodru) #Interestingly, the focal coefficients of interest (PP~IRB, OCBI, OCBO) were invariant across groups. In other words, though proximal remedies were used to reduce common method variance in the focal predictor-criterion relationships and they appeared to cause differences in substantive factor loadings, they did not cause differences in the focal substantive parameter estimates. This may suggest that proximal causes of CMV are not be powerful enough alone to cause substantial amounts of bias. By contrast, the method bias that was observed in this study was attributable to positive affectivity. 
+methodruc <- cfa(methodruc.cfa, group = "COND", data = data3, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodruc,methoduc) #Evidence of bias attributable to the accounted for method effects (i.e., positive affectivity and proximal method variance). 
 
 ## extract fit indices tables
 fitm.initial <- fitmeasures(initial)      #Model 1: Initial model.
@@ -5110,12 +4766,12 @@ fitm.methodi <- fitmeasures(methodi)      #Model 4: Method effects vary across s
 fitm.methoduc <- fitmeasures(methoduc)    #Model 5: Constrain method effects to equality across conditions. (Proximal method variance equal across remedied vs. non-remedied).
 fitm.methodup <- fitmeasures(methodup)    #Model 6: Constrain substantive factor loadings to be equal across conditions (proximal remedies decontaminate measurement models).
 fitm.methodupi <- fitmeasures(methodupi)  #Model 7: Force factor loadings to be equal within factors but vary across factors (congeneric vs. noncongeneric proximal method effects).
-fitm.methodru <- fitmeasures(methodru)    #Model 8: Constrain latent covariances to baseline levels in respective conditions (test for method bias).
-fitm.methodru <- fitmeasures(methoduu)    #Model 9: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05).
+fitm.methodupc <-  fitmeasures(methodupc) #Model 8: Tests for constant proximal method effect.
+fitm.methodru <- fitmeasures(methodrupi)  #Model 9: Constrain latent covariances to baseline levels in respective conditions (test for method bias).
 
 #Build table
 greeks=c(alpha='\u03b1', tau='\u03c4', sigma='\u03c3', beta='\u03b2', gamma='\u03b3', chi='\u03c7', delta='\u0394')
-Model <- c("Initial CFA", "Baseline", "Method U", "Method I", "Method Uc", "Method Up", "Method Upi", "Method Ru", "Method Uu")
+Model <- c("Initial CFA", "Baseline", "Method U", "Method I", "Method Uc", "Method Up", "Method Upi", "Method Ru", "Method U")
 chi.square <- c(paste0(greeks['chi'],'^2^'))
 df <- c("df")
 chi.square.p.value <- c("*p* value")
@@ -5446,6 +5102,16 @@ table[1,9] <- round(table[1,8]/table[1,6], digits = 2)
 table[2,9] <- round(table[2,8]/table[2,6], digits = 2)
 table[3,9] <- round(table[3,8]/table[3,6], digits = 2)
 table[4,9] <- round(table[4,8]/table[4,6], digits = 2)
+
+#Insert PA data.
+table[5,2] <- round(PA.alpha, digits = 2)
+table[5,3] <- round(PA.alpha, digits = 2)
+table[5,4] <- 0
+table[5,5] <- NA
+table[5,6] <- round(PA.alpha, digits = 2)
+table[5,7] <- round(PA.alpha, digits = 2)
+table[5,8] <- 0
+table[5,9] <- NA
 
 #Relable table to table 4.
 table4 <- table
