@@ -76,9 +76,7 @@ set.seed(19)
   Unfortunately, little research to date has systematically examined the efficacy of procedural remedies that involve separating measurements in some form. This is unfortunate because common method variance is still seen as a common issue plaguing substantive research and the very guidance upon which researchers draw has not be tested adequately. Additionally, to date researchers have adopted two interrelated views for addressing method variance (procedural remedies or statistical remedies). However, few have considered the implications of jointly using both, particularly in studying the efficacy of procedural remedies. Presumably, if a researcher measured a source of methodological contamination (e.g., positive affectivity) while also using a procedural remedy that relates to said source of contamination, then we could test whether the procedural remedy has affected the cause of method variance and more specifically whether the procedural remedy as reduced the role played by the measured cause of method variance. Unfortunately, studying method variance in this way (as we learned) is a rather complicated affair.
 ##Our Overarching Approach to Examining the Efficacy of Procedural Remedies
   We examined how parameter estimates for a substantive measurement model (i.e., a model containing measures of proactive personality, in-role behavior, and organizational citizenship) were affected by a measured cause of method variance (i.e., positive affectivty). Additionally, we randomoly assigned individuals to receive a non-remedied survey or a survey that was designed to remove any bias in the estimated relationships between between proactive personality and both in-role behavior and organizational citizenship. 
-   To study the efficacy of procedural remedies for method variance, we drew upon latent variable modeling strategies proposed by Wiliams and colleagues [e.g., @WilliamsFourResearchDesigns2016; @WilliamsMethodVarianceMarker2010], but adapted these strategies to a multiple group context whereby the efficacy of procedural remedies for method variance was tested. Specifically, we followed a step-wise nested model comparison approach that involved tested key hypotheses regarding the efficacy of procedural remedies for method variance. In our initial step, we simply examined whether the measures for each of these factors loaded on their respective factors. We also examined model data fit. However, unlike Williams et al. we did not concern ourselves with ensuring that the initial model attain relatively good fit because we expected that unaccounted for method variance could be attributable to either the lack of procedural remedies, positive affectivity, or both. Afterward, we moved on to a baseline model whereby the latent covariances linking positive affectivity to the substantive factors were fixed to zero. Theoretical independendence from other latent factors has been considered a requirement linking method factors to substantive factors [see @ConwayWhatReviewersShould2010; @WilliamsIdealnonidealnomarker2015]. In other words, our model testing assumes that positive affectivity contaminates responses to proactive personality, in-role behavior, and ocb [@SpectorMethodologicalUrbanLegends2011]. While this model is compared to the initial model, rejection of this baseline model is not important for our purposes [see @WilliamsFourResearchDesigns2016; @WilliamsMethodVarianceMarker2010]. We then move to a model whereby positive affectivity contaminates responses to the items reflecting proactive personanlity, in-role behavior, and ocb and compare the fit of this model to the baseline. This model (method-U) tests the assumption that positive affectivity contaminates these measures. If this model is superior to the baseline, then method variance (in this case, attributable to positive affectivity) is present and we move to examining the nature of the method variance by comparing this congeneric (method-u) model to a non-congeneric (method-i) whereby method loadings are viewed as equivalent within substantive factors but allowed to vary across substantive factors [@RichardsonTaleThreePerspectives2009; @WilliamsFourResearchDesigns2016]. This tests the assumption that method variance is measure-specific rather than item specific [see @SpectorNewPerspectiveMethod2017]. Further equality constraints can be imposed if necessary [see Williams et al. method-c model; @WilliamsFourResearchDesigns2016]. As this is a multiple group context, we then examine whether the method effects attributable to positive affectivity are equally present across conditions by constraining the method effects attributable to positive affectivity to be equal across conditions while retaining any constraints that survived prior testing (method-xc). If proximal remedies have an impact, then this model should be rejected. Additionally, for proximal remedies to be effective, they must also reduce the amount of method variance attributable to positive affectivity, which is eventually examined. Following this test, we move to exmamining whether proximal remedies have any other indepedent effects by constraining the substantive factor loadings to be equal across conditions. Rejecting this model implies that the substantive loadings vary across conditions, further suggesting that proximal remedies have some kind of impact. 
-   Following suggestions from friendly reviewers, other important assumptions can be tested. One key assumption, which is implied in any research that advocates a correction to coefficients that are estimated when procedural remedies have not been employed [e.g., @PodsakoffCommonmethodbiases2003], is that failing to use specific remedies has certain consequences. For example, failing to use item randomization would result in a consistent and systematic inflation of substantive factor loadings. This assumption can be tested by forcing the differences in substantive factor loadings to be equal across conditions, which tests the hypothesis that proximal remedies have a non-congeneric effect in that they cause a difference in the factor loadings of our measurement model. If this is true, then a simple correction is meaningful. If it is not true, and such proximal method variance is congeneric, then such a simple correction cannot be afforded. 
-   Once all desired method variance constraints have been tested and method variance has been detected, then tests for method bias can be conducted [see @WilliamsFourResearchDesigns2016; @WilliamsMethodVarianceMarker2010]. Here, the best-fitting model containing method variance is compared to a model with latent construct covariances constrained to levels estimated in the baseline model (Williams et al.'s method-r model). Rejection of this model implies that coefficients are biased the modeled causes of method variance. Additionally, a model can be estimated whereby the latent construct covariances are constrained to be equal across conditions, which tests the assumption that proximal remedies effectively de-bias one's data by affecting unmeasured proximal causes. This model is summarily compared with the best fitting method effect model. Rejection of this model implies that latent construct covariances do vary across conditions and demonstrates that proximal remedies have an impact.
+   To study the efficacy of procedural remedies for method variance, we drew upon latent variable modeling strategies proposed by Wiliams and colleagues [e.g., @WilliamsFourResearchDesigns2016; @WilliamsMethodVarianceMarker2010], but adapted these strategies to a multiple group context whereby the efficacy of procedural remedies for method variance was tested. Specifically, we followed a step-wise nested model comparison approach that involved tested key hypotheses regarding the efficacy of procedural remedies for method variance. In our initial step [Phase 1a], we simply examined whether the measures for each of these factors loaded on their respective factors. We also examined model data fit. Afterward [Phase 1b], we moved on to a baseline model whereby the latent covariances linking positive affectivity to the substantive factors were fixed to zero. Theoretical independendence from other latent factors has been considered a requirement linking method factors to substantive factors [see @ConwayWhatReviewersShould2010; @WilliamsIdealnonidealnomarker2015]. In other words, our model testing assumes that positive affectivity contaminates responses to proactive personality, in-role behavior, and ocb [@SpectorMethodologicalUrbanLegends2011]. While this model is compared to the initial model, rejection of this baseline model is not important for our purposes [see @WilliamsFourResearchDesigns2016; @WilliamsMethodVarianceMarker2010]. We then move to a series of model tests whereby positive affectivity and other proximal method effects are assumed to play some contaminating role within our substantive measurement model [Phase 1c]. If these models are superior to the baseline, then method variance in some form is present. After identifying the nature of the method variance [congeneric vs. non-congeneric; see @RichardsonTaleThreePerspectives2009; @WilliamsFourResearchDesigns2016], we then examine whether there is method bias attributable to captured sources of method variance [Phase 1d], which is done by fixing substantive factor correlations to values from the baseline model and testing for a significant difference. If this model is statistical significant from a model developed in Phase 1c, then method bias has occurred [see @WilliamsFourResearchDesigns2016; @WilliamsMethodVarianceMarker2010].
 ###General Purpose
   In three experiments, we examine the efficacy of procedural remedies for different proximal causes of common method variance while also examining the role played by other proximal causes of method variance that are specific to our measures. Across all three studies, we randomly assigned individuals to conditions where remedies for different proximal causes of CMV have been applied or have not been applied. This allows us to test the causal role of hypothesized mechanisms that give rise method variance and also to test the extent to which these causes produce biased estimates. We focus on relationships between proactive personality and important workplace outcomes for a number of substantive reasons associated with common method variance. 
   First, we chose to study these predictor-criterion relationships because meta-analytic results have demonstrated correlations two-to-three times larger between proactive personality and the workplace outcomes used in our study when relying on self-report data exclusively as compared to distinct-source ratings [@FullerJr.Changedrivennature2009].[^It is worth noting that the difference between same-source and distinct-source designs could be exaggerated by uncommon sources of method variance. Interested readers are directed to @LanceUseindependentmeasures2015; @SpectorNewPerspectiveMethod2017.] Similarly, previous research also has investigated both self-report and significant-other reports of proactively personality. @SeibertProactivepersonalitycareer1999 found regression coefficients representing the impact of proactive personality on workplace outcomes range from 31% to 55% stronger when using self-report ratings rather than significant-other ratings. Together, these findings illustrate the potential for common method variance to confound relationships found when using self-report of proactive personality alongside self-reports of workplace outcomes.
@@ -361,24 +359,16 @@ fulltime.p <- as.numeric(freq_vect(data1$EMPLOYED)[4,"Percentage"])
 rm(list=setdiff(ls(), "data1"))
 #Create scale scores
 my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
-                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"),
+                     IRB=c("IRB1","IRB2","IRB3","IRB4"), #Negatively worded items and item 5 removed)
                      OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
-                     OCBO=c("OCBO1","OCBO2","-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
-                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
-                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
-                     AP=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10","NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
-                     CM=c("CM1","CM2","CM3","-CM4","CM5","-CM6","CM7","-CM8"),
-                     NIW=c("IRB6","IRB7","OCBO3","OCBO4","OCBO5"))
+                     OCBO=c("OCBO1","OCBO2","OCBO6","OCBO7"), #Negatively worded items
+                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"))
 my.scales <- scoreItems(my.keys.list,data1)
-PP.alpha <- my.scales[["alpha"]][1]
-IRB.alpha <- my.scales[["alpha"]][2]
-OCBI.alpha <- my.scales[["alpha"]][3]
-OCBO.alpha <- my.scales[["alpha"]][4]
-PA.alpha <- my.scales[["alpha"]][5]
-Na.alpha <- my.scales[["alpha"]][6]
-AP.alpha <- my.scales[["alpha"]][7]
-CM.alpha <- my.scales[["alpha"]][8]
-NIW.alpha <- my.scales[["alpha"]][9]
+PP.alpha <- round(my.scales[["alpha"]][1],2)
+IRB.alpha <- round(my.scales[["alpha"]][2],2)
+OCBI.alpha <- round(my.scales[["alpha"]][3],2)
+OCBO.alpha <- round(my.scales[["alpha"]][4],2)
+PA.alpha <- round(my.scales[["alpha"]][5],2)
 ```
 ###Proactive personality
   We used the  10-item proactive personality scale was used to capture proactive personality [@SeibertProactivepersonalitycareer1999]. Example items include: "I am constantly on the lookout for new ways to improve," "If I see something I don't like, I fix it," and "I excel at identifying opportunities." This, and all scales included in this study, utilized a five-point agreement Likert rating scale (1 = strongly disagree, 5 = strongly agree) ($\alpha$ = `r apa(PP.alpha,2,T)`))
@@ -391,15 +381,7 @@ NIW.alpha <- my.scales[["alpha"]][9]
   
 ##Analytical Approach
   To test if our chosen procedural remedies for common method variance were effective, we followed the step-wise model comparison approach discussed previously. Positive affectivity was modeled using a single composite indicator approach Given that our measures involved the use of Likert rating scales, which generally produce multivariate non-normal data, we opted for diagonally-weighted least squares. Chi-square difference testing (p < .05) was used to facilitate decisions regarding model rejection.
-  
-#Results - Study 1
-```{r Descriptive Statistics, include = FALSE}
-#Create Descriptives Table
-scales <- my.scales[["scores"]]
-scales <- cbind(data1[c(1,2,4,5)],scales)
-scales <- scales[c(1:9)]
-```
-```{r Proximal Separation Substantive Analyses, include=FALSE}
+```{r Method Factor Analysis, include=FALSE}
 method.cfa <- '
 #Method factors
   PA =~ NA*PA1 + PA2 + PA3 + PA4 + PA5 + PA6 + PA7 + PA8 + PA9 + PA10 
@@ -429,763 +411,10 @@ df <- predict(method)
 
 #bind to dataframe
 data1 <- cbind(data1,df)
-
-#Note: certain response categories are too few for the estimator to work.  Specifically, the "strongly disagree" and "disagree" response options were simply combined to reflect a "disagree" option. So I combined them:
-
-##Model 1 <- Initial Model
-initial.cfa <- '
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA
-PA ~~ ((1-.921)*0.824)*PA
-
-#Factor variances are fixed to 1 to allow estimation.
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). 
-PP ~~ c(ppirba,ppirbb)*IRB
-PP ~~ c(ppocbia,ppocbib)*OCBI
-PP ~~ c(ppocboa,ppocbob)*OCBO
-PP ~~ c(pppaa,pppab)*PosAff
-IRB ~~ c(irbocbia,irbocbib)*OCBI
-IRB ~~ c(irbocboa,irbocbob)*OCBO
-IRB ~~ c(irbpaa,irbpab)*PosAff
-OCBI ~~ c(ocbioa,ocbiob)*OCBO
-OCBI ~~ c(ocbipaa,ocbipab)*PosAff
-OCBO ~~ c(ocbopaa,ocbopab)*PosAff
-
-#Compute factor covariance differences 
-ppirbc := ppirba-ppirbb
-ppocbic := ppocbia-ppocbib
-ppocboc := ppocboa-ppocbob
-pppac := pppaa-pppab
-irbocbic := irbocbia-irbocbib
-irbocboc := irbocboa-irbocbob
-irbpac := irbpaa-irbpab
-ocbioc := ocbioa-ocbiob
-ocbipac := ocbipaa-ocbipab
-ocbopac := ocbopaa-ocbopab
-
-#Factor means of latent factors for both groups are fixed at zero to allow identification, with the exception of the composite indicators.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-initial <- cfa(initial.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-
-#Model 2: Baseline. Method and substantive covariances are constrained to zero. Method effects are constrained to zero.
-baseline.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA
-PA ~~ ((1-.921)*0.824)*PA
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factor covariances are also constrained to zero.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of the both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-baseline <- cfa(baseline.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(initial, baseline) #As expected, baseline is much worse. 
-
-#Model 3: Method U model. Freely estimate method effects across groups. Tests for the pressence of method effects attributable to a common sources of variance (proximal causes and positive affectivity). Method effects are allowed to vary across conditions. Factor differences in factor loadings and covariances have been computed to facilitate interpretation of method effects. 
-methodu.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences 
-pp1c	:=	pp1b	-	pp1a
-pp2c	:=	pp2b	-	pp2a
-pp3c	:=	pp3b	-	pp3a
-pp4c	:=	pp4b	-	pp4a
-pp5c	:=	pp5b	-	pp5a
-pp6c	:=	pp6b	-	pp6a
-pp7c	:=	pp7b	-	pp7a
-pp8c	:=	pp8b	-	pp8a
-pp9c	:=	pp9b	-	pp9a
-pp10c	:=	pp10b	-	pp10a
-irb1c	:=	irb1b	-	irb1a
-irb2c	:=	irb2b	-	irb2a
-irb3c	:=	irb3b	-	irb3a
-irb4c	:=	irb4b	-	irb4a
-ocbi1c	:=	ocbi1b	-	ocbi1a
-ocbi2c	:=	ocbi2b	-	ocbi2a
-ocbi3c	:=	ocbi3b	-	ocbi3a
-ocbi4c	:=	ocbi4b	-	ocbi4a
-ocbi5c	:=	ocbi5b	-	ocbi5a
-ocbi6c	:=	ocbi6b	-	ocbi6a
-ocbi7c	:=	ocbi7b	-	ocbi7a
-ocbo1c	:=	ocbo1b	-	ocbo1a
-ocbo2c	:=	ocbo2b	-	ocbo2a
-ocbo6c	:=	ocbo6b	-	ocbo6a
-ocbo7c	:=	ocbo7b	-	ocbo7a
-papp1c	:=	papp1b	-	papp1a
-papp2c	:=	papp2b	-	papp2a
-papp3c	:=	papp3b	-	papp3a
-papp4c	:=	papp4b	-	papp4a
-papp5c	:=	papp5b	-	papp5a
-papp6c	:=	papp6b	-	papp6a
-papp7c	:=	papp7b	-	papp7a
-papp8c	:=	papp8b	-	papp8a
-papp9c	:=	papp9b	-	papp9a
-papp10c	:=	papp10b	-	papp10a
-pairb1c	:=	pairb1b	-	pairb1a
-pairb2c	:=	pairb2b	-	pairb2a
-pairb3c	:=	pairb3b	-	pairb3a
-pairb4c	:=	pairb4b	-	pairb4a
-paocbi1c	:=	paocbi1b	-	paocbi1a
-paocbi2c	:=	paocbi2b	-	paocbi2a
-paocbi3c	:=	paocbi3a	-	paocbi3b
-paocbi4c	:=	paocbi4b	-	paocbi4a
-paocbi5c	:=	paocbi5b	-	paocbi5a
-paocbi6c	:=	paocbi6b	-	paocbi6a
-paocbi7c	:=	paocbi7b	-	paocbi7a
-paocbo1c	:=	paocbo1b	-	paocbo1a
-paocbo2c	:=	paocbo2b	-	paocbo2a
-paocbo6c	:=	paocbo6b	-	paocbo6a
-paocbo7c	:=	paocbo7b	-	paocbo7a
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Compute factor covariances differences.
-PPIRB3 := PPIRB1-PPIRB2
-PPOCBI3 := PPOCBI1-PPOCBI2
-PPOCBO13 := PPOCBO1-PPOCBO2
-IRBOCBI3 := IRBOCBI1-IRBOCBI2
-IRBOCBO3 := IRBOCBO1-IRBOCBO2
-OCBIO3 := OCBIO1-OCBIO2
-
-#Factor means of the both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodu <- cfa(methodu.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(baseline,methodu) #Method variance attributable to positive affectivity has been identified. 
-
-#Model 4: Method I model. Constrain estimates of method effects to be equal within substantive variables but different across substantive variables. This tests whether method effects attributable to positive affectivity are present to an equal degree within a given factor but vary across different factors.
-methodi.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp1a, papp1a)*PP2 + c(papp1a,papp1a)*PP3 + c(papp1a,papp1a)*PP4 + c(papp1a,papp1a)*PP5 + c(papp1a,papp1a)*PP6 + c(papp1a,papp1a)*PP7 + c(papp1a,papp1a)*PP8 + c(papp1a,papp1a)*PP9 + c(papp1a,papp1a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a)*OCBO2 + c(paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. 
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of the both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodi <- cfa(methodi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodi,methodu) #Method variance is congeneric across substantive items. 
-
-#Model 5: Method UC model. Constrain estimates of method effects, which are freely estimated across all factors (i.e., method u), to be equal across conditions. This is done by making the method factor loadings equal across conditions and tests whether method variance attributable to positive affectivity is equally present across conditions. 
-methoduc.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences. Done for interpretation purposes. 
-pp1c	:=	pp1b	-	pp1a
-pp2c	:=	pp2b	-	pp2a
-pp3c	:=	pp3b	-	pp3a
-pp4c	:=	pp4b	-	pp4a
-pp5c	:=	pp5b	-	pp5a
-pp6c	:=	pp6b	-	pp6a
-pp7c	:=	pp7b	-	pp7a
-pp8c	:=	pp8b	-	pp8a
-pp9c	:=	pp9b	-	pp9a
-pp10c	:=	pp10b	-	pp10a
-irb1c	:=	irb1b	-	irb1a
-irb2c	:=	irb2b	-	irb2a
-irb3c	:=	irb3b	-	irb3a
-irb4c	:=	irb4b	-	irb4a
-ocbi1c	:=	ocbi1b	-	ocbi1a
-ocbi2c	:=	ocbi2b	-	ocbi2a
-ocbi3c	:=	ocbi3b	-	ocbi3a
-ocbi4c	:=	ocbi4b	-	ocbi4a
-ocbi5c	:=	ocbi5b	-	ocbi5a
-ocbi6c	:=	ocbi6b	-	ocbi6a
-ocbi7c	:=	ocbi7b	-	ocbi7a
-ocbo1c	:=	ocbo1b	-	ocbo1a
-ocbo2c	:=	ocbo2b	-	ocbo2a
-ocbo6c	:=	ocbo6b	-	ocbo6a
-ocbo7c	:=	ocbo7b	-	ocbo7a
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methoduc <- cfa(methoduc.cfa,group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methoduc,methodu) #Method variance attributable to positive affectivity varies across the two conditions. 
-
-#Model 6: Method UP model. Constrain substantive factor loadings to be equal across conditions but free across factors and within factors. This tests the hypothesis that proximal remedies do or do not cause a difference in the factor loadings of our measurement model. If this model is equivalent to methodu, then proximal remedies do not cause a meaningful difference in factor loadings. 
-
-methodup.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Constrain substantive factor loadings to equality. 
-pp1a==pp1b
-pp2a==pp2b
-pp3a==pp3b
-pp4a==pp4b
-pp5a==pp5b
-pp6a==pp6b
-pp7a==pp7b
-pp8a==pp8b
-pp9a==pp9b
-pp10a==pp10b
-irb1a==irb1b
-irb2a==irb2b
-irb3a==irb3b
-irb4a==irb4b
-ocbi1a==ocbi1b
-ocbi2a==ocbi2b
-ocbi3a==ocbi3b
-ocbi4a==ocbi4b
-ocbi5a==ocbi5b
-ocbi6a==ocbi6b
-ocbi7a==ocbi7b
-ocbo1a==ocbo1b
-ocbo2a==ocbo2b
-ocbo6a==ocbo6b
-ocbo7a==ocbo7b
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodup <- cfa(methodup.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodup,methodu) #Method variance attributable to other proximal causes of method variance has been detected. Need to follow up with tests to identify the nature of the proximal causes of method variance (congeneric vs. non-congeneric).
-
-#Model 7: Method UPI model. Allow substantive factor loadings to vary across conditions but (1) force the differences in factor loadings to be equal within factors yet to (2) vary across factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are congeneric (vs. non-congeneric) and is done by (i) computing factor loading differences across conditions and then (ii) forcing the differences to be equal across conditions. If this model is statistically different from method u, then proximal method effects have complex effects and so a simple correction for failing to use proximal remedies will not be viable. However, if the model is not statistically different from method u, then this suggests that proximal method effects in the factor loadings vary across measurement models.
-methodupi.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences.  
-pp1c	:=	pp1b	-	pp1a
-pp2c	:=	pp2b	-	pp2a
-pp3c	:=	pp3b	-	pp3a
-pp4c	:=	pp4b	-	pp4a
-pp5c	:=	pp5b	-	pp5a
-pp6c	:=	pp6b	-	pp6a
-pp7c	:=	pp7b	-	pp7a
-pp8c	:=	pp8b	-	pp8a
-pp9c	:=	pp9b	-	pp9a
-pp10c	:=	pp10b	-	pp10a
-irb1c	:=	irb1b	-	irb1a
-irb2c	:=	irb2b	-	irb2a
-irb3c	:=	irb3b	-	irb3a
-irb4c	:=	irb4b	-	irb4a
-ocbi1c	:=	ocbi1b	-	ocbi1a
-ocbi2c	:=	ocbi2b	-	ocbi2a
-ocbi3c	:=	ocbi3b	-	ocbi3a
-ocbi4c	:=	ocbi4b	-	ocbi4a
-ocbi5c	:=	ocbi5b	-	ocbi5a
-ocbi6c	:=	ocbi6b	-	ocbi6a
-ocbi7c	:=	ocbi7b	-	ocbi7a
-ocbo1c	:=	ocbo1b	-	ocbo1a
-ocbo2c	:=	ocbo2b	-	ocbo2a
-ocbo6c	:=	ocbo6b	-	ocbo6a
-ocbo7c	:=	ocbo7b	-	ocbo7a
-
-#Constrain the differences to be equal within factors but vary across factors.
-pp1c==pp2c
-pp2c==pp3c
-pp3c==pp4c
-pp4c==pp5c
-pp5c==pp6c
-pp6c==pp7c
-pp7c==pp8c
-pp8c==pp9c
-pp9c==pp10c
-irb1c==irb2c
-irb2c==irb3c
-irb3c==irb4c
-ocbi1c==ocbi2c
-ocbi2c==ocbi3c
-ocbi3c==ocbi4c
-ocbi4c==ocbi5c
-ocbi5c==ocbi6c
-ocbi6c==ocbi7c
-ocbo1c==ocbo2c
-ocbo2c==ocbo6c
-ocbo6c==ocbo7c
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodupi <- cfa(methodupi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodupi,methodu) #Methodupi is not statistically different from method u, but is simpler and so retained via the rule of parsimony. Variance attributable to other proximal causes of method variance appears to vary across measures but is constant within a given measure.  Following up with a test to see if the effect is constant across all measures (and so a simple correction for failing to use a proximal remedy for CMV is viable) or if the correction would have to be within measures. 
-
-#Model 8: Tests for constant proximal method effect. Same as model 7 with one exception: force the differences in factor loadings to be equal across all factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are constant. If this model is not statistically different from method upi, then proximal method effects are a constant and can be corrected simply. In other words, proximal method effects would be as simple as has been appreciated in the literature.
-
-methodupc.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences.  
-pp1c	:=	pp1b	-	pp1a
-pp2c	:=	pp2b	-	pp2a
-pp3c	:=	pp3b	-	pp3a
-pp4c	:=	pp4b	-	pp4a
-pp5c	:=	pp5b	-	pp5a
-pp6c	:=	pp6b	-	pp6a
-pp7c	:=	pp7b	-	pp7a
-pp8c	:=	pp8b	-	pp8a
-pp9c	:=	pp9b	-	pp9a
-pp10c	:=	pp10b	-	pp10a
-irb1c	:=	irb1b	-	irb1a
-irb2c	:=	irb2b	-	irb2a
-irb3c	:=	irb3b	-	irb3a
-irb4c	:=	irb4b	-	irb4a
-ocbi1c	:=	ocbi1b	-	ocbi1a
-ocbi2c	:=	ocbi2b	-	ocbi2a
-ocbi3c	:=	ocbi3b	-	ocbi3a
-ocbi4c	:=	ocbi4b	-	ocbi4a
-ocbi5c	:=	ocbi5b	-	ocbi5a
-ocbi6c	:=	ocbi6b	-	ocbi6a
-ocbi7c	:=	ocbi7b	-	ocbi7a
-ocbo1c	:=	ocbo1b	-	ocbo1a
-ocbo2c	:=	ocbo2b	-	ocbo2a
-ocbo6c	:=	ocbo6b	-	ocbo6a
-ocbo7c	:=	ocbo7b	-	ocbo7a
-
-#Constrain the differences to be equal within factors but vary across factors.
-pp1c==pp2c
-pp2c==pp3c
-pp3c==pp4c
-pp4c==pp5c
-pp5c==pp6c
-pp6c==pp7c
-pp7c==pp8c
-pp8c==pp9c
-pp9c==pp10c
-pp10c==irb1c
-irb1c==irb2c
-irb2c==irb3c
-irb3c==irb4c
-irb4c==ocbi1c
-ocbi1c==ocbi2c
-ocbi2c==ocbi3c
-ocbi3c==ocbi4c
-ocbi4c==ocbi5c
-ocbi5c==ocbi6c
-ocbi6c==ocbi7c
-ocbo1c==ocbo2c
-ocbo2c==ocbo6c
-ocbo6c==ocbo7c
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodupc <- cfa(methodupc.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodupi,methodupc) #Methodupi is statistically different from methodupc and a better fit. Therefore, a  correction for failing to use a proximal remedy for CMV is viable) or if the correction would have to be measure specific, which is consistent with a measure-centric view of method variance (Spector et al., 2017). *More research is needed to verify this (especially if replicated in study 2). 
-
-#Model 9: Method RAff model. Constrain estimates of covariances to be equal to baseline levels in respective conditions. Test method bias due to positive affectivity and proximal causes of method variance. 
-methodrupi.cfa <- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences.  
-pp1c	:=	pp1b	-	pp1a
-pp2c	:=	pp2b	-	pp2a
-pp3c	:=	pp3b	-	pp3a
-pp4c	:=	pp4b	-	pp4a
-pp5c	:=	pp5b	-	pp5a
-pp6c	:=	pp6b	-	pp6a
-pp7c	:=	pp7b	-	pp7a
-pp8c	:=	pp8b	-	pp8a
-pp9c	:=	pp9b	-	pp9a
-pp10c	:=	pp10b	-	pp10a
-irb1c	:=	irb1b	-	irb1a
-irb2c	:=	irb2b	-	irb2a
-irb3c	:=	irb3b	-	irb3a
-irb4c	:=	irb4b	-	irb4a
-ocbi1c	:=	ocbi1b	-	ocbi1a
-ocbi2c	:=	ocbi2b	-	ocbi2a
-ocbi3c	:=	ocbi3b	-	ocbi3a
-ocbi4c	:=	ocbi4b	-	ocbi4a
-ocbi5c	:=	ocbi5b	-	ocbi5a
-ocbi6c	:=	ocbi6b	-	ocbi6a
-ocbi7c	:=	ocbi7b	-	ocbi7a
-ocbo1c	:=	ocbo1b	-	ocbo1a
-ocbo2c	:=	ocbo2b	-	ocbo2a
-ocbo6c	:=	ocbo6b	-	ocbo6a
-ocbo7c	:=	ocbo7b	-	ocbo7a
-
-#Constrain the differences to be equal within factors but vary across factors.
-pp1c==pp2c
-pp2c==pp3c
-pp3c==pp4c
-pp4c==pp5c
-pp5c==pp6c
-pp6c==pp7c
-pp7c==pp8c
-pp8c==pp9c
-pp9c==pp10c
-irb1c==irb2c
-irb2c==irb3c
-irb3c==irb4c
-ocbi1c==ocbi2c
-ocbi2c==ocbi3c
-ocbi3c==ocbi4c
-ocbi4c==ocbi5c
-ocbi5c==ocbi6c
-ocbi6c==ocbi7c
-ocbo1c==ocbo2c
-ocbo2c==ocbo6c
-ocbo6c==ocbo7c
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Latent covariances come from the 
-PP ~~ c(.279,.296)*IRB
-PP ~~ c(.459,.573)*OCBI
-PP ~~ c(.464,.403)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(.351,.475)*OCBI
-IRB ~~ c(.738,.591)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(.690,.635)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Factor means of the both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodrupi <- cfa(methodrupi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(methodrupi,methodupi) #No evidence of bias attributable to the accounted for method effects (i.e., positive affectivity and method effects). 
-
-#Model 10: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model, which in this case is the Method U model) to be equal. This helps to show that assuming equal covariances across conditions (i.e., method variance without bias) is tenable. 
-methodupic.cfa<- '
-
-##Substantive factors
-PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
-IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
-OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
-OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
-
-##Method factors
-PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
-PA ~~ ((1-.921)*0.824)*PA
-
-#Compute factor loading differences.  
-pp1c	:=	pp1b	-	pp1a
-pp2c	:=	pp2b	-	pp2a
-pp3c	:=	pp3b	-	pp3a
-pp4c	:=	pp4b	-	pp4a
-pp5c	:=	pp5b	-	pp5a
-pp6c	:=	pp6b	-	pp6a
-pp7c	:=	pp7b	-	pp7a
-pp8c	:=	pp8b	-	pp8a
-pp9c	:=	pp9b	-	pp9a
-pp10c	:=	pp10b	-	pp10a
-irb1c	:=	irb1b	-	irb1a
-irb2c	:=	irb2b	-	irb2a
-irb3c	:=	irb3b	-	irb3a
-irb4c	:=	irb4b	-	irb4a
-ocbi1c	:=	ocbi1b	-	ocbi1a
-ocbi2c	:=	ocbi2b	-	ocbi2a
-ocbi3c	:=	ocbi3b	-	ocbi3a
-ocbi4c	:=	ocbi4b	-	ocbi4a
-ocbi5c	:=	ocbi5b	-	ocbi5a
-ocbi6c	:=	ocbi6b	-	ocbi6a
-ocbi7c	:=	ocbi7b	-	ocbi7a
-ocbo1c	:=	ocbo1b	-	ocbo1a
-ocbo2c	:=	ocbo2b	-	ocbo2a
-ocbo6c	:=	ocbo6b	-	ocbo6a
-ocbo7c	:=	ocbo7b	-	ocbo7a
-
-#Constrain the differences to be equal within factors but vary across factors.
-pp1c==pp2c
-pp2c==pp3c
-pp3c==pp4c
-pp4c==pp5c
-pp5c==pp6c
-pp6c==pp7c
-pp7c==pp8c
-pp8c==pp9c
-pp9c==pp10c
-irb1c==irb2c
-irb2c==irb3c
-irb3c==irb4c
-ocbi1c==ocbi2c
-ocbi2c==ocbi3c
-ocbi3c==ocbi4c
-ocbi4c==ocbi5c
-ocbi5c==ocbi6c
-ocbi6c==ocbi7c
-ocbo1c==ocbo2c
-ocbo2c==ocbo6c
-ocbo6c==ocbo7c
-
-#Factor variances are fixed to 1 to allow estimation.
-###Substantive factors
-PP ~~ c(1,1)*PP
-IRB ~~ c(1,1)*IRB
-OCBI ~~ c(1,1)*OCBI
-OCBO ~~ c(1,1)*OCBO
-
-##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
-PP ~~ c(PPIRB1,PPIRB2)*IRB
-PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
-PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
-PP ~~ c(0,0)*PosAff
-IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
-IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
-IRB ~~ c(0,0)*PosAff
-OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
-OCBI ~~ c(0,0)*PosAff
-OCBO ~~ c(0,0)*PosAff
-
-#Constrain factor covariances to equality
-PPIRB1==PPIRB2
-PPOCBI1==PPOCBI2
-PPOCBO1==PPOCBO2
-IRBOCBI1==IRBOCBI2
-OCBIO1==OCBIO2
-
-#Factor means of both groups are fixed at zero to allow identification.
-##Substantive factors
-PP ~ c(0, 0)*1
-IRB ~ c(0, 0)*1
-OCBI ~ c(0, 0)*1
-OCBO ~ c(0, 0)*1
-'
-methodupic <- cfa(methodupic.cfa,group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
-anova(initial, methodu, methodi, methoduc, methodup, methodupi, methodupic, methodrupi) #Interestingly, all covariances appeared invariant across conditions. In other words, proximal remediess, though appearing to reduce method variance (i.e., method variance varies across condi), do not cause differences in the substantive parameter estimates. This may suggest that proximal causes of CMV are not be powerful enough alone to cause substantial amounts of bias. By contrast, the method bias that was observed in this study was attributable to positive affectivity. 
-
+```
+  
+#Results - Study 1
+```{r Analyses to distribute, include = FALSE}
 ## extract fit indices tables
 fitm.initial <- fitmeasures(initial)      #Model 1: Initial model.
 fitm.baseline <- fitmeasures(baseline)    #Model 2: Baseline model.
@@ -1545,22 +774,1269 @@ table[5,9] <- NA
 #Relable table to table 4.
 table4 <- table
 ```
-  Descriptive statistics for study variables can be found in table 1. 
-  
- 
-```{r Table 1 Descriptives Study 1, include = TRUE}
+```{r Descriptives Study 1, include = FALSE}
+#Create Descriptives Table
+scales <- my.scales[["scores"]]
+scales <- cbind(data1[c(1,2,4,5)],scales)
+scales <- scales[c(1:9)]
+table1 <- apa.cor.table(scales, table.number = 1, landscape = FALSE)
+```
+```{r Table 1, include = TRUE}
 table1 <- apa.cor.table(scales)
 ```
-```{r Table 2 Model-Data Fit Study 1, include = TRUE}
-table2
+  Descriptive statistics and bivariate correlations can be found in table 1. As expected, proactive personality was moderately and positively related to in-role behavior (*r* = .43), OCBI (*r* = .50),and OCBO (*r* = .47). It was also strongly related to our method factor, positive affectivity. 
+#Phase 1a: Evaluation of the Measurement Model
+```{r Phase 1a Study 1, include = FALSE}
+##Model 1 <- Initial Model
+initial.cfa <- '
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA
+PA ~~ ((1-.921)*0.824)*PA
+
+#Factor variances are fixed to 1 to allow estimation.
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated. 
+PP ~~ c(ppirba,ppirbb)*IRB
+PP ~~ c(ppocbia,ppocbib)*OCBI
+PP ~~ c(ppocboa,ppocbob)*OCBO
+PP ~~ c(pppaa,pppab)*PosAff
+IRB ~~ c(irbocbia,irbocbib)*OCBI
+IRB ~~ c(irbocboa,irbocbob)*OCBO
+IRB ~~ c(irbpaa,irbpab)*PosAff
+OCBI ~~ c(ocbioa,ocbiob)*OCBO
+OCBI ~~ c(ocbipaa,ocbipab)*PosAff
+OCBO ~~ c(ocbopaa,ocbopab)*PosAff
+
+#Compute factor covariance differences 
+ppirbc := ppirba-ppirbb
+ppocbic := ppocbia-ppocbib
+ppocboc := ppocboa-ppocbob
+pppac := pppaa-pppab
+irbocbic := irbocbia-irbocbib
+irbocboc := irbocboa-irbocbob
+irbpac := irbpaa-irbpab
+ocbioc := ocbioa-ocbiob
+ocbipac := ocbipaa-ocbipab
+ocbopac := ocbopaa-ocbopab
+
+#Factor means of latent factors for both groups are fixed at zero to allow identification, with the exception of the composite indicators.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+initial <- cfa(initial.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+
+## extract fit indices tables
+fitm.initial <- fitmeasures(initial)      #Model 1: Initial model.
+
+#Build table
+greeks=c(alpha='\u03b1', tau='\u03c4', sigma='\u03c3', beta='\u03b2', gamma='\u03b3', chi='\u03c7', delta='\u0394')
+Model <- c("Initial CFA", "Baseline", "Method U", "Method I", "Method Uc", "Method Up", "Method Upi", "Method Ru", "Method U")
+chi.square <- c(paste0(greeks['chi'],'^2^'))
+df <- c("df")
+chi.square.p.value <- c("*p* value")
+RMSEA <- c("RMSEA")
+RMSEA.lower <- c("90% LCL")
+RMSEA.upper <- c("90% UCL")
+RMSEA.pvalue <- c("RMSEA p value")
+SRMR <- c("SRMR")
+table <- as.data.frame(cbind(Model,chi.square,df,"p value","CF","RMSEA","90% LCL","90% UCL","RMSEA p value","SRMR"))
+colnames(table)[2] <- paste0(greeks['chi'],'^2')
+colnames(table)[3] <- df
+colnames(table)[4] <- c("p value")
+colnames(table)[5] <- c("CFI")
+colnames(table)[6] <- RMSEA
+colnames(table)[7] <- RMSEA.lower
+colnames(table)[8] <- RMSEA.upper
+colnames(table)[9] <- RMSEA.pvalue
+colnames(table)[10] <- SRMR
+#Convert collumns 2 through 9 to numeric.
+table$`χ^2` <- as.numeric(table$χ)
+table$df <- as.numeric(table$df)
+table$`p value` <- as.numeric(table$`p value`)
+table$CFI <- as.numeric(table$CFI)
+table$RMSEA <- as.numeric(table$RMSEA)
+table$`90% LCL` <- as.numeric(table$`90% LCL`)
+table$`90% UCL` <- as.numeric(table$`90% UCL`)
+table$`RMSEA p value` <- as.numeric(table$`RMSEA p value`)
+table$SRMR <- as.numeric(table$SRMR)
+
+#Insert stats
+##Chi-Square
+table[1,2]<- round(as.numeric(fitMeasures(initial)[3]), digits = 2)
+
+##df
+table[1,3]<- round(as.numeric(fitMeasures(initial)[4]), digits = 2)
+
+##Chi-Square p value
+#Adapt p-values to table.
+pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
+
+  roundr <- function(x, digits = 1) {
+    res <- sprintf(paste0('%.', digits, 'f'), x)
+    zzz <- paste0('0.', paste(rep('0', digits), collapse = ''))
+    res[res == paste0('-', zzz)] <- zzz
+    res
+  }
+
+  sapply(pvals, function(x, sig.limit) {
+    if (x < sig.limit)
+      if (html)
+        return(sprintf('&lt; %s', format(sig.limit))) else
+          return(sprintf('< %s', format(sig.limit)))
+    if (x > .1)
+      return(roundr(x, digits = 2)) else
+        return(roundr(x, digits = digits))
+  }, sig.limit = sig.limit)
+}
+table[1,4]<- pvalr(as.numeric(fitMeasures(initial)[5]), digits = 2)
+
+#CFI
+table[1,5]<- round(as.numeric(fitMeasures(initial)[9]), digits = 3)
+
+##RMSEA
+table[1,6]<- round(as.numeric(fitMeasures(initial)[17]), digits = 3)
+
+#RMSEA lower
+table[1,7]<- round(as.numeric(fitMeasures(initial)[18]), digits = 3)
+
+#RMSEA upper
+table[1,8]<- round(as.numeric(fitMeasures(initial)[19]), digits = 3)
+
+#RMSEA p-value
+table[1,9]<- pvalr(as.numeric(fitMeasures(initial)[20]), digits = 3)
+
+#SRMR
+table[1,10]<- round(as.numeric(fitMeasures(initial)[23]), digits = 3)
+
+#Relable table to table2.
+table2 <- table
+
+#Extract relevant values
+chi.initial <- table2$`χ^2`[1]
+df.initial <- table2$df[1] 
+p.initial <- table2$`p value`[1]
+cfi.initial <- table2$CFI[1]
+rmsea.initial <- table2$RMSEA[1]
+rmseal.initial <- table2$`90% LCL`[1]
+rmseau.initial <- table2$`90% UCL`[1]
+srmr.initial <- table2$SRMR[1]
 ```
-```{r Table 3 Model-Comparison Table Study 1, include = TRUE}
-table3
+  We first estimated a CFA measurement model with our three substantive variables and our measured cause variable (positive affectivity). The fit of the measurement model was good: 
+chi(`r apa(df.initial,2,T)`) = `r apa(chi.initial,2,T)`, *p* = `r apa(p.initial,2,T)`; CFI = `r apa(cfi.initial,2,T)`; RMSEA = `r apa(rmsea.initial,2,T)` (`r apa(rmseal.initial,2,T)`, `r apa(rmseau.initial,2,T)`); SRMR = `r apa(srmr.initial,2,T)`. None of the factor factor correlations were so high as to warrant concerns about discimininant validity [see Table 1; none exceeded .80; see @brownConfirmatoryFactorAnalysis2006]. 
+#Phase 1b: Establishing the Baseline Model
+```{r Phase 1b Study 1, include = FALSE}
+#Model 2: Baseline. Method and substantive covariances are constrained to zero. Method effects are constrained to zero.
+baseline.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA
+PA ~~ ((1-.921)*0.824)*PA
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated. However, correlations with the method factors are fixed to zero. 
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Factor means of the both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+baseline <- cfa(baseline.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(initial, baseline) #As expected, baseline is much worse. 
+
+## extract fit indices tables
+fitm.baseline <- fitmeasures(baseline)    #Model 2: Baseline model.
+
+#Insert stats
+##Chi-Square
+table2[2,2]<- round(as.numeric(fitmeasures(baseline)[3]), digits = 2)
+
+##df
+table2[2,3]<- round(as.numeric(fitmeasures(baseline)[4]), digits = 2)
+
+##Chi-Square p value
+table2[2,4]<- pvalr(as.numeric(fitmeasures(baseline)[5]), digits = 2)
+
+#CFI
+table2[2,5]<- round(as.numeric(fitmeasures(baseline)[9]), digits = 3)
+
+##RMSEA
+table2[2,6]<- round(as.numeric(fitmeasures(baseline)[17]), digits = 3)
+
+#RMSEA lower
+table2[2,7]<- round(as.numeric(fitmeasures(baseline)[18]), digits = 3)
+
+#RMSEA upper
+table2[2,8]<- round(as.numeric(fitmeasures(baseline)[19]), digits = 3)
+
+#RMSEA p-value
+table2[2,9]<- pvalr(as.numeric(fitmeasures(baseline)[20]), digits = 3)
+
+#SRMR
+table2[2,10]<- round(as.numeric(fitmeasures(baseline)[23]), digits = 3)
+
+#Extract relevant statistics
+cfi.baseline <- table2$`χ^2`[2]
+df.baseline <- table2$df[2] 
+p.baseline <- table2$`p value`[2]
+cfi.baseline <- table2$CFI[2]
+rmsea.baseline <- table2$RMSEA
+rmseal.baseline <- table2$`90% LCL`[2]
+rmseau.baseline <- table2$`90% UCL`[2]
+srmr.baseline <- table2$SRMR[2]
 ```
+  Having established our initial measurement model, we moved to a baseline model whereby the factor correlations linking positive affectivity to our substantive factors was fixed to zero. This is done because theoretical independendence from other latent factors has been considered a requirement linking method factors to substantive factors [see @ConwayWhatReviewersShould2010; @WilliamsIdealnonidealnomarker2015]. The fit of this model was, as expected, poorer than the baseline model: chi(`r apa(df.baseline,2,T)`) = `r apa(chi.baseline,2,T)`, *p* = `r apa(p.baseline,2,T)`; CFI = `r apa(cfi.baseline,2,T)`; RMSEA = `r apa(rmsea.baseline,2,T)` (`r apa(rmseal.baseline,2,T)`, `r apa(rmseau.baseline,2,T)`); SRMR = `r apa(srmr.baseline,2,T)`. We then moved to test for the presence and nature of method variance attributable to positive affectivity and proximal causes.
+#Phase 1c: Test for the Presence and Nature of Method Variance
+```{r Phase 1c Step 1 Study 1, include = FALSE}
+#Model 3: Method U model. Freely estimate method effects across groups. Tests for the pressence of method effects attributable to positive affectivity. The positive affectivity method effects are allowed to vary across conditions. Factor differences in factor loadings and covariances have been computed to facilitate interpretation of method effects. 
+methodu.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences 
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+papp1c	:=	papp1b	-	papp1a
+papp2c	:=	papp2b	-	papp2a
+papp3c	:=	papp3b	-	papp3a
+papp4c	:=	papp4b	-	papp4a
+papp5c	:=	papp5b	-	papp5a
+papp6c	:=	papp6b	-	papp6a
+papp7c	:=	papp7b	-	papp7a
+papp8c	:=	papp8b	-	papp8a
+papp9c	:=	papp9b	-	papp9a
+papp10c	:=	papp10b	-	papp10a
+pairb1c	:=	pairb1b	-	pairb1a
+pairb2c	:=	pairb2b	-	pairb2a
+pairb3c	:=	pairb3b	-	pairb3a
+pairb4c	:=	pairb4b	-	pairb4a
+paocbi1c	:=	paocbi1b	-	paocbi1a
+paocbi2c	:=	paocbi2b	-	paocbi2a
+paocbi3c	:=	paocbi3a	-	paocbi3b
+paocbi4c	:=	paocbi4b	-	paocbi4a
+paocbi5c	:=	paocbi5b	-	paocbi5a
+paocbi6c	:=	paocbi6b	-	paocbi6a
+paocbi7c	:=	paocbi7b	-	paocbi7a
+paocbo1c	:=	paocbo1b	-	paocbo1a
+paocbo2c	:=	paocbo2b	-	paocbo2a
+paocbo6c	:=	paocbo6b	-	paocbo6a
+paocbo7c	:=	paocbo7b	-	paocbo7a
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated. However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Compute factor covariances differences.
+PPIRB3 := PPIRB1-PPIRB2
+PPOCBI3 := PPOCBI1-PPOCBI2
+PPOCBO13 := PPOCBO1-PPOCBO2
+IRBOCBI3 := IRBOCBI1-IRBOCBI2
+IRBOCBO3 := IRBOCBO1-IRBOCBO2
+OCBIO3 := OCBIO1-OCBIO2
+
+#Factor means of the both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodu <- cfa(methodu.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(baseline,methodu) #Method variance attributable to positive affectivity has been identified. 
+
+## extract fit indices tables
+fitm.methodu <- fitmeasures(methodu)      #Model 3: Unconstrained method effects model. (Presence of method effects).
+
+#Insert stats
+##Chi-Square
+table2[3,2]<- round(as.numeric(fitmeasures(methodu)[3]), digits = 2)
+
+##df
+table2[3,3]<- round(as.numeric(fitmeasures(methodu)[4]), digits = 2)
+
+##Chi-Square p value
+table2[3,4]<- pvalr(as.numeric(fitmeasures(methodu)[5]), digits = 2)
+
+#CFI
+table2[3,5]<- round(as.numeric(fitmeasures(methodu)[9]), digits = 3)
+
+##RMSEA
+table2[3,6]<- round(as.numeric(fitmeasures(methodu)[17]), digits = 3)
+
+#RMSEA lower
+table2[3,7]<- round(as.numeric(fitmeasures(methodu)[18]), digits = 3)
+
+#RMSEA upper
+table2[3,8]<- round(as.numeric(fitmeasures(methodu)[19]), digits = 3)
+
+#RMSEA p-value
+table2[3,9]<- pvalr(as.numeric(fitmeasures(methodu)[20]), digits = 3)
+
+#SRMR
+table2[3,10]<- round(as.numeric(fitmeasures(methodu)[23]), digits = 3)
+
+#Extract relevant statistics
+cfi.methodu <- table2$`χ^2`[3]
+df.methodu <- table2$df[3] 
+p.methodu <- table2$`p value`[3]
+cfi.methodu <- table2$CFI[3]
+rmsea.methodu <- table2$RMSEA
+rmseal.methodu <- table2$`90% LCL`[3]
+rmseau.methodu <- table2$`90% UCL`[3]
+srmr.methodu <- table2$SRMR[3]
+
+#Build table. These codes need to be fixed. 
+Model <- c("Baseline vs. Method U", "Method U vs. Method I", "Method U vs. Method Uc", "Method U vs. Method Up", "Method U vs. Method Upi", "Method U vs. Method Ru", "Method U vs. Method Uu")
+chi.square <- c(paste0(greeks['delta']),paste0(greeks['chi']), "^2^")
+df <- c(paste0(greeks['delta']),"df")
+chi.square.critical.value <- c(paste0(greeks['chi'],'^2^', " critical value; 0.05"))
+table <- as.data.frame(cbind(Model,chi.square,df,chi.square.critical.value,"pvalue"))
+colnames(table)[2] <- c(paste0(greeks['chi']))
+colnames(table)[3] <- c("df")
+colnames(table)[4] <- c(paste0(greeks['chi'],'^2^', " critical value; 0.05"))
+colnames(table)[5] <- c("p value")
+
+#Convert collumns 2 through 4 to numeric.
+table$χ <- as.numeric(table$χ)    #chi-square
+table$df <- as.numeric(table$df)  #df
+table$`χ^2^ critical value; 0.05` <- as.numeric(table$`χ^2^ critical value; 0.05`)  #critical-value
+table$`p value` <- as.numeric(table$`p value`)
+
+#Insert stats
+#Chi-square difference
+table[1,2]<- abs(table2$`χ^2`[2] - table2$`χ^2`[3])
+
+#df difference
+table[1,3]<- abs(table2$df[2] - table2$df[3])
+
+#chi-square critical value
+table[1,4]<- round(qchisq(.05, table$df[1], lower.tail=FALSE), digits = 2)
+
+#p value
+table[1,5]<- pvalr(pchisq(table$χ[1], table$df[1], lower.tail=FALSE), digits = 2)
+
+#Change table to table 3.
+table3 <- table
+
+#Extract relevant statistics.
+chi.sq.diff.methodu.b <- table3$χ[2]
+pval.chi.sq.diff.methodu.b <- table3$`p value`[2]
+```
+  In phase 1c, we conducted a series of sequential model comparisons. We started first with positive affectivity given its strong relationship to our substantive variables of interest but then moved to imposing constraints that tested for toerh proximal effects on substantive factor loadings. For step 1 of this phase, we added method factor loadings (MFLs) from positive affectivity to the substantive indicators and freely estimated these paths. In other words, this model [Method-U; see @williamsFourResearchDesigns2015] tests for the pressence of method effects attributable to a common sources of variance (proximal causes and positive affectivity). Method effects were allowed to vary across conditions. The fit of this model was good: chi(`r apa(df.methodu,2,T)`) = `r apa(chi.methodu,2,T)`, *p* = `r apa(p.methodu,2,T)`; CFI = `r apa(cfi.methodu,2,T)`; RMSEA = `r apa(rmsea.methodu,2,T)` (`r apa(rmseal.methodu,2,T)`, `r apa(rmseau.methodu,2,T)`); SRMR = `r apa(srmr.methodu,2,T)`. Because this model was superior to the baseline model (chi.sq.diff = `r apa(chi.sq.diff.methodu.b,2,T)`, *p* < `r apa(pval.chi.sq.diff.methodu.b,2,T)`), we retained it. It is worth noting that 15/25 items (60%) were contaminated by positive affectivity (*p* < .05). 
+```{r Phase 1c Step 2 Study 1, include = FALSE}
+#Model 4: Method I model. Constrain estimates of method effects to be equal within substantive variables but different across substantive variables. This tests whether method effects attributable to positive affectivity are present to an equal degree within a given factor but vary across different factors.
+methodi.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp1a, papp1a)*PP2 + c(papp1a,papp1a)*PP3 + c(papp1a,papp1a)*PP4 + c(papp1a,papp1a)*PP5 + c(papp1a,papp1a)*PP6 + c(papp1a,papp1a)*PP7 + c(papp1a,papp1a)*PP8 + c(papp1a,papp1a)*PP9 + c(papp1a,papp1a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb1a,pairb1a)*IRB2 + c(pairb1a,pairb1a)*IRB3 + c(pairb1a,pairb1a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi1a,paocbi1a)*OCBI2 + c(paocbi1a,paocbi1a)*OCBI3 + c(paocbi1a,paocbi1a)*OCBI4 + c(paocbi1a,paocbi1a)*OCBI5 + c(paocbi1a,paocbi1a)*OCBI6 + c(paocbi1a,paocbi1a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo1a,paocbo1a)*OCBO2 + c(paocbo1a,paocbo1a)*OCBO6 + c(paocbo1a,paocbo1a)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated. However, correlations with the method factors are fixed to zero. 
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Factor means of the both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodi <- cfa(methodi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodi,methodu) #Congeneric method variance is present. 
+
+## extract fit indices tables
+fitm.methodi <- fitmeasures(methodi)      #Model 4: Method effects vary across substantive constructs. (Congeneric vs. Noncongeneric CMV).
+
+#Insert stats
+##Chi-Square
+table2[4,2]<- round(as.numeric(fitmeasures(methodi)[3]), digits = 2)
+
+##df
+table2[4,3]<- round(as.numeric(fitmeasures(methodi)[4]), digits = 2)
+
+##Chi-Square p value
+table2[4,4]<- pvalr(as.numeric(fitmeasures(methodi)[5]), digits = 2)
+
+#CFI
+table2[4,5]<- round(as.numeric(fitmeasures(methodi)[9]), digits = 3)
+
+##RMSEA
+table2[4,6]<- round(as.numeric(fitmeasures(methodi)[17]), digits = 3)
+
+#RMSEA lower
+table2[4,7]<- round(as.numeric(fitmeasures(methodi)[18]), digits = 3)
+
+#RMSEA upper
+table2[4,8]<- round(as.numeric(fitmeasures(methodi)[19]), digits = 3)
+
+#RMSEA p-value
+table2[4,9]<- pvalr(as.numeric(fitmeasures(methodi)[20]), digits = 3)
+
+#SRMR
+table2[4,10]<- round(as.numeric(fitmeasures(methodi)[23]), digits = 3)
+
+#Extract relevant statistics
+cfi.methodi <- table2$`χ^2`[4]
+df.methodi <- table2$df[4] 
+p.methodi <- table2$`p value`[4]
+cfi.methodi <- table2$CFI[4]
+rmsea.methodi <- table2$RMSEA
+rmseal.methodi <- table2$`90% LCL`[4]
+rmseau.methodi <- table2$`90% UCL`[4]
+srmr.methodi <- table2$SRMR[4]
+
+#Insert stats
+#Chi-square difference
+table3[2,2]<- abs(table2$`χ^2`[3] - table2$`χ^2`[4])
+
+#df difference
+table3[2,3]<- abs(table2$df[3] - table2$df[4])
+
+#chi-square critical value
+table3[2,4]<- round(qchisq(.05, table$df[2], lower.tail=FALSE), digits = 2)
+
+#p value
+table3[2,5]<- pvalr(pchisq(table$χ[2], table$df[2], lower.tail=FALSE), digits = 2)
+
+#Extract relevant statistics.
+chi.sq.diff.methodu.i <- table3$χ[3]
+pval.chi.sq.diff.methodu.i <- table3$`p value`[3]
+```
+  We then constrained estimates of method effects attributable to positive affectivity to be equal within substantive variables but to vary across substantive variables [Method-i; see @williamsFourResearchDesigns2015]. This tests whether method effects attributable to positive affectivity are congeneric or non-congeneric [see @richardsonTaleThreePerspectives2009]. While the fit of this model was good in absolute terms, it was relatively poorer compared to Method-U (chi.sq.diff = `r apa(chi.sq.diff.methodu.i,2,T)`, *p* < `r apa(pval.chi.sq.diff.methodu.i,2,T)`), further supporting the notion that contamination due to positive affectivity is congeneric.
+```{r Phase 1c Step 3 Study 1, include = FALSE}
+#Model 5: Method UC model. Constrain estimates of method effects, which are freely estimated across all factors (i.e., method u), to be equal across conditions. This is done by making the method factor loadings equal across conditions and tests whether method variance attributable to positive affectivity is equally present across conditions. 
+methoduc.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1a)*PP1 + c(papp2a, papp2a)*PP2 + c(papp3a,papp3a)*PP3 + c(papp4a,papp4a)*PP4 + c(papp5a,papp5a)*PP5 + c(papp6a,papp6a)*PP6 + c(papp7a,papp7a)*PP7 + c(papp8a,papp8a)*PP8 + c(papp9a,papp9a)*PP9 + c(papp10a,papp10a)*PP10 + c(pairb1a,pairb1a)*IRB1 + c(pairb2a,pairb2a)*IRB2 + c(pairb3a,pairb3a)*IRB3 + c(pairb4a,pairb4a)*IRB4 + c(paocbi1a,paocbi1a)*OCBI1 + c(paocbi2a,paocbi2a)*OCBI2 + c(paocbi3a,paocbi3a)*OCBI3 + c(paocbi4a,paocbi4a)*OCBI4 + c(paocbi5a,paocbi5a)*OCBI5 + c(paocbi6a,paocbi6a)*OCBI6 + c(paocbi7a,paocbi7a)*OCBI7 + c(paocbo1a,paocbo1a)*OCBO1 + c(paocbo2a,paocbo2a)*OCBO2 + c(paocbo6a,paocbo6a)*OCBO6 + c(paocbo7a,paocbo7a)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences. Done for interpretation purposes. 
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated. However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methoduc <- cfa(methoduc.cfa,group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methoduc,methodu) #Method variance attributable to positive affectivity varies across the two conditions. 
+
+## extract fit indices tables
+fitm.methoduc <- fitmeasures(methoduc)    #Model 5: Constrain method effects to equality across conditions. (Proximal method variance equal across remedied vs. non-remedied).
+
+#Insert stats
+##Chi-Square
+table2[5,2]<- round(as.numeric(fitmeasures(methoduc)[3]), digits = 2)
+
+##df
+table2[5,3]<- round(as.numeric(fitmeasures(methoduc)[4]), digits = 2)
+
+##Chi-Square p value
+table2[5,4]<- pvalr(as.numeric(fitmeasures(methoduc)[5]), digits = 2)
+
+#CFI
+table2[5,5]<- round(as.numeric(fitmeasures(methoduc)[9]), digits = 3)
+
+##RMSEA
+table2[5,6]<- round(as.numeric(fitmeasures(methoduc)[17]), digits = 3)
+
+#RMSEA lower
+table2[5,7]<- round(as.numeric(fitmeasures(methoduc)[18]), digits = 3)
+
+#RMSEA upper
+table2[5,8]<- round(as.numeric(fitmeasures(methoduc)[19]), digits = 3)
+
+#RMSEA p-value
+table2[5,9]<- pvalr(as.numeric(fitmeasures(methoduc)[20]), digits = 3)
+
+#SRMR
+table2[5,10]<- round(as.numeric(fitmeasures(methoduc)[23]), digits = 3)
+
+#Insert stats
+#Chi-square difference
+table3[3,2]<- abs(table2$`χ^2`[3] - table2$`χ^2`[5])
+
+#df difference
+table3[3,3]<- abs(table2$df[3] - table2$df[5])
+
+#chi-square critical value
+table3[3,4]<- round(qchisq(.05, table$df[3], lower.tail=FALSE), digits = 2)
+
+#p value
+table3[3,5]<- pvalr(pchisq(table$χ[3], table$df[3], lower.tail=FALSE), digits = 2)
+
+#Extract relevant statistics.
+chi.sq.diff.methodu.uc <- table3$χ[4]
+pval.chi.sq.diff.methodu.uc <- table3$`p value`[4]
+```
+  We then constrained estimates of method effects attributable to positive affectivity to be equal across conditions. This is done by forcing the MFLs to be equal across conditions and tests whether method variance attributable to positive affectivity is equally present across conditions (Method-Uc). The results suggested that the model with constrained MFLs was equivalent to the Method-U model that lacked these constraints (chi.sq.diff = `r apa(chi.sq.diff.methodu.uc,2,T)`, *p* < `r apa(pval.chi.sq.diff.methodu.uc,2,T)`). Therefore, equivalence of method variance attributable to positive affectivity was assumed across both conditions. 
+```{r Phase 1c Step 4 Study 1, include = FALSE}
+#Model 6: Method UP model. Constrain substantive factor loadings to be equal across conditions but free across factors and within factors. This tests the hypothesis that proximal remedies do or do not cause a difference in the factor loadings of our measurement model. If this model is equivalent to methodu, then proximal remedies do not cause a meaningful difference in factor loadings. 
+
+methodup.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Constrain substantive factor loadings to equality. 
+pp1a==pp1b
+pp2a==pp2b
+pp3a==pp3b
+pp4a==pp4b
+pp5a==pp5b
+pp6a==pp6b
+pp7a==pp7b
+pp8a==pp8b
+pp9a==pp9b
+pp10a==pp10b
+irb1a==irb1b
+irb2a==irb2b
+irb3a==irb3b
+irb4a==irb4b
+ocbi1a==ocbi1b
+ocbi2a==ocbi2b
+ocbi3a==ocbi3b
+ocbi4a==ocbi4b
+ocbi5a==ocbi5b
+ocbi6a==ocbi6b
+ocbi7a==ocbi7b
+ocbo1a==ocbo1b
+ocbo2a==ocbo2b
+ocbo6a==ocbo6b
+ocbo7a==ocbo7b
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodup <- cfa(methodup.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodup,methodu) #Method variance attributable to other proximal causes of method variance has been detected. Need to follow up with tests to identify the nature of the proximal causes of method variance (congeneric vs. non-congeneric).
+
+## extract fit indices tables
+fitm.methodup <- fitmeasures(methodup)    #Model 6: Constrain substantive factor loadings to be equal across conditions (proximal remedies decontaminate measurement models).
+
+#Insert stats
+##Chi-Square
+table2[6,2]<- round(as.numeric(fitmeasures(methodup)[3]), digits = 2)
+
+##df
+table2[6,3]<- round(as.numeric(fitmeasures(methodup)[4]), digits = 2)
+
+##Chi-Square p value
+table2[6,4]<- pvalr(as.numeric(fitmeasures(methodup)[5]), digits = 2)
+
+#CFI
+table2[6,5]<- round(as.numeric(fitmeasures(methodup)[9]), digits = 3)
+
+##RMSEA
+table2[6,6]<- round(as.numeric(fitmeasures(methodup)[17]), digits = 3)
+
+#RMSEA lower
+table2[6,7]<- round(as.numeric(fitmeasures(methodup)[18]), digits = 3)
+
+#RMSEA upper
+table2[6,8]<- round(as.numeric(fitmeasures(methodup)[19]), digits = 3)
+
+#RMSEA p-value
+table2[6,9]<- pvalr(as.numeric(fitmeasures(methodup)[20]), digits = 3)
+
+#SRMR
+table2[6,10]<- round(as.numeric(fitmeasures(methodup)[23]), digits = 3)
+
+#Insert stats
+#Chi-square difference
+table3[4,2]<- abs(table2$`χ^2`[3] - table2$`χ^2`[6])
+
+#df difference
+table3[4,3]<- abs(table2$df[3] - table2$df[6])
+
+#chi-square critical value
+table3[4,4]<- round(qchisq(.05, table$df[4], lower.tail=FALSE), digits = 2)
+
+#p value
+table3[4,5]<- pvalr(pchisq(table$χ[4], table$df[4], lower.tail=FALSE), digits = 2)
+
+#Extract relevant statistics.
+chi.sq.diff.methoduc.up <- table3$χ[5]
+pval.chi.sq.diff.methoduc.up <- table3$`p value`[5]
+```
+  We then constrained the substantive factor loadings to be equal across conditions (Method-Up). This tests the hypothesis that proximal remedies address the serial-item order effects that is believed to inflate the substantive factor loadings of our measurement model. If this model is equivalent to Method-Uc, then proximal remedies do not cause a meaningful difference in factor loadings. The results suggested that the model with equivalent substantive factor loadings was inferior to the Method-Uc model, which lacked these constraints (chi.sq.diff = `r apa(chi.sq.diff.methoduc.up,2,T)`, *p* < `r apa(pval.chi.sq.diff.methoduc.up,2,T)`). Therefore, it appears as though these non-measured proximal effects were presumably present in the non-remedied condition. It also supports the notion that our proximal remedies address unmeasured proximal causes of method variance. 
+```{r Phase 1c Step 5 Study 1, include = FALSE}
+#Model 7: Method UPI model. Allow substantive factor loadings to vary across conditions but (1) force the differences in factor loadings to be equal within factors yet to (2) vary across factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are congeneric (vs. non-congeneric) and is done by (i) computing factor loading differences across conditions and then (ii) forcing the differences to be equal across conditions. If this model is statistically different from method u, then proximal method effects have complex effects and so a simple correction for failing to use proximal remedies will not be viable. However, if the model is not statistically different from method u, then this suggests that proximal method effects in the factor loadings vary across measurement models.
+methodupi.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodupi <- cfa(methodupi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodupi,methodu) #Methodupi is not statistically different from method u, but is simpler and so retained via the rule of parsimony. Variance attributable to other proximal causes of method variance appears to vary across measures but is constant within a given measure.  Following up with a test to see if the effect is constant across all measures (and so a simple correction for failing to use a proximal remedy for CMV is viable) or if the correction would have to be within measures. 
+
+## extract fit indices tables
+fitm.methodupi <- fitmeasures(methodupi)    #Model 6: Constrain substantive factor loadings to be equal across conditions (proximal remedies decontaminate measurement models).
+
+#Insert stats
+##Chi-Square
+table2[7,2]<- round(as.numeric(fitmeasures(methodupi)[3]), digits = 2)
+
+##df
+table2[7,3]<- round(as.numeric(fitmeasures(methodupi)[4]), digits = 2)
+
+##Chi-Square p value
+table2[7,4]<- pvalr(as.numeric(fitmeasures(methodupi)[5]), digits = 2)
+
+#CFI
+table2[7,5]<- round(as.numeric(fitmeasures(methodupi)[9]), digits = 3)
+
+##RMSEA
+table2[7,6]<- round(as.numeric(fitmeasures(methodupi)[17]), digits = 3)
+
+#RMSEA lower
+table2[7,7]<- round(as.numeric(fitmeasures(methodupi)[18]), digits = 3)
+
+#RMSEA upper
+table2[7,8]<- round(as.numeric(fitmeasures(methodupi)[19]), digits = 3)
+
+#RMSEA p-value
+table2[7,9]<- pvalr(as.numeric(fitmeasures(methodupi)[20]), digits = 3)
+
+#SRMR
+table2[7,10]<- round(as.numeric(fitmeasures(methodupi)[23]), digits = 3)
+
+#Insert stats
+#Chi-square difference
+table3[5,2]<- abs(table2$`χ^2`[3] - table2$`χ^2`[6])
+
+#df difference
+table3[5,3]<- abs(table2$df[3] - table2$df[6])
+
+#chi-square critical value
+table3[5,4]<- round(qchisq(.05, table$df[4], lower.tail=FALSE), digits = 2)
+
+#p value
+table3[5,5]<- pvalr(pchisq(table$χ[4], table$df[4], lower.tail=FALSE), digits = 2)
+
+#Extract relevant statistics.
+chi.sq.diff.methoduc.up <- table3$χ[6]
+pval.chi.sq.diff.methoduc.up <- table3$`p value`[6]
+```
+   It is worth noting that the Method-Uc model assumes that these effects vary across items. Therefore, we sought to establish whether a simpler assumption (e.g., non-congeneric item-order effects) is tenable. Weran a model whereby the substantive factor loadings we allowed to vary across conditions. However, we forced the differences in factor loadings to be equal within factors and yet vary across factors. Conceptually analogous to Method-I (we termed it Method-Upi), this model tests the hypothesis that proximal causes of method effects addressed by proximal remedies are congeneric (vs. non-congeneric) and scale-specific. This was done by forcing the differences in factor loadings within scales to be equal across conditions. If this model worse from Method-Uc, then proximal method effects vary across items. The results suggested that the model with equivalent substantive factor loadings was inferior to the Method-Uc model, which lacked these constraints (chi.sq.diff = `r apa(chi.sq.diff.methoduc.up,2,T)`, *p* < `r apa(pval.chi.sq.diff.methoduc.up,2,T)`). Therefore, it appears as though the proximal remedies do not address serial-item order effects.
+```{r Phase 1c Step 6 Study 1, include = FALSE}
+#Model 8: Tests for constant proximal method effect. Same as model 7 with one exception: force the differences in factor loadings to be equal across all factors. Tests the hypothesis that proximal causes of method effects addressed by proximal remedies are constant. If this model is not statistically different from method upi, then proximal method effects are a constant and can be corrected simply. In other words, proximal method effects would be as simple as has been appreciated in the literature.
+
+methodupc.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+pp10c==irb1c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+irb4c==ocbi1c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodupc <- cfa(methodupc.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodupi,methodupc) #Methodupi is statistically different from methodupc and a better fit. Therefore, a  correction for failing to use a proximal remedy for CMV is viable) or if the correction would have to be measure specific, which is consistent with a measure-centric view of method variance (Spector et al., 2017). *More research is needed to verify this (especially if replicated in study 2). 
+
+## extract fit indices tables
+fitm.methodupc <- fitmeasures(methodupc)    #Model 6: Constrain substantive factor loadings to be equal across conditions (proximal remedies decontaminate measurement models).
+
+#Insert stats
+##Chi-Square
+table2[8,2]<- round(as.numeric(fitmeasures(methodupi)[3]), digits = 2)
+
+##df
+table2[8,3]<- round(as.numeric(fitmeasures(methodupi)[4]), digits = 2)
+
+##Chi-Square p value
+table2[8,4]<- pvalr(as.numeric(fitmeasures(methodupi)[5]), digits = 2)
+
+#CFI
+table2[8,5]<- round(as.numeric(fitmeasures(methodupi)[9]), digits = 3)
+
+##RMSEA
+table2[8,6]<- round(as.numeric(fitmeasures(methodupi)[17]), digits = 3)
+
+#RMSEA lower
+table2[8,7]<- round(as.numeric(fitmeasures(methodupi)[18]), digits = 3)
+
+#RMSEA upper
+table2[8,8]<- round(as.numeric(fitmeasures(methodupi)[19]), digits = 3)
+
+#RMSEA p-value
+table2[8,9]<- pvalr(as.numeric(fitmeasures(methodupi)[20]), digits = 3)
+
+#SRMR
+table2[8,10]<- round(as.numeric(fitmeasures(methodupi)[23]), digits = 3)
+
+#Insert stats
+#Chi-square difference
+table3[6,2]<- abs(table2$`χ^2`[3] - table2$`χ^2`[6])
+
+#df difference
+table3[6,3]<- abs(table2$df[3] - table2$df[6])
+
+#chi-square critical value
+table3[6,4]<- round(qchisq(.05, table$df[4], lower.tail=FALSE), digits = 2)
+
+#p value
+table3[6,5]<- pvalr(pchisq(table$χ[4], table$df[4], lower.tail=FALSE), digits = 2)
+
+#Extract relevant statistics.
+chi.sq.diff.methoduc.up <- table3$χ[7]
+pval.chi.sq.diff.methoduc.up <- table3$`p value`[7]
+```
+  Having demonstrated that method effects are scale-specific in our study, we then ran a model whereby the differences in factor loadings were constrained to be equal across all factors, which is analogous to Method-C [@WilliamsMethodVarianceMarker2010]. In other words, we tested whether the proximal method effects are a constant across all of our scales. The results suggested that Methodupi is statistically different from methodupc and a better fit. Therefore, a  correction for failing to use a proximal remedy for CMV is viable) or if the correction would have to be measure specific, which is consistent with a measure-centric view of method variance (Spector et al., 2017). *More research is needed to verify this (especially if replicated in study 2).  
+```{r Phase 1c Step 7 Study 1, include = FALSE}
+#Model 9: Method RAff model. Constrain estimates of covariances to be equal to baseline levels in respective conditions. Test method bias due to positive affectivity and proximal causes of method variance. 
+methodrupi.cfa <- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Latent covariances come from the 
+PP ~~ c(.279,.296)*IRB
+PP ~~ c(.459,.573)*OCBI
+PP ~~ c(.464,.403)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(.351,.475)*OCBI
+IRB ~~ c(.738,.591)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(.690,.635)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Factor means of the both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodrupi <- cfa(methodrupi.cfa, group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(methodrupi,methodupi) #No evidence of bias attributable to the accounted for method effects (i.e., positive affectivity and method effects). 
+
+```
+
+```{r Phase 1c Step 8 Study 1, include = FALSE}
+#Model 10: Constrain the between-condition factor covariances that are statistically indistinguishable from zero (p > .05; as identified by the best-fitting model, which in this case is the Method U model) to be equal. This helps to show that assuming equal covariances across conditions (i.e., method variance without bias) is tenable. 
+methodupic.cfa<- '
+
+##Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+##Method factors
+PosAff =~ c(1,1)*PA + c(papp1a, papp1b)*PP1 + c(papp2a, papp2b)*PP2 + c(papp3a,papp3b)*PP3 + c(papp4a,papp4b)*PP4 + c(papp5a,papp5b)*PP5 + c(papp6a,papp6b)*PP6 + c(papp7a,papp7b)*PP7 + c(papp8a,papp8b)*PP8 + c(papp9a,papp9b)*PP9 + c(papp10a,papp10b)*PP10 + c(pairb1a,pairb1b)*IRB1 + c(pairb2a,pairb2b)*IRB2 + c(pairb3a,pairb3b)*IRB3 + c(pairb4a,pairb4b)*IRB4 + c(paocbi1a,paocbi1b)*OCBI1 + c(paocbi2a,paocbi2b)*OCBI2 + c(paocbi3a,paocbi3b)*OCBI3 + c(paocbi4a,paocbi4b)*OCBI4 + c(paocbi5a,paocbi5b)*OCBI5 + c(paocbi6a,paocbi6b)*OCBI6 + c(paocbi7a,paocbi7b)*OCBI7 + c(paocbo1a,paocbo1b)*OCBO1 + c(paocbo2a,paocbo2b)*OCBO2 + c(paocbo6a,paocbo6b)*OCBO6 + c(paocbo7a,paocbo7b)*OCBO7
+PA ~~ ((1-.921)*0.824)*PA
+
+#Compute factor loading differences.  
+pp1c	:=	pp1b	-	pp1a
+pp2c	:=	pp2b	-	pp2a
+pp3c	:=	pp3b	-	pp3a
+pp4c	:=	pp4b	-	pp4a
+pp5c	:=	pp5b	-	pp5a
+pp6c	:=	pp6b	-	pp6a
+pp7c	:=	pp7b	-	pp7a
+pp8c	:=	pp8b	-	pp8a
+pp9c	:=	pp9b	-	pp9a
+pp10c	:=	pp10b	-	pp10a
+irb1c	:=	irb1b	-	irb1a
+irb2c	:=	irb2b	-	irb2a
+irb3c	:=	irb3b	-	irb3a
+irb4c	:=	irb4b	-	irb4a
+ocbi1c	:=	ocbi1b	-	ocbi1a
+ocbi2c	:=	ocbi2b	-	ocbi2a
+ocbi3c	:=	ocbi3b	-	ocbi3a
+ocbi4c	:=	ocbi4b	-	ocbi4a
+ocbi5c	:=	ocbi5b	-	ocbi5a
+ocbi6c	:=	ocbi6b	-	ocbi6a
+ocbi7c	:=	ocbi7b	-	ocbi7a
+ocbo1c	:=	ocbo1b	-	ocbo1a
+ocbo2c	:=	ocbo2b	-	ocbo2a
+ocbo6c	:=	ocbo6b	-	ocbo6a
+ocbo7c	:=	ocbo7b	-	ocbo7a
+
+#Constrain the differences to be equal within factors but vary across factors.
+pp1c==pp2c
+pp2c==pp3c
+pp3c==pp4c
+pp4c==pp5c
+pp5c==pp6c
+pp6c==pp7c
+pp7c==pp8c
+pp8c==pp9c
+pp9c==pp10c
+irb1c==irb2c
+irb2c==irb3c
+irb3c==irb4c
+ocbi1c==ocbi2c
+ocbi2c==ocbi3c
+ocbi3c==ocbi4c
+ocbi4c==ocbi5c
+ocbi5c==ocbi6c
+ocbi6c==ocbi7c
+ocbo1c==ocbo2c
+ocbo2c==ocbo6c
+ocbo6c==ocbo7c
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ c(1,1)*PP
+IRB ~~ c(1,1)*IRB
+OCBI ~~ c(1,1)*OCBI
+OCBO ~~ c(1,1)*OCBO
+
+##Factor covariances freely estimated (with the exception being the bifactors). However, correlations with the method factors are fixed to zero. Method factors are also constrained to zero.
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+PP ~~ c(0,0)*PosAff
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+IRB ~~ c(0,0)*PosAff
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+OCBI ~~ c(0,0)*PosAff
+OCBO ~~ c(0,0)*PosAff
+
+#Constrain factor covariances to equality
+PPIRB1==PPIRB2
+PPOCBI1==PPOCBI2
+PPOCBO1==PPOCBO2
+IRBOCBI1==IRBOCBI2
+OCBIO1==OCBIO2
+
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ c(0, 0)*1
+IRB ~ c(0, 0)*1
+OCBI ~ c(0, 0)*1
+OCBO ~ c(0, 0)*1
+'
+methodupic <- cfa(methodupic.cfa,group = "COND", data = data1, estimator = "DWLS", parameterization = "theta", information = "expected", std.lv=TRUE)
+anova(initial, methodu, methodi, methoduc, methodup, methodupi, methodupic, methodrupi) #Interestingly, all covariances appeared invariant across conditions. In other words, proximal remediess, though appearing to reduce method variance (i.e., method variance varies across condi), do not cause differences in the substantive parameter estimates. This may suggest that proximal causes of CMV are not be powerful enough alone to cause substantial amounts of bias. By contrast, the method bias that was observed in this study was attributable to positive affectivity. 
+
+```
+
 ```{r Table 4 Variance Decomposition Study 1, include = TRUE}
 table4
 ```
-
+  
+  
+  
+  
   The results of our tests and model comparisons are available in table x. The model data fit for our baseline models (i.e., models without method effects included) were generally unacceptable, which is common when method effects have not been modeled [see @WilliamsMethodVarianceMarker2010]. As can be seen, modeling method effects improved the fit of the model to the data relative to baseline levels. The best-fitting method effect models were the most flexible with some consistency to both substantive and method effects in terms of direction and magnitude. Across all models, the predictor-criterion relationships were positive. The series of model comparisons consistently (as in across conditions) revealed congeneric (unequal) method effects attributable to positive affectivity, negative affectivity, mood, and negative item wording. However, consistency motif effects were observed in the non-remedied condition for two of the OCBO parcels. While this does suggest that consistency motifs played a role in our non-remedied condition, and were absent in the remedied condition, the magnitude of these effects seem negligible. In fact, overall tests for method bias in the control condition failed to support method bias attributable to all method variance sources. Additionally, as expected, a blocking factor emerged in the remedied condition and exerted a constant effect on the measured variables for our criteria. Further testing revealed that all method effects in the remedied condition were enough to bias the observed correlations and that once these method effects were modeled, the proactive personality-role behavior relationships became non-significant. All other substantive effects were reduced in magnitude. The magnitude and direction of all method effects can be observed in table x. 
 
   Table z displays the decomposed reliabilities of each scale as a function of substantive and method variance and also lists the percentage of overall method variance attributable to these different sources. As can be seen, there were multiple sources of method variance evident in our measurement model. Consistently, positive affectivity exerted an influence over responses to measures of proactive personality, voice, taking charge, in-role behavior, and OCBI. For OCBO, which was primarily method variance (63% in the control vs. 74% in the remedied condition), multiple method sources were present. 
@@ -1881,24 +2357,16 @@ data2$OCBO7[data2$OCBO7==1] <- 2
 rm(list=setdiff(ls(),"data2"))
 #Create scale scores
 my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
-                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"),
+                     IRB=c("IRB1","IRB2","IRB3","IRB4"), #Negatively worded items and item 5 removed)
                      OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
-                     OCBO=c("OCBO1","OCBO2","-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
-                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
-                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
-                     AP=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10","NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
-                     CM=c("CM1","CM2","CM3","-CM4","CM5","-CM6","CM7","-CM8"),
-                     NIW=c("IRB6","IRB7","OCBO3","OCBO4","OCBO5"))
+                     OCBO=c("OCBO1","OCBO2","OCBO6","OCBO7"), #Negatively worded items
+                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"))
 my.scales <- scoreItems(my.keys.list,data2)
-PP.alpha <- my.scales[["alpha"]][1]
-IRB.alpha <- my.scales[["alpha"]][2]
-OCBI.alpha <- my.scales[["alpha"]][3]
-OCBO.alpha <- my.scales[["alpha"]][4]
-PA.alpha <- my.scales[["alpha"]][5]
-Na.alpha <- my.scales[["alpha"]][6]
-AP.alpha <- my.scales[["alpha"]][7]
-CM.alpha <- my.scales[["alpha"]][8]
-NIW.alpha <- my.scales[["alpha"]][9]
+PP.alpha <- round(my.scales[["alpha"]][1],2)
+IRB.alpha <- round(my.scales[["alpha"]][2],2)
+OCBI.alpha <- round(my.scales[["alpha"]][3],2)
+OCBO.alpha <- round(my.scales[["alpha"]][4],2)
+PA.alpha <- round(my.scales[["alpha"]][5],2)
 ```
 ##Results - Study 2
 ```{r Descriptive Statistics, include=FALSE}
@@ -4138,22 +4606,16 @@ fulltime.p <- as.numeric(freq_vect(data3$PartFullTime)[2,"Percentage"])
 #Cronbach Alphas
 #Create scale scores
 my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
-                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"),
+                     IRB=c("IRB1","IRB2","IRB3","IRB4"), #Negatively worded items and item 5 removed)
                      OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
-                     OCBO=c("OCBO1","OCBO2","-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
-                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
-                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
-                     AP=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10","NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
-                     NIW=c("IRB6","IRB7","OCBO3","OCBO4","OCBO5"))
+                     OCBO=c("OCBO1","OCBO2","OCBO6","OCBO7"), #Negatively worded items
+                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"))
 my.scales <- scoreItems(my.keys.list,data3)
-PP.alpha <- my.scales[["alpha"]][1]
-IRB.alpha <- my.scales[["alpha"]][2]
-OCBI.alpha <- my.scales[["alpha"]][3]
-OCBO.alpha <- my.scales[["alpha"]][4]
-PA.alpha <- my.scales[["alpha"]][5]
-Na.alpha <- my.scales[["alpha"]][6]
-AP.alpha <- my.scales[["alpha"]][7]
-NIW.alpha <- my.scales[["alpha"]][9]
+PP.alpha <- round(my.scales[["alpha"]][1],2)
+IRB.alpha <- round(my.scales[["alpha"]][2],2)
+OCBI.alpha <- round(my.scales[["alpha"]][3],2)
+OCBO.alpha <- round(my.scales[["alpha"]][4],2)
+PA.alpha <- round(my.scales[["alpha"]][5],2)
 ```
   Participants were recruited using a SurveyMonkey panel and randomly assigned to a condition where they received all measures at the same time (i.e., control) or a condition whereby a temporal separation of one week was used to divide the adminstration of predictor and criterion measures. All respondents received $5 to complete this survey. Fifteen respondents did not answer demographic questions and were  For the temporal remedy condition (n = `r apa(N2,0,T)`), after one week, the in-role behavior and OCB measures were administered along with a measure of positive and negative affectivity and the demographics questionnaire.OCB. Additionally, anticipating a significant amount of attrition in temporal separation condition, we requested that individuals twice as many in the longitudinal condition to end up with roughly equal sample sizes. For the cross-sectional data (n = `r apa(N1,0,T)`), respondents completed all measures at the same point in time. Notwithstanding missing demographic data, the sample was female biased (n = `r apa(female.n,0,T)`, `r apa(female,2,T)`), predominantly Caucasian, and  the average age was *M* = `r apa(M,2,T)` (*SD* = `r apa(SD,2,T)`). The majority (n = `r apa(fulltime.n,0,T)`, *f* = `r apa(fulltime.p,2,T)`) of respondents worked full-time. The same measures used in study 1 and 2 were used in study 3. Cronbach alphas ranged from `r apa(OCBO.alpha)` for OCBO to `r apa(NA.alpha)` for negative affectivity. Again, cases of missing item level data were handled using the normal model approach [see @WuComparisonImputationStrategies2015]. 
 
