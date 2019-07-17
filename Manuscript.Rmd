@@ -28,7 +28,7 @@ figurelist: no
 footnotelist: no
 tablelist: no
 
-lang: "english"
+lang: "en-US"
 lineno: no
 
 author_note: "An earlier version of this manuscript received both a Research Methods Division Best Paper Award and Best Conference Paper Award from the 2017 annual conference for the Southern Management Association. We'd like to thank several individuals for providing friendly reviewer feedback on the development of this manuscript, including Hettie Richardson, Larry Williams, Alyssa McGonagle, and Chris Rosen. Additionally, we'd like to thank members of the lavaan user group, specifically Terrence Jorgenson and Ed Rigdon for providing helpful feedback as we were troubleshooting the analysis. Any mistakes are ours. All data and code have been made publicly available for re-analysis at https://osf.io/wdskv/."
@@ -71,9 +71,9 @@ In contrast to Podsakoff and colleagues' view, @LanceMethodEffectsMeasurement201
 
 In our manuscript, we examine whether substantive estimates regarding measures of proactive personality, in-role behavior, and organizational citizenship behavior, vary across conditions where proximal remedies have and have not been applied. Our remedies were aimed at reducing method variance believed to bias correlations linking proactive personality (predictor) to in-role and organizational citizenship behavior (outcomes). Single-source designs should be ripe for method variance because the cognitive processes of retrieval (i.e., remembering responses to previously answered items rather than the whole of one's experience), judgment (i.e., falsely judging that one has effectively retrieved relevant memories), and in some instances reporting (i.e., modifying one's responses to be consistent) may not be addressed unless a remedy is applied [see @PodsakoffCommonmethodbiases2003; @PodsakoffSourcesMethodBias2012]. We chose to study proactive personality-workplace behavior relationships for two reasons that are important for both organizational scholars and method variance testing in general. First, these relationships are often described in the literature [e.g.,@FullerJr.Changedrivennature2009; @GrantReversingExtravertedLeadership2011], suggesting that they are important to a broad audience of organizational scholars. Second, prior research suggests that method variance might influence these relationships [e.g., @FullerJr.Changedrivennature2009]. A meta-analysis by @FullerJr.Changedrivennature2009 demonstrated that these relationships were stronger when measured using same source data, rather than distinct sources. Specifically, they observed that the relationships between proactive personality and workplace behaviors were between 129% and 308% stronger when study designs used a common rather than distinct sources. Though these percentages likely misstate the impact of method variance by failing to account for uncommon method variance [e.g., @LanceUseindependentmeasures2015; @spectorNewPerspectiveMethod2017], which even further obscures the role of method variance, they nevertheless suggest that methodological factors could play a role. To resolve these disparities, we tested the same measurement model in our three studies, examining the effects of various hypothesized common method factors (e.g., momentary mood) and uncommon method factors (e.g., negative item wording). Figure 1 illustrates the substantive and methodological factors of interest.
 
-# ---------------
+# - - - - - - - - - - - 
 # Insert Figure 1 about here
-# ---------------
+# - - - - - - - - - - - 
 
 ## Common Rater Effects
 
@@ -95,7 +95,7 @@ Given that proximal causes of method variance inflate the correlation among same
 
 *Hypothesis 1: Data gathered using proximal remedies (i.e., using of a cover story, randomizing item and scale order, using a filler scale, separating collection of predictor data from outcome data by one week) will result in weaker correlations between substantive factors of interest.*
 
-As suggested by @spectorNewPerspectiveMethod2017, when method variance is shared by items belonging to a measure, latent factor approaches will mistake method variance for trait variance [see also @@PodsakoffCommonmethodbiases2003]. However, when a remedy has been applied, such method variance should not be correlated with the latent trait in question. For instance, maintaining a consistent item-order in one's survey introduces a serial-item order effect that could cause factor loadings for a measurement model to be biased. Conversely, randomizing the presentation of items such that participants receive unique orderings of items introduces unsystematic variation into the group-level measurement (i.e., item-order effects are largely confined to the item residuals). As the reliability of observed data can be decomposed into modeled sources of variance, both method and non-method [@WilliamsMethodVarianceMarker2010], we can examine how methodological conditions influence estimates of substantive variance across conditions. As proximal causes of method variance operate within non-remedied data, studies that do not use proximal remedies should result in a biased impression of the amount of substantive variance that is captured by a measurement model [@@PodsakoffCommonmethodbiases2003]. In other words, in comparing the amount of substantive and method variance captured by a measurement model across studies that do and do not apply remedies, non-remedied data should reflect more (and remedied data should reflect less) substantive variance. Therefore, each study tests the following hypothesis:
+As suggested by @spectorNewPerspectiveMethod2017, when method variance is shared by items belonging to a measure, latent factor approaches will mistake method variance for trait variance [see also @@PodsakoffCommonmethodbiases2003]. However, when a remedy has been applied, such method variance should not be correlated with the latent trait in question. For instance, maintaining a consistent item-order in one's survey introduces a serial-item order effect that could cause factor loadings for a measurement model to be biased. Conversely, randomizing the presentation of items such that participants receive unique orderings of items introduces unsystematic variation into the group-level measurement (i.e., item-order effects are largely confined to the item residuals). As the reliability of observed data can be decomposed into modeled sources of variance, both method and non-method [@WilliamsMethodVarianceMarker2010], we can examine how methodological conditions influence estimates of substantive variance across conditions. As proximal causes of method variance operate within non-remedied data, studies that do not use proximal remedies should result in a biased impression of the amount of substantive variance that is captured by a measurement model [@PodsakoffCommonmethodbiases2003]. In other words, in comparing the amount of substantive and method variance captured by a measurement model across studies that do and do not apply remedies, non-remedied data should reflect more (and remedied data should reflect less) substantive variance. Therefore, each study tests the following hypothesis:
 
 *Hypothesis 2: Data gathered using proximal remedies (e.g., using of a cover story, randomizing item- and scale-order, using a filler scale) will result in weaker estimates of substantive (i.e., non-method) variance for the substantive variables.*
 
@@ -338,7 +338,7 @@ colnames(data1)[colnames(data1)== "round(rowSums(SDR)/ncol(SDR), 2)"] <- "SDR"
   
 Six hundred and twenty-one workers from Amazon's Mechanical Turk were paid $1.30 for completing a survey, of which `r N` agreed to participate in our study after reading our informed consent form. These `r Nall` participants were randomly assigned to one of two conditions: non-remedied (n = `r N1`) or remedied (n = `r N2`). Approximately `r sr1` (n = `r n1`) in the non-remedied and approximately `r sr2` (n = `r n2`) in the remedied condition correctly responded to the manipulation check of proper interpretation of the study purpose and were allowed to continue. Respondents' data were eliminated due to incorrectly or not responding to an attention check item asking individuals to "Click on the first circle indicating 'Strongly Disagree?'" (n = `r iar`) [@MeadeIdentifyingcarelessresponses2012], or not reporting demographics and abandoning the survey (n = 4). This filtering process resulted in a final sample of `r N` individuals (`r n1f` in the no remedies and `r n2f` in the bundled remedies condition). Notwithstanding missing demographic data, the sample was predominantly Caucasian, and the average age was *M* = `r apa(M,2,T)` (*SD* = `r apa(SD,2,T)`). The majority (n = `r fulltime.n`) of respondents worked full-time. Three cases of missing item-level data were handled using the normal model approach, which treats ordinal missing data as normally distributed [for more details, see @WuComparisonImputationStrategies2015].
   
-Following guidance by @PodsakoffCommonmethodbiases2003, we sought to create a psychological separation of measurement using a cover story. In the bundled remedies condition where the proximal separation of measurement remedy was used, participants were given a cover story designed to disguise the purpose of the study: "In this study, you will be asked to respond to statements about yourself and how you behave at work. Separate researchers built the content of this survey for separate purposes, and so the questions may or may not relate to one another. As such, there are no right or wrong answers, so please provide honest responses." By comparison, in the no remedies condition participants were given a message to make the purpose of the study transparent: "The purpose of this study is to test for relationships between proactive personality and workplace behaviors (including taking charge at work, having a voice in the workplace, organizational citizenship behavior at work, and job performance)." These participants were also given a survey with all items and scales presented in the same order (demographics were presented last). Following the randomly assigned cover story, we asked our participants to respond to the following item indicating whether they understood the purpose of our study: "Before you take our survey, please tell us which of the following correctly describes the purpose of this study." Three response options were given: (a) "The purpose of this study is to test for relationships between personality and workplace behaviors. As such, there is a clear purpose to the study." (b) "Separate researchers built the content of this survey for separate purposes, and so the questions may or may not relate to one another. As such, there is no single clear purpose to this study." and (c) "The purpose of this study is to measure emotional intelligence and workplace behaviors." In addition to the use of a cover story, we followed guidance by @PodsakoffCommonmethodbiases2003 and included other procedural remedies for method variance within the bundled remedies condition. We placed filler scales in between the administration of the proactive personality and outcomes scales. Notably, all outcome measures included in the same survey block. Several filler scales were included, which contained the positive and negative affect schedule [@watsonDevelopmentValidationBrief1988] and psychometric synonyms and antonyms [@goldbergPredictionSemanticConsistency1985]. Additionally, to address scale-order effects, we randomized the placement of proactive personality and outcomes scales. To address item-order effects, we randomized items within all scales.
+Following guidance by @PodsakoffCommonmethodbiases2003, we sought to create a psychological separation of measurement using a cover story. In the bundled remedies condition where the proximal separation of measurement remedy was used, participants were given a cover story designed to disguise the purpose of the study: "In this study, you will be asked to respond to statements about yourself and how you behave at work. Separate researchers built the content of this survey for separate purposes, and so the questions may or may not relate to one another. As such, there are no right or wrong answers, so please provide honest responses." By comparison, in the no remedies condition participants were given a message to make the purpose of the study transparent: "The purpose of this study is to test for relationships between proactive personality and workplace behaviors (including taking charge at work, having a voice in the workplace, organizational citizenship behavior at work, and job performance)." These participants were also given a survey with all items and scales presented in the same order (demographics were presented last). Following the randomly assigned cover story, we asked our participants to respond to the following item indicating whether they understood the purpose of our study: "Before you take our survey, please tell us which of the following correctly describes the purpose of this study." Three response options were given: (a) "The purpose of this study is to test for relationships between personality and workplace behaviors. As such, there is a clear purpose to the study." (b) "Separate researchers built the content of this survey for separate purposes, and so the questions may or may not relate to one another. As such, there is no single clear purpose to this study." and (c) "The purpose of this study is to measure emotional intelligence and workplace behaviors." In addition to the use of a cover story, we followed guidance by @PodsakoffCommonmethodbiases2003 and included other procedural remedies for method variance within the bundled remedies condition. We placed filler scales in between the administration of the proactive personality and outcomes scales. Notably, all outcome measures included in the same survey block. Several filler scales were included, which contained the positive and negative affect schedule [@WatsonDevelopmentValidationBrief1988] and psychometric synonyms and antonyms [@goldbergPredictionSemanticConsistency1985]. Additionally, to address scale-order effects, we randomized the placement of proactive personality and outcomes scales. To address item-order effects, we randomized items within all scales.
 
 ## Measures
 ```{r Study 1: Cronbach Alphas, include = FALSE}
@@ -394,7 +394,7 @@ data1 <- cbind(data1,affect[c(1)])
 
 ## Analytical Approach
 
-We conducted a multiple group analysis with 'lavaan' in R. Specifically, a model was tested whereby all latent construct covariances were freely estimated with certain exceptions. Given the presence of negatively-keyed items in these measures, we included a negative item wording content factor that explained variance in the negatively-keyed items only [see @dalalNegativelyWordedItems2015; @ZhangImprovingFactorStructure2016]. This negative method factor was theoretically independent from IRB and OCBO [@ConwayWhatReviewersShould2010]. Positive affectivity was modeled as a cause of the momentary mood state [@spectorNewPerspectiveMethod2017; @watsonDevelopmentValidationBrief1988]. Importantly, mood was modeled as a contaminant of substantive item responses whereas positive affectivity was modeled as a correlate of the substantive factors of interest [@kaplanRolePositiveNegative2009]. This approach allowed us to capture the contaminating influences of mood independent of the substantive influences of positive affectivity [for a similar approach, see @spectorNewPerspectiveMethod2017]. As our scales are Likert-type (i.e., only five response categories, cannot be normally distributed), we used the diagonally weighted least squares (DWLS) estimator and scale-shifted test statistics [see @beauducelPerformanceMaximumLikelihood2006; @katsikatsouPairwiseLikelihoodEstimation2012]. Model fit was assessed by means of the Satorra-Bentler scaled chi-square test statistics and robust variants of the root-mean-square error of approximation (RMSEA), the standardized root-mean-square residual (SRMR), and the comparative fit index (CFI) [see @katsikatsouPairwiseLikelihoodEstimation2012]. According to @huCutoffCriteriaFit1999, RMSEA of ~.06 indicates a close fit, whereas an RMSEA of ~.08 indicates acceptable fit [see also @beauducelPerformanceMaximumLikelihood2006]. For the SRMR, a cutoff close to .08 or below has been recommended [@huCutoffCriteriaFit1999]. The CFI should be greater than .95. 
+We conducted a multiple group analysis with 'lavaan' in R. Specifically, a model was tested whereby all latent construct covariances were freely estimated with certain exceptions. Given the presence of negatively-keyed items in these measures, we included a negative item wording content factor that explained variance in the negatively-keyed items only [see @dalalNegativelyWordedItems2015; @ZhangImprovingFactorStructure2016]. This negative method factor was theoretically independent from IRB and OCBO [@ConwayWhatReviewersShould2010]. Positive affectivity was modeled as a cause of the momentary mood state [@spectorNewPerspectiveMethod2017; @watsonDevelopmentValidationBrief1988]. Importantly, mood was modeled as a contaminant of substantive item responses whereas positive affectivity was modeled as a correlate of the substantive factors of interest [@kaplanRolePositiveNegative2009]. This approach allowed us to capture the contaminating influences of mood independent of the substantive influences of positive affectivity [for a similar approach, see @spectorNewPerspectiveMethod2017]. As our scales are Likert-type (i.e., only five response categories, cannot be normally distributed), we used the diagonally weighted least squares (DWLS) estimator and scale-shifted test statistics [see @beauducelPerformanceMaximumLikelihood2006; @katsikatsouPairwiseLikelihoodEstimation2012]. Model fit was assessed by means of the Satorra-Bentler scaled chi-square test statistics and robust variants of the root-mean-square error of approximation (RMSEA), the standardized root-mean-square residual (SRMR), and the comparative fit index (CFI) [see @katsikatsouPairwiseLikelihoodEstimation2012]. According to @huCutoffCriteriaFit1999, RMSEA of ~.06 indicates a close fit, whereas an RMSEA of ~.08 indicates acceptable fit [see also @beauducelPerformanceMaximumLikelihood2006]. For the SRMR, a cutoff close to .08 or below has been recommended [@huCutoffCriteriaFit1999]. The CFI should be greater than .95.
 
 Following an assessment of model data fit, we tested our hypotheses by computing z-scores, which described the difference between key parameters of interest across conditions (*p* < .05). For hypothesis 1, these difference scores were in regard to the latent factor correlations. For hypothesis 2, we decomposed the reliability of our measures into substantive and method factors following guidance from the literature @WilliamsMethodVarianceMarker2010. Briefly, this involves estimating the proportion of a measure's reliability represented by trait, measured method (e.g., mood and negative item wording) represented and error. The reliability estimates are ratios describing the estimated proportion of substantive and method variance relative to all other sources of modeled variance (trait, method, and error) [see @WilliamsMethodVarianceMarker2010]. This clarifies how the procedural remedies affect substantive and method factors [@coteMeasurementErrorTheory1988; @williamsMethodVarianceOrganizational1994]. Crucially, these estimates only account for measured factors. As some method factors could not be measured (e.g., order effects), we strive to interpret our estimates in light of such confounds. Furthermore, as we are not aware of any accepted statistical test comparing decomposed reliability coefficients, we first interpreted the reliability decomposition tables descriptively. Still, to address concerns regarding statistical significance, we have also reported z-scores describing the average difference between the factor loadings for a given measurement model. For a given measure, this z-score was calculated by first computing a z-score that described the difference between a pair of factor loadings and then taking the average of these z-scores to see whether the remedies affected estimates of the substantive variance for each scale. 
 
@@ -607,7 +607,7 @@ table$`In-Role Behavior`[2] <- m1.covariances[["0"]][["psi"]][1,2]  # PP-IRBr
 PPIRB1b <- round(table$`In-Role Behavior`[2],2)
 table$`In-Role Behaviorp`[2] <- data %>% dplyr::filter(label == "PPIRB1") %>% select(p) 
 table$OCBI[1] <- m1.covariances[["1"]][["psi"]][1,3]  # PP-OCBInr
-PPOCBI1a <- round(table$OCBI[1])
+PPOCBI1a <- round(table$OCBI[1],2)
 table$OCBIp[1] <- data %>% dplyr::filter(label == "PPOCBI2") %>% select(p) 
 table$OCBI[2] <- m1.covariances[["0"]][["psi"]][1,3]  # PP-OCBIr
 PPOCBI1b <- round(table$OCBI[2], 2)
@@ -843,37 +843,48 @@ pp1z <- pe %>%
   dplyr::filter(label == "ppfl.z") %>%
   select(z)
 pp1z <- round(pp1z,3)
+pp1z <- as.numeric(pp1z[1])
 pp1p <- pe %>% 
   dplyr::filter(label == "ppfl.z") %>%
   select(pvalue)
 pp1p <- round(pp1p,3)
+pp1p <- as.numeric(pp1p[1])
+
 ## IRB
 irb1z <- pe %>% 
   dplyr::filter(label == "irbfl.z") %>%
   select(z)
 irb1z <- round(irb1z,3)
+irb1z <- as.numeric(irb1z[1])
 irb1p <- pe %>% 
   dplyr::filter(label == "irbfl.z") %>%
   select(pvalue)
 irb1p <- round(irb1p,3)
+irb1p <- as.numeric(irb1p[1])
+
 ## OCBI
 ocbi1z <- pe %>% 
   dplyr::filter(label == "ocbifl.z") %>%
   select(z)
 ocbi1z <- round(ocbi1z,3)
+ocbi1z <- as.numeric(ocbi1z[1])
 ocbi1p <- pe %>% 
   dplyr::filter(label == "ocbifl.z") %>%
   select(pvalue)
 ocbi1p <- round(ocbi1p,3)
+ocbi1p <- as.numeric(ocbi1p[1])
+
 ## OCBO
 ocbo1z <- pe %>% 
   dplyr::filter(label == "ocbofl.z") %>%
   select(z)
 ocbo1z <- round(ocbo1z,3)
+ocbo1z <- as.numeric(ocbo1z[1])
 ocbo1p <- pe %>% 
   dplyr::filter(label == "ocbofl.z") %>%
   select(pvalue)
 ocbo1p <- round(ocbo1p,3)
+ocbo1p <- as.numeric(ocbo1p[1])
 ```
 ```{r Table 1, results = 'asis', tab.cap = NULL, echo = FALSE, include = FALSE}
 table2 %>%
@@ -885,7 +896,7 @@ table2 %>%
     ),
                  repeat_header_method = c("replace")) %>%
   kableExtra::footnote(general = "* p < .05; ** p < .01; *** p < .001. ",
-  "Values in parentheses are z-scores and describe the difference between the remedied and non-remedied correlations.") %>%
+  "Values in parentheses are z-scores and describe the difference between the estimated correlations.") %>%
   landscape() %>%
   kable_styling(full_width = F) %>%
   save_kable("table1.html")
@@ -895,13 +906,13 @@ table3 %>%
   knitr::kable(format = 'html', booktabs=T ,escape = T) %>%
   kable_styling(latex_options = c("scale_down", "hold_position"),
                  repeat_header_method = c("replace")) %>%
-  footnote(general = "Total reliability is a sum of the substantive and method reliability components (see Williams et al., 2010). ") %>%
+  kableExtra::footnote(general = "Total reliability is a sum of the substantive and method reliability components (see Williams et al., 2010). ") %>%
   landscape() %>%
   kable_styling(full_width = T) %>%
   save_kable("Table2.html")
 ```
 
-Our proposed model had a close fit ($\chi^2$~(`r df.ms1`)~ = `r csq.ms1`, *p* = `r p.ms1`, $\chi^2$/df = `r cdfratio.ms1`, CFI = `r cfi.ms1`, RMSEA = `r remsea.ms1`, SRMR = `r srmr.ms1`) and so we moved to interpreting the results. Table 1 contains the estimates for the latent construct correlations. A clear trend emerged. Specifically, all of the latent construct correlations were larger under the non-remedied condition relative to the remedied condition. The PP–IRB correlation was smaller in the remedied condition compared to the non-remedied condition (ξs: `r PPIRB1b` vs. `r PPIRB1a`, z = `r PPIRB1z`, *p* = `r PPIRB1zp`). The same was also observed for the PP–OCBI correlation (ξs: `r PPOCBI1b` vs. `r PPOCBI1a`,  z = `r PPOCBI1z`, *p* `r PPOCBI1zp`). However, the PP–OCBO correlation, though descriptively smaller and in the direction of our expectations, was not statistically significantly different (ξs: `r PPOCBO1b` vs. `r PPOCBO1a`,  z = `r PPOCBO1z`, *p* `r PPOCBO1zp`). Overall, these findings provide some support for hypothesis 1.
+Our proposed model had a close fit ($\chi^2$~(`r df.ms1`)~ = `r csq.ms1`, *p* `r p.ms1`, $\chi^2$/df = `r cdfratio.ms1`, CFI = `r cfi.ms1`, RMSEA = `r remsea.ms1`, SRMR = `r srmr.ms1`) and so we moved to interpreting the results. Table 1 contains the estimates for the latent construct correlations. A clear trend emerged. Specifically, all of the latent construct correlations were larger under the non-remedied condition relative to the remedied condition. The PP–IRB correlation was smaller in the remedied condition compared to the non-remedied condition (ξs: `r PPIRB1b` vs. `r PPIRB1a`, z = `r PPIRB1z`, *p* = `r PPIRB1zp`). The same was also observed for the PP–OCBI correlation (ξs: `r PPOCBI1b` vs. `r PPOCBI1a`,  z = `r PPOCBI1z`, *p* `r PPOCBI1zp`). However, the PP–OCBO correlation, though descriptively smaller and in the direction of our expectations, was not statistically significantly different (ξs: `r PPOCBO1b` vs. `r PPOCBO1a`,  z = `r PPOCBO1z`, *p* `r PPOCBO1zp`). Overall, these findings provide some support for hypothesis 1.
 
 # - - - - - - - - - - - 
 # Insert Tables 1 and 2 about here
@@ -1175,7 +1186,7 @@ OCBO.alpha <- round(my.scales[["alpha"]][4],2)
 PA.alpha <- round(my.scales[["alpha"]][5],2)
 ```
 
-Nine hundred and one workers from Amazon's Mechanical Turk were paid $1.45 for completing a survey, of which `r apa(Nall,0,T)` consented to participating in our study. These `r apa(Nall,0,T)` participants were randomly assigned to one of five conditions: a non-remedied condition (n = `r apa(N1,0,T)`), a condition where a cover story was used to blind the purpose of the study (n = `r apa(N2,0,T)`), a condition where scale order was randomized (n = `r apa(N3,0,T)`), a condition where items within scales were randomized (n = `r apa(N4,0,T)`), or a condition wherein filler scales were employed (n = `r apa(N5,0,T)`). Respondents who incorrectly responded to an attention check item were excluded from the survey during administration and so their data were not collected. Five more cases were removed for failing to report demographics and abandoning the survey. The rates for successfully passing our manipulation check for the study purpose were between `r apa(sr5,2,T)` and `r apa(sr4,2,T)` with an overall success rate of `r apa(srall,2,T)` and were much stronger than Study 1. Our relatively higher success rates, compared to Study 1, might be attributed tentatively to our using both a video to communicate the purpose of the survey and/or requiring participants to restate the purpose of our study in their own terms in writing prior to participating in our study.
+Nine hundred and one workers from Amazon's Mechanical Turk were paid $1.45 for completing a survey, of which `r apa(Nall,0,T)` consented to participating in our study. These `r apa(Nall,0,T)` participants were randomly assigned to one of five conditions: a non-remedied condition (n = `r apa(N1,0,T)`), a condition where a cover story was used to blind the purpose of the study (n = `r apa(N2,0,T)`), a condition where scale order was randomized (n = `r apa(N3,0,T)`), a condition where items within scales were randomized (n = `r apa(N4,0,T)`), or a condition wherein filler scales were employed (n = `r apa(N5,0,T)`). Respondents who incorrectly responded to an attention check item were excluded from the survey during administration and so their data were not collected. Five more cases were removed for failing to report demographics and abandoning the survey. The rates for successfully passing our manipulation check for the study purpose were between `r percent(sr5)` and `r apa(sr4)` with an overall success rate of `r percent(srall)` and were much stronger than Study 1. Our relatively higher success rates, compared to Study 1, might be attributed tentatively to our using both a video to communicate the purpose of the survey and/or requiring participants to restate the purpose of our study in their own terms in writing prior to participating in our study.
 
 Our filtering process resulted in a final sample of `r apa(n1,0,T)` individuals in the control condition, `r apa(n2,0,T)` in the cover story condition, `r apa(n3,0,T)` in the randomized scales condition, `r apa(n4,0,T)` in the randomized items within scales condition, and `r apa(n5,0,T)` in the filler scales condition. The sample was predominantly Caucasian and the average age was *M* = `r apa(M,2,T)` (*SD* = `r apa(SD,2,T)`). The majority (n = `r apa(fulltime.n,0,T)`) of respondents worked full-time. 
 
@@ -2037,37 +2048,46 @@ ppfl.zbac <- pe %>%
   dplyr::filter(label == "ppfl.zbac") %>%
   select(z)
 ppfl.zbac <- round(ppfl.zbac,3)
+ppfl.zbac <- as.numeric(ppfl.zbac[1])
 ppfl.pbac <- pe %>% 
   dplyr::filter(label == "ppfl.zbac") %>%
   select(pvalue)
 ppfl.pbac <- round(ppfl.pbac,3)
+ppfl.pbac <- as.numeric(ppfl.pbac[1])
 ### ItemRand v Control
 ppfl.zcbc <- pe %>% 
   dplyr::filter(label == "ppfl.zcbc") %>%
   select(z)
 ppfl.zcbc <- round(ppfl.zcbc,3)
+ppfl.zcbc <- as.numeric(ppfl.zcbc[1])
 ppfl.pcbc <- pe %>% 
   dplyr::filter(label == "ppfl.zcbc") %>%
   select(pvalue)
 ppfl.pcbc <- round(ppfl.pcbc,3)
+ppfl.pcbc <- as.numeric(ppfl.pcbc[1])
 ### FillerScales v Control
 ppfl.zdbc	 <- pe %>% 
   dplyr::filter(label == "ppfl.zdbc") %>%
   select(z)
 ppfl.zdbc	 <- round(ppfl.zdbc	,3)
+ppfl.zdbc	 <- as.numeric(ppfl.zdbc[1])
 ppfl.pdbc	 <- pe %>% 
   dplyr::filter(label == "ppfl.zdbc") %>%
   select(pvalue)
 ppfl.pdbc <- round(ppfl.pdbc,3)
+ppfl.pdbc	 <- as.numeric(ppfl.pdbc[1])
+
 ### ScaleRand v Control
 ppfl.zebc	 <- pe %>% 
   dplyr::filter(label == "ppfl.zebc") %>%
   select(z)
 ppfl.zebc	 <- round(ppfl.zebc	,3)
+ppfl.zebc	 <- as.numeric(ppfl.zebc[1])
 ppfl.pebc	 <- pe %>% 
   dplyr::filter(label == "ppfl.zebc") %>%
   select(pvalue)
 ppfl.pebc <- round(ppfl.pebc,3)
+ppfl.pebc	 <- as.numeric(ppfl.pebc[1])
 
 ## irb
 ### CS Manipulation v Control
@@ -2075,37 +2095,48 @@ irbfl.zbac <- pe %>%
   dplyr::filter(label == "irbfl.zbac") %>%
   select(z)
 irbfl.zbac <- round(irbfl.zbac,3)
+irbfl.zbac <- as.numeric(irbfl.zbac[1])
 irbfl.pbac <- pe %>% 
   dplyr::filter(label == "irbfl.zbac") %>%
   select(pvalue)
 irbfl.pbac <- round(irbfl.pbac,3)
+irbfl.pbac <- as.numeric(irbfl.pbac[1])
+
 ### ItemRand v Control
 irbfl.zcbc <- pe %>% 
   dplyr::filter(label == "irbfl.zcbc") %>%
   select(z)
 irbfl.zcbc <- round(irbfl.zcbc,3)
+irbfl.zcbc <- as.numeric(irbfl.zcbc[1])
 irbfl.pcbc <- pe %>% 
   dplyr::filter(label == "irbfl.zcbc") %>%
   select(pvalue)
 irbfl.pcbc <- round(irbfl.pcbc,3)
+irbfl.pcbc <- as.numeric(irbfl.pcbc[1])
+
 ### FillerScales v Control
 irbfl.zdbc	 <- pe %>% 
   dplyr::filter(label == "irbfl.zdbc") %>%
   select(z)
 irbfl.zdbc	 <- round(irbfl.zdbc	,3)
+irbfl.zdbc	 <- as.numeric(irbfl.zdbc[1])
 irbfl.pdbc	 <- pe %>% 
   dplyr::filter(label == "irbfl.zdbc") %>%
   select(pvalue)
 irbfl.pdbc <- round(irbfl.pdbc,3)
+irbfl.pdbc	 <- as.numeric(irbfl.pdbc[1])
+
 ### ScaleRand v Control
 irbfl.zebc	 <- pe %>% 
   dplyr::filter(label == "irbfl.zebc") %>%
   select(z)
 irbfl.zebc	 <- round(irbfl.zebc	,3)
+irbfl.zebc	 <- as.numeric(irbfl.zebc[1])
 irbfl.pebc	 <- pe %>% 
   dplyr::filter(label == "irbfl.zebc") %>%
   select(pvalue)
 irbfl.pebc <- round(irbfl.pebc,3)
+irbfl.pebc	 <- as.numeric(irbfl.pebc[1])
 
 ## ocbi
 ### CS Manipulation v Control
@@ -2113,37 +2144,48 @@ ocbifl.zbac <- pe %>%
   dplyr::filter(label == "ocbifl.zbac") %>%
   select(z)
 ocbifl.zbac <- round(ocbifl.zbac,3)
+ocbifl.zbac <- as.numeric(ocbifl.zbac[1])
 ocbifl.pbac <- pe %>% 
   dplyr::filter(label == "ocbifl.zbac") %>%
   select(pvalue)
 ocbifl.pbac <- round(ocbifl.pbac,3)
+ocbifl.pbac <- as.numeric(ocbifl.pbac[1])
+
 ### ItemRand v Control
 ocbifl.zcbc <- pe %>% 
   dplyr::filter(label == "ocbifl.zcbc") %>%
   select(z)
 ocbifl.zcbc <- round(ocbifl.zcbc,3)
+ocbifl.zcbc <- as.numeric(ocbifl.zcbc[1])
 ocbifl.pcbc <- pe %>% 
   dplyr::filter(label == "ocbifl.zcbc") %>%
   select(pvalue)
 ocbifl.pcbc <- round(ocbifl.pcbc,3)
+ocbifl.pcbc <- as.numeric(ocbifl.pcbc[1])
+
 ### FillerScales v Control
 ocbifl.zdbc	 <- pe %>% 
   dplyr::filter(label == "ocbifl.zdbc") %>%
   select(z)
 ocbifl.zdbc	 <- round(ocbifl.zdbc	,3)
+ocbifl.zdbc	 <- as.numeric(ocbifl.zdbc[1])
 ocbifl.pdbc	 <- pe %>% 
   dplyr::filter(label == "ocbifl.zdbc") %>%
   select(pvalue)
 ocbifl.pdbc <- round(ocbifl.pdbc,3)
+ocbifl.pdbc	 <- as.numeric(ocbifl.pdbc[1])
+
 ### ScaleRand v Control
 ocbifl.zebc	 <- pe %>% 
   dplyr::filter(label == "ocbifl.zebc") %>%
   select(z)
 ocbifl.zebc	 <- round(ocbifl.zebc	,3)
+ocbifl.zebc	 <- as.numeric(ocbifl.zebc[1])
 ocbifl.pebc	 <- pe %>% 
   dplyr::filter(label == "ocbifl.zebc") %>%
   select(pvalue)
 ocbifl.pebc <- round(ocbifl.pebc,3)
+ocbifl.pebc	 <- as.numeric(ocbifl.pebc[1])
 
 ## ocbo
 ### CS Manipulation v Control
@@ -2151,37 +2193,48 @@ ocbofl.zbac <- pe %>%
   dplyr::filter(label == "ocbofl.zbac") %>%
   select(z)
 ocbofl.zbac <- round(ocbofl.zbac,3)
+ocbofl.zbac <- as.numeric(ocbofl.zbac[1])
 ocbofl.pbac <- pe %>% 
   dplyr::filter(label == "ocbofl.zbac") %>%
   select(pvalue)
 ocbofl.pbac <- round(ocbofl.pbac,3)
+ocbofl.pbac <- as.numeric(ocbofl.pbac[1])
+
 ### ItemRand v Control
 ocbofl.zcbc <- pe %>% 
   dplyr::filter(label == "ocbofl.zcbc") %>%
   select(z)
 ocbofl.zcbc <- round(ocbofl.zcbc,3)
+ocbofl.zcbc <- as.numeric(ocbofl.zcbc[1])
 ocbofl.pcbc <- pe %>% 
   dplyr::filter(label == "ocbofl.zcbc") %>%
   select(pvalue)
 ocbofl.pcbc <- round(ocbofl.pcbc,3)
+ocbofl.pcbc <- as.numeric(ocbofl.pcbc[1])
+
 ### FillerScales v Control
 ocbofl.zdbc	 <- pe %>% 
   dplyr::filter(label == "ocbofl.zdbc") %>%
   select(z)
 ocbofl.zdbc	 <- round(ocbofl.zdbc	,3)
+ocbofl.zdbc	 <- as.numeric(ocbofl.zdbc[1])
 ocbofl.pdbc	 <- pe %>% 
   dplyr::filter(label == "ocbofl.zdbc") %>%
   select(pvalue)
 ocbofl.pdbc <- round(ocbofl.pdbc,3)
+ocbofl.pdbc	 <- as.numeric(ocbofl.pdbc[1])
+
 ### ScaleRand v Control
 ocbofl.zebc	 <- pe %>% 
   dplyr::filter(label == "ocbofl.zebc") %>%
   select(z)
 ocbofl.zebc	 <- round(ocbofl.zebc	,3)
+ocbofl.zebc	 <- as.numeric(ocbofl.zebc[1])
 ocbofl.pebc	 <- pe %>% 
   dplyr::filter(label == "ocbofl.zebc") %>%
   select(pvalue)
 ocbofl.pebc <- round(ocbofl.pebc,3)
+ocbofl.pebc	 <- as.numeric(ocbofl.pebc[1])
 ```
 ```{r Table 3, results = 'asis', tab.cap = NULL, echo = FALSE, include = FALSE}
 table5 %>%
@@ -2192,8 +2245,8 @@ table5 %>%
     "hold_position"
     ),
                  repeat_header_method = c("replace")) %>%
-  footnote(general = ". p < .10; * p < .05; ** p < .01; *** p < .001. ",
-  "Values in parentheses are z-scores and describe the difference between the remedied and non-remedied correlations.") %>%
+  kableExtra::footnote(general = ". p < .10; * p < .05; ** p < .01; *** p < .001. ",
+  "Values in parentheses are z-scores and describe the difference between the estimated correlations.") %>%
   landscape() %>%
   kable_styling(full_width = F) %>%
   save_kable("Table3.html")
@@ -2203,15 +2256,15 @@ table6 %>%
   knitr::kable(format = 'html', booktabs=T ,escape = T) %>%
   kable_styling(latex_options = c("scale_down", "hold_position"),
                  repeat_header_method = c("replace")) %>%
-  footnote(general = "Total reliability is a sum of the substantive and method reliability components (see Williams et al., 2010). ") %>%
+  kableExtra::footnote(general = "Total reliability is a sum of the substantive and method reliability components (see Williams et al., 2010). ") %>%
   landscape() %>%
   kable_styling(full_width = T) %>%
   save_kable("Table4.html")
 ```
 
-Though our initial model provided a close fit to the data, the estimates we derived were nonsensical. In certain conditions, mood explained a majority of the variance in substantive measures, which could be attributed to assumptions regarding the reliability of our one-item mood measure. Though informed by conservative values [@PetrescuMarketingresearchusing2013], these conservative estimates may be less applicable to our data. Rather than engage in a search for more ideal sample-specific estimates of mood reliability, we decided to drop both mood and positive affectivity from our analysis. Therefore, our results should be viewed as unadjusted any momentary mood effects. This revised model had a close fit ($\chi^2$~(`r df.ms2`)~ = `r csq.ms2`, *p* = `r p.ms2`, $\chi^2$/df = `r cdfratio.ms2`, CFI = `r cfi.ms2`, RMSEA = `r remsea.ms2`, SRMR = `r srmr.ms2`) and so we moved to interpreting the results. 
+Though our initial model provided a close fit to the data, the estimates we derived were nonsensical. In certain conditions, mood explained a majority of the variance in substantive measures, which could be attributed to assumptions regarding the reliability of our one-item mood measure. Though informed by conservative values [@PetrescuMarketingresearchusing2013], these conservative estimates may be less applicable to our data. Rather than engage in a search for more ideal sample-specific estimates of mood reliability, we decided to drop both mood and positive affectivity from our analysis. Therefore, our results should be viewed as unadjusted any momentary mood effects. This revised model had a close fit ($\chi^2$~(`r df.ms2`)~ = `r csq.ms2`, *p* `r p.ms2`, $\chi^2$/df = `r cdfratio.ms2`, CFI = `r cfi.ms2`, RMSEA = `r remsea.ms2`, SRMR = `r srmr.ms2`) and so we moved to interpreting the results. 
 
-Table 3 contains the estimates for the latent construct correlations. Unexpectedly, the PP-IRB correlations were, compared to the non-remedied condition (ξ = `r PPIRB2b`), all consistently stronger in the remedied conditions (all zs > 3.38, all ps < .001). Conversely, the PP–OCBI correlations were generally, though inconsistently, smaller. Compared to the no remedy condition (ξ = `r PPOCBI2b`), the correlations linking PP to OCBI were smaller in the item randomization condition (ξ = `r PPOCBI2c`, z = `r PPOCBI2bcz`, p = `r PPOCBI2bcp`), the filler scale condition (ξ = `r PPOCBI2d`, z = `r PPOCBI2bdz`, p `r pvalr(PPOCBI2bdp)`), and the scale randomization condition (ξ = `r PPOCBI2e`, z = `r PPOCBI2bez`, p = `r PPOCBI2bep`). There was no significant effect of the cover story manipulation on PP–OCBI correlation (ξ = `r PPOCBI2a`, z = `r PPOCBI2abz`, p = `r round(PPOCBI2abp,2)`). As for the PP–OCBO correlation, compared to the no remedy condition (ξ = `r PPOCBO2b`), only the cover story manipulation (ξ = `r PPOCBO2a`, z = `r PPOCBO2abz`, p = `r PPOCBO2abp`) affected this correlation, seemingly increasing it. The remaining remedies did not significantly affect this correlation (filler scales: ξ = `r PPOCBO2d`, z = `r PPOCBO2bdz`, p = `r PPOCBO2bdp`, scale randomization: ξ = `r PPOCBO2e`, z = `r PPOCBO2bez`, p = `r PPOCBO2bep`). Overall, this study provides evidence that bares complexly upon hypothesis 1 (i.e., some corroborating evidence, some negating evidence, and no evidence depending on the specific comparison in question). 
+Table 3 contains the estimates for the latent construct correlations. Unexpectedly, the PP-IRB correlations were, compared to the non-remedied condition (ξ = `r PPIRB2b`), all consistently stronger in the remedied conditions (all zs > 3.38, all *p*s < .001). Conversely, the PP–OCBI correlations were generally, though inconsistently, smaller. Compared to the no remedy condition (ξ = `r PPOCBI2b`), the correlations linking PP to OCBI were smaller in the item randomization condition (ξ = `r PPOCBI2c`, z = `r PPOCBI2bcz`, *p* = `r PPOCBI2bcp`), the filler scale condition (ξ = `r PPOCBI2d`, z = `r PPOCBI2bdz`, *p* `r pvalr(PPOCBI2bdp)`), and the scale randomization condition (ξ = `r PPOCBI2e`, z = `r PPOCBI2bez`, *p* = `r PPOCBI2bep`). There was no significant effect of the cover story manipulation on PP–OCBI correlation (ξ = `r PPOCBI2a`, z = `r PPOCBI2abz`, *p* = `r round(PPOCBI2abp,2)`). As for the PP–OCBO correlation, compared to the no remedy condition (ξ = `r PPOCBO2b`), only the cover story manipulation (ξ = `r PPOCBO2a`, z = `r PPOCBO2abz`, *p* = `r PPOCBO2abp`) affected this correlation, seemingly increasing it. The remaining remedies did not significantly affect this correlation (filler scales: ξ = `r PPOCBO2d`, z = `r PPOCBO2bdz`, *p* = `r PPOCBO2bdp`, scale randomization: ξ = `r PPOCBO2e`, z = `r PPOCBO2bez`, *p* = `r PPOCBO2bep`). Overall, this study provides evidence that bares complexly upon hypothesis 1 (i.e., some corroborating evidence, some negating evidence, and no evidence depending on the specific comparison in question). 
 
 # - - - - - - - - - - - 
 # Insert Tables 3 and 4 about here
@@ -2221,7 +2274,7 @@ Table 4 contains the reliability decomposition for our study variables. While th
 
 # Discussion Study 2
 
-Study 2 provided further evidence that using a specific proximal remedy can influence one's substantive conclusions in unforeseen ways. While some effects were anticipated, many were not. We suspected that since a specific remedy should address a specific method effect (e.g., the cover story should eliminate demand effects; item randomization should eliminate serial item-order effects), the estimated substantive effects would be relatively weaker compared to a condition where no remedy was applied. Others (i.e., colleagues who suggested we conduct this study) suggested that perhaps a single remedy would emerge to explain the pattern of results obtained in Study 1. While this latter view seems untenable in light our data, the reliability decomposition for Study 2 favors the formal view.
+Study 2 provided further evidence that using a specific proximal remedy can influence one's substantive conclusions in unforeseen ways. While some effects were anticipated, many were not. We suspected that since a specific remedy should address a specific method effect (e.g., the cover story should eliminate demand effects; item randomization should eliminate serial item-order effects), the estimated substantive effects would be relatively weaker compared to a condition where no remedy was applied. Others (i.e., colleagues who suggested we conduct this study) suggested that perhaps a single remedy would emerge to explain the pattern of results obtained in Study 1. While this latter view seems untenable in light our data, the reliability decomposition for Study 2 favors the former view.
 
 Recall from our discussion of study 1 that a substantive reliability estimate is a ratio of the trait variance (as estimated by substantive factor loadings) to all sources of modeled variance (trait, measured method, and error) reflected by the corresponding measurement models [@WilliamsMethodVarianceMarker2010]. In Study 2, the proactive personality and OCBI measures were modeled as reflecting only two sources of variance, and so we observed smaller substantive reliability estimates across all remedied conditions in an incremental fashion. Unfortunately, for measures that are contaminated by measured method effects (e.g., negative item wording), the interpretation thereof is more complicated. While we generally see weaker substantive reliability for the IRB and OCBO measures, certain remedied substantive factor loadings are *larger* than the non-remedied factor loadings. This would suggest that CMV, which would be present in the non-remedied condition, can *weaken* estimates. However, the opposite was observed in Study 1. Such conflicting findings suggests, to us, that our understanding of the procedural remedies, and method variance in general, may be overly simplistic. 
 
@@ -2229,9 +2282,9 @@ To make sense of findings from Studies 1 and 2, we revisited the literature to u
 
 Placing our results into this broader literature does help us make sense of our findings. Since procedural remedies only address relatively unique causes of method variance, interpreting one's observed estimates will require holding certain assumptions regarding key quantities, such as (i) how the remedy affects the correlation among the relevant method constructs, (ii) what the correlation is linking the substantive constructs, and (iii) the ratio of the two. Unfortunately, these are quantities that are difficult to know, which brings us to our conclusion regarding study 2: when method variance plays a role in a study, it will be difficult to form a reliable interpretation regarding the effect that has been estimated. In practice, this conclusion implies that when method variance can explain one's findings, bundling remedies would be the most advisable course of action. This conclusion also highlights a need for research into the procedural remedies and method constructs that are affected by these remedies, which we will elaborate upon in our general discussion section.
 
-## Study 3 - Efficacy of Introducing a 1-Week Separation Between Predictor and Outcome Measures
+# Study 3 - Efficacy of Introducing a 1-Week Separation Between Predictor and Outcome Measures
 
-As observed in Study 1, mood played a contaminating role in our observations. This is to be expected as data were gathered using a single-source at a single point in time. With study 3, we examined how the contaminating role played by momentary mood might be reduced. Specifically, we examined the efficacy of introducing a one-week temporal separation of measurement between the administration of our predictor and outcome measures. Conventionally this involves administering predictor measures first and, after a time lag of one week or so, administering the outcome measures. In sum, temporal separation of measurement is designed to reduce if not eliminate any method effects that are relevant to a single-source single time-point design, such as momentary mood, that affect estimates of the correlation among scales.
+As observed in Study 1, mood played a contaminating role in our observations. This is to be expected as data were gathered using a single-source at a single point in time. With Study 3, we examined how the contaminating role played by momentary mood might be reduced. Specifically, we examined the efficacy of introducing a one-week temporal separation of measurement between the administration of our predictor and outcome measures. Conventionally this involves administering predictor measures first and, after a time lag of one week or so, administering the outcome measures. In sum, temporal separation of measurement is designed to reduce if not eliminate any method effects that are relevant to a single-source single time-point design, such as momentary mood, that affect estimates of the correlation among scales.
 
 Before we move on, it is important to keep in mind that our findings from Study 2 suggest that the impact of a single remedy on one's substantive estimates can be difficult to know in advance unless the relative interplay between the method and substantive constructs is understood. Findings from Study 1 and 2 suggest that some proximal method effects (i.e., item context effects, scale-order effects) play a role even when data are gathered via a temporal separation. Though we would expect smaller estimates of correlation (consistent with hypothesis 1), item- and scale-order effects at play would still contaminate the measurement model, inflating estimates of substantive reliability across all conditions. This should inform our expectations regarding Study 3. While the substantive reliability estimates should be relatively similar across both conditions, for the non-remedied condition, however, the total reliability (i.e., substantive reliability + method reliability) estimated for our outcome measures (i.e., IRB and OCB) should be larger because these outcome measures should contain additional method variance attributable to mood, which has not been remedied. Overall, the latent construct correlations in the remedied condition should generally be weaker (which would support Hypothesis 1), the amount of mood-related variance contaminating the measurement model should also be lower. This latter claim we articulate with Hypothesis 3:
 
@@ -2891,60 +2944,68 @@ pp3z <- pe %>%
   dplyr::filter(label == "ppfl.z") %>%
   select(z)
 pp3z <- round(pp3z,3)
+pp3z <- as.numeric(pp3z[1])
 pp3p <- pe %>% 
   dplyr::filter(label == "ppfl.z") %>%
   select(pvalue)
 pp3p <- round(pp3p,3)
+pp3p <- as.numeric(pp3p[1])
 ## IRB
 irb3z <- pe %>% 
   dplyr::filter(label == "irbfl.z") %>%
   select(z)
 irb3z <- round(irb3z,3)
+irb3z <- as.numeric(irb3z[1])
 irb3p <- pe %>% 
   dplyr::filter(label == "irbfl.z") %>%
   select(pvalue)
 irb3p <- round(irb3p,3)
+irb3p <- as.numeric(irb3p[1])
+
 ## OCBI
 ocbi3z <- pe %>% 
   dplyr::filter(label == "ocbifl.z") %>%
   select(z)
 ocbi3z <- round(ocbi3z,3)
+ocbi3z <- as.numeric(ocbi3z[1])
 ocbi3p <- pe %>% 
   dplyr::filter(label == "ocbifl.z") %>%
   select(pvalue)
 ocbi3p <- round(ocbi3p,3)
+ocbi3p <- as.numeric(ocbi3p[1])
+
 ## OCBO
 ocbo3z <- pe %>% 
   dplyr::filter(label == "ocbofl.z") %>%
   select(z)
 ocbo3z <- round(ocbo3z,3)
+ocbo3z <- as.numeric(ocbo3z[1])
 ocbo3p <- pe %>% 
   dplyr::filter(label == "ocbofl.z") %>%
   select(pvalue)
 ocbo3p <- round(ocbo3p,3)
+ocbo3p <- as.numeric(ocbo3p[1])
+
 ## Mood
 mood.ocbofl.z <- pe %>% 
   dplyr::filter(label == "mood.ocbofl.z") %>%
   select(z)
 mood.ocbofl.z <- round(mood.ocbofl.z,3)
+mood.ocbofl.z <- as.numeric(mood.ocbofl.z[1])
 mood.ocbofl.p <- pe %>% 
   dplyr::filter(label == "mood.ocbofl.z") %>%
   select(pvalue)
 mood.ocbofl.p <- round(mood.ocbofl.p,3)
+mood.ocbofl.p <- as.numeric(mood.ocbofl.p[1])
 ```
 ```{r Table 5}
 table8 %>%
-  knitr::kable(format = 'html', booktabs=T ,escape = F) %>%
-  kable_styling(latex_options = c(
-   # "scale_down",
-    "threeparttable",
-    "hold_position"
-    ),
+  knitr::kable(format = 'html', booktabs=T ,escape = T) %>%
+  kable_styling(latex_options = c("scale_down", "hold_position"),
                  repeat_header_method = c("replace")) %>%
-  footnote(general = ". p < .10; * p < .05; ** p < .01; *** p < .001. ",
-  "Values in parentheses are z-scores and describe the difference between the remedied and non-remedied correlations.") %>%
+  kableExtra::footnote(general = "* p < .05; ** p < .01; *** p < .001. ") %>%
   landscape() %>%
-  kable_styling(full_width = F) %>%
+  kable_styling(full_width = T) %>%
   save_kable("Table5.html")
 ```
 ```{r Table 6}
@@ -2952,13 +3013,13 @@ table9 %>%
   knitr::kable(format = 'html', booktabs=T ,escape = T) %>%
   kable_styling(latex_options = c("scale_down", "hold_position"),
                  repeat_header_method = c("replace")) %>%
-  footnote(general = "Total reliability is a sum of the substantive and method reliability components (see Williams et al., 2010). ") %>%
+  kableExtra::footnote(general = "Total reliability is a sum of the substantive and method reliability components (see Williams et al., 2010). ") %>%
   landscape() %>%
   kable_styling(full_width = T) %>%
   save_kable("Table6.html")
 ```
 
-Our proposed model had a close fit ($\chi^2$~(`r df.ms3`)~ = `r csq.ms3`, *p* = `r p.ms3`, $\chi^2$/df = `r cdfratio.ms3`, CFI = `r cfi.ms3`, RMSEA = `r remsea.ms3`, SRMR = `r srmr.ms3`) and so we moved to interpreting the results. Table 5 contains the estimates for the latent construct correlations. A consistent trend emerged. Specifically, all of the latent construct correlations were larger under the non-remedied condition relative to the remedied condition. The PP–IRB correlation was smaller in the remedied condition compared to the non-remedied condition (ξs: `r PPIRB3b` vs. `r PPIRB3a`, z = `r PPIRB3z`, *p* = `r PPIRB3zp`). The same was also observed for the PP–OCBI correlation (ξs: `r PPOCBI3b` vs. `r PPOCBI3a`, z = `r PPOCBI3z`, *p* `r PPOCBI3zp`) as well as the PP–OCBO correlation (ξs: `r PPOCBO3b` vs. `r PPOCBO3a`, z = `r PPOCBO3z`, *p* `r PPOCBO3zp`). Overall, these findings provide strong support for hypothesis 1. 
+Our proposed model had a close fit ($\chi^2$~(`r df.ms3`)~ = `r csq.ms3`, *p* `r p.ms3`, $\chi^2$/df = `r cdfratio.ms3`, CFI = `r cfi.ms3`, RMSEA = `r remsea.ms3`, SRMR = `r srmr.ms3`) and so we moved to interpreting the results. Table 5 contains the estimates for the latent construct correlations. A consistent trend emerged. Specifically, all of the latent construct correlations were larger under the non-remedied condition relative to the remedied condition. The PP–IRB correlation was smaller in the remedied condition compared to the non-remedied condition (ξs: `r PPIRB3b` vs. `r PPIRB3a`, z = `r PPIRB3z`, *p* = `r PPIRB3zp`). The same was also observed for the PP–OCBI correlation (ξs: `r PPOCBI3b` vs. `r PPOCBI3a`, z = `r PPOCBI3z`, *p* `r PPOCBI3zp`) as well as the PP–OCBO correlation (ξs: `r PPOCBO3b` vs. `r PPOCBO3a`, z = `r PPOCBO3z`, *p* `r PPOCBO3zp`). Overall, these findings provide strong support for hypothesis 1. 
 
 # - - - - - - - - - - - 
 # Insert Tables 5 and 6 about here
@@ -2990,19 +3051,19 @@ The results of our three studies add to the growing literature on method varianc
 
 Notably, scholars who study proactive personality may view our findings with great skepticism. They may (we think inaccurately) view our findings as suggesting either that proactive individuals are neither good nor bad workers or that our method variance remedies distort estimates of this relationship. Indeed, internally we discussed the possibility that proximal remedies for method variance such as the ones we examined here might produce a distorted estimate of the substantive correlations of interest (e.g., PP-IRB). Given the wealth of evidence suggesting that proactive personality traits are related to a host of desirable outcomes for organizations [see @FullerJr.Changedrivennature2009], our findings require further clarification. 
 
-First, we do not believe that our results refute the possibility of meaningful correlations between proactive personality and job performance outcomes. Rather, we submit that meaningful correlations between these factors would more be reliably revealed by other designs, such as distinct- or multiple-source designs, with the latter being the least likely to introduce method bias [@coteMeasurementErrorTheory1988; @spectorNewPerspectiveMethod2017; @williamsMethodVarianceOrganizational1994]. We emphasize the difference between distinct- and multi-source designs because the two are often conflated in the literature [see  @FullerJr.Changedrivennature2009]. Distinct-source designs involve gathering measurements on separate factors from distinct sources (e.g., predictor data from employees, outcome data from supervisors), which can introduce uncommon method variance [e.g., potentially impression management, halo and observational biases; see @LanceUseindependentmeasures2015; @spectorNewPerspectiveMethod2017] that weakens substantive estimates. Multi-source designs (i.e., gathering multiple perspectives on both predictor and outcome factors using multiple sources, such as in a 360) should produce more reliable substantive estimates by addressing multiple method effects simultaneously.
+First, we do not believe that our results refute the possibility of meaningful correlations between proactive personality and job performance outcomes. Rather, we submit that meaningful correlations between these factors would be more reliably revealed by other designs, such as distinct- or multiple-source designs, with the latter being the least likely to introduce method bias [@coteMeasurementErrorTheory1988; @spectorNewPerspectiveMethod2017; @williamsMethodVarianceOrganizational1994]. We emphasize the difference between distinct- and multi-source designs because the two are often conflated in the literature [see  @FullerJr.Changedrivennature2009]. Distinct-source designs involve gathering measurements on separate factors from distinct sources (e.g., predictor data from employees, outcome data from supervisors), which can introduce uncommon method variance [e.g., potentially impression management, halo and observational biases; see @LanceUseindependentmeasures2015; @spectorNewPerspectiveMethod2017] that weakens substantive estimates. Multi-source designs (i.e., gathering multiple perspectives on both predictor and outcome factors using multiple sources, such as in a 360) should produce more reliable substantive estimates by addressing multiple method effects simultaneously.
 
-Second, it might be argued that our remedied estimates systematically underestimate the effects in question. This reasoning implies that remedied estimates could be less accurate than non-remedied estimates. For this reasoning to be true, non-remedied designs would have to experience a symmetry between method variance and substantive variance [@coteMeasurementErrorTheory1988; @siemsenCommonMethodBias2010; @williamsMethodVarianceOrganizational1994] for method bias is negligible. Alternatively, measurement unreliability would have to play a role [@lanceMethodEffectsMeasurement2010]. Unfortunately, it is not clear how frequently such symmetry occurs in practice and whether or not this occurred here. Also, the conditions that must apply for unreliability to offset method variance remain relatively unknown. 
+Second, it might be argued that our remedied estimates systematically underestimate the effects in question. This reasoning implies that remedied estimates could be less accurate than non-remedied estimates. For this reasoning to be true, non-remedied designs would have to experience a symmetry between method variance and substantive variance [@coteMeasurementErrorTheory1988; @siemsenCommonMethodBias2010; @williamsMethodVarianceOrganizational1994] for method bias is negligible. Alternatively, measurement unreliability would have to play a role [@LanceMethodEffectsMeasurement2010]. Unfortunately, it is not clear how frequently such symmetry occurs in practice and whether or not this occurred here. Also, the conditions that must apply for unreliability to offset method variance remain relatively unknown. 
 
-Though these concerns do highlight a need for deeper thinking regarding how method-substantive symmetry and measure reliability interplay with procedural remedies, we urge those researchers to consider that a coincidence of symmetry or measurement unreliability may be besides the point entirely. While using a design confounded by method variance could produce an estimate that is closer to the true value, it would be better scientific practice to demonstrate this empirically. As procedural remedies for method variance are intended to address *methodological* explanations for a relationship, a simple test is remedying method effects and seeing if the results change. A similar point has been made previously by @spectorMethodVarianceOrganizational2006, who argued that once researchers identify a correlation between two factors, they should then seek to eliminate remaining explanations for this correlation, such as method effects [see also @antonakisMakingCausalClaims2010]. If a remedied estimate deviates more strongly from a true estimate than a non-remedied estimate, the former should be considered more more credible because the substantive hypothesis in question has undergone a more rigorous test. In the absence of such evidence, however, contaminated estimates can reasonably be viewed as less credible than non-remedied estimates. 
+Though these concerns do highlight a need for deeper thinking regarding how method-substantive symmetry and measure reliability interplay with procedural remedies, we urge those researchers to consider that a coincidence of symmetry or measurement unreliability may be besides the point entirely. While using a design confounded by method variance could produce an estimate that is closer to the true value, it would be better scientific practice to demonstrate this empirically. As procedural remedies for method variance are intended to address *methodological* explanations for a relationship, a simple test is remedying method effects and seeing if the results change. A similar point has been made previously by @SpectorMethodVarianceOrganizational2006, who argued that once researchers identify a correlation between two factors, they should then seek to eliminate remaining explanations for this correlation, such as method effects [see also @antonakisMakingCausalClaims2010]. If a remedied estimate deviates more strongly from a true estimate than a non-remedied estimate, the former should be considered more more credible because the substantive hypothesis in question has undergone a more rigorous test. In the absence of such evidence, however, contaminated estimates can reasonably be viewed as less credible than non-remedied estimates. 
 
 # A Call for Theory Development Regarding Method Variance
 
-We suspect that most researchers devote modest attention to the interplay between method and substantive constructs when conducting a study, seeking rather to use designs, such as distinct-source designs, that appear sufficient to purify estimates of obvious causes of common method variance (e.g., self-report bias). While such designs (compared to self-report designs) should more reliably detect effects if they are present, they will also produce attenuated estimates unless uncommon method variance is addressed [@lanceUseIndependentMeasures2015; @spectorNewPerspectiveMethod2017]. Also, there are instances when method variance is ignorable. Simulation work by @siemsenCommonMethodBias2010 suggests that when multiple factors are contaminated by common method variance but examined in a multivariate manner for linear effects (e.g., multiple regression analysis with multiple predictors), CMV impacting the regression slopes can be negligible (i.e., a remedy may not be required in these contexts). However, theorized interaction effects (linear and nonlinear), though they cannot be produced by method variance, could be weakened in such instances (i.e., a remedy may be required in these contexts to produce more reliable effect size estimates). Unless the symmetry between method and substantive constructs within a given design is known, it will remain unclear when method variance is ignorable (so no remedy is required) and when it is not ignorable (and so a remedy is required). 
+We suspect that most researchers devote modest attention to the interplay between method and substantive constructs when conducting a study, seeking rather to use designs, such as distinct-source designs, that appear sufficient to purify estimates of obvious causes of common method variance (e.g., self-report bias). While such designs (compared to self-report designs) should more reliably detect effects if they are present, they will also produce attenuated estimates unless uncommon method variance is addressed [@LanceUseindependentmeasures2015; @spectorNewPerspectiveMethod2017]. Also, there are instances when method variance is ignorable. Simulation work by @siemsenCommonMethodBias2010 suggests that when multiple factors are contaminated by common method variance but examined in a multivariate manner for linear effects (e.g., multiple regression analysis with multiple predictors), CMV impacting the regression slopes can be negligible (i.e., a remedy may not be required in these contexts). However, theorized interaction effects (linear and nonlinear), though they cannot be produced by method variance, could be weakened in such instances (i.e., a remedy may be required in these contexts to produce more reliable effect size estimates). Unless the symmetry between method and substantive constructs within a given design is known, it will remain unclear when method variance is ignorable (so no remedy is required) and when it is not ignorable (and so a remedy is required). 
 
 While it widely agreed upon that scholars take steps to purify one's study of method variance, given that addressing every possible cause of method bias is a gargantuan feat for any single study, research is needed to clarify when impure estimates may or may not be reliable. For a design (e.g., same-source single time-point) that uses only a select few remedies (and so other method effects plausibly remain), researchers will need guidance regarding how method variance could be biasing results. Interestingly, our findings revealed that the procedural remedies, used singly, may produce estimates that are difficult to interpret. This may occur because a single remedy affects the symmetry between method and substantive factors at play in ways that are difficult to identify [see @coteMeasurementErrorTheory1988; @siemsenCommonMethodBias2010; @williamsMethodVarianceOrganizational1994]. 
 
-Seeing this need, we call for the development of a formal theory of method variance that clarifies how procedural remedies for method variance can render method effects negligible or not. There is a vast literature on this topic to draw upon [@coteMeasurementErrorTheory1988; @lanceUseIndependentMeasures2015; @PodsakoffCommonmethodbiases2003; @siemsenCommonMethodBias2010; @spectorNewPerspectiveMethod2017; @williamsMethodVarianceOrganizational1994] to synthesize such a formal theory. We see great value in this work because such a theory would resolve the long-standing debate regarding the nature of method variance. As scholars fall into various positions regarding method variance [e.g., it exists but is negligible, it is non-negligible; see @richardsonTaleThreePerspectives2009], such a theory would explain when (and which) remedies render method bias a plausible alternative explanation as well as when it is ignorable. Adversarial collaborations in developing such a theory would represent a meaningful contribution to social science research writ large.
+Seeing this need, we call for the development of a formal theory of method variance that clarifies how procedural remedies for method variance can render method effects negligible or not. There is a vast literature on this topic to draw upon [@coteMeasurementErrorTheory1988; @LanceUseindependentmeasures2015; @PodsakoffCommonmethodbiases2003; @siemsenCommonMethodBias2010; @spectorNewPerspectiveMethod2017; @williamsMethodVarianceOrganizational1994] to synthesize such a formal theory. We see great value in this work because such a theory would resolve the long-standing debate regarding the nature of method variance. As scholars fall into various positions regarding method variance [e.g., it exists but is negligible, it is non-negligible; see @RichardsonTaleThreePerspectives2009], such a theory would explain when (and which) remedies render method bias a plausible alternative explanation as well as when it is ignorable. Adversarial collaborations in developing such a theory would represent a meaningful contribution to social science research writ large.
 
 In sum, more research focused on how remedies affect the interrelation between method and substantive constructs would clarify when remedies are and are not useful as well as which remedies should be used. Such a theory would also be empirically verifiable by showing how results should (or should not) change when a procedural remedy has been applied. 
 
