@@ -3,22 +3,22 @@ title         : "You've Gotta Keep 'em Separated: Examining the Efficacy of Prox
 shorttitle    : "PROXIMAL METHOD VARIANCE REMEDIES"
 
 author:
-- address: 906 East 1st. St., Thibodaux, LA 70301
+- address: XXXXXXXXXXXXXXXX
   affiliation: '1'
   corresponding: yes
-  email: chris_castille@mac.com
-  name: Christopher M. Castille
+  email: XXXXXXXXXXXXXXXX
+  name: XXXXXXXXXXXXXXXX
 - affiliation: '2'
-  name: Wayne S. Crawford
+  name: XXXXXXXXXXXXXXXX
 - affilitation: '3'
-  name: Marcia J. Simmering
+  name: XXXXXXXXXXXXXXXX
 affiliation:
 - id: '1'
-  institution: Nicholls State University
+  institution: XXXXXXXXXXXXXXXX
 - id: '2'
-  institution: University of Texas at Arlington
+  institution: XXXXXXXXXXXXXXXX
 - id: '3'
-  institution: Louisiana Tech University
+  institution: XXXXXXXXXXXXXXXX
 
 output            : papaja::apa6_word
 
