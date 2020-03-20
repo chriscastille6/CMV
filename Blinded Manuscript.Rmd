@@ -51,7 +51,7 @@ packages <- c("papaja", "apaTables","citr","tidyverse","haven","readr","MOTE",
               "mice","psych","car","boot","lavaan","semTools","semPlot","searcher","fastDummies","gtools",
               #"rmdrive",
               "flextable",
-              "packrat","scales","kableExtra","huxtable")
+              "packrat","scales","kableExtra","huxtable","here")
 lapply(packages, library, character.only = TRUE)
 set.seed(19)
 ```
@@ -110,7 +110,7 @@ In study 1, we examined the efficacy of bundling proximal remedies for method va
 ## Sample and Procedure
 ```{r Load Study 1 Data, include=FALSE}
 #Load data
-data <- read_sav("Data/Study 1.sav")
+data <- read_sav(here("Data","Study 1.sav"))
 
 #Count of individuals who agree to participate (Q42=1 OR Q44=1). Note: 1 is control/non-remedied and 2 is treatment/experimental/remedied.
 N1 <- as.numeric(freq_vect(data$Q42)[1,"Count"])
@@ -938,7 +938,7 @@ As stated earlier, each remedy should address a specific cause of common method 
 
 ## Sample, Procedure, and Analytical Approach
 ```{r Load Study 2 Data, message = FALSE, warning = FALSE, include = FALSE}
-data <- read_sav("Data/Study 2.sav")
+data <- read_sav(here("Data","Study 2.sav"))
 N <- as.numeric(nrow(data))
 
 #Count of individuals who agree to participate.
@@ -2294,7 +2294,7 @@ Recall that findings from Study 2 suggest that the impact of a single remedy on 
 
 ## Sample, procedure, and analytical approach
 ```{r Load Study 3 Data, include=FALSE}
-data3 <- read_sav("Data/Study 3.sav")
+data3 <- read_sav(here("Data","Study 3.sav"))
 
 #Address the misnamed OCB variables. Fix OCBO ordering to align with other datasets.
 colnames(data3)[colnames(data3)=="OCBI7"] <- "OCBO1new"
