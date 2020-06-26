@@ -1,0 +1,1340 @@
+---
+title: "Procedural Remedies Paper 2020"
+author: "ANON"
+date: "6/26/2020"
+output: html_document
+---
+# Load Packages
+We first load the packages...
+```{r Load Packages, include = FALSE}
+packages <- c("papaja", "apaTables","citr","tidyverse","haven","readr",
+              "frequencies",
+              "mice","psych","car","lavaan","semTools","semPlot", "MVN",
+              "fastDummies","gtools",
+              "flextable",
+              "scales","kableExtra","huxtable","here")
+lapply(packages, library, character.only = TRUE)
+set.seed(19)
+```
+
+# Load Sample Data, Print Descriptives, and Prepare Data for Mega Analysis
+Then, we load the data for each sample. Code for the descriptive statistics tables are also included for each study as well as the code for Mardia's test of multivariate normality (which across samples revealed that data violated this assumption).
+```{r Load Sample 1 Data, include=FALSE}
+#Load data
+#data <- read_sav(here("Data","Study 1.sav"))
+data <- read_sav(here("Data","Study1.sav"))
+
+#Count of individuals who agree to participate (Q42=1 OR Q44=1). Note: 1 is control/non-remedied and 2 is treatment/experimental/remedied.
+N1 <- as.numeric(freq_vect(data$Q42)[1,"Count"])
+N2 <- as.numeric(freq_vect(data$Q44)[1,"Count"])
+Nall <- sum(N1,N2)
+
+#Subset in those who agreed to participate and passed the manipulation check question (Q42=1 OR Q44=1 & correctly answered attention checks).
+Agree <- subset(data, Q42 == 1 & Q47 == 1 | Q44 == 1 & Q79 == 2)
+
+#Get success rates (SR) for responding correctly across both conditions.
+n1 <- as.numeric(freq_vect(Agree$Q42)[1,"Count"])
+n2 <- as.numeric(freq_vect(Agree$Q42)[2,"Count"])
+n <- n1+n2
+sr1 <- percent(n1/N1)
+sr2 <- percent(n2/N2)
+
+#Filter in attentive responders.
+Inattent <- subset(Agree, Q26_11 == 1 | Q105_11 ==  1)
+
+#Calculate sum of inattentive responders (iar) that have been screened out of the Inattent dataset for either incorrectly or failing to answer "strongly disagree" to an attention check question. 
+iar1 <- freq_vect(Agree$Q26_11)
+iar1[3,1] <- "2" 
+iar1[4,1] <- "2" 
+iar1[5,1] <- "2" 
+iar1 <- freq_vect(iar1$data)
+iar1 <- as.numeric(iar1[2,"Count"])
+iar2 <- freq_vect(Agree$Q105_11)
+iar2[2,1] <- "2" 
+iar2[3,1] <- "2" 
+iar2 <- freq_vect(iar2$data)
+iar2 <- as.numeric(iar2[2,"Count"])
+iar <- iar1+iar2+(nrow(Agree) - (sum(iar1,iar2)) - nrow(Inattent))
+
+#Delete cases who did not complete the demographic questionnaire and barely completed any tests.
+Inattent <- Inattent[-c(1, 275, 276, 277),]
+
+#Setup demographics.
+#Rename variables.
+Inattent$COND <- Inattent$Q42 
+Inattent$AGE <- Inattent$Q33
+Inattent$RACE <- Inattent$Q34
+Inattent$GENDER <- Inattent$Q35
+Inattent$EDUCAT <- Inattent$Q36.0
+Inattent$EMPLOYED <- Inattent$Q37
+Inattent$JOBTENURE <- Inattent$Q38
+Inattent$USREGION <- Inattent$Q40
+Inattent$PROFESSION <- Inattent$Q39
+
+#Then, combine data from separate surveys in order to form the final cleaned and well-structured dataset. Note: there were two surveys setup on Qualtrics, hence why data needs to be combined. You'll see redundant items moving forward.
+##Convert NAs to 0 to allow merging. Later, you'll need to reasign NAs to conduct a missing data analysis. 
+Inattent[is.na(Inattent)] <- 0
+
+#Proactive personality
+Inattent$PP1	<-	Inattent$Q26_1	+Inattent$Q105_1 #Wherever I have been, I have been a powerful force for change.
+Inattent$PP2	<-	Inattent$Q26_2	+Inattent$Q105_2 #I am constantly on the lookout for new ways to improve my life.
+Inattent$PP3	<-	Inattent$Q26_3	+Inattent$Q105_3 #If I see something I don't like, I fix it.
+Inattent$PP4	<-	Inattent$Q26_4	+Inattent$Q105_4 #I am always looking for better ways to do things.
+Inattent$PP5	<-	Inattent$Q26_5	+Inattent$Q105_5 #No matter what the odds, if I believe in something, I will make it happen.
+Inattent$PP6	<-	Inattent$Q26_6	+Inattent$Q105_6 #Nothing is more exciting than seeing my ideas turn into reality.
+Inattent$PP7	<-	Inattent$Q26_7	+Inattent$Q105_7 #I love being a champion for my ideas, even against others' opposition.
+Inattent$PP8	<-	Inattent$Q26_8	+Inattent$Q105_8 #I excel at identifying opportunities.
+Inattent$PP9	<-	Inattent$Q26_9	+Inattent$Q105_9 #If I believe in an idea, no obstacle will prevent me.
+Inattent$PP10	<-	Inattent$Q26_10	+Inattent$Q105_10 #I can spot a good opportunity long before others can.
+
+#Voice
+Inattent$VC1	<-	Inattent$Q27_1	+	Inattent$Q106_1 #I develop and make recommendations concerning issues that affect my work group.
+Inattent$VC2	<-	Inattent$Q27_2	+	Inattent$Q106_2 #I speak up and encourage others in my group to get involved in issues that affect the group.
+Inattent$VC3	<-	Inattent$Q27_3	+	Inattent$Q106_3 #I communicate my opinions about work issues to others in my group even if my opinion is different and others in the group disagree with me.
+Inattent$VC4	<-	Inattent$Q27_4	+	Inattent$Q106_4 #I keep well informed about issues where my opinion might be useful to my work group.
+Inattent$VC5	<-	Inattent$Q27_5	+	Inattent$Q106_5 #I get involved in issues that affect the quality of work life here in my group.
+Inattent$VC6	<-	Inattent$Q27_6	+	Inattent$Q106_6 #I speak up in my group with ideas for new projects or changes in procedures.
+
+#Taking Charge
+Inattent$TC1	<-	Inattent$Q28_1	+	Inattent$Q106_8  #I often try to adopt improved procedures for doing my job.
+Inattent$TC2	<-	Inattent$Q28_2	+	Inattent$Q106_9  #I often try to change how my job is executed in order to be more effective.
+Inattent$TC3	<-	Inattent$Q28_3	+	Inattent$Q106_10 #I often try to bring about improved procedures for the work unit or department.
+Inattent$TC4	<-	Inattent$Q28_4	+	Inattent$Q106_11 #I often try to institute new work methods that are more effective for this company.
+Inattent$TC5	<-	Inattent$Q28_5	+	Inattent$Q106_12 #I often try to change organizational rules or policies that are nonproductive or counterproductive.
+Inattent$TC6	<-	Inattent$Q28_6	+	Inattent$Q106_13 #I often make constructive suggestions for imprving how things operate within the organization.
+Inattent$TC7	<-	Inattent$Q28_7	+	Inattent$Q106_14 #I often try to correct a faulty procedure or practice.
+Inattent$TC8	<-	Inattent$Q28_8	+	Inattent$Q106_15 #I often try to eliminate redundant or unnecessary procedures.
+Inattent$TC9	<-	Inattent$Q28_9	+	Inattent$Q106_16 #I often try to implement solutions to pressing organizational problems.
+Inattent$TC10	<-	Inattent$Q28_10	+	Inattent$Q106_17 #I often try to introduce new structures, technologies, or approaches to improve efficiency
+
+#OCBI
+Inattent$OCBI1	<-	Inattent$Q29_1	+	Inattent$Q106_19 #I help others who have been absent.
+Inattent$OCBI2	<-	Inattent$Q29_2	+	Inattent$Q106_20 #I help others who have heavy work loads.
+Inattent$OCBI3  <-	Inattent$Q29_3	+	Inattent$Q106_21 #I assist my supervisor with his/her work load (when not asked).
+Inattent$OCBI4	<-	Inattent$Q29_4	+	Inattent$Q106_22 #I take time to listen to co-workers' problems and worries.
+Inattent$OCBI5	<-	Inattent$Q29_5	+	Inattent$Q106_23 #I go out of my way to help new employees.
+Inattent$OCBI6	<-	Inattent$Q29_6	+	Inattent$Q106_24 #I take a personal interest in other employees.
+Inattent$OCBI7	<-	Inattent$Q29_7	+	Inattent$Q106_25 #I pass along information to co-workers.
+
+#OCBO
+Inattent$OCBO1	<-	Inattent$Q30_1	+	Inattent$Q106_27 #My attendance at work is above the norm.
+Inattent$OCBO2	<-	Inattent$Q30_2	+	Inattent$Q106_28 #I give advance notice when I'm unable to come to work.
+Inattent$OCBO3	<-	Inattent$Q30_3	+	Inattent$Q106_29 #I take undeserved work breaks. (r) 
+Inattent$OCBO4	<-	Inattent$Q30_4	+	Inattent$Q106_30 #I spend a great deal of time with personal phone conversations. (r)
+Inattent$OCBO5	<-	Inattent$Q30_5	+	Inattent$Q106_31 #I complain about insignificant things at work. (r)
+Inattent$OCBO6	<-	Inattent$Q30_6	+	Inattent$Q106_32 #I conserve and protect organizational property.
+Inattent$OCBO7	<-	Inattent$Q30_7	+	Inattent$Q106_33 #I adhere to informal rules devised to maintain order. 
+
+#IRB
+Inattent$IRB1	<-	Inattent$Q31_1	+	Inattent$Q106_35 #I adepquately complete assigned duties.
+Inattent$IRB2	<-	Inattent$Q31_2	+	Inattent$Q106_36 #I fulfill responsibilities specific in my job description.
+Inattent$IRB3	<-	Inattent$Q31_3	+	Inattent$Q106_37 #I perform tasks that are expected of me.
+Inattent$IRB4	<-	Inattent$Q31_4	+	Inattent$Q106_38 #I meet formal performance requirements of the job.
+Inattent$IRB5	<-	Inattent$Q31_5	+	Inattent$Q106_39 #I engage in activities that will directly affect my performance.
+Inattent$IRB6	<-	Inattent$Q31_6	+	Inattent$Q106_40 #I nelgect aspects of my job that I'm obligated to perform. (r)
+Inattent$IRB7	<-	Inattent$Q31_7	+	Inattent$Q106_41 #I fail to perform essential job duties. (r)
+
+#Consistency Motif
+Inattent$CM1 <- Inattent$Q27_7 + Inattent$Q106_7   #"I am a brave person"
+Inattent$CM2 <- Inattent$Q28_11 + Inattent$Q106_18 #"I am a courageous person"  
+Inattent$CM3 <- Inattent$Q29_8 + Inattent$Q106_26  #"I am a talkative person"
+Inattent$CM4 <- Inattent$Q30_8 + Inattent$Q106_34  #"I am a silent person" (r)
+Inattent$CM5 <- Inattent$Q33_6 + Inattent$Q112_6   #"I am an optimistic person"
+Inattent$CM6 <- Inattent$Q41_7 + Inattent$Q116_7   #"I am a pessimistic person" (r)
+Inattent$CM7 <- Inattent$Q31_8 + Inattent$Q106_42  #"I seldom feel blue." (r)
+Inattent$CM8 <- Inattent$Q32_5 + Inattent$Q111_5   #"I often feel blue."
+
+#Preferance for color blue
+Inattent$PB1 <- Inattent$Q32_1 + Inattent$Q111_1   #"I prefer blue to other colors."
+Inattent$PB2 <- Inattent$Q32_2 + Inattent$Q111_2 #"I like the color blue."  
+Inattent$PB3 <- Inattent$Q32_3 + Inattent$Q111_3  #"I like blue clothes."
+Inattent$PB4 <- Inattent$Q32_4 + Inattent$Q111_4  #"I hope my next car is blue."
+
+#Brand label attitudes
+Inattent$BLA1 <- Inattent$Q33_1 + Inattent$Q112_1   #"Buying private label brands makes me feel good."
+Inattent$BLA2 <- Inattent$Q33_2 + Inattent$Q112_2 #"I love it when private label brands are available for the product categories I purchase."  
+Inattent$BLA3 <- Inattent$Q33_3 + Inattent$Q112_3  #"For most product categories, the best buy is usually the private label brand."
+Inattent$BLA4 <- Inattent$Q33_4 + Inattent$Q112_4  #"Considering the value for the money, I prefer private label brands to national brands."
+Inattent$BLA5 <- Inattent$Q33_5 + Inattent$Q112_5  #"When I buy a private label brand, I always feel that I am getting a good deal."
+
+###Create PANAS items.
+##PA
+Inattent$PA1 <- Inattent$Q34_1 + Inattent$Q113_1   #Interested
+Inattent$PA2 <- Inattent$Q34_3 + Inattent$Q113_3   #Excited
+Inattent$PA3 <- Inattent$Q34_5 + Inattent$Q113_5   #Strong
+Inattent$PA4 <- Inattent$Q34_9 + Inattent$Q113_9   #Enthusiastic
+Inattent$PA5 <- Inattent$Q34_10 + Inattent$Q113_10 #Proud
+Inattent$PA6 <- Inattent$Q35_2 + Inattent$Q114_2   #Alert
+Inattent$PA7 <- Inattent$Q35_4 + Inattent$Q114_4   #Inspired
+Inattent$PA8 <- Inattent$Q35_6 + Inattent$Q114_6   #Determined
+Inattent$PA9 <- Inattent$Q35_7 + Inattent$Q114_7   #Attentive
+Inattent$PA10 <- Inattent$Q35_9 + Inattent$Q114_9  #Active
+
+##NA
+Inattent$NA1 <- Inattent$Q34_2 + Inattent$Q113_2    #Distressed
+Inattent$NA2 <- Inattent$Q34_4 + Inattent$Q113_4    #Upset
+Inattent$NA3 <- Inattent$Q34_6 + Inattent$Q113_6    #Guilty
+Inattent$NA4 <- Inattent$Q34_7 + Inattent$Q113_7    #Scared
+Inattent$NA5 <- Inattent$Q34_8 + Inattent$Q113_8    #Hostile
+Inattent$NA6 <- Inattent$Q35_1 + Inattent$Q114_1    #Irritable
+Inattent$NA7 <- Inattent$Q35_3 + Inattent$Q114_3    #Ashamed
+Inattent$NA8 <- Inattent$Q35_5 + Inattent$Q114_5    #Nervous
+Inattent$NA9 <- Inattent$Q35_8 + Inattent$Q114_8    #Jittery
+Inattent$NA10 <- Inattent$Q35_10 + Inattent$Q114_10 #Afraid
+
+##Mood
+Inattent$MOOD <- Inattent$Q36 + Inattent$Q115 # “My mood today can best be described as...”
+
+#Survey Enjoyment and Value
+Inattent$SE1 <- Inattent$Q41_1 + Inattent$Q116_1   #"I do not like filling out surveys." (R)
+Inattent$SE2 <- Inattent$Q41_2 + Inattent$Q116_2 #"Surveys are fun to fill out."  
+Inattent$SE3 <- Inattent$Q41_3 + Inattent$Q116_3  #"I enjoy filling out surveys."
+Inattent$SV1 <- Inattent$Q41_4 + Inattent$Q116_4   #"A lot can be learned from information gathered from surveys."
+Inattent$SV2 <- Inattent$Q41_5 + Inattent$Q116_5 #"Nothing good comes from completing a survey."  (R)
+Inattent$SV3 <- Inattent$Q41_6 + Inattent$Q116_6  #"Surveys are useful ways to gather information."
+
+#Recode 0 values to missing.
+l <- Inattent[c(224:315)]
+l <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"0=NA"); x}))
+
+#Retain only variables used for testing purposes.
+data1 <- cbind(Inattent[c(215:223)],l)
+N <- as.numeric(nrow(data1))
+n1f <- as.numeric(freq_vect(data1$COND)[2,"Count"])
+n2f <- as.numeric(freq_vect(data1$COND)[1,"Count"])
+
+#Missing data analysis using 'sapply(data1, function(x) sum(is.na(x)))' revealed some missing likert data. 
+init <- mice(data1, maxit = 0)
+meth <- init$method
+predM <- init$predictorMatrix
+meth[c("PP5")]="norm"
+meth[c("OCBI5")]="norm"
+meth[c("IRB4")]="norm"
+imputed <- mice(data1, method=meth, predictorMatrix=predM, m=5)
+data1 <- complete(imputed)
+
+#Round imputed data to nearest whole number for estimation purposes. 
+#data1$PP5 <- ceiling(data1$PP5)
+#data1$OCBI5 <- ceiling(data1$OCBI5)
+#data1$IRB4 <- ceiling(data1$IRB4)
+
+#Calculate descriptives
+data1$AGE <- as.numeric(data1$AGE)
+M <- mean(data1$AGE, na.rm = TRUE)
+SD <- sd(data1$AGE, na.rm = TRUE)
+
+#Calculate frequencies
+##Recode single "f" to female. 
+female.n <- as.numeric(freq_vect(data1$GENDER)[1,"Count"])
+female.p <- as.numeric(freq_vect(data1$GENDER)[1,"Percentage"])
+white.n <- as.numeric(freq_vect(data1$RACE)[2,"Count"])
+white.p <- as.numeric(freq_vect(data1$RACE)[2,"Percentage"])
+fulltime.n <- as.numeric(freq_vect(data1$EMPLOYED)[4,"Count"])
+fulltime.p <- as.numeric(freq_vect(data1$EMPLOYED)[4,"Percentage"])
+
+# Create response style indicators from observed data (Falk & Cai, 2016).
+# Recode all Likert measures (l)
+l <- data1[c(10:56)]
+## Extreme Response Style (ERS)
+ERS <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"1=1; 2=0; 3=0; 4=0; 5=1"); x}))
+ERS <- as.data.frame(round(rowSums(ERS)/ncol(ERS),2))
+## Midpoint Response Style(MRS)
+MRS <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"1=0; 2=0; 3=1; 4=0; 5=0"); x}))
+MRS <- as.data.frame(round(rowSums(MRS)/ncol(MRS),2))
+## Acquiescence as a tendency to respond above the midpoint
+ARS <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"1=0; 2=0; 3=0; 4=1; 5=1"); x}))
+ARS <- as.data.frame(round(rowSums(ARS)/ncol(ARS),2))
+## Dis-acquiescence as a tendency to respond above the midpoint
+DRS <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"1=1; 2=1; 3=0; 4=0; 5=0"); x}))
+DRS <- as.data.frame(round(rowSums(DRS)/ncol(DRS),2))
+## Socially desirable responding. Requires separating datasets into positive and negatively worded items and keying for socially desirable resonding.
+lp <- data1[c(10:44,48:54)]
+SDR1 <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"1=0; 2=0; 3=0; 4=1; 5=0"); x}))
+ln <- data1[c(45:47,55,56)]
+SDR2 <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"1=0; 2=1; 3=0; 4=0; 5=0"); x}))
+SDR <- cbind(SDR1,SDR2)
+SDR<- as.data.frame(round(rowSums(SDR)/ncol(SDR),2))
+
+## Merge all response style variables.
+RS <- cbind(ERS,MRS,ARS,DRS,SDR)
+
+## Merge response style measures with main dataset.
+data1 <- cbind(data1,RS)
+
+# Rename response style variables.
+colnames(data1)[colnames(data1)== "round(rowSums(ERS)/ncol(ERS), 2)"] <- "ERS"
+colnames(data1)[colnames(data1)== "round(rowSums(MRS)/ncol(MRS), 2)"] <- "MRS"
+colnames(data1)[colnames(data1)== "round(rowSums(ARS)/ncol(ARS), 2)"] <- "ARS"
+colnames(data1)[colnames(data1)== "round(rowSums(DRS)/ncol(DRS), 2)"] <- "DRS"
+colnames(data1)[colnames(data1)== "round(rowSums(SDR)/ncol(SDR), 2)"] <- "SDR"
+```
+```{r Descriptives Tables for Sample 1 Data, include = FALSE}
+#Create scale scores study 1
+my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
+                     TC=c("TC1","TC2","TC3","TC4","TC5","TC6","TC7","TC8","TC9","TC10"),
+                     VC=c("VC1","VC2","VC3","VC4","VC5","VC6"),
+                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"), 
+                     OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
+                     OCBO=c("OCBO1","OCBO2", "-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
+                     CM=c("CM1","CM2","CM3","-CM4","CM5","-CM6","-CM7","CM8"),
+                     PrefB=c("PB1","PB2","PB3","PB4"),
+                     BLA=c("BLA1","BLA2","BLA3","BLA4","BLA5"),
+                     SEnj=c("-SE1","SE2","SE3"),
+                     SVal=c("SV1","-SV2","SV3"),
+                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
+                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10")
+                     )
+my.scales <- scoreItems(my.keys.list,data1, min = 1, max = 5)
+PP.alpha <- round(my.scales[["alpha"]][1],2)
+IRB.alpha <- round(my.scales[["alpha"]][4],2)
+OCBI.alpha <- round(my.scales[["alpha"]][5],2)
+OCBO.alpha <- round(my.scales[["alpha"]][6],2)
+PA.alpha <- round(my.scales[["alpha"]][12],2)
+NA.alpha <- round(my.scales[["alpha"]][13],2)
+VC.alpha <- round(my.scales[["alpha"]][3],2)
+TC.alpha <- round(my.scales[["alpha"]][2],2)
+PrefB.alpha <- round(my.scales[["alpha"]][8],2)
+CM.alpha <- round(my.scales[["alpha"]][7],2)
+SEnj.alpha <- round(my.scales[["alpha"]][10],2)
+SVal.alpha <- round(my.scales[["alpha"]][11],2)
+BLA.alpha <- round(my.scales[["alpha"]][9],2)
+
+#Create dataframe for descriptive table (1: correlations)
+d <- as.data.frame(data1$COND)
+scores <- as.data.frame(my.scales[["scores"]])
+mood <- as.data.frame(data1$MOOD)
+descriptives <- cbind(d,scores)
+descriptives1 <- cbind(descriptives,mood)
+apaTables::apa.cor.table(descriptives1, filename="Table1_APA.doc", table.number=1)
+descriptives1a <- subset(descriptives1, d=='0')
+apaTables::apa.cor.table(descriptives1a, filename="Table1a_APA.doc", table.number=1)
+descriptives1b <- subset(descriptives1, d=='1')
+apaTables::apa.cor.table(descriptives1b, filename="Table1b_APA.doc", table.number=1)
+##Subset out reliabilities.
+data1a <- subset(data1, COND =='0')
+my.scales1a <- scoreItems(my.keys.list,data1a)
+data1b <- subset(data1, COND =='1')
+my.scales1b <- scoreItems(my.keys.list,data1b)
+```
+```{r Multivariate Normality Testing for Sample 1, include = FALSE}
+#Examine multivariate normality assumption
+mvn1 <- mvn(data1[c(10:85)], mvnTest = "mardia", covariance = FALSE)
+# results ar significant (p < .001)
+```
+```{r Load Sample 2 Data, include=FALSE}
+# just a note for the folks wondering why this is referred to as "sample 2" but data3 below. In an earlier version of this manuscript, we structured the results to present the proximal remedies in the order of sample 1 as study 1, sample 3 as study2, and sample 2 as study 3. We initially thought this structure would make for an easier read. Our reviewers thought otherwise, so we restructured the paper to reflect - accurately - the temporal order in which the samples were gathered. 
+data3 <- foreign::read.spss(here("Data","Study 3.sav"), to.data.frame = TRUE,
+                    # if you plan to treat Likert items as ordinal or numeric:
+                    use.value.labels = FALSE)
+
+#Address the misnamed OCB variables. Fix OCBO ordering to align with other datasets.
+colnames(data3)[colnames(data3)=="OCBI7"] <- "OCBO1new"
+colnames(data3)[colnames(data3)=="OCBO7"] <- "OCBI7new"
+colnames(data3)[colnames(data3)=="OCBO6"] <- "OCBO7"
+colnames(data3)[colnames(data3)=="OCBO5"] <- "OCBO6"
+colnames(data3)[colnames(data3)=="OCBO4"] <- "OCBO5"
+colnames(data3)[colnames(data3)=="OCBO3"] <- "OCBO4"
+colnames(data3)[colnames(data3)=="OCBO2"] <- "OCBO3"
+colnames(data3)[colnames(data3)=="OCBO1"] <- "OCBO2"
+colnames(data3)[colnames(data3)=="OCBO1new"] <- "OCBO1"
+colnames(data3)[colnames(data3)=="OCBI7new"] <- "OCBI7"
+
+#Re-order variables.
+#data3 <- data3[c(2,3,87,88,89,4:13,30:35,43,37:42,36,44:50,60:79,86)]
+
+#Analyses revealed that some cases of data had been imputed. Missing data appears to have been dealt with by simply imputing an average of sorts. This could be problematic (see Enders, C. K. (2003). Using the expectation maximization algorithm to estimate coefficient alpha for scales with item-level missing data. Psychological Methods, 8(3), 322-337.; Enders, C. K. (2010). Applied missing data analysis: New York, NY: The Guilford Press. Additionally, and more importantly, the required estimation methods are not maximum likelihood but are ordinal, further requiring the each response category be represented (i.e., averages do not fall into a particular response category).  Reversing this decision:
+data3$PA2[data3$PA2==3.23] <- NA
+data3$PA5[data3$PA5==3.58] <- NA
+data3$PA6[data3$PA6==3.59] <- NA
+data3$PA8[data3$PA8==3.77] <- NA
+data3$PA9[data3$PA9==3.75] <- NA
+data3$PA10[data3$PA10==3.57] <- NA
+data3$PA3[data3$PA3==3.44] <- NA
+data3$PA4[data3$PA4==3.56] <- NA
+data3$PA7[data3$PA7==3.45] <- NA
+data3$NA9[data3$NA9==1.87] <- NA
+data3$NA2[data3$NA2==3.23] <- NA
+data3$NA3[data3$NA3==1.72] <- NA
+data3$NA6[data3$NA6==2.17] <- NA
+data3$NA7[data3$NA7==1.57] <- NA
+data3$NA8[data3$NA8==2.11] <- NA
+data3$PP1[data3$PP1==3.49] <- NA
+data3$PP3[data3$PP3==3.92] <- NA
+data3$PP3[data3$PP3==0] <- NA
+data3$PP8[data3$PP8==3.57] <- NA
+data3$PP9[data3$PP9==3.53] <- NA
+data3$PP10[data3$PP10==3.45] <- NA
+data3$IRB1[data3$IRB1==4.47] <- NA
+data3$IRB2[data3$IRB2==4.47] <- NA
+data3$IRB4[data3$IRB4==4.49] <- NA
+data3$IRB5[data3$IRB5==3.59] <- NA
+data3$IRB5[data3$IRB5==3.96] <- NA
+data3$IRB6[data3$IRB6==1.88] <- NA
+data3$IRB7[data3$IRB7==1.65] <- NA
+data3$IRB7[data3$IRB7==0] <- NA
+data3$OCBI3[data3$OCBI3==3.7] <- NA
+data3$OCBI3[data3$OCBI3==0] <- NA
+data3$OCBI5[data3$OCBI5==3.99] <- NA
+data3$OCBI7[data3$OCBI7==4.06] <- NA
+data3$OCBO2[data3$OCBO2==4.24] <- NA
+data3$OCBO4[data3$OCBO4==1.92] <- NA
+data3$OCBO4[data3$OCBO4==0] <- NA
+data3$OCBO5[data3$OCBO5==2.12] <- NA
+data3$OCBO5[data3$OCBO5==0] <- NA
+data3$OCBO6[data3$OCBO6==2.12] <- NA
+data3$OCBO7[data3$OCBO7==3.89] <- NA
+
+#Examine missingness pattern.
+#MDAplot <-  aggr(data3, col=mdc(1:2), numbers=TRUE, sortVars=TRUE, labels=names(data3), cex.axis=.7, gap=3, ylab=c("Proportion of missingness","Missingness Pattern"))
+#Delete cases who did not complete the didn't complete the demographic questionnaire.
+data3 <- data3[-c(38,94,141,153,161,165,170,183,188,190,193,195,196,231,300),]
+#MDAplot <-  aggr(data3, col=mdc(1:2), numbers=TRUE, sortVars=TRUE, labels=names(data3), cex.axis=.7, gap=3, ylab=c("Proportion of missingness","Missingness Pattern"))
+#MDA <- LittleMCAR(data3[c(6:31,33:56)]) #Only 50 items can be analyzed, so one item with full data was dropped from the analysis. 
+
+##Thirty six missing data patterns and a just significant LittleMCAR test suggest that data may not be MCAR. Though imputation is used to fill in gaps, this should be taken as a limitation.
+
+#Count of individuals who agree to participate.
+N1 <- as.numeric(freq_vect(data3$COND)[1,"Count"])  #Cross-sectional/Control
+N2 <- as.numeric(freq_vect(data3$COND)[2,"Count"])  #Temporal Separation of Measurement
+
+#Missing data analysis using 'sapply(data3, function(x) sum(is.na(x)))' which likert data were missing. 
+init <- mice(data3, maxit = 0)
+meth <- init$method
+predM <- init$predictorMatrix
+meth[c("PP1")]="norm"
+meth[c("PP3")]="norm"
+meth[c("PP8")]="norm"
+meth[c("PP9")]="norm"
+meth[c("PP10")]="norm"
+meth[c("OCBI3")]="norm"
+meth[c("OCBI5")]="norm"
+meth[c("OCBO1")]="norm"
+meth[c("OCBO3")]="norm"
+meth[c("OCBO4")]="norm"
+meth[c("OCBO5")]="norm"
+meth[c("OCBO6")]="norm"
+meth[c("OCBO7")]="norm"
+meth[c("IRB2")]="norm"
+meth[c("IRB4")]="norm"
+meth[c("IRB5")]="norm"
+meth[c("IRB6")]="norm"
+meth[c("IRB7")]="norm"
+meth[c("PA1")]="norm"
+meth[c("PA2")]="norm"
+meth[c("PA3")]="norm"
+meth[c("PA4")]="norm"
+meth[c("PA5")]="norm"
+meth[c("PA6")]="norm"
+meth[c("PA7")]="norm"
+meth[c("PA8")]="norm"
+meth[c("PA9")]="norm"
+meth[c("PA10")]="norm"
+meth[c("NA1")]="norm"
+meth[c("NA2")]="norm"
+meth[c("NA3")]="norm"
+meth[c("NA4")]="norm"
+meth[c("NA5")]="norm"
+meth[c("NA6")]="norm"
+meth[c("NA7")]="norm"
+meth[c("NA8")]="norm"
+meth[c("NA9")]="norm"
+meth[c("NA10")]="norm"
+imputed <- mice(data3, method=meth, predictorMatrix=predM, m=5)
+data3 <- complete(imputed)
+#Round imputed data to nearest whole number for estimation purposes. 
+#data3$PP1 <- ceiling(data3$PP1)
+#data3$PP3 <- ceiling(data3$PP3)
+#data3$PP8 <- ceiling(data3$PP8)
+#data3$PP9 <- ceiling(data3$PP9)
+#data3$PP10 <- ceiling(data3$PP10)
+#data3$OCBI3 <- ceiling(data3$OCBI3)
+#data3$OCBI5 <- ceiling(data3$OCBI5)
+#data3$OCBO1 <- ceiling(data3$OCBO1)
+#data3$OCBO3 <- ceiling(data3$OCBO3)
+#data3$OCBO4 <- ceiling(data3$OCBO4)
+#data3$OCBO5 <- ceiling(data3$OCBO5)
+#data3$OCBO6 <- ceiling(data3$OCBO6)
+#data3$OCBO7 <- ceiling(data3$OCBO7)
+#data3$IRB2 <- ceiling(data3$IRB2)
+#data3$IRB4 <- ceiling(data3$IRB4)
+#data3$IRB5 <- ceiling(data3$IRB5)
+#data3$IRB6 <- ceiling(data3$IRB6)
+#data3$IRB7 <- ceiling(data3$IRB7)
+#data3$PA1 <- ceiling(data3$PA1)
+#data3$PA2 <- ceiling(data3$PA2)
+#data3$PA3 <- ceiling(data3$PA3)
+#data3$PA4 <- ceiling(data3$PA4)
+#data3$PA5 <- ceiling(data3$PA5)
+#data3$PA6 <- ceiling(data3$PA6)
+#data3$PA7 <- ceiling(data3$PA7)
+#data3$PA8 <- ceiling(data3$PA8)
+#data3$PA9 <- ceiling(data3$PA9)
+#data3$PA10 <- ceiling(data3$PA10)
+#data3$NA1 <- ceiling(data3$NA1)
+#data3$NA2 <- ceiling(data3$NA2)
+#data3$NA3 <- ceiling(data3$NA3)
+#data3$NA4 <- ceiling(data3$NA4)
+#data3$NA5 <- ceiling(data3$NA5)
+#data3$NA6 <- ceiling(data3$NA6)
+#data3$NA7 <- ceiling(data3$NA7)
+#data3$NA8 <- ceiling(data3$NA8)
+#data3$NA9 <- ceiling(data3$NA9)
+#data3$NA10 <- ceiling(data3$NA10)
+
+#Setup demographics.
+#Rename variables.
+colnames(data3)[colnames(data3)=="SEX"] <- "GENDER"
+
+#Calculate descriptives
+data3$AGE <- as.numeric(data3$AGE)
+M <- mean(data3$AGE, na.rm = TRUE)
+SD <- sd(data3$AGE, na.rm = TRUE)
+
+#Calculate frequencies
+##Recode single "f" to female. 
+data3$GENDER[data3$GENDER=="f"] <- 1
+female.n <- as.numeric(freq_vect(data3$GENDER)[2,"Count"])
+female.p <- as.numeric(freq_vect(data3$GENDER)[2,"Percentage"])
+white.n <- as.numeric(freq_vect(data3$RACE)[2,"Count"])
+white.p <- as.numeric(freq_vect(data3$RACE)[2,"Percentage"])
+fulltime.n <- as.numeric(freq_vect(data3$PartFullTime)[2,"Count"])
+fulltime.p <- as.numeric(freq_vect(data3$PartFullTime)[2,"Percentage"])
+```
+```{r Descriptives Tables for Sample 2 Data, include = FALSE}
+#Create scale scores study 3
+my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
+                     TC=c("TC1","TC2","TC3","TC4","TC5","TC6","TC7","TC8","TC9","TC10"),
+                     VC=c("VOICE1","VOICE2","VOICE3","VOICE4","VOICE5","VOICE6"),
+                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"), 
+                     OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
+                     OCBO=c("OCBO1","OCBO2", "-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
+                     PrefBt1=c("Blue1","Blue2","Blue3","Blue4"),
+                     PrefBt2=c("BLUE1_T2","BLUE2_T2","BLUE3_T2","BLUE4_T2"),
+                     BLAt1=c("PLBA1","PLBA2","PLBA3","PLBA4","PLBA5"),
+                     BLAt2=c("PLBA1_T2","PLBA2_T2","PLBA3_T2","PLBA4_T2","PLBA5_T2"),
+                     SEnjt1=c("-S_ENJ1","S_ENJ2","S_ENJ3"),
+                     SEnjt2=c("-S_ENJ1_T2","S_ENJ2_T2","S_ENJ3_T2"),
+                     SValt1=c("S_VAL1","-S_VAL2","S_VAL3"),
+                     SValt2=c("S_VAL1_T2","-S_VAL2_T2","S_VAL3_T2"),
+                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
+                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"))
+my.scales <- scoreItems(my.keys.list,data3, min = 1, max = 5)
+#PP.alpha <- round(my.scales[["alpha"]][1],2)
+#IRB.alpha <- round(my.scales[["alpha"]][2],2)
+#OCBI.alpha <- round(my.scales[["alpha"]][3],2)
+#OCBO.alpha <- round(my.scales[["alpha"]][4],2)
+#PA.alpha <- round(my.scales[["alpha"]][8],2)
+#NA.alpha <- round(my.scales[["alpha"]][9],2)
+#SEnj.alpha <- round(my.scales[["alpha"]][6],2)
+#SVal.alpha <- round(my.scales[["alpha"]][7],2)
+
+#Create dataframe for descriptive table (1: correlations)
+d <- as.data.frame(data3$COND)
+scores <- as.data.frame(my.scales[["scores"]])
+moodt1 <- as.data.frame(data3$MOOD_T1)
+moodt2 <- as.data.frame(data3$MOOD_T2)
+descriptives3 <- cbind(d,scores)
+descriptives3 <- cbind(descriptives3,moodt1)
+descriptives3 <- cbind(descriptives3,moodt2)
+apaTables::apa.cor.table(descriptives3, filename="Table3_APA.doc", table.number=1)
+descriptives3a <- subset(descriptives3, data3$COND=='0')
+apaTables::apa.cor.table(descriptives3a, filename="Table3a_APA.doc", table.number=1)
+descriptives3b <- subset(descriptives3, data3$COND=='1')
+apaTables::apa.cor.table(descriptives3b, filename="Table3b_APA.doc", table.number=1)
+##Subset out reliabilities.
+data3a <- subset(data3, COND =='0')
+my.scales3a <- scoreItems(my.keys.list,data3a)
+data3b <- subset(data3, COND =='1')
+my.scales3b <- scoreItems(my.keys.list,data3b)
+```
+```{r Multivariate Normality Testing for Sample 1, include = FALSE}
+#Examine multivariate normality assumption
+mvn3 <- mvn(data3[c(6:57)], mvnTest = "mardia", covariance = FALSE)
+# results ar significant (p < .001)
+```
+```{r Load Sample 3 Data, include = FALSE}
+data <- read_sav(here("Data","Study 2.sav"))
+N <- as.numeric(nrow(data))
+
+#Count of individuals who agree to participate.
+N1 <- as.numeric(freq_vect(data$IC1)[1,"Count"])  #Control
+N2 <- as.numeric(freq_vect(data$IC2)[1,"Count"])  #Coverstory
+N3 <- as.numeric(freq_vect(data$IC3)[1,"Count"])  #Randomized Scales
+N4 <- as.numeric(freq_vect(data$FOR4)[1,"Count"]) #Randomized Items Within Scales
+N5 <- as.numeric(freq_vect(data$FOR5)[1,"Count"]) #Filler Scales Used
+Nall <- sum(N1,N2,N3,N4,N5)
+
+#Recode consent and manipulation check so that only those who passed have their data examined. 
+data$IC1[data$IC1 =="I Agree"] <- 1
+data$IC2[data$IC2 =="I Agree"] <- 1
+data$IC3[data$IC3 =="I Agree"] <- 1
+data$FOR4[data$FOR4 =="I Agree"] <- 1
+data$FOR5[data$FOR5 =="I Agree"] <- 1
+
+#Subset in those individuals who paid attention and understood the purpose of the survey as it was presented to them.
+Likert <- subset(data, IC1 == "1" & Dupe1 == "1" | IC2 == "1" & Dupe1 == "2" | IC3 == "1" & Dupe1 == "1" | FOR4 == "1" & Dupe1 == "1" |  FOR5 == "1" & Dupe1 == "1")
+
+#Delete cases who did not complete the demographic questionnaire.
+Likert <- Likert[complete.cases(Likert[ , 376:380]),]
+
+#Get success rates (SR) for responding correctly across both conditions.
+n1 <- as.numeric(freq_vect(Likert$IC1)[1,"Count"])  #Control
+n2 <- as.numeric(freq_vect(Likert$IC2)[1,"Count"])  #Coverstory
+n3 <- as.numeric(freq_vect(Likert$IC3)[1,"Count"])  #Randomized Scales
+n4 <- as.numeric(freq_vect(Likert$FOR4)[1,"Count"]) #Randomized Items Within Scales
+n5 <- as.numeric(freq_vect(Likert$FOR5)[1,"Count"]) #Filler Scales Used
+n <- n1+n2+n2+n4+n5
+sr1 <- round(n1/N1,2)
+sr2 <- round(n2/N2,2)
+sr3 <- round(n3/N3,2)
+sr4 <- round(n4/N4,2)
+sr5 <- round(n5/N5,2)
+srall <- round(n/(N1+N2+N3+N4+N5),2)
+
+##Collapse like data across columns.
+###Conditions; build independent data sets and then rename the condition variable.
+###1 Control
+Likert$IC1[is.na(Likert$IC1)] <- 0
+Likert$IC1 <- as.numeric(Likert$IC1)
+###2 Cover Story Manipulation
+Likert$IC2 <- ifelse(Likert$IC2 == 1, c("2"))
+Likert$IC2[is.na(Likert$IC2)] <- 0
+Likert$IC2 <- as.numeric(Likert$IC2)
+###3 Randomized Scales
+Likert$IC3 <- ifelse(Likert$IC3 == 1, c("3"))
+Likert$IC3[is.na(Likert$IC3)] <- 0
+Likert$IC3 <- as.numeric(Likert$IC3)
+###4 Randomized Items
+Likert$FOR4 <- ifelse(Likert$FOR4 == 1, c("4"))
+Likert$FOR4[is.na(Likert$FOR4)] <- 0
+Likert$FOR4 <- as.numeric(Likert$FOR4)
+###5 Filler Scales
+Likert$FOR5 <- ifelse(Likert$FOR5 == 1, c("5"))
+Likert$FOR5[is.na(Likert$FOR5)] <- 0
+Likert$FOR5 <- as.numeric(Likert$FOR5)
+#Combine condition Likert into single variable column
+Likert$COND <- Likert$IC1 + Likert$IC2+ Likert$IC3 + Likert$FOR4 + Likert$FOR5
+#Apply value lables. 
+Likert$COND <- factor(Likert$COND, levels = c(1,2,3,4,5), labels = c("Control", "CSManipulation","ScaleRand","ItemRand","FillerScales"))
+
+#Consolidate item response measures
+##Form Likert datasets, re-lable values, convert to numeric data, consolidate measures, and delete data.
+agree <- Likert[c(21:60,89:138,157:196,225:236,262:289,293:332)]
+#agree <- ifelse(agree == "Strongly Disagree", 1, ifelse(agree == "Disagree", 2, ifelse(agree == "Neither Agree nor Disagree", 3, ifelse(agree == "Agree", 4, ifelse(agree == "Strongly Agree", 5,0)))))
+agree <- as.data.frame(agree)
+agree[is.na(agree)] <- 0
+
+#####Proactive Personality 
+agree$PP1	<-	agree$PP1_1	+	agree$PP2_1	+	agree$PP5_1	+	agree$PP6_1	+	agree$PPx_1
+agree$PP2	<-	agree$PP1_2	+	agree$PP2_2	+	agree$PP5_2	+	agree$PP6_2	+	agree$PPx_2
+agree$PP3	<-	agree$PP1_3	+	agree$PP2_3	+	agree$PP5_3	+	agree$PP6_3	+	agree$PPx_3
+agree$PP4	<-	agree$PP1_4	+	agree$PP2_4	+	agree$PP5_4	+	agree$PP6_4	+	agree$PPx_4
+agree$PP5	<-	agree$PP1_5	+	agree$PP2_5	+	agree$PP5_5	+	agree$PP6_5	+	agree$PPx_5
+agree$PP6	<-	agree$PP1_6	+	agree$PP2_6	+	agree$PP5_6	+	agree$PP6_6	+	agree$PPx_6
+agree$PP7	<-	agree$PP1_7	+	agree$PP2_7	+	agree$PP5_7	+	agree$PP6_7	+	agree$PPx_7
+agree$PP8	<-	agree$PP1_8	+	agree$PP2_8	+	agree$PP5_8	+	agree$PP6_8	+	agree$PPx_8
+agree$PP9	<-	agree$PP1_9	+	agree$PP2_9	+	agree$PP5_9	+	agree$PP6_9	+	agree$PPx_9
+agree$PP10	<-	agree$PP1_10	+	agree$PP2_10	+	agree$PP5_10	+	agree$PP6_10	+	agree$PPx_10
+
+#####OCBI
+agree$OCBI1	<-	agree$OCBI1_1	+	agree$OCBI2_1	+	agree$OCBI5_1	+	agree$OCBI6_1	+	agree$OCBIx_1
+agree$OCBI2	<-	agree$OCBI1_3	+	agree$OCBI2_3	+	agree$OCBI5_3	+	agree$OCBI6_3	+	agree$OCBIx_3
+agree$OCBI3	<-	agree$OCBI1_4	+	agree$OCBI2_4	+	agree$OCBI5_4	+	agree$OCBI6_4	+	agree$OCBIx_4
+agree$OCBI4	<-	agree$OCBI1_5	+	agree$OCBI2_5	+	agree$OCBI5_5	+	agree$OCBI6_5	+	agree$OCBIx_5
+agree$OCBI5	<-	agree$OCBI1_6	+	agree$OCBI2_6	+	agree$OCBI5_6	+	agree$OCBI6_6	+	agree$OCBIx_6
+agree$OCBI6	<-	agree$OCBI1_7	+	agree$OCBI2_7	+	agree$OCBI5_7	+	agree$OCBI6_7	+	agree$OCBIx_7
+agree$OCBI7	<-	agree$OCBI1_8	+	agree$OCBI2_8	+	agree$OCBI5_8	+	agree$OCBI6_8	+	agree$OCBIx_8
+
+#####OCBO
+agree$OCBO1	<-	agree$OCBO1_1	+	agree$OCBO2_1	+	agree$OCBO5_1	+	agree$OCBO6_1	+	agree$OCBOx_1
+agree$OCBO2	<-	agree$OCBO1_2	+	agree$OCBO2_2	+	agree$OCBO5_2	+	agree$OCBO6_2	+	agree$OCBOx_2
+agree$OCBO3	<-	agree$OCBO1_3	+	agree$OCBO2_3	+	agree$OCBO5_3	+	agree$OCBO6_3	+	agree$OCBOx_3
+agree$OCBO4	<-	agree$OCBO1_5	+	agree$OCBO2_5	+	agree$OCBO5_5	+	agree$OCBO6_5	+	agree$OCBOx_5
+agree$OCBO5	<-	agree$OCBO1_6	+	agree$OCBO2_6	+	agree$OCBO5_6	+	agree$OCBO6_6	+	agree$OCBOx_6
+agree$OCBO6	<-	agree$OCBO1_7	+	agree$OCBO2_7	+	agree$OCBO5_7	+	agree$OCBO6_7	+	agree$OCBOx_7
+agree$OCBO7	<-	agree$OCBO1_8	+	agree$OCBO2_8	+	agree$OCBO5_8	+	agree$OCBO6_8	+	agree$OCBOx_8
+
+#####IRB
+agree$IRB1	<-	agree$IRB1_1	+	agree$IRB2_1	+	agree$IRB5_1	+	agree$IRB6_1	+	agree$IRBx_1
+agree$IRB2	<-	agree$IRB1_3	+	agree$IRB2_3	+	agree$IRB5_3	+	agree$IRB6_3	+	agree$IRBx_3
+agree$IRB3	<-	agree$IRB1_4	+	agree$IRB2_4	+	agree$IRB5_4	+	agree$IRB6_4	+	agree$IRBx_4
+agree$IRB4	<-	agree$IRB1_5	+	agree$IRB2_5	+	agree$IRB5_5	+	agree$IRB6_5	+	agree$IRBx_5
+agree$IRB5	<-	agree$IRB1_6	+	agree$IRB2_6	+	agree$IRB5_6	+	agree$IRB6_6	+	agree$IRBx_6
+agree$IRB6	<-	agree$IRB1_8	+	agree$IRB2_8	+	agree$IRB5_8	+	agree$IRB6_8	+	agree$IRBx_8
+agree$IRB7	<-	agree$IRB1_9	+	agree$IRB2_9	+	agree$IRB5_9	+	agree$IRB6_9	+	agree$IRBx_9
+
+#####Inattentive Responding
+agree$IR	<-	agree$PP1_11	+	agree$PP2_11	+	agree$PP5_11	+	agree$PP6_11	+	agree$PPx_11
+
+#####Consistency Motif
+agree$CM1	<-	agree$PP1_12	+	agree$PP2_12	+	agree$PP5_12	+	agree$PP6_12	+	agree$PPx_12 #Brave
+agree$CM2	<-	agree$IRB1_2	+	agree$IRB2_2	+	agree$IRB5_2	+	agree$IRB6_2	+	agree$IRBx_2 #Courageous
+agree$CM3	<-	agree$OCBI1_9	+	agree$OCBI2_9	+	agree$OCBI5_9	+	agree$OCBI6_9	+	agree$OCBIx_9 #Talkative
+agree$CM4	<-	agree$OCBO1_9	+	agree$OCBO2_9	+	agree$OCBO5_9	+	agree$OCBO6_9	+	agree$OCBOx_9 #Silent Person
+agree$CM5	<-	agree$IRB1_7	+	agree$IRB2_7	+	agree$IRB5_7	+	agree$IRB6_7	+	agree$IRBx_7 #Optimistic
+agree$CM6	<-	agree$OCBO1_4	+	agree$OCBO2_4	+	agree$OCBO5_4	+	agree$OCBO6_4	+	agree$OCBOx_4 #Pessimistic Person
+agree$CM7	<-	agree$IRB1_10	+	agree$IRB2_10	+	agree$IRB5_10	+	agree$IRB6_10	+	agree$IRBx_10 #Seldom feel blue.
+agree$CM8	<-	agree$OCBI1_2	+	agree$OCBI2_2	+	agree$OCBI5_2	+	agree$OCBI6_2	+	agree$OCBIx_2 #Often feel blue.
+
+#Consolidate agree data
+agree <- agree[c(211:250)]
+
+#PANAS
+PANAS <- Likert[c(65:84,133:152,201:220,241:260,337:356)]
+#PANAS <- ifelse(PANAS == "Very slightly or not at all", 1, ifelse(PANAS == "A little", 2, ifelse(PANAS == "Moderately", 3, ifelse(PANAS == "Quite a bit", 4, ifelse(PANAS == "Extremely", 5, 0)))))
+PANAS <- as.data.frame(PANAS)
+PANAS[is.na(PANAS)] <- 0
+PANAS$PA1	<-	PANAS$PAff1_1	+	PANAS$PAff2_1	+	PANAS$PAff5_1	+	PANAS$PAff6_1	+	PANAS$PAffx_1
+PANAS$PA2	<-	PANAS$PAff1_2	+	PANAS$PAff2_2	+	PANAS$PAff5_2	+	PANAS$PAff6_2	+	PANAS$PAffx_2
+PANAS$PA3	<-	PANAS$PAff1_3	+	PANAS$PAff2_3	+	PANAS$PAff5_3	+	PANAS$PAff6_3	+	PANAS$PAffx_3
+PANAS$PA4	<-	PANAS$PAff1_4	+	PANAS$PAff2_4	+	PANAS$PAff5_4	+	PANAS$PAff6_4	+	PANAS$PAffx_4
+PANAS$PA5	<-	PANAS$PAff1_5	+	PANAS$PAff2_5	+	PANAS$PAff5_5	+	PANAS$PAff6_5	+	PANAS$PAffx_5
+PANAS$PA6	<-	PANAS$PAff1_6	+	PANAS$PAff2_6	+	PANAS$PAff5_6	+	PANAS$PAff6_6	+	PANAS$PAffx_6
+PANAS$PA7	<-	PANAS$PAff1_7	+	PANAS$PAff2_7	+	PANAS$PAff5_7	+	PANAS$PAff6_7	+	PANAS$PAffx_7
+PANAS$PA8	<-	PANAS$PAff1_8	+	PANAS$PAff2_8	+	PANAS$PAff5_8	+	PANAS$PAff6_8	+	PANAS$PAffx_8
+PANAS$PA9	<-	PANAS$PAff1_9	+	PANAS$PAff2_9	+	PANAS$PAff5_9	+	PANAS$PAff6_9	+	PANAS$PAffx_9
+PANAS$PA10	<-	PANAS$PAff1_10	+	PANAS$PAff2_10	+	PANAS$PAff5_10	+	PANAS$PAff6_10	+	PANAS$PAffx_10
+PANAS$NA1	<-	PANAS$NAff1_1	+	PANAS$NAff2_1	+	PANAS$NAff5_1	+	PANAS$NAff6_1	+	PANAS$NAffx_1
+PANAS$NA2	<-	PANAS$NAff1_2	+	PANAS$NAff2_2	+	PANAS$NAff5_2	+	PANAS$NAff6_2	+	PANAS$NAffx_2
+PANAS$NA3	<-	PANAS$NAff1_3	+	PANAS$NAff2_3	+	PANAS$NAff5_3	+	PANAS$NAff6_3	+	PANAS$NAffx_3
+PANAS$NA4	<-	PANAS$NAff1_4	+	PANAS$NAff2_4	+	PANAS$NAff5_4	+	PANAS$NAff6_4	+	PANAS$NAffx_4
+PANAS$NA5	<-	PANAS$NAff1_5	+	PANAS$NAff2_5	+	PANAS$NAff5_5	+	PANAS$NAff6_5	+	PANAS$NAffx_5
+PANAS$NA6	<-	PANAS$NAff1_6	+	PANAS$NAff2_6	+	PANAS$NAff5_6	+	PANAS$NAff6_6	+	PANAS$NAffx_6
+PANAS$NA7	<-	PANAS$NAff1_7	+	PANAS$NAff2_7	+	PANAS$NAff5_7	+	PANAS$NAff6_7	+	PANAS$NAffx_7
+PANAS$NA8	<-	PANAS$NAff1_8	+	PANAS$NAff2_8	+	PANAS$NAff5_8	+	PANAS$NAff6_8	+	PANAS$NAffx_8
+PANAS$NA9	<-	PANAS$NAff1_9	+	PANAS$NAff2_9	+	PANAS$NAff5_9	+	PANAS$NAff6_9	+	PANAS$NAffx_9
+PANAS$NA10	<-	PANAS$NAff1_10	+	PANAS$NAff2_10	+	PANAS$NAff5_10	+	PANAS$NAff6_10	+	PANAS$NAffx_10
+#Consolidate "PANAS" dataset.
+PANAS <- PANAS[c(101:120)]
+
+#Mood
+Mood <- as.data.frame(Likert[c(85,153,221,261,357)])
+Mood[is.na(Mood)] <- 0
+Mood$MOOD	<-	Mood$Mood1	+	Mood$MOOD2	+	Mood$MOOD5	+	Mood$Mood6	+	Mood$MOODx
+#Consolidate Mood
+MOOD <- Mood[c(6)]
+
+#####HALO
+Halo <- as.data.frame(Likert[c(61:64,129:132,197:200,237:240,333:336)])
+Halo[is.na(Halo)] <- 0
+Halo$HALO1	<-	Halo$HALO1_1	+	Halo$HALO2_1	+	Halo$HALO5_1	+	Halo$HALO6_1	+	Halo$HALOx_1 # Facial attractiveness
+Halo$HALO2	<-	Halo$HALO1_2	+	Halo$HALO2_2	+	Halo$HALO5_2	+	Halo$HALO6_2	+	Halo$HALOx_2 # Intelligence
+Halo$HALO3	<-	Halo$HALO1_3	+	Halo$HALO2_3	+	Halo$HALO5_3	+	Halo$HALO6_3	+	Halo$HALOx_3 # Atheletic ability
+Halo$HALO4	<-	Halo$HALO1_4	+	Halo$HALO2_4	+	Halo$HALO5_4	+	Halo$HALO6_4	+	Halo$HALOx_4 # Trivia knowledge
+#Consolidate Halo
+HALO <- Halo[c(21:24)]
+
+#Recode 0 values to missing.
+l <- cbind(agree,PANAS,MOOD,HALO, Likert[c(358:365)])
+l <- as.data.frame(apply(l, 2, function(x) {x <- recode(x,"0=NA"); x}))
+
+#Missing data analysis using 'sapply(data2, function(x) sum(is.na(x)))' revealed some missing likert data. 
+init <- mice(l[c(-8)], maxit = 0)
+meth <- init$method
+predM <- init$predictorMatrix
+meth[c("IRB3")]="norm"
+meth[c("NA3")]="norm"
+imputed <- mice(l, method=meth, predictorMatrix=predM, m=5)
+l <- complete(imputed)
+#Round imputed data to nearest whole number for estimation purposes. 
+#l$IRB3 <- ceiling(l$IRB3)
+#l$NA3 <- ceiling(l$NA3)
+
+#Retain only variables used for testing purposes.
+data2 <- cbind(Likert[c(376:386)],l,Likert[c(365:375)])
+n <- as.numeric(nrow(data2))
+
+#Setup demographics.
+#Rename variables.
+colnames(data2)[colnames(data2)=="Age"] <- "AGE"
+data2$AGE <- as.numeric(data2$AGE)
+colnames(data2)[colnames(data2)=="Race"] <- "RACE"
+colnames(data2)[colnames(data2)=="Gender"] <- "GENDER"
+colnames(data2)[colnames(data2)=="Education"] <- "EDUCAT"
+colnames(data2)[colnames(data2)=="EmployStat"] <- "EMPLOYED"
+colnames(data2)[colnames(data2)=="EmployStatYrs"] <- "JOBTENURE"
+colnames(data2)[colnames(data2)=="JobTitle"] <- "PROF_SPECIFY"
+
+#Calculate descriptives
+M <- mean(data2$AGE, na.rm = TRUE)
+SD <- sd(data2$AGE, na.rm = TRUE)
+
+#Calculate frequencies
+##Recode single "f" to female. 
+#data2$GENDER[data2$GENDER=="f"] <- 1
+female.n <- as.numeric(freq_vect(data2$GENDER)[1,"Count"])
+female.p <- as.numeric(freq_vect(data2$GENDER)[1,"Percentage"])
+white.n <- as.numeric(freq_vect(data2$RACE)[7,"Count"])
+white.p <- as.numeric(freq_vect(data2$RACE)[7,"Percentage"])
+fulltime.n <- as.numeric(freq_vect(data2$EMPLOYED)[3,"Count"])
+fulltime.p <- as.numeric(freq_vect(data2$EMPLOYED)[3,"Percentage"])
+
+# Dummy code the conodition variable for lavaan.
+data2 <- dummy_cols(data2, select_columns = "COND")
+
+#Rename SurvValeEnj items
+names(data2)[names(data2) == "SurvValEnj_1"] <- "SE1"
+names(data2)[names(data2) == "SurvValEnj_2"] <- "SE2"
+names(data2)[names(data2) == "SurvValEnj_3"] <- "SE3"
+names(data2)[names(data2) == "SurvValEnj_4"] <- "SV1"
+names(data2)[names(data2) == "SurvValEnj_5"] <- "SV2"
+names(data2)[names(data2) == "SurvValEnj_6"] <- "SV3"
+```
+```{r Descriptives Tables for Sample 3 Data, include = FALSE}
+#Create scale scores study 2
+my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
+                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"), 
+                     OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
+                     OCBO=c("OCBO1","OCBO2", "-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
+                     CM=c("CM1","CM2","CM3","-CM4","CM5","-CM6","-CM7","CM8"),
+                     SEnj=c("-SE1","SE2","SE3"),
+                     SVal=c("SV1","-SV2","SV3"),
+                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
+                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
+                     Halo=c("HALO1","HALO2","HALO3","HALO4")
+                   )
+my.scales <- scoreItems(my.keys.list,data2) #produces misleading means and sds because of incorrect scale points (with the exception being the Halo measure, which is correctly reported)
+HALO.alpha <- round(my.scales[["alpha"]][10],2)
+my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
+                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"), 
+                     OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
+                     OCBO=c("OCBO1","OCBO2", "-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
+                     CM=c("CM1","CM2","CM3","-CM4","CM5","-CM6","-CM7","CM8"),
+                     SEnj=c("-SE1","SE2","SE3"),
+                     SVal=c("SV1","-SV2","SV3"),
+                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
+                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10"),
+                     Halo=c("HALO1","HALO2","HALO3","HALO4") #not on 5 point  
+)
+my.scales2 <- scoreItems(my.keys.list,data2, min = 1, max = 5) #this produces correct means and SDs for all but the halo factor. Keep this in mind when reading the results. 
+#HALO.alpha <- round(my.scales[["alpha"]][10],2)
+#PP.alpha <- round(my.scales[["alpha"]][1],2)
+#IRB.alpha <- round(my.scales[["alpha"]][2],2)
+#OCBI.alpha <- round(my.scales[["alpha"]][3],2)
+#OCBO.alpha <- round(my.scales[["alpha"]][4],2)
+#PA.alpha <- round(my.scales[["alpha"]][8],2)
+#NA.alpha <- round(my.scales[["alpha"]][9],2)
+#CM.alpha <- round(my.scales[["alpha"]][5],2)
+#SEnj.alpha <- round(my.scales[["alpha"]][6],2)
+#SVal.alpha <- round(my.scales[["alpha"]][7],2)
+#HALO.alpha <- round(my.scales[["alpha"]][10],2)
+
+#Create dataframe for descriptive table (1: correlations)
+d <- as.data.frame(data2$COND)
+d <- fastDummies::dummy_cols(d)
+#reorder
+d <- d[, c(3, 2, 4, 5, 6)]
+scores <- as.data.frame(my.scales2[["scores"]])
+mood <- as.data.frame(data2$MOOD)
+descriptives2 <- cbind(d,scores)
+descriptives2 <- cbind(descriptives2,mood)
+apaTables::apa.cor.table(descriptives2, filename="Table2_APA.doc", table.number=1)
+descriptives2a <- subset(descriptives2, data2$COND_Control=='1')
+descriptives2a <- descriptives2a[c(1,6:16)]
+apaTables::apa.cor.table(descriptives2a, filename="Table2a_APA.doc", table.number=1)
+descriptives2b <- subset(descriptives2, data2$COND_CSManipulation=='1')
+descriptives2b <- descriptives2b[c(2,6:16)]
+apaTables::apa.cor.table(descriptives2b, filename="Table2b_APA.doc", table.number=1)
+descriptives2c <- subset(descriptives2, data2$COND_ItemRand=='1')
+descriptives2c <- descriptives2c[c(3,6:16)]
+apaTables::apa.cor.table(descriptives2c, filename="Table2c_APA.doc", table.number=1)
+descriptives2d <- subset(descriptives2, data2$COND_FillerScales=='1')
+descriptives2d <- descriptives2d[c(3,6:16)]
+apaTables::apa.cor.table(descriptives2d, filename="Table2d_APA.doc", table.number=1)
+descriptives2e <- subset(descriptives2, data2$COND_ScaleRand=='1')
+descriptives2e <- descriptives2e[c(3,6:16)]
+apaTables::apa.cor.table(descriptives2e, filename="Table2e_APA.doc", table.number=1)
+##Subset out reliabilities.
+data2a <- subset(data2, COND_Control =='1')
+my.scales2a <- scoreItems(my.keys.list,data2a)
+data2b <- subset(data2, COND_CSManipulation =='1')
+my.scales2b <- scoreItems(my.keys.list,data2b)
+data2c <- subset(data2, COND_ItemRand =='1')
+my.scales2c <- scoreItems(my.keys.list,data2c)
+data2d <- subset(data2, COND_FillerScales =='1')
+my.scales2d <- scoreItems(my.keys.list,data2d)
+data2e <- subset(data2, COND_ScaleRand =='1')
+my.scales2e <- scoreItems(my.keys.list,data2e)
+```
+```{r Multivariate Normality Testing for Sample 3, include = FALSE}
+#Examine multivariate normality assumption
+mvn2 <- mvn(data2[c(12:42,52:72)], mvnTest = "mardia", covariance = FALSE)
+# results ar significant (p < .001)
+```
+Note: this function converts any really small p values to "< .001". It is helpful for printing a significant finding in-text.
+```{r Pvalr Function}
+# Create pvalue function to conver values < .001 to "<.001".
+pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
+
+  roundr <- function(x, digits = 1) {
+    res <- sprintf(paste0('%.', digits, 'f'), x)
+    zzz <- paste0('0.', paste(rep('0', digits), collapse = ''))
+    res[res == paste0('-', zzz)] <- zzz
+    res
+  }
+
+  sapply(pvals, function(x, sig.limit) {
+    if (x < sig.limit)
+      if (html)
+        return(sprintf('&lt; %s', format(sig.limit))) else
+          return(sprintf('< %s', format(sig.limit)))
+    if (x > .1)
+      return(roundr(x, digits = 2)) else
+        return(roundr(x, digits = digits))
+  }, sig.limit = sig.limit)
+}
+```
+```{r Build Mega-Analysis Dataset, include = FALSE}
+##Combine data
+## Study 1 Data
+data1.pa <- data1 %>%
+  select(starts_with("PA"))
+
+data1.pp <- data1 %>%
+  select(starts_with("PP"))
+
+data1.na <- data1 %>%
+  select(starts_with("Na"))
+
+data1.irb <- data1 %>%
+  select(starts_with("IRB"))
+
+data1.ocb <- data1 %>%
+  select(starts_with("OCB"))
+
+data1.mood <- data1 %>%
+  select(starts_with("MOOD"))
+
+data1.cond <- data1 %>%
+  select(starts_with("COND")) %>%
+  rename(COND_BUNDLED = COND)
+
+#combine
+data1.r <- cbind(data1.cond,data1.pp,data1.irb,data1.ocb,data1.pa,data1.na,data1.mood)
+
+#add in dummy codes
+data1.r$COND_Control <- ifelse(data1.r$COND_BUNDLED == "1", 1,0)
+data1.r$COND_ItemRand <- ifelse(data1.r$COND_BUNDLED == "0", 1,0)
+data1.r$COND_ScaleRand <- ifelse(data1.r$COND_BUNDLED == "0", 1,0)
+data1.r$COND_FillerScales <- ifelse(data1.r$COND_BUNDLED == "0", 1,0)
+data1.r$COND_CSManipulation <- ifelse(data1.r$COND_BUNDLED == "0", 1,0)
+data1.r$COND_BUNDLED <- ifelse(data1.r$COND_BUNDLED == "0", 1,0)
+data1.r$COND_TempSep <- 0
+
+#reorder
+data1.r <- data1.r %>%
+  select(COND_Control,COND_ItemRand, COND_ScaleRand, COND_FillerScales, COND_CSManipulation, COND_BUNDLED, COND_TempSep, everything())
+
+## Study 2 Data
+data2.pa <- data2 %>%
+  select(starts_with("PA")) 
+
+data2.pp <- data2 %>%
+  select(starts_with("PP"))
+
+data2.na <- data2 %>%
+  select(starts_with("Na"))
+
+data2.irb <- data2 %>%
+  select(starts_with("IRB"))
+
+data2.ocb <- data2 %>%
+  select(starts_with("OCB"))
+
+data2.mood <- data2 %>%
+  select(starts_with("MOOD"))
+
+data2.cond <- data2 %>%
+  select(starts_with("COND")) %>%
+  select(-1)
+
+#combine
+data2.r <- cbind(data2.cond,data2.pp,data2.irb,data2.ocb,data2.pa,data2.na,data2.mood)
+
+#add in dummy codes
+data2.r$COND_BUNDLED <- 0
+data2.r$COND_TempSep <- 0
+
+#reorder
+data2.r <- data2.r %>%
+  select(COND_Control,COND_ItemRand, COND_ScaleRand, COND_FillerScales, COND_CSManipulation, COND_BUNDLED, COND_TempSep, everything())
+
+## Study 3 Data
+data3.pa <- data3 %>%
+  select(starts_with("PA")) %>%
+  select(-1)
+
+data3.pp <- data3 %>%
+  select(starts_with("PP"))
+
+data3.na <- data3 %>%
+  select(starts_with("Na"))
+
+data3.irb <- data3 %>%
+  select(starts_with("IRB"))
+
+data3.ocb <- data3 %>%
+  select(starts_with("OCB"))
+
+data3.mood <- data3 %>%
+  select(starts_with("MOOD_T1"))%>%
+  rename(MOOD = MOOD_T1)
+
+data3.cond <- data3 %>%
+  select(starts_with("COND")) %>%
+  rename(COND_TempSep = COND)
+
+#combine
+data3.r <- cbind(data3.cond,data3.pp,data3.irb,data3.ocb,data3.pa,data3.na,data3.mood)
+
+#add in dummy codes
+data3.r$COND_Control <- ifelse(data3.r$COND_TempSep == "0", 1,0)
+data3.r$COND_ItemRand <- 0
+data3.r$COND_ScaleRand <- 0
+data3.r$COND_FillerScales <- 0
+data3.r$COND_CSManipulation <- 0
+data3.r$COND_BUNDLED <- 0
+
+#reorder
+data3.r <- data3.r %>%
+  select(COND_Control,COND_ItemRand, COND_ScaleRand, COND_FillerScales, COND_CSManipulation, COND_BUNDLED, COND_TempSep, everything())
+
+#bind all data
+mega.df <- rbind(data1.r,data2.r,data3.r)
+
+# The following code was used to examine the effectiveness of all remedies except a cover story as well as examine whether the cover story data from sample 3 was just a fluke. You can use commenting to select which cut of the data you wish to analyze.
+# subset out coverstory data.
+#mega.df.nocover <- mega.df[ which(mega.df$COND_CSManipulation=='0'), ]
+# subset out coverstory data but retain the bundleded data
+mega.df.nocover <- mega.df[ which(mega.df$COND_CSManipulation=='0' | mega.df$COND_BUNDLED=='1'), ]
+```
+
+# Mega-Analysis and Printing Reliability Decomposition Statistics
+The following code allows you to reproduce the mega-analysis. The comparison defaults to comparing the non-remedied data to data containing any remedies.
+```{r Mega-Analysis, include = FALSE}
+mega <- ' 
+# Substantive factors
+PP =~ c(pp1a, pp1b)*PP1 + c(pp2a, pp2b)*PP2 + c(pp3a,pp3b)*PP3 + c(pp4a,pp4b)*PP4 + c(pp5a,pp5b)*PP5 + c(pp6a,pp6b)*PP6 + c(pp7a,pp7b)*PP7 + c(pp8a,pp8b)*PP8 + c(pp9a,pp9b)*PP9 + c(pp10a,pp10b)*PP10
+IRB =~ c(irb1a,irb1b)*IRB1 + c(irb2a,irb2b)*IRB2 + c(irb3a,irb3b)*IRB3 + c(irb4a,irb4b)*IRB4 + c(irb5a,irb5b)*IRB5 + c(irb6a,irb6b)*IRB6 + c(irb7a,irb7b)*IRB7
+OCBI =~ c(ocbi1a,ocbi1b)*OCBI1 + c(ocbi2a,ocbi2b)*OCBI2 + c(ocbi3a,ocbi3b)*OCBI3 + c(ocbi4a,ocbi4b)*OCBI4 + c(ocbi5a,ocbi5b)*OCBI5 + c(ocbi6a,ocbi6b)*OCBI6 + c(ocbi7a,ocbi7b)*OCBI7
+OCBO =~ c(ocbo1a,ocbo1b)*OCBO1 + c(ocbo2a,ocbo2b)*OCBO2 + c(ocbo3a,ocbo3b)*OCBO3 + c(ocbo4a,ocbo4b)*OCBO4 + c(ocbo5a,ocbo5b)*OCBO5 + c(ocbo6a,ocbo6b)*OCBO6 + c(ocbo7a,ocbo7b)*OCBO7
+
+# Negative Item Content Factor
+NW =~ c(nw1a, nw1b)*IRB6 + c(nw2a, nw2b)*IRB7 + c(nw3a, nw3b)*OCBO3 + c(nw4a, nw4b)*OCBO4 + c(nw5a, nw5b)*OCBO5
+NW ~~ 1*NW
+NW ~ 0*1
+NW ~~ 0*IRB
+NW ~~ 0*OCBO
+NW ~~ 0*PP
+NW ~~ 0*OCBI
+
+#Affectivity
+PAff =~ PA1 + PA2 + PA3 + PA4 + PA5 + PA6 + PA7 + PA8 + PA9 + PA10 
+Na =~ NA1 + NA2 + NA3 + NA4 + NA5 + NA6 + NA7 + NA8 + NA9 + NA10 
+AP =~ PA1 + PA2 + PA3 + PA4 + PA5 + PA6 + PA7 + PA8 + PA9 + PA10 + NA1 + NA2 + NA3 + NA4 + NA5 + NA6 + NA7 + NA8 + NA9 + NA10 
+
+#Constrain bifactor covariances
+PAff ~~ 0*Na
+PAff ~~ 0*AP
+Na ~~ 0*AP
+
+#Factor variances are fixed to 1 to allow estimation.
+###Substantive factors
+PP ~~ 1*PP
+IRB ~~ 1*IRB
+OCBI ~~ 1*OCBI
+OCBO ~~ 1*OCBO
+
+##Factor covariances labels 
+PP ~~ c(PPIRB1,PPIRB2)*IRB
+PP ~~ c(PPOCBI1,PPOCBI2)*OCBI
+PP ~~ c(PPOCBO1,PPOCBO2)*OCBO
+IRB ~~ c(IRBOCBI1,IRBOCBI2)*OCBI
+IRB ~~ c(IRBOCBO1,IRBOCBO2)*OCBO
+OCBI ~~ c(OCBIO1,OCBIO2)*OCBO
+
+#Factor means of both groups are fixed at zero to allow identification.
+##Substantive factors
+PP ~ 0*1
+IRB ~ 0*1
+OCBI ~ 0*1
+OCBO ~ 0*1
+
+# Add in "Mood" as a single-item latent construct that is an uncorrelated with all factors.
+Mood =~ .95*MOOD + c(mpp1a, mpp1b)*PP1 + c(mpp2a, mpp2b)*PP2 + c(mpp3a,mpp3b)*PP3 + c(mpp4a,mpp4b)*PP4 + c(mpp5a,mpp5b)*PP5 + c(mpp6a,mpp6b)*PP6 + c(mpp7a,mpp7b)*PP7 + c(mpp8a,mpp8b)*PP8 + c(mpp9a,mpp9b)*PP9 + c(mpp10a,mpp10b)*PP10 + c(mirb1a,mirb1b)*IRB1 + c(mirb2a,mirb2b)*IRB2 + c(mirb3a,mirb3b)*IRB3 + c(mirb4a,mirb4b)*IRB4 + c(mirb5a,mirb5b)*IRB5 + c(mirb6a,mirb6b)*IRB6 + c(mirb7a,mirb7b)*IRB7 + c(mocbi1a,mocbi1b)*OCBI1 + c(mocbi2a,mocbi2b)*OCBI2 + c(mocbi3a,mocbi3b)*OCBI3 + c(mocbi4a,mocbi4b)*OCBI4 + c(mocbi5a,mocbi5b)*OCBI5 + c(mocbi6a,mocbi6b)*OCBI6 + c(mocbi7a,mocbi7b)*OCBI7 + c(mocbo1a,mocbo1b)*OCBO1 + c(mocbo2a,mocbo2b)*OCBO2 + c(mocbo3a,mocbo3b)*OCBO3 + c(mocbo4a,mocbo4b)*OCBO4 + c(mocbo5a,mocbo5b)*OCBO5 + c(mocbo6a,mocbo6b)*OCBO6 + c(mocbo7a,mocbo7b)*OCBO7
+
+# (see Anderson & Gerbing, 1988; Sorbom & Joreskig, 1982; as cited by Petrescu, 2013)
+MOOD ~~ (1.665606)*(1-.85)*MOOD
+
+# Add in causal sructure for PA and Mood
+Mood ~ PAff + Na
+
+# Mood as a proximal cause of method variance
+Mood ~~ 0*PP # Mood uncorrelated with proactive personality
+Mood ~~ 0*IRB # Mood uncorrelated with IRB
+Mood ~~ 0*OCBI # Mood uncorreated with OCBI
+Mood ~~ 0*OCBO # Mood uncorrelated with OCBO
+NW ~~ 0*Mood
+
+# Estimate differences in key parameters (factor loadings and covariances). 
+# Compute differences in factor loadings
+pp1c	:=	pp1a	-	pp1b
+pp2c	:=	pp2a	-	pp2b
+pp3c	:=	pp3a	-	pp3b
+pp4c	:=	pp4a	-	pp4b
+pp5c	:=	pp5a	-	pp5b
+pp6c	:=	pp6a	-	pp6b
+pp7c	:=	pp7a	-	pp7b
+pp8c	:=	pp8a	-	pp8b
+pp9c	:=	pp9a	-	pp9b
+pp10c	:=	pp10a	-	pp10b
+irb1c	:=	irb1a	-	irb1b
+irb2c	:=	irb2a	-	irb2b
+irb3c	:=	irb3a	-	irb3b
+irb4c	:=	irb4a	-	irb4b
+irb5c	:=	irb5a	-	irb5b
+irb6c	:=	irb6a	-	irb6b
+irb7c	:=	irb7a	-	irb7b
+ocbi1c	:=	ocbi1a	-	ocbi1b
+ocbi2c	:=	ocbi2a	-	ocbi2b
+ocbi3c	:=	ocbi3a	-	ocbi3b
+ocbi4c	:=	ocbi4a	-	ocbi4b
+ocbi5c	:=	ocbi5a	-	ocbi5b
+ocbi6c	:=	ocbi6a	-	ocbi6b
+ocbi7c	:=	ocbi7a	-	ocbi7b
+ocbo1c	:=	ocbo1a	-	ocbo1b
+ocbo2c	:=	ocbo2a	-	ocbo2b
+ocbo3c	:=	ocbo3a	-	ocbo3b
+ocbo4c	:=	ocbo4a	-	ocbo4b
+ocbo5c	:=	ocbo5a	-	ocbo5b
+ocbo6c	:=	ocbo6a	-	ocbo6b
+ocbo7c	:=	ocbo7a	-	ocbo7b
+nw1c	:=	nw1a	-	nw1b
+nw2c	:=	nw2a	-	nw2b
+nw3c	:=	nw3a	-	nw3b
+nw4c	:=	nw4a	-	nw4b
+nw5c	:=	nw5a	-	nw5b
+
+# Compute covariance differences (tests H1)
+PPIRB3 := PPIRB1-PPIRB2
+PPOCBI3 := PPOCBI1-PPOCBI2
+PPOCBO3 := PPOCBO1-PPOCBO2
+
+# Compute differences in mood effect loadings
+mpp1c	:=	mpp1b		-		mpp1a
+mpp2c	:=	mpp2b		-		mpp2a
+mpp3c	:=	mpp3b		-	mpp3a
+mpp4c	:=	mpp4b		-	mpp4a
+mpp5c	:=	mpp5b		-	mpp5a
+mpp6c	:=	mpp6b		-		mpp6a
+mpp7c	:=	mpp7b		-		mpp7a
+mpp8c	:=	mpp8b		-		mpp8a
+mpp9c	:=	mpp9b		-		mpp9a
+mpp10c	:=	mpp10b		-		mpp10a
+mirb1c	:=	mirb1b		-		mirb1a
+mirb2c	:=	mirb2b		-		mirb2a
+mirb3c	:=	mirb3b		-		mirb3a
+mirb4c	:=	mirb4b		-		mirb4a
+mirb5c	:=	mirb5b		-		mirb5a
+mirb6c	:=	mirb6b		-		mirb6a
+mirb7c	:=	mirb7b		-  mirb7a
+mocbi1c	:=	mocbi1b		- mocbi1a
+mocbi2c	:=	mocbi2b		-	mocbi2a
+mocbi3c	:=	mocbi3b		-	mocbi3a
+mocbi4c	:=	mocbi4b		-	mocbi4a
+mocbi5c	:=	mocbi5b		- mocbi5a
+mocbi6c	:=	mocbi6b		- mocbi6a
+mocbi7c	:=	mocbi7b		- mocbi7a
+mocbo1c	:=	mocbo1b		-	mocbo1a
+mocbo2c	:=	mocbo2b		-	mocbo2a
+mocbo3c	:=	mocbo3b		-	mocbo3a
+mocbo4c	:=	mocbo4b		-	mocbo4a
+mocbo5c	:=	mocbo5b		- mocbo5a
+mocbo6c	:=	mocbo6b		- mocbo6a
+mocbo7c	:=	mocbo7b		- mocbo7a
+'
+
+#Note: the different group codes are commented in or out depending on which subgroup analysis you'd like to conduct. Additionally, there are two different datasets that can be analyzed (mega.df: which contains all data; mega.df.nocover: which either excludes the coverstory data or just the coverstory data from sample 3.). Also keep in mind that the reliability decomposition will only print the statistics from a given model run.
+m1 <- cfa(mega, 
+          #group = "COND_Control", 
+          #group = "COND_ItemRand",
+          #group = "COND_ScaleRand", 
+          #group = "COND_FillerScales",  
+          group = "COND_CSManipulation", #coverstory
+          #group = "COND_BUNDLED",  
+          #group = "COND_TempSep",  
+          data = mega.df, 
+          #data = mega.df.nocover,
+          estimator = "WLSMV", std.lv=TRUE)
+summary(m1, standardized = TRUE, fit.measures = TRUE)
+
+# Build reliability decomposition table 
+factors <- c("Proactive Personality","","In-Role Behavior", "","OCBI","", "OCBO", "")
+table <- as.data.frame(cbind(factors,"Condition","Total Reliability","Substantive Reliability","Mood Reliability","% Mood Reliability","Negative Item Wording Reliability","% Negative Item Wording Reliability"))
+colnames(table)[1] <- "Latent Variable"
+colnames(table)[2] <- "Condition"
+colnames(table)[3] <- "Total Reliability"
+colnames(table)[4] <- "Substantive Reliability"
+colnames(table)[5] <- "Mood Reliability"
+colnames(table)[6] <- "% Mood Reliability"
+colnames(table)[7] <- "Negative Item Wording Reliability"
+colnames(table)[8] <- "% Negative Item Wording Reliability"
+table$Condition <- as.character(table$Condition)
+table$`Total Reliability` <- as.numeric(table$`Total Reliability`)
+table$`Substantive Reliability` <- as.numeric(table$`Substantive Reliability`)
+table$`Mood Reliability` <- as.numeric(table$`Mood Reliability`)
+table$`% Mood Reliability` <- as.numeric(table$`% Mood Reliability`)
+table$`Negative Item Wording Reliability` <- as.numeric(table$`Negative Item Wording Reliability`)
+table$`% Negative Item Wording Reliability` <- as.numeric(table$`% Negative Item Wording Reliability`)
+table$Condition[1] <- "No Remedy"
+table$Condition[2] <- "Remedy"
+table$Condition[3] <- "No Remedy"
+table$Condition[4] <- "Remedy"
+table$Condition[5] <- "No Remedy"
+table$Condition[6] <- "Remedy"
+table$Condition[7] <- "No Remedy"
+table$Condition[8] <- "Remedy"
+
+# Extract the factor loadings
+m1.factorloadings <- inspect(m1,"est")
+
+# Focus on the remedied group
+PP <- as.data.frame(m1.factorloadings[["0"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(1:10) %>%
+  mutate(Sub.Rel = PP^2)%>%
+  mutate(Mood.Rel = Mood^2)%>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[2] <- (sum(PP$PP)^2)/((sum(PP$PP)^2)+(sum(PP$Mood)^2)+sum(PP$Error))
+table$`Mood Reliability`[2] <- (sum(PP$Mood)^2)/((sum(PP$PP)^2)+(sum(PP$Mood)^2)+sum(PP$Error))
+table$`Negative Item Wording Reliability`[2] <- (sum(PP$NW)^2)/((sum(PP$PP)^2)+(sum(PP$Mood)^2)+(sum(PP$NW)^2)+sum(PP$Error))
+table$`Total Reliability`[2] <- (table$`Substantive Reliability`[2]+table$`Mood Reliability`[2]+table$`Negative Item Wording Reliability`[2] )
+table$`% Mood Reliability`[2] <- (table$`Mood Reliability`[2]/table$`Total Reliability`[2])
+table$`% Negative Item Wording Reliability`[2] <- (table$`Negative Item Wording Reliability`[2]/table$`Total Reliability`[2])
+
+IRB <- as.data.frame(m1.factorloadings[["0"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(11:17) %>%
+  mutate(Sub.Rel = IRB^2) %>%
+  mutate(Mood.Rel = Mood^2) %>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[4] <- (sum(IRB$IRB)^2)/((sum(IRB$IRB)^2)+(sum(IRB$Mood)^2)+(sum(IRB$NW)^2)+sum(IRB$Error))
+table$`Mood Reliability`[4] <- (sum(IRB$Mood)^2)/((sum(IRB$IRB)^2)+(sum(IRB$Mood)^2)+(sum(IRB$NW)^2)+sum(IRB$Error))
+table$`Negative Item Wording Reliability`[4] <- (sum(IRB$NW)^2)/((sum(IRB$IRB)^2)+(sum(IRB$Mood)^2)+(sum(IRB$NW)^2)+sum(IRB$Error))
+table$`Total Reliability`[4] <- (table$`Substantive Reliability`[4]+table$`Mood Reliability`[4]+table$`Negative Item Wording Reliability`[4] )
+table$`% Mood Reliability`[4] <- (table$`Mood Reliability`[4]/table$`Total Reliability`[4])
+table$`% Negative Item Wording Reliability`[4] <- (table$`Negative Item Wording Reliability`[4]/table$`Total Reliability`[4])
+
+OCBI <- as.data.frame(m1.factorloadings[["0"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(18:24) %>%
+  mutate(Sub.Rel = OCBI^2) %>%
+  mutate(Mood.Rel = Mood^2) %>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[6] <- (sum(OCBI$OCBI)^2)/((sum(OCBI$OCBI)^2)+(sum(OCBI$Mood)^2)+(sum(OCBI$NW)^2)+sum(OCBI$Error))
+table$`Mood Reliability`[6] <- (sum(OCBI$Mood)^2)/((sum(OCBI$OCBI)^2)+(sum(OCBI$Mood)^2)+(sum(OCBI$NW)^2)+sum(OCBI$Error))
+table$`Negative Item Wording Reliability`[6] <- (sum(OCBI$NW)^2)/((sum(OCBI$OCBI)^2)+(sum(OCBI$Mood)^2)+(sum(OCBI$NW)^2)+sum(OCBI$Error))
+table$`Total Reliability`[6] <- (table$`Substantive Reliability`[6]+table$`Mood Reliability`[6]+table$`Negative Item Wording Reliability`[6])
+table$`% Mood Reliability`[6] <- (table$`Mood Reliability`[6]/table$`Total Reliability`[6])
+table$`% Negative Item Wording Reliability`[6] <- (table$`Negative Item Wording Reliability`[6]/table$`Total Reliability`[6])
+
+OCBO <- as.data.frame(m1.factorloadings[["0"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(25:32) %>%
+  mutate(Sub.Rel = OCBO^2) %>%
+  mutate(Mood.Rel = Mood^2) %>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[8] <- (sum(OCBO$OCBO)^2)/((sum(OCBO$OCBO)^2)+(sum(OCBO$Mood)^2)+(sum(OCBO$NW)^2)+sum(OCBO$Error))
+table$`Mood Reliability`[8] <- (sum(OCBO$Mood)^2)/((sum(OCBO$OCBO)^2)+(sum(OCBO$Mood)^2)+(sum(OCBO$NW)^2)+sum(OCBO$Error))
+table$`Negative Item Wording Reliability`[8] <- (sum(OCBO$NW)^2)/((sum(OCBO$OCBO)^2)+(sum(OCBO$Mood)^2)+(sum(OCBO$NW)^2)+sum(OCBO$Error))
+table$`Total Reliability`[8] <- (table$`Substantive Reliability`[8]+table$`Mood Reliability`[8]+table$`Negative Item Wording Reliability`[8])
+table$`% Mood Reliability`[8] <- (table$`Mood Reliability`[8]/table$`Total Reliability`[8])
+table$`% Negative Item Wording Reliability`[8] <- (table$`Negative Item Wording Reliability`[8]/table$`Total Reliability`[8])
+
+# Focus on non-remedied
+PP <- as.data.frame(m1.factorloadings[["1"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(1:10) %>%
+  mutate(Sub.Rel = PP^2)%>%
+  mutate(Mood.Rel = Mood^2)%>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[1] <- (sum(PP$PP)^2)/((sum(PP$PP)^2)+(sum(PP$Mood)^2)+sum(PP$Error))
+table$`Mood Reliability`[1] <- (sum(PP$Mood)^2)/((sum(PP$PP)^2)+(sum(PP$Mood)^2)+sum(PP$Error))
+table$`Negative Item Wording Reliability`[1] <- (sum(PP$NW)^2)/((sum(PP$PP)^2)+(sum(PP$Mood)^2)+(sum(PP$NW)^2)+sum(PP$Error))
+table$`Total Reliability`[1] <- (table$`Substantive Reliability`[1]+table$`Mood Reliability`[1]+table$`Negative Item Wording Reliability`[1])
+table$`% Mood Reliability`[1] <- (table$`Mood Reliability`[1]/table$`Total Reliability`[1])
+table$`% Negative Item Wording Reliability`[1] <- (table$`Negative Item Wording Reliability`[1]/table$`Total Reliability`[1])
+
+IRB <- as.data.frame(m1.factorloadings[["1"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(11:17) %>%
+  mutate(Sub.Rel = IRB^2) %>%
+  mutate(Mood.Rel = Mood^2) %>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[3] <- (sum(IRB$IRB)^2)/((sum(IRB$IRB)^2)+(sum(IRB$Mood)^2)+(sum(IRB$NW)^2)+sum(IRB$Error))
+table$`Mood Reliability`[3] <- (sum(IRB$Mood)^2)/((sum(IRB$IRB)^2)+(sum(IRB$Mood)^2)+(sum(IRB$NW)^2)+sum(IRB$Error))
+table$`Negative Item Wording Reliability`[3] <- (sum(IRB$NW)^2)/((sum(IRB$IRB)^2)+(sum(IRB$Mood)^2)+(sum(IRB$NW)^2)+sum(IRB$Error))
+table$`Total Reliability`[3] <- (table$`Substantive Reliability`[3]+table$`Mood Reliability`[3]+table$`Negative Item Wording Reliability`[3])
+table$`% Mood Reliability`[3] <- (table$`Mood Reliability`[3]/table$`Total Reliability`[3])
+table$`% Negative Item Wording Reliability`[3] <- (table$`Negative Item Wording Reliability`[3]/table$`Total Reliability`[3])
+
+OCBI <- as.data.frame(m1.factorloadings[["1"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(18:24) %>%
+  mutate(Sub.Rel = OCBI^2) %>%
+  mutate(Mood.Rel = Mood^2) %>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[5] <- (sum(OCBI$OCBI)^2)/((sum(OCBI$OCBI)^2)+(sum(OCBI$Mood)^2)+(sum(OCBI$NW)^2)+sum(OCBI$Error))
+table$`Mood Reliability`[5] <- (sum(OCBI$Mood)^2)/((sum(OCBI$OCBI)^2)+(sum(OCBI$Mood)^2)+(sum(OCBI$NW)^2)+sum(OCBI$Error))
+table$`Negative Item Wording Reliability`[5] <- (sum(OCBI$NW)^2)/((sum(OCBI$OCBI)^2)+(sum(OCBI$Mood)^2)+(sum(OCBI$NW)^2)+sum(OCBI$Error))
+table$`Total Reliability`[5] <- (table$`Substantive Reliability`[5]+table$`Mood Reliability`[5]+table$`Negative Item Wording Reliability`[5])
+table$`% Mood Reliability`[5] <- (table$`Mood Reliability`[5]/table$`Total Reliability`[5])
+table$`% Negative Item Wording Reliability`[5] <- (table$`Negative Item Wording Reliability`[5]/table$`Total Reliability`[5])
+
+OCBO <- as.data.frame(m1.factorloadings[["1"]][["lambda"]])  %>%
+  abs() %>%
+  rownames_to_column %>%
+  slice(25:32) %>%
+  mutate(Sub.Rel = OCBO^2) %>%
+  mutate(Mood.Rel = Mood^2) %>%
+  mutate(NW.Rel = NW^2) %>%
+  as.data.frame() %>%
+  mutate(Error = (1-(Sub.Rel+Mood.Rel+NW.Rel)))
+
+table$`Substantive Reliability`[7] <- (sum(OCBO$OCBO)^2)/((sum(OCBO$OCBO)^2)+(sum(OCBO$Mood)^2)+(sum(OCBO$NW)^2)+sum(OCBO$Error))
+table$`Mood Reliability`[7] <- (sum(OCBO$Mood)^2)/((sum(OCBO$OCBO)^2)+(sum(OCBO$Mood)^2)+(sum(OCBO$NW)^2)+sum(OCBO$Error))
+table$`Negative Item Wording Reliability`[7] <- (sum(OCBO$NW)^2)/((sum(OCBO$OCBO)^2)+(sum(OCBO$Mood)^2)+(sum(OCBO$NW)^2)+sum(OCBO$Error))
+table$`Total Reliability`[7] <- (table$`Substantive Reliability`[7]+table$`Mood Reliability`[7]+table$`Negative Item Wording Reliability`[7])
+table$`% Mood Reliability`[7] <- (table$`Mood Reliability`[7]/table$`Total Reliability`[7])
+table$`% Negative Item Wording Reliability`[7] <- (table$`Negative Item Wording Reliability`[7]/table$`Total Reliability`[7])
+```
+
+If you have any questions, please contact the lead author.
