@@ -270,19 +270,11 @@ colnames(data1)[colnames(data1)== "round(rowSums(SDR)/ncol(SDR), 2)"] <- "SDR"
 ```
 ```{r Descriptives Tables for Sample 1 Data, include = FALSE}
 #Create scale scores study 1
-my.keys.list <- list(PP=c("PP1","PP2","PP3","PP4","PP5","PP6","PP7","PP8","PP9","PP10"),
-                     TC=c("TC1","TC2","TC3","TC4","TC5","TC6","TC7","TC8","TC9","TC10"),
+my.keys.list <- list(POFA=c("PercepAcc1","PercepAcc2","PercepAcc3","PercepAcc4"),
+                     DJ=c("DisJust1","DisJust2","DisJust3","DisJust4"),
                      VC=c("VC1","VC2","VC3","VC4","VC5","VC6"),
-                     IRB=c("IRB1","IRB2","IRB3","IRB4","IRB5","-IRB6","-IRB7"), 
-                     OCBI=c("OCBI1","OCBI2","OCBI3","OCBI4","OCBI5","OCBI6","OCBI7"),
-                     OCBO=c("OCBO1","OCBO2", "-OCBO3","-OCBO4","-OCBO5","OCBO6","OCBO7"),
-                     CM=c("CM1","CM2","CM3","-CM4","CM5","-CM6","-CM7","CM8"),
-                     PrefB=c("PB1","PB2","PB3","PB4"),
-                     BLA=c("BLA1","BLA2","BLA3","BLA4","BLA5"),
-                     SEnj=c("-SE1","SE2","SE3"),
-                     SVal=c("SV1","-SV2","SV3"),
-                     PA=c("PA1","PA2","PA3","PA4","PA5","PA6","PA7","PA8","PA9","PA10"),
-                     Na=c("NA1","NA2","NA3","NA4","NA5","NA6","NA7","NA8","NA9","NA10")
+                     PA=c("Interested","Excited","Strong","Enthusiastic","Proud","Alert","Inspired","Determined","Attentive","Active"),
+                     Na=c("Distressed","Upset","Guilty","Scared","Hostile","Irritable","Ashamed","Nervous","Jittery","Afraid")
                      )
 my.scales <- scoreItems(my.keys.list,data1, min = 1, max = 5)
 PP.alpha <- round(my.scales[["alpha"]][1],2)
