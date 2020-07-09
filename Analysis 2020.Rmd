@@ -993,6 +993,7 @@ data3.r <- data3.r %>%
 
 #bind all data
 mega.df <- rbind(data1.r,data2.r,data3.r)
+write.csv(mega.df,"combined_data.csv", row.names = FALSE)
 
 # The following code was used to examine the effectiveness of all remedies except a cover story as well as examine whether the cover story data from sample 3 was just a fluke. You can use commenting to select which cut of the data you wish to analyze.
 # subset out coverstory data.
