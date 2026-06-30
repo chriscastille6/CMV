@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ULMC Review Metadata Schema",
+  "description": "Bibliographic/harvest metadata schema. Canonical extraction field definitions live in review/config.yaml and review/EBSCO/VARIABLE_CODEBOOK.md.",
+  "type": "object",
+  "required": ["id", "title", "year", "source"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier (DOI or OpenAlex ID)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Article title"
+    },
+    "authors": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 2010,
+      "maximum": 2025
+    },
+    "source": {
+      "type": "string",
+      "enum": ["OpenAlex", "Crossref", "Manual"]
+    },
+    "venue": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "publisher": {"type": "string"},
+        "issn": {"type": "string"},
+        "is_mdpi": {"type": "boolean"}
+      }
+    },
+    "abstract": {
+      "type": "string"
+    },
+    "doi": {
+      "type": "string"
+    },
+    "citations": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "estimator": {
+      "type": "string",
+      "enum": ["CB-SEM", "PLS", "PLSc", "Mixed", "Unknown"]
+    },
+    "screening": {
+      "type": "object",
+      "properties": {
+        "level": {"type": "integer"},
+        "include": {"type": "boolean"},
+        "reason": {"type": "string"}
+      }
+    },
+    "extraction": {
+      "type": "object",
+      "properties": {
+        "ulmc_used": {"type": "boolean"},
+        "model_variant": {"type": "string"},
+        "num_method_factors": {"type": "integer"},
+        "identifying_indicators": {"type": "boolean"},
+        "mv_proportion": {"type": "number"},
+        "remedy_claims": {"type": "boolean"},
+        "limitations_discussed": {"type": "boolean"},
+        "richardson_2009_cited": {
+          "type": "boolean",
+          "description": "Was Richardson et al. (2009) cited?"
+        },
+        "richardson_citation_context": {
+          "type": "string",
+          "enum": ["critical", "supportive", "neutral", "misuse"],
+          "description": "How was Richardson et al. (2009) cited?"
+        },
+        "richardson_critique_acknowledged": {
+          "type": "boolean",
+          "description": "Did authors acknowledge Richardson's critique of ULMC?"
+        },
+        "richardson_citation_text": {
+          "type": "string",
+          "description": "Exact text where Richardson is cited (for verification)"
+        },
+        "pls_sem_used": {
+          "type": "boolean",
+          "description": "PLS-SEM used; captured but excluded from CB-SEM synthesis"
+        },
+        "mv_inference_criteria_used": {
+          "type": "boolean",
+          "description": "Authors articulated explicit criteria for inferring MV status"
+        },
+        "mv_inference_criteria_list": {
+          "type": "string",
+          "description": "Semicolon-separated standardized MV inference criteria"
+        },
+        "mv_inferred_not_problem": {
+          "type": "boolean",
+          "description": "Authors conclude MV is not a threat"
+        },
+        "mv_inference_rationale_text": {
+          "type": "string",
+          "description": "Verbatim or near-verbatim MV inference rationale"
+        },
+        "authors_business_school": {
+          "type": "boolean",
+          "description": "At least one author affiliated with a business school or school/college of management. Extraction-time only (not in EBSCO harvest metadata); code from PDF title page."
+        },
+        "author_affiliation_detail": {
+          "type": "string",
+          "description": "Verbatim business-school affiliation line(s); semicolon-separated if multiple. Extraction-time only."
+        }
+      }
+    }
+  }
+}
+
+
+
