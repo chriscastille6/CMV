@@ -1,0 +1,64 @@
+{
+  "last_updated": "2026-06-30T17:08:46+00:00",
+  "strand": "ebsco_worklist_positions_1_150",
+  "table_count": 1,
+  "tables": [
+    {
+      "id": "ebsco_1150_l1_screening",
+      "title": "EBSCO 1\u2013150 Level 1 screening (to date)",
+      "columns": [
+        "Decision",
+        "Count",
+        "% of assessed"
+      ],
+      "rows": [
+        {
+          "Decision": "Export positions 1\u2013150",
+          "Count": 150,
+          "% of assessed": "100.0%"
+        },
+        {
+          "Decision": "In master (positions 1\u2013150)",
+          "Count": 150,
+          "% of assessed": "100.0%"
+        },
+        {
+          "Decision": "With PDF on disk",
+          "Count": 147,
+          "% of assessed": "98.0%"
+        },
+        {
+          "Decision": "L1 assessed (with evidence)",
+          "Count": 150,
+          "% of assessed": "100.0%"
+        },
+        {
+          "Decision": "Included",
+          "Count": 77,
+          "% of assessed": "51.3%"
+        },
+        {
+          "Decision": "Excluded (eligibility)",
+          "Count": 44,
+          "% of assessed": "29.3%"
+        },
+        {
+          "Decision": "Excluded (PLS-SEM)",
+          "Count": 29,
+          "% of assessed": "19.3%"
+        },
+        {
+          "Decision": "Manual review",
+          "Count": 0,
+          "% of assessed": "0.0%"
+        },
+        {
+          "Decision": "Pending",
+          "Count": 0,
+          "% of assessed": "0.0%"
+        }
+      ],
+      "note": "Primary reporting strand for live screening. Positions 21, 89, 148\u2013150 added to master 2026-06-26."
+    }
+  ]
+}
