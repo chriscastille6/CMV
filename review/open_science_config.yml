@@ -1,0 +1,134 @@
+# Open Science Agents — CMV / ULMC Systematic Review
+# Run from: /Users/ccastille/Documents/GitHub/Open Science Agents
+#   Rscript scripts/run_orchestrator.R --config "/Users/ccastille/Documents/GitHub/CMV/review/open_science_config.yml" --agent prereg
+
+project_id: "ulmc_systematic_review_cmv"
+title: "ULMC Systematic Review — Prospectively Registered Expansion"
+description: >
+  Prospectively registered systematic review of unmeasured latent method construct (ULMC)
+  usage in organizational research. Builds on Castille & Williams (2022 AOM; 2024 RPHRM).
+  Semi-automated screening/extraction pipeline with legacy holdout replication.
+lead_contact: "christopher.castille@nicholls.edu"
+
+paths:
+  data_raw: "/Users/ccastille/Documents/GitHub/CMV/review/master"
+  data_clean: "/Users/ccastille/Documents/GitHub/CMV/review/EBSCO"
+  manuscript_dir: "/Users/ccastille/Documents/GitHub/CMV/review"
+  materials_dir: "/Users/ccastille/Documents/GitHub/CMV/review/EBSCO"
+  output_dir: "/Users/ccastille/Documents/GitHub/CMV/review/artifacts/reports"
+
+registries:
+  osf_project: "x9643"
+  osf_url: "https://osf.io/x9643/"
+  osf_project_overview: "https://osf.io/x9643/overview"
+  preregistration_status: "submitted"
+  preregistration_date: "2026-06-26"
+  preregistration_url: "https://osf.io/3kmyc/"
+  preregistration_artifacts:
+    - "OSF_REGISTRATION_PASTE.md"
+    - "artifacts/reports/preregistration_filled.json"
+    - "PROSPERO_DRAFT_REGISTRATION_FINAL.md"
+  prereg_template: "osf_registries"
+  target_journal: "Journal of Applied Psychology"
+  top_level: 2
+
+repositories:
+  github_repo: "ccastillec/CMV"
+  project_board_id: ""
+
+privacy:
+  pii_policy: "none"
+  irb_protocol_id: "N/A"
+  data_retention_years: 10
+
+llm:
+  provider: "openai"
+  model: "gpt-4o"
+  temperature: 0.3
+  max_cost_per_run: 10.00
+  enable_caching: true
+
+agents:
+  orchestrator:
+    enabled: true
+    auto_sync_github: false
+    notification_email: ""
+
+  citation:
+    enabled: true
+    auto_create_issues: false
+    citation_style: "apa"
+
+  data_analysis:
+    enabled: false
+    auto_upload_osf: false
+    freeze_versions: true
+    validate_preregistration: true
+
+  materials:
+    enabled: true
+    auto_generate: false
+    version_materials: true
+
+  prereg:
+    enabled: true
+    auto_submit: false
+    track_deviations: true
+
+  qa:
+    enabled: true
+    enforce_top_compliance: true
+    check_ai_acknowledgment: true
+    journal_specific_checks: false
+
+  contributor:
+    enabled: false
+    use_credit_taxonomy: true
+    track_engagement: false
+    auto_update_authorship: false
+
+workflow:
+  use_targets: false
+  parallel_execution: false
+  log_level: "INFO"
+  artifact_retention_days: 365
+
+open_science_goals:
+  - "Submit PROSPERO registration (manual — not automated by OSA)"
+  - "OSF backup preregistration via osf_registries template"
+  - "Deposit PRISMA_PROTOCOL.md, PROSPERO_DRAFT_REGISTRATION_FINAL.md, search strategy"
+  - "Link PROSPERO record to OSF project after approval"
+  - "Upload extraction codebook, config.yaml, and screening scripts"
+  - "Document protocol restart and relation to RPHRM 2024 pilot corpus"
+
+project_metadata:
+  project_type: "Systematic Review"
+  co_authors:
+    - "Larry J. Williams (Texas Tech University)"
+  prior_publications:
+  - "Castille & Williams (2022) AOM Proceedings — doi:10.5465/ambpp.2022.10998abstract"
+  - "Castille & Williams (2024) RPHRM Vol. 42 — doi:10.1108/s0742-730120240000042007"
+  key_protocol_files:
+    - "PRISMA_PROTOCOL.md"
+    - "PROSPERO_DRAFT_REGISTRATION_FINAL.md"
+    - "PREREGISTRATION_PLAN.md"
+    - "config.yaml"
+    - "EBSCO/VARIABLE_CODEBOOK.md"
+    - "SEARCH_STRATEGY_REPRODUCIBILITY.md"
+  prior_work_dir: "/Users/ccastille/Documents/GitHub/CMV/paper/jap-ulmc-esem/prior-work"
+  osf_url: "https://osf.io/x9643/overview"
+
+sharing:
+  license: "CC-BY-4.0"
+  visibility: "public"
+  allow_derivatives: true
+  commercial_use: true
+  attribution_required: true
+
+related_work:
+  prior_reviews:
+    - "Castille & Williams (2024) RPHRM — pilot corpus ~185 studies"
+    - "Castille & Williams (2022) AOM — preliminary ULMC review and simulation"
+  methodological_references:
+    - "Williams & McGonagle (2016) — three-step ULMC procedure"
+    - "Podsakoff et al. (2003) — common method biases"
