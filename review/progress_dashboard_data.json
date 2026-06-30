@@ -1,0 +1,26 @@
+{
+  "last_updated": "2026-06-30T17:08:46+00:00",
+  "pool_size": 570,
+  "in_master_registry": 548,
+  "pool_gap_rows": 22,
+  "pdf_downloaded": 179,
+  "pdf_in_zotero": 0,
+  "pdf_missing": 369,
+  "remaining_to_download": 391,
+  "exam_fully_coded": 84,
+  "remaining_to_examine": 486,
+  "download_pct": 31.4,
+  "examination_pct": 14.7,
+  "pdf_status_counts": {
+    "downloaded": 179,
+    "missing": 369
+  },
+  "examination_status_counts": {
+    "fully_coded": 84,
+    "not_in_master": 22,
+    "not_read": 448,
+    "partially_coded": 3,
+    "pdf_missing": 8,
+    "read_snippet_only": 5
+  }
+}

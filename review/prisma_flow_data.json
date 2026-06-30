@@ -1,0 +1,18 @@
+{
+  "last_updated": "2026-06-30T17:08:46+00:00",
+  "strand": "ebsco_worklist_positions_1_150",
+  "identified": 150,
+  "off_pool_removed": 0,
+  "in_pool": 150,
+  "pdfs_retrieved": 147,
+  "full_text_assessed": 150,
+  "l1_included": 77,
+  "l1_excluded": 44,
+  "l1_excluded_pls": 29,
+  "l1_excluded_total": 73,
+  "l1_manual_review": 0,
+  "l1_pending": 0,
+  "included_note": "EBSCO positions 1\u2013150 to date: 77 included, 73 excluded (44 eligibility + 29 PLS), 0 manual review pending.",
+  "source_doc": "review/EBSCO/EBSCO_PRIMARY_WORKLIST.md",
+  "legacy_strand_note": "Full 570-pool PRISMA (1036 identified \u2192 182 legacy included) deferred until batch screening continues past position 150."
+}

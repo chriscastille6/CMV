@@ -1,0 +1,16 @@
+# Large local-only assets (regenerate or download separately)
+raw/
+Zotero/
+artifacts/
+EBSCO/pdfs/*
+!EBSCO/pdfs/INGEST_LOG.csv
+EBSCO/.browser_profile/
+EBSCO/pdfs/incoming/
+EBSCO/imports/*.pdf
+
+# OS / editor
+.DS_Store
+*.swp
+
+# Staging
+.tmp/
