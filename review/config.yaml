@@ -1,0 +1,257 @@
+# ULMC Systematic Review Configuration
+
+# Search parameters
+search:
+  time_window:
+    start: 2010
+    end: 2026
+  language: en
+  publication_type: peer-reviewed journal articles
+
+  # PRIMARY identification (PROSPERO-registered narrow query)
+  primary:
+    strategy: narrow
+    query: '"unmeasured latent method construct" OR "unmeasured latent method factor"'
+    filters:
+      - full_text
+      - scholarly_peer_reviewed
+      - academic_journals
+    rationale: >
+      Capture scholars' in-text ULMC usage (aligned with PROSPERO_DRAFT_REGISTRATION_FINAL.md).
+      Domain, empirical, and PLS criteria are applied at screening—not in the search string.
+
+  # SUPPLEMENTARY / sensitivity (optional; not primary identification)
+  supplementary:
+    expanded_boolean:
+      enabled: false  # optional sensitivity or gap-filling search
+      note: See terms.expanded below; not used for primary PRISMA identification counts
+    programmatic:
+      enabled: false  # optional
+      databases:
+        - OpenAlex
+        - Crossref
+      script: review/01_search_harvest.R
+
+  # Term lists (expanded = supplementary only; narrow = primary)
+  terms:
+    narrow:  # primary identification
+      - "unmeasured latent method construct"
+      - "unmeasured latent method factor"
+    expanded:  # supplementary/sensitivity only
+      - "ULMC"
+      - "single method factor"
+      - "common latent factor"
+      - "common method variance"
+      - "common method bias"
+      - "Harman single factor"
+      - "Harman test"
+      - "marker variable"
+      - "method factor"
+      - "procedural remedy"
+      - "separation of measurement"
+  domains:  # applied at screening, not in primary search string
+    - management
+    - psychology
+    - applied psychology
+    - organizational behavior
+    - industrial-organizational psychology
+
+# Filtering parameters
+filters:
+  # Predatory/questionable publishers: include in main analysis; flag for sensitivity analysis
+  tag_predatory_publishers:
+    - MDPI
+    - "Multidisciplinary Digital Publishing Institute"
+  exclude_publishers: []  # empty — do not exclude by publisher outlet
+  
+  include_pls: true  # Include PLS studies (toggle)
+  tag_pls: true      # Tag PLS vs CB-SEM
+  
+  minimum_citations: 0  # Minimum citation threshold (0 = no filter)
+  
+  # Journal quality filters (optional)
+  journal_lists:
+    - FT50
+    - ABS
+    - JCR_Q1
+    - JCR_Q2
+
+# Extraction schema
+extraction:
+  fields:
+    - ulmc_used
+    - model_variant
+    - num_method_factors
+    - identifying_indicators_used
+    - mv_proportion_reported
+    - mv_proportion_value
+    - estimator  # CB-SEM, PLS, PLSc, other
+    
+    # NEW FIELDS (per user request 2025-10-27)
+    - procedural_remedies_used  # Were procedural remedies reported?
+    - procedural_remedies_list  # Which ones? (temporal/source/methodological separation, anonymity, etc.)
+    - pls_sem_used              # Was PLS-SEM used? (Boolean)
+    - pls_variant               # PLS, PLSc, consistent PLS, etc.
+    - statistical_methods_mv    # What specific statistical methods were used to address MV?
+    - statistical_method_detail # ULMC, CFA marker, correlational marker, etc.
+    - harman_deployed           # Was Harman's single-factor test deployed? (Boolean, separate from % reported)
+    - harman_variance_pct       # Percentage of variance from Harman's test (if reported)
+    
+    # MV INFERENCE CRITERIA (author-stated reasons for inferring MV is/is not a problem)
+    - mv_inference_criteria_used   # Did authors articulate explicit criteria? (Boolean)
+    - mv_inference_criteria_list   # Standardized criteria terms (semicolon-separated)
+    - mv_inference_criteria_detail # Free-text criteria not captured in standardized list
+    - mv_inferred_not_problem        # Authors conclude MV is NOT a threat (Boolean)
+    - mv_inference_rationale_text    # Verbatim or near-verbatim quote supporting inference
+    
+    # AUTHOR AFFILIATION — BUSINESS SCHOOL (per user request 2026-06-24)
+    - authors_business_school        # At least one author at business/management school? (Boolean)
+    - author_affiliation_detail      # Matching affiliation text (semicolon-separated if multiple)
+    
+    # RICHARDSON ET AL. (2009) CITATION TRACKING (per user request)
+    - richardson_2009_cited              # Was Richardson et al. (2009) cited? (Boolean)
+    - richardson_citation_context        # How was it cited? (supportive, critical, neutral, misuse)
+    - richardson_critique_acknowledged   # Did authors acknowledge Richardson's critique of ULMC? (Boolean)
+    - richardson_citation_text           # Exact text where Richardson is cited (for verification)
+    
+    # ORIGINAL FIELDS (continued)
+    - remedy_claims
+    - honesty_language
+    - limitations_discussed
+    - design_features
+    - sample_size
+    - content_domain              # Substantive topic/setting (e.g., leadership, turnover, healthcare workers)
+    - construct_names             # Latent construct names in tested ULMC model (semicolon-separated)
+    - num_constructs              # Latent constructs in tested ULMC CFA/SEM
+    - num_indicators              # Total measurement-model items/indicators
+    - complexity_ratio            # num_indicators / num_constructs (items per construct)
+
+    # PUBLISHER / OUTLET FAMILY (per user request 2026-06-24)
+    - publisher_outlet            # MDPI, Frontiers, Elsevier, Springer, Wiley, SAGE, Taylor & Francis, Emerald, APA/PSYC, Other, NA
+    - publisher_outlet_detail     # Optional journal name when outlet inferred or needs clarification
+    - predatory_journal_flag        # Flag questionable/predatory outlet (e.g., MDPI); include in main analysis, use in sensitivity analysis
+
+    # ULMC THREE-STEP PROCEDURE (Richardson et al. 2009; Williams & McGonagle 2016)
+    - three_step_approach_used              # Authors claim/use three-step ULMC procedure
+    - step1_presence_delta_chisq_reported   # Step 1: trait-only vs trait+ULMC nested Δχ² reported (CMV presence)
+    - step1_presence_delta_chisq              # Step 1: nested Δχ² value (trait-only vs trait+ULMC)
+    - step1_presence_pvalue                   # Step 1: p-value for CMV presence nested test
+    - step1_cmv_indicated                   # Step 1: nested test indicates CMV present
+    - step2_method_r_model_reported         # Step 2: trait/method-R model reported
+    - step2_method_r_bias_test_reported     # Step 2: trait/method-R vs trait/method comparison (bias test)
+    - step2_bias_indicated                  # Step 2: Method-R test indicates substantive bias
+    - step3_contamination_reported          # Step 3: indicator/construct MV or contamination reported
+    - step3_indicator_level_mv_reported     # Step 3: indicator-level method variance/decomposition
+    - step3_construct_level_mv_reported     # Step 3: construct-level method variance/decomposition
+    - method_variance_reported_despite_no_bias  # MV/contamination reported when Step 2 shows no bias
+    - three_step_complete                   # All three steps appropriately reported (see codebook)
+    # Legacy CSV aliases (same semantics after codebook realignment; prefer canonical names above)
+    - step1_baseline_reported
+    - step2_ulmc_reported
+    - step3_chisq_diff_reported
+
+    # SUPPLEMENT / INCOMPLETE MAIN TEXT (per user request 2026-06-24)
+    - details_in_supplement           # Authors refer to online supplement/appendix for coding-relevant details
+    - extraction_incomplete_main_text # ULMC/MV/construct/Harman fields not fully in main PDF; check supplement or cannot code
+    - supplement_notes                # What is missing / where referred (free text)
+
+# Screening questions (matches legacy DistillerSR structure)
+screening:
+  level1:  # Initial screening (Q1.4 first; then legacy Q1.1–Q1.3)
+    - Q1.4: "Has the study been formally retracted by the publisher?" # Yes = exclude (EXCLUDE_RETRACTED)
+    - Q1.1: "Is the study published in management/HRM/OB/Applied Psychology domain?"
+    - Q1.2: "Is the study empirical and uses ULMC to test CMV?"
+    - Q1.3: "Does the study use PLS estimation?" # Yes = exclude
+  
+  level2:  # Full-text extraction (enhanced from legacy)
+    # Original legacy fields
+    - Q2.1: "Exact text extraction regarding authors' conclusions"
+    - Q2.2: "Claims about relative fit of ULMC model"
+    - Q2.3: "Did ULMC improve model fit?"
+    - Q2.4: "Percentage of variance explained by ULMC"
+    - Q2.5: "Author conclusion about method bias"
+    - Q2.6: "Was ULMC included in final analysis?"
+    
+    # NEW extraction fields (per user request 2025-10-27)
+    - Q2.7: "Were procedural remedies used?"
+    - Q2.8: "Which procedural remedies? (list)"
+    - Q2.9: "What specific statistical methods were used for MV?"
+    - Q2.9a: "Was Harman's single-factor test deployed?" # Boolean; TRUE if test run/reported even without %
+    - Q2.10: "PLS-SEM variant used (if applicable)"
+    
+    # RICHARDSON ET AL. (2009) CITATION TRACKING (per user request)
+    - Q2.11: "Was Richardson et al. (2009) cited?"
+    - Q2.12: "How was Richardson et al. (2009) cited? (supportive, critical, neutral, misuse)"
+    - Q2.13: "Did authors acknowledge Richardson's critique of ULMC?"
+    
+    # MV INFERENCE CRITERIA (per user request 2026-06-24)
+    - Q2.14: "Did authors state explicit criteria for inferring whether MV is a problem?"
+    - Q2.15: "Which criteria did authors cite? (standardized list; semicolon-separated)"
+    - Q2.16: "Do authors conclude MV is NOT a threat to their findings?"
+    - Q2.17: "Verbatim/near-verbatim quote of authors' MV inference rationale"
+    
+    # AUTHOR AFFILIATION — BUSINESS SCHOOL (per user request 2026-06-24)
+    - Q2.18: "Is at least one author affiliated with a business school / school of management / college of business? (check title page / author footnotes)"
+    - Q2.18a: "Business-school affiliation detail (semicolon-separated if multiple lead authors)"
+    
+    # STUDY CHARACTERISTICS — content domain & model complexity (per user request 2026-06-25)
+    - Q2.19: "Content domain / substantive topic? (content_domain — e.g., leadership, turnover, safety climate)"
+    - Q2.19a: "Construct names in tested ULMC model? (construct_names — semicolon-separated)"
+    - Q2.20: "How many latent constructs in the tested ULMC CFA/SEM? (num_constructs)"
+    - Q2.21: "Total indicators/items in the measurement model? (num_indicators)"
+    - Q2.22: "Complexity ratio (indicators per construct) — calculate or record if reported"
+
+    # PUBLISHER / OUTLET FAMILY (per user request 2026-06-24)
+    - Q2.23: "Publisher outlet family? (MDPI, Frontiers, Elsevier, etc. — infer from DOI/journal when possible)"
+    - Q2.23a: "Publisher outlet detail (journal name if needed for disambiguation)"
+
+    # SUPPLEMENT / INCOMPLETE MAIN TEXT (per user request 2026-06-24)
+    - Q2.24: "Do authors refer to supplementary materials/appendix for methods or results needed for coding?"
+    - Q2.25: "Are ULMC/MV/construct/Harman coding fields incomplete in the main PDF (must check supplement or cannot code)?"
+    - Q2.25a: "Supplement notes — what is missing and where referred?"
+
+    # ULMC THREE-STEP PROCEDURE (Richardson et al. 2009; Williams & McGonagle 2016)
+    - Q2.26: "Step 1 — trait-only vs trait+ULMC nested Δχ² reported? (CMV presence test)"
+    - Q2.26a: "Step 1 — nested Δχ² value for presence test? (step1_presence_delta_chisq)"
+    - Q2.26b: "Step 1 — p-value for CMV presence nested test? (step1_presence_pvalue)"
+    - Q2.26c: "Step 1 — nested test indicates CMV present? (step1_cmv_indicated)"
+    - Q2.27: "Step 2 — trait/method-R model reported?"
+    - Q2.27a: "Step 2 — trait/method-R vs trait/method comparison reported? (Method-R bias test)"
+    - Q2.27b: "Step 2 — Method-R test indicates substantive bias?"
+    - Q2.28: "Step 3 — indicator- or construct-level method variance/contamination reported?"
+    - Q2.28a: "Step 3 — indicator-level MV/decomposition reported?"
+    - Q2.28b: "Step 3 — construct-level MV/decomposition reported?"
+    - Q2.28c: "Method variance/contamination reported despite no bias on Step 2?"
+    - Q2.29: "Three-step procedure complete per codebook?"
+
+# Research questions (protocol framing)
+research_questions:
+  primary: "How is ULMC implemented in organizational research, and what evidence exists for methodological misuse?"
+  secondary:
+    - "What percentage of studies retain ULMC in final models after detection?"
+    - "How frequently do studies implement procedural remedies alongside ULMC testing?"
+    - "What is the distribution of method variance percentages detected across studies?"
+
+# Output settings
+output:
+  prisma_flow: true
+  journal_table: true
+  mv_distribution: true
+  figures:
+    - prisma_flow
+    - journal_frequency
+    - mv_histogram
+    - estimator_prevalence
+    - temporal_trends
+
+# EBSCO screening pool download/examination priority (2026-06-26)
+ebsco_worklist:
+  primary_sort: ebsco_search_position  # native EBSCO search order (not recent-first pool_id)
+  first_batch_positions: 1-150
+  import_files:
+    - review/EBSCO/imports/EBSCO-Metadata-06_26_2026.csv
+    - review/EBSCO/imports/EBSCO-Metadata-06_26_2026-2.csv
+    - review/EBSCO/imports/EBSCO-Metadata-06_26_2026-3.csv
+  queue_csv: review/EBSCO/download_queue_ebsco_order.csv
+  worklist_doc: review/EBSCO/EBSCO_PRIMARY_WORKLIST.md
+
