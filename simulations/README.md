@@ -71,6 +71,11 @@ Rscript simulations/summarize_ambiversion_power.R
 
 **Note:** Unfolding items are scored via item means for comparability with typical TMGT regression practice. Ideal-point IRT scoring would be the next extension.
 
+## Usage (TMGT-CMV study)
+
+```r
+# From repository root
+source("simulations/run_tmgt_cmv_simulation.R")
 
 # Quick pilot (100 replications)
 results <- run_tmgt_cmv_study(
