@@ -1,17 +1,34 @@
 # Data-generating process for TMGT effects with CMV contamination
 # Extends Siemsen et al. (2010) to quadratic and moderated-quadratic models
 
+#' Transform latent X to simulate measurement that loses midrange discrimination
+apply_x_transform <- function(x, transform = "none") {
+  switch(
+    transform,
+    none = x,
+    compressed = tanh(x * 1.5) / 1.5,
+    skewed = x + 0.30 * x^2,
+    x
+  )
+}
+
 #' Generate latent TMGT data
 #'
 #' Population model:
 #' Y = b0 + b1*X + b2*X^2 + b3*W + b4*X*W + b5*X^2*W + error
-generate_latent_tmgt <- function(n, scenario) {
+generate_latent_tmgt <- function(n, scenario, measurement = NULL) {
   X <- stats::rnorm(n)
   W <- stats::rnorm(n)
 
   if (!is.null(scenario$rho_xw) && scenario$rho_xw != 0) {
     W <- scenario$rho_xw * X + sqrt(1 - scenario$rho_xw^2) * W
   }
+
+  x_transform <- "none"
+  if (!is.null(measurement) && !is.null(measurement$x_transform)) {
+    x_transform <- measurement$x_transform
+  }
+  X_observed <- apply_x_transform(X, x_transform)
 
   Y <- scenario$b0 +
     scenario$b1 * X +
@@ -21,7 +38,7 @@ generate_latent_tmgt <- function(n, scenario) {
     scenario$b5 * X^2 * W +
     stats::rnorm(n, sd = scenario$sd_y)
 
-  list(X = X, W = W, Y = Y)
+  list(X = X_observed, W = W, Y = Y, X_latent = X)
 }
 
 #' Build a method factor optionally correlated with latent constructs
@@ -68,8 +85,18 @@ make_indicators <- function(latent, method_component, cmv_prop, n_items = 4,
 generate_tmgt_cmv_data <- function(n, scenario, cmv_prop = 0,
                                    same_source = TRUE,
                                    rho_m_x = 0, rho_m_y = 0, rho_m_w = 0,
-                                   n_items = 4, substantive_loading = NULL) {
-  latents <- generate_latent_tmgt(n, scenario)
+                                   n_items = 4, substantive_loading = NULL,
+                                   measurement = NULL) {
+  latents <- generate_latent_tmgt(n, scenario, measurement = measurement)
+
+  if (!is.null(measurement)) {
+    if (!is.null(measurement$n_items)) {
+      n_items <- measurement$n_items
+    }
+    if (!is.null(measurement$substantive_loading)) {
+      substantive_loading <- measurement$substantive_loading
+    }
+  }
   method <- generate_method_factor(n, rho_m_x, rho_m_y, rho_m_w)
 
   m_x <- if (same_source) method$M_x else stats::rnorm(n)

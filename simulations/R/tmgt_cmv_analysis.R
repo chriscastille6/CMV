@@ -63,7 +63,8 @@ extract_tmgt_estimates <- function(models) {
 }
 
 #' Run one replication: generate data, fit models, return test outcomes
-run_one_replication <- function(n, scenario, cmv_settings, n_items = 4) {
+run_one_replication <- function(n, scenario, cmv_settings, n_items = 4,
+                                measurement = NULL) {
   sim <- generate_tmgt_cmv_data(
     n = n,
     scenario = scenario,
@@ -72,7 +73,8 @@ run_one_replication <- function(n, scenario, cmv_settings, n_items = 4) {
     rho_m_x = cmv_settings$rho_m_x,
     rho_m_y = cmv_settings$rho_m_y,
     rho_m_w = cmv_settings$rho_m_w,
-    n_items = n_items
+    n_items = n_items,
+    measurement = measurement
   )
 
   df <- prepare_analysis_data(sim)
