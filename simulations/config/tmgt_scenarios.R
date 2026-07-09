@@ -88,23 +88,82 @@ TMGT_SCENARIOS <- list(
 # Measurement profiles for ambiversion sensitivity
 MEASUREMENT_PROFILES <- list(
   grant = list(
-    label = "Grant (4-item, alpha ~ .85)",
+    label = "Cumulative (Grant 4-item, alpha ~ .85)",
+    mode = "cumulative",
     n_items = 4,
     substantive_loading = 0.61,
     x_transform = "none"
   ),
   coarse = list(
-    label = "Coarse (2-item, low reliability)",
+    label = "Coarse cumulative (2-item)",
+    mode = "cumulative",
     n_items = 2,
     substantive_loading = 0.55,
     x_transform = "none"
   ),
   compressed = list(
-    label = "Compressed midrange (poor ambiversion sensitivity)",
+    label = "Compressed midrange (cumulative + attenuation)",
+    mode = "cumulative",
     n_items = 4,
     substantive_loading = 0.61,
     x_transform = "compressed"
+  ),
+  unfolding_midrange = list(
+    label = "Unfolding ideal-point (midrange tau = 0)",
+    mode = "unfolding_midrange",
+    n_items = 4,
+    substantive_loading = 0.61,
+    x_transform = "none"
+  ),
+  unfolding_spread = list(
+    label = "Unfolding ideal-point (spread around ambivert zone)",
+    mode = "unfolding_spread",
+    n_items = 4,
+    substantive_loading = 0.61,
+    x_transform = "none"
+  ),
+  unfolding_extremes = list(
+    label = "Unfolding ideal-point (extreme locations)",
+    mode = "unfolding_extremes",
+    n_items = 4,
+    substantive_loading = 0.61,
+    x_transform = "none"
+  ),
+  unfolding_mixed = list(
+    label = "Mixed cumulative + unfolding midrange",
+    mode = "unfolding_mixed",
+    n_items = 4,
+    substantive_loading = 0.61,
+    x_transform = "none"
+  ),
+  facet_cumulative = list(
+    label = "Facet cumulative (assertiveness + enthusiasm)",
+    mode = "facet_cumulative",
+    n_items = 4,
+    substantive_loading = 0.61,
+    x_transform = "none"
+  ),
+  facet_balance = list(
+    label = "Facet balance (assertiveness-enthusiasm equilibrium)",
+    mode = "facet_balance",
+    n_items = 4,
+    substantive_loading = 0.61,
+    x_transform = "none"
   )
+)
+
+# Sample sizes for ambiversion power study
+AMBIVERSION_SAMPLE_SIZES <- c(340, 500, 750, 1000, 1500, 2000, 3000, 5000)
+
+# Measurement approaches compared in ambiversion power study
+AMBIVERSION_MEASUREMENT_APPROACHES <- c(
+  "grant",
+  "unfolding_midrange",
+  "unfolding_spread",
+  "unfolding_extremes",
+  "unfolding_mixed",
+  "facet_cumulative",
+  "facet_balance"
 )
 
 # Asymmetric CMV: method factor more correlated with X than Y

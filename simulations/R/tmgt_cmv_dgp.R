@@ -60,9 +60,9 @@ generate_method_factor <- function(n, rho_m_x, rho_m_y, rho_m_w) {
   )
 }
 
-#' Create k indicators for a latent construct with CMV contamination
-make_indicators <- function(latent, method_component, cmv_prop, n_items = 4,
-                            substantive_loading = NULL) {
+#' Create k cumulative (dominance) indicators — standard Likert-style
+make_cumulative_items <- function(latent, method_component, cmv_prop, n_items = 4,
+                                  substantive_loading = NULL) {
   n <- length(latent)
   if (is.null(substantive_loading)) {
     substantive_loading <- sqrt(pmax(0.05, 1 - cmv_prop) * 0.75)
@@ -79,6 +79,175 @@ make_indicators <- function(latent, method_component, cmv_prop, n_items = 4,
   }
 
   items
+}
+
+#' Backward-compatible alias
+make_indicators <- make_cumulative_items
+
+#' Ideal-point (unfolding) indicators — peak endorsement near item location tau
+#'
+#' Models items like "I adjust my assertiveness to fit the situation" that are
+#' maximally endorsed by ambiverts. Based on hyperbolic cosine / ideal-point IRT.
+make_unfolding_items <- function(latent, method_component, cmv_prop,
+                                 item_locations, item_widths = NULL,
+                                 substantive_loading = 0.61) {
+  n <- length(latent)
+  k <- length(item_locations)
+  if (is.null(item_widths)) {
+    item_widths <- rep(1.0, k)
+  }
+
+  method_loading <- sqrt(cmv_prop)
+  residual_sd <- sqrt(pmax(0.01, 1 - substantive_loading^2 - method_loading^2))
+
+  items <- matrix(NA_real_, n, k)
+  for (j in seq_len(k)) {
+    dist <- (latent - item_locations[j]) / item_widths[j]
+    substantive <- substantive_loading * exp(-0.5 * dist^2)
+    items[, j] <- substantive +
+      method_loading * method_component +
+      stats::rnorm(n, sd = residual_sd)
+  }
+
+  items
+}
+
+#' Facet-based extraversion measurement (assertiveness + enthusiasm)
+#'
+#' Returns list with item matrices and precomputed scale scores.
+make_facet_extraversion <- function(latent_x, method_component, cmv_prop,
+                                    mode = c("cumulative", "balance"),
+                                    n_items_per_facet = 2,
+                                    substantive_loading = 0.61) {
+  mode <- match.arg(mode)
+  n <- length(latent_x)
+
+  # Facets correlate with latent extraversion but diverge at extremes
+  assert_latent <- latent_x + 0.35 * stats::rnorm(n)
+  enthus_latent <- latent_x + 0.35 * stats::rnorm(n)
+
+  a_items <- make_cumulative_items(
+    assert_latent, method_component, cmv_prop,
+    n_items_per_facet, substantive_loading
+  )
+  e_items <- make_cumulative_items(
+    enthus_latent, method_component, cmv_prop,
+    n_items_per_facet, substantive_loading
+  )
+
+  a_score <- scale_scores_from_items(a_items)
+  e_score <- scale_scores_from_items(e_items)
+
+  x_score <- if (mode == "cumulative") {
+    scale_scores_from_items(cbind(a_items, e_items))
+  } else {
+    # Balance index: rewards moderate overall extraversion AND facet equilibrium
+    balance <- (a_score + e_score) / 2 - 0.5 * abs(a_score - e_score)
+    as.numeric(scale(balance)[, 1])
+  }
+
+  list(
+    X_items = cbind(a_items, e_items),
+    X_score = x_score,
+    facet_mode = mode
+  )
+}
+
+#' Route X measurement to cumulative, unfolding, or facet approach
+make_x_measurement <- function(latent_x, method_component, cmv_prop, measurement) {
+  mode <- if (is.null(measurement$mode)) {
+    "cumulative"
+  } else {
+    measurement$mode
+  }
+
+  loading <- if (is.null(measurement$substantive_loading)) {
+    0.61
+  } else {
+    measurement$substantive_loading
+  }
+  n_items <- if (is.null(measurement$n_items)) {
+    4L
+  } else {
+    measurement$n_items
+  }
+
+  if (mode == "cumulative") {
+    latent_for_x <- latent_x
+    if (!is.null(measurement$x_transform) && measurement$x_transform == "compressed") {
+      latent_for_x <- apply_x_transform(latent_x, "compressed")
+    }
+    return(list(
+      X_items = make_cumulative_items(
+        latent_for_x, method_component, cmv_prop, n_items, loading
+      ),
+      X_score = NULL
+    ))
+  }
+
+  if (mode == "unfolding_midrange") {
+    return(list(
+      X_items = make_unfolding_items(
+        latent_x, method_component, cmv_prop,
+        item_locations = rep(0, 4),
+        item_widths = rep(0.85, 4),
+        substantive_loading = loading
+      ),
+      X_score = NULL
+    ))
+  }
+
+  if (mode == "unfolding_spread") {
+    return(list(
+      X_items = make_unfolding_items(
+        latent_x, method_component, cmv_prop,
+        item_locations = c(-0.5, -0.25, 0.25, 0.5),
+        item_widths = rep(0.70, 4),
+        substantive_loading = loading
+      ),
+      X_score = NULL
+    ))
+  }
+
+  if (mode == "unfolding_extremes") {
+    return(list(
+      X_items = make_unfolding_items(
+        latent_x, method_component, cmv_prop,
+        item_locations = c(-1.4, -1.4, 1.4, 1.4),
+        item_widths = rep(0.60, 4),
+        substantive_loading = loading
+      ),
+      X_score = NULL
+    ))
+  }
+
+  if (mode == "unfolding_mixed") {
+    cum_items <- make_cumulative_items(
+      latent_x, method_component, cmv_prop, 2, loading
+    )
+    unf_items <- make_unfolding_items(
+      latent_x, method_component, cmv_prop,
+      item_locations = c(0, 0),
+      item_widths = rep(0.85, 2),
+      substantive_loading = loading
+    )
+    return(list(
+      X_items = cbind(cum_items, unf_items),
+      X_score = NULL
+    ))
+  }
+
+  if (mode %in% c("facet_cumulative", "facet_balance")) {
+    facet_mode <- if (mode == "facet_cumulative") "cumulative" else "balance"
+    return(make_facet_extraversion(
+      latent_x, method_component, cmv_prop,
+      mode = facet_mode,
+      n_items_per_facet = 2,
+      substantive_loading = loading
+    ))
+  }
+
+  stop("Unknown measurement mode: ", mode)
 }
 
 #' Full DGP: latent TMGT + CMV-contaminated indicators
@@ -103,19 +272,26 @@ generate_tmgt_cmv_data <- function(n, scenario, cmv_prop = 0,
   m_w <- if (same_source) method$M_w else stats::rnorm(n)
   m_y <- if (same_source) method$M_y else stats::rnorm(n)
 
-  x_items <- make_indicators(
-    latents$X, m_x, cmv_prop, n_items, substantive_loading
+  meas_spec <- measurement
+  if (is.null(meas_spec)) {
+    meas_spec <- list(mode = "cumulative", x_transform = "none",
+                      n_items = n_items, substantive_loading = substantive_loading)
+  }
+
+  x_meas <- make_x_measurement(
+    latents$X_latent, m_x, cmv_prop, meas_spec
   )
-  w_items <- make_indicators(
+  w_items <- make_cumulative_items(
     latents$W, m_w, cmv_prop, n_items, substantive_loading
   )
-  y_items <- make_indicators(
+  y_items <- make_cumulative_items(
     latents$Y, m_y, cmv_prop, n_items, substantive_loading
   )
 
   list(
     latents = latents,
-    X_items = x_items,
+    X_items = x_meas$X_items,
+    X_score = x_meas$X_score,
     W_items = w_items,
     Y_items = y_items,
     settings = list(
@@ -138,7 +314,11 @@ scale_scores_from_items <- function(items) {
 
 #' Prepare analysis-ready data frame from simulated indicators
 prepare_analysis_data <- function(sim_data) {
-  X <- scale_scores_from_items(sim_data$X_items)
+  X <- if (!is.null(sim_data$X_score)) {
+    sim_data$X_score
+  } else {
+    scale_scores_from_items(sim_data$X_items)
+  }
   W <- scale_scores_from_items(sim_data$W_items)
   Y <- scale_scores_from_items(sim_data$Y_items)
 
