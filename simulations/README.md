@@ -49,11 +49,28 @@ Manipulated conditions:
 | `run_tmgt_cmv_simulation.R` | Monte Carlo driver; produces CSV results |
 | `config/tmgt_scenarios.R` | Named scenarios (null, simple TMGT, moderated TMGT) |
 
-## Usage
+## Ambiversion power study (large N × measurement approaches)
 
-```r
-# From repository root
-source("simulations/run_tmgt_cmv_simulation.R")
+```bash
+Rscript simulations/run_ambiversion_power_study.R          # full (N = 340–5000)
+Rscript simulations/run_ambiversion_power_study.R --pilot  # quick test
+Rscript simulations/summarize_ambiversion_power.R
+```
+
+### Measurement approaches compared
+
+| Approach | Description |
+|----------|-------------|
+| `grant` | Standard cumulative Likert (Grant 4-item) |
+| `unfolding_midrange` | Ideal-point items peaking at ambivert level (τ = 0) |
+| `unfolding_spread` | Ideal-point items spread around midrange |
+| `unfolding_extremes` | Ideal-point items at intro/extreme poles |
+| `unfolding_mixed` | Half cumulative + half unfolding midrange |
+| `facet_cumulative` | Assertiveness + enthusiasm summed (Big Five style) |
+| `facet_balance` | Facet score penalizing assertiveness–enthusiasm imbalance |
+
+**Note:** Unfolding items are scored via item means for comparability with typical TMGT regression practice. Ideal-point IRT scoring would be the next extension.
+
 
 # Quick pilot (100 replications)
 results <- run_tmgt_cmv_study(
