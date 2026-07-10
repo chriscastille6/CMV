@@ -34,7 +34,8 @@ Rscript simulations/summarize_results.R
 Rscript simulations/summarize_ambiversion_power.R
 ```
 
-Results write to `simulations/output/*.csv` (gitignored; generated locally).
+Results CSVs from cloud runs are in `simulations/output/results/` (committed).
+Fresh runs still write timestamped files to `simulations/output/` (gitignored).
 
 ## What's included
 
